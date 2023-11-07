@@ -36,3 +36,4 @@
 
 # Jetbrains IDEs
 /.idea
+/coverage/
