@@ -11,10 +11,16 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+<<<<<<< HEAD
 gem "bcrypt", "~> 3.1.7"
 gem "bootstrap", "~> 5.0"
 gem "bootstrap_form", "~> 5.4"
 gem "sassc-rails"
+=======
+# For password encryption in db
+gem "bcrypt", "~> 3.1.7"
+
+>>>>>>> 7d080f3 (chore: add bcrypt gem to Gemfile)
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
