@@ -63,4 +63,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # This will include the route helpers, and things like root_path should then be available in your tests.
+  config.include Rails.application.routes.url_helpers
 end
