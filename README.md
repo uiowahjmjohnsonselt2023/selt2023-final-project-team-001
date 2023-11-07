@@ -76,3 +76,5 @@ GRANT ALL PRIVILEGES ON DATABASE myapp_development TO myappuser;
 Lastly in config/database.yml be sure to set the username, password, and database fields to match the PostgreSQL configuration you set up.
 
 #### Windows
+
+You can install PostgreSQL using WSL and following the above guide for Ubuntu.
