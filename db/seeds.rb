@@ -9,8 +9,22 @@
 #   end
 
 users = [
-  {first_name: "admin", last_name: "admin", email: "admin@admin.com",
-   password_digest: "admin", password_digest_confirmation: "admin", is_seller: false, is_buyer: false}
+  {
+    first_name: "admin",
+    last_name: "admin",
+    email: "admin@admin.com",
+    password: "admin",
+    is_seller: false,
+    is_buyer: false
+  },
+  {
+    first_name: "admin2",
+    last_name: "admin2",
+    email: "admin2@admin.com",
+    password: "admin2",
+    is_seller: false,
+    is_buyer: false
+  }
 ]
 
 users.each do |user|
