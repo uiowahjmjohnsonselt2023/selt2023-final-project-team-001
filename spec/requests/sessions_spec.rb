@@ -8,17 +8,17 @@ RSpec.describe "Sessions", type: :request do
     end
   end
 
-  describe "GET /create" do
+  describe "POST /create" do
     it "returns http success" do
       post login_path
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /destroy" do
-    it "returns http success" do
-      get logout_path
-      expect(response).to have_http_status(:success)
+  describe "DELETE /destroy" do
+    it "returns http redirect" do
+      delete logout_path
+      expect(response).to have_http_status(:redirect)
     end
   end
 end
