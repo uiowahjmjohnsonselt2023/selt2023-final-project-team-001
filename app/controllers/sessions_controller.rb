@@ -5,10 +5,11 @@ class SessionsController < ApplicationController
 
   def create
     # Handle sign-in and authentication logic
-    user = User.find_by(email: params[:session][:email])
+    email = params[:email]
+    password = params[:password]
+    user = User.find_by(email: email)
 
-    if user&.user&.authenticate(params[:session][:password])
-      # Sign in the user
+    if user&.user&.authenticate(password)
       session[:user_id] = user.id
       flash[:notice] = "Successfully signed in!"
       redirect_to "/", notice: "Successfully signed in!"
