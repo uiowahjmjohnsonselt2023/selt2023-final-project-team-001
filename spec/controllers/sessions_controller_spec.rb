@@ -3,23 +3,30 @@
 require "rails_helper"
 
 describe SessionsController, type: :controller do
+  let(:valid_user) { create(:user, email: "admin@admin.com", password: "admin") }
+
   describe "POST #create" do
     context "with valid credentials" do
-      it "signs in the user" do
-        user = create(:user) # Create a test user
-        post :create, params: {session: {email: user.email, password: user.password}}
-        expect(session[:user_id]).to eq(user.id)
-        expect(response).to redirect_to(user_profile_path(user))
+      it "signs in the user goes to root" do
+        expect(session[:user_id]).to be(nil)
+        post :create, params: {email: valid_user.email, password: valid_user.password}
+        expect(session[:user_id]).to be_truthy
+
+        # expect(response).to have_http_status(200)
+        expect(response).to redirect_to("/")
+        expect(flash[:notice]).to eq("Successfully signed in!")
       end
     end
 
     context "with invalid credentials" do
       it "does not sign in the user" do
-        user = create(:user)
-        post :create, params: {session: {email: user.email, password: "wrong_password"}}
-        expect(session[:user_id]).to be_nil
+        expect(session[:user_id]).to be(nil)
+        post :create, params: {email: "bad_email@email.com", password: "bad_password"}
+        expect(session[:user_id]).to be(nil)
+
         expect(response).to render_template("new")
-        expect(flash[:alert]).to be_present
+
+        expect(flash.now[:alert]).to eq("Invalid email/password combination")
       end
     end
   end

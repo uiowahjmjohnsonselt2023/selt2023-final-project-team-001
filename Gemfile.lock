@@ -101,6 +101,11 @@ GEM
     error_highlight (0.5.1)
     erubi (1.12.0)
     execjs (2.9.1)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -176,6 +181,10 @@ GEM
       activesupport (= 7.1.1)
       bundler (>= 1.15.0)
       railties (= 7.1.1)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -308,9 +317,11 @@ DEPENDENCIES
   bootstrap_form (~> 5.4)
   debug
   error_highlight (>= 0.4.0)
+  factory_bot_rails
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.1)
+  rails-controller-testing
   rspec-rails (~> 6.0.0)
   rubocop (~> 1.56.4)
   rubocop-performance
