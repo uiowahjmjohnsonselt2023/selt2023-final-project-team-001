@@ -17,7 +17,7 @@ RSpec.describe "Sessions", type: :request do
 
   describe "DELETE /destroy" do
     it "returns http redirect" do
-      delete logout_path
+      get logout_path
       expect(response).to have_http_status(:redirect)
     end
   end

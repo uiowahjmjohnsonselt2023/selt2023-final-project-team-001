@@ -25,7 +25,7 @@ describe SessionsController, type: :controller do
 
         expect(response).to render_template("new")
 
-        expect(flash.now[:alert]).to eq("Invalid email/password combination")
+        expect(flash[:alert]).to eq("Invalid email/password combination")
       end
     end
   end
@@ -38,14 +38,28 @@ describe SessionsController, type: :controller do
       expect(session[:user_id]).to be_nil
     end
 
-    it "redirects to the root path" do
+    it "redirects to the root after logging in" do
+      user = create(:user)
+      session[:user_id] = user.id
       delete :destroy
       expect(response).to redirect_to("/")
     end
 
-    it "displays a success flash message" do
+    it "displays a success flash message after logging in" do
+      user = create(:user)
+      session[:user_id] = user.id
       delete :destroy
       expect(flash[:notice]).to eq("Signed out successfully!")
+    end
+
+    it "redirects to the login when not logged in" do
+      delete :destroy
+      expect(response).to redirect_to("/login")
+    end
+
+    it "gives flash message telling to log in when not logged in" do
+      delete :destroy
+      expect(flash[:notice]).to eq("You need to sign in before you can sign out!")
     end
   end
 
