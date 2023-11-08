@@ -7,3 +7,23 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Taken from eBay.
+categories = [
+  "Motors",
+  "Electronics",
+  "Collectibles & Art",
+  "Home & Garden",
+  "Clothing, Shoes & Accessories",
+  "Toys & Hobbies",
+  "Sporting Goods",
+  "Books, Movies & Music",
+  "Health & Beauty",
+  "Business & Industrial",
+  "Jewelry & Watches",
+  "Baby Essentials",
+  "Pet Supplies"
+]
+categories.each do |category|
+  Category.find_or_create_by!(name: category)
+end
