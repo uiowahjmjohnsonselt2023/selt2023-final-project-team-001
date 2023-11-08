@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  # mentioned in lecture but I'm not sure how it applies yet
+  # skip_before_filter :set_current_user
   def new
     # automatically renders the sign-in form
   end
@@ -13,11 +15,11 @@ class SessionsController < ApplicationController
       if user&.authenticate(password)
         session[:user_id] = user.id
         flash[:notice] = "Successfully signed in!"
-        redirect_to "/", notice: "Successfully signed in!"
-      else
-        flash.now[:alert] = "Invalid email/password combination"
-        render "new"
+        redirect_to "/"
       end
+    else
+      flash[:alert] = "Invalid email/password combination"
+      render "new"
     end
   end
 
@@ -25,6 +27,6 @@ class SessionsController < ApplicationController
     # Handle sign-out logic
     session[:user_id] = nil
     flash[:notice] = "Signed out successfully!"
-    redirect_to "/", notice: "Signed out successfully!"
+    redirect_to "/"
   end
 end
