@@ -14,6 +14,7 @@ users = [
     last_name: "admin",
     email: "admin@admin.com",
     password: "admin",
+    password_confirmation: "admin",
     is_seller: false,
     is_buyer: false
   },
@@ -22,6 +23,7 @@ users = [
     last_name: "admin2",
     email: "admin2@admin.com",
     password: "admin2",
+    password_confirmation: "admin2",
     is_seller: false,
     is_buyer: false
   }
