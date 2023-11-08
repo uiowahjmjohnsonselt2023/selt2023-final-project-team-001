@@ -12,7 +12,6 @@ describe SessionsController, type: :controller do
         post :create, params: {email: valid_user.email, password: valid_user.password}
         expect(session[:user_id]).to be_truthy
 
-        # expect(response).to have_http_status(200)
         expect(response).to redirect_to("/")
         expect(flash[:notice]).to eq("Successfully signed in!")
       end
@@ -46,7 +45,14 @@ describe SessionsController, type: :controller do
 
     it "displays a success flash message" do
       delete :destroy
-      expect(flash[:notice]).to be_present
+      expect(flash[:notice]).to eq("Signed out successfully!")
+    end
+  end
+
+  describe "GET #new" do
+    it "renders the sign-in page" do
+      get :new
+      expect(response).to render_template("new")
     end
   end
 
