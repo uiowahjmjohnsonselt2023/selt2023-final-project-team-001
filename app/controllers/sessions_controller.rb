@@ -9,13 +9,15 @@ class SessionsController < ApplicationController
     password = params[:password]
     user = User.find_by(email: email)
 
-    if user&.user&.authenticate(password)
-      session[:user_id] = user.id
-      flash[:notice] = "Successfully signed in!"
-      redirect_to "/", notice: "Successfully signed in!"
-    else
-      flash.now[:alert] = "Invalid email/password combination"
-      render "new"
+    if user
+      if user&.authenticate(password)
+        session[:user_id] = user.id
+        flash[:notice] = "Successfully signed in!"
+        redirect_to "/", notice: "Successfully signed in!"
+      else
+        flash.now[:alert] = "Invalid email/password combination"
+        render "new"
+      end
     end
   end
 
