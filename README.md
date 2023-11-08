@@ -56,23 +56,6 @@ sudo service postgresql start
 sudo systemctl enable postgresql
 ```
 
-To access PostgreSQL via the postgres user and then enter PostgreSQL prompt
-```shell
-sudo -i -u postgres
-psql
-# To exit PostgreSQL prompt run
-# \q
-```
-
-To create a PostgreSQL User and Database for development (replace myapp_development, myappuser, and 'password' with the desired names for your database, user, and password).
-```shell
-CREATE DATABASE myapp_development;
-CREATE USER myappuser WITH PASSWORD 'password';
-ALTER ROLE myappuser SET client_encoding TO 'utf8';
-ALTER ROLE myappuser SET default_transaction_isolation TO 'read committed';
-ALTER ROLE myappuser SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE myapp_development TO myappuser;
-```
-Lastly in config/database.yml be sure to set the username, password, and database fields to match the PostgreSQL configuration you set up.
-
 #### Windows
+
+You can install PostgreSQL using WSL and follow the above guide for Ubuntu.
