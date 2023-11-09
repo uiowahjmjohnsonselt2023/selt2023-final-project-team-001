@@ -13,8 +13,10 @@ password_kwargs = {
   special_characters: true
 }
 
-# We don't use #insert_all for users because we need bcrypt
-# to hash the passwords (which is done in the model)
+# We don't use #insert_all for users because we need bcrypt to hash the passwords
+# (which is done in the model). This is a lot slower unfortunately, but I couldn't
+# find a way to get around it. Note: the slow part is model instantiation, not the
+# database insertion.
 30.times do |i|
   email = Faker::Internet.unique.email
   password = Faker::Internet.password(**password_kwargs)
