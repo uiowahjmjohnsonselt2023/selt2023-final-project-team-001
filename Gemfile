@@ -29,6 +29,7 @@ group :rubocop do
 end
 
 group :development, :test do
+  gem "faker", "~> 3.2.2"
   gem "rspec-rails", "~> 6.0.0"
   gem "simplecov", require: false
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
