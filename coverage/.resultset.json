@@ -353,6 +353,123 @@
           null
         ]
       },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/config/initializers/money.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/mnt/c/Users/blake/selt2023-final-project-team-001/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
@@ -480,6 +597,89 @@
           null
         ]
       },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/spec/models/categorization_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/categorization.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/spec/models/category_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/category.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/spec/models/product_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/product.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/mnt/c/Users/blake/selt2023-final-project-team-001/spec/models/user_spec.rb": {
         "lines": [
           1,
@@ -490,13 +690,6 @@
         ]
       },
       "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/user.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/mnt/c/Users/blake/selt2023-final-project-team-001/app/models/application_record.rb": {
         "lines": [
           1,
           1,
@@ -563,6 +756,6 @@
         ]
       }
     },
-    "timestamp": 1699539153
+    "timestamp": 1699540825
   }
 }
