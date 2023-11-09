@@ -28,31 +28,42 @@ users = [
     is_seller: false,
     is_buyer: false,
     is_admin: true
+  },
+  {
+    first_name: "noprofile",
+    last_name: "noprofile",
+    email: "noprofile@noprofile.com",
+    password: "noprofile",
+    password_confirmation: "noprofile",
+    is_seller: false,
+    is_buyer: false,
+    is_admin: false
   }
 ]
 
 users.each do |user_attributes|
   user = User.create_with(user_attributes).find_or_create_by!(email: user_attributes[:email])
+  unless user_attributes[:first_name] == "noprofile"
+    # Explicitly define user_attributes within the loop
+    profile_attributes = {
+      bio: Faker::Lorem.paragraph(sentence_count: 2),
+      location: Faker::Address.city,
+      first_name: user_attributes[:first_name],
+      last_name: user_attributes[:last_name],
+      birth_date: Faker::Date.between(from: 40.years.ago, to: 18.years.ago),
+      twitter: Faker::Internet.username,
+      facebook: Faker::Internet.username,
+      instagram: Faker::Internet.username,
+      website: Faker::Internet.url,
+      occupation: Faker::Job.title,
+      seller_rating: Faker::Number.between(from: 1, to: 5),
+      buyer_rating: Faker::Number.between(from: 1, to: 5),
+      public_profile: true,
+      user: user
+    }
 
-  # Explicitly define user_attributes within the loop
-  profile_attributes = {
-    bio: Faker::Lorem.paragraph(sentence_count: 2),
-    location: Faker::Address.city,
-    first_name: user_attributes[:first_name],
-    last_name: user_attributes[:last_name],
-    birth_date: Faker::Date.between(from: 40.years.ago, to: 18.years.ago),
-    twitter: Faker::Internet.username,
-    facebook: Faker::Internet.username,
-    instagram: Faker::Internet.username,
-    website: Faker::Internet.url,
-    occupation: Faker::Job.title,
-    seller_rating: Faker::Number.between(from: 1, to: 5),
-    buyer_rating: Faker::Number.between(from: 1, to: 5),
-    public_profile: true,
-    user: user
-  }
-
-  Profile.create!(profile_attributes)
+    Profile.create!(profile_attributes)
+  end
 end
 
 # This file should contain all the record creation needed to seed the database
