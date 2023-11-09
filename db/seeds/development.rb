@@ -16,7 +16,7 @@ Product.insert_all(
     {
       name: Faker::Commerce.product_name,
       description: Faker::Lorem.paragraph(sentence_count: 2),
-      price_cents: Faker::Number.within(range: 1...1000_00), # $0.01 to $1000.00
+      price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
       quantity: Faker::Number.within(range: 1..100),
       condition: Faker::Base.sample(conditions),
       private: Faker::Boolean.boolean,
@@ -29,7 +29,7 @@ Product.insert_all(
 max_num_categories = [5, category_ids.length].min
 Categorization.insert_all(
   Product.pluck(:id).flat_map do |product_id|
-    num_categories = Faker::Number.within(range: 1...max_num_categories)
+    num_categories = Faker::Number.within(range: 1..max_num_categories)
     Faker::Base.sample(category_ids, num_categories).map do |category_id|
       {product_id:, category_id:}
     end
