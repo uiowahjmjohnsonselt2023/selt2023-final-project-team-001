@@ -13,8 +13,8 @@ users = [
     first_name: "admin",
     last_name: "admin",
     email: "admin@admin.com",
-    password: "admin",
-    password_confirmation: "admin",
+    password: "admin000",
+    password_confirmation: "admin000",
     is_seller: false,
     is_buyer: false,
     is_admin: true
@@ -23,8 +23,8 @@ users = [
     first_name: "admin2",
     last_name: "admin2",
     email: "admin2@admin.com",
-    password: "admin2",
-    password_confirmation: "admin2",
+    password: "admin2000",
+    password_confirmation: "admin2000",
     is_seller: false,
     is_buyer: false,
     is_admin: true
