@@ -16,7 +16,8 @@ users = [
     password: "admin",
     password_confirmation: "admin",
     is_seller: false,
-    is_buyer: false
+    is_buyer: false,
+    is_admin: true
   },
   {
     first_name: "admin2",
