@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       if user&.authenticate(password)
         session[:user_id] = user.id
         flash[:notice] = "Successfully signed in!"
-        redirect_to "/" and return
+        redirect_to root_path and return
       end
     end
     flash[:alert] = "Invalid email/password combination"
@@ -26,11 +26,11 @@ class SessionsController < ApplicationController
     # Handle sign-out logic
     if session[:user_id].nil?
       flash[:notice] = "You need to sign in before you can sign out!"
-      redirect_to "/login" and return
+      redirect_to login_path and return
     end
     session[:user_id] = nil
     flash[:notice] = "Signed out successfully!"
-    redirect_to "/"
+    redirect_to root_path
   end
 
   def register
