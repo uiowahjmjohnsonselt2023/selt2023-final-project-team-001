@@ -32,12 +32,14 @@ password_kwargs = {
   )
 end
 
+seller_ids = User.sellers.pluck(:id)
 Product.insert_all(
   100.times.map do
     # created_at is separate to ensure created_at < updated_at
     created_at = Faker::Time.backward
     {
       name: Faker::Commerce.product_name,
+      seller_id: Faker::Base.sample(seller_ids),
       description: Faker::Lorem.paragraph(sentence_count: 2),
       price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
       quantity: Faker::Number.within(range: 1..100),
