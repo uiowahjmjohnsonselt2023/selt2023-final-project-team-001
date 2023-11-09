@@ -1,6 +1,7 @@
 <!-- app/views/profiles/show.html.erb -->
 
 <h1>User Profile</h1>
+<%= csrf_meta_tags %>
 
 <% if @user.present? && @profile.present? %>
   <p><strong>Name:</strong> <%= @profile.full_name %></p>
@@ -17,6 +18,7 @@
 
   <!-- Add other profile attributes as needed -->
 
+  <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
 <% else %>
   <p>User profile not found.</p>
 <% end %>

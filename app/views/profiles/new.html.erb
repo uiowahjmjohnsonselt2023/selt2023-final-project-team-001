@@ -1,0 +1,7 @@
+<%= bootstrap_form_with(model: @profile, url: profiles_path, method: :post, local: true) do |f| %>
+  <%= f.text_field :first_name, label: "First Name:" %>
+  <%= f.text_field :last_name, label: "Last Name:" %>
+  <%= f.text_area :bio, label: "Bio:" %>
+  <%= f.text_field :location, label: "Location:" %>
+  <%= f.submit "Create Profile" %>
+<% end %>

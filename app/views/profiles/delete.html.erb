@@ -1,0 +1,5 @@
+<h1>Delete Profile</h1>
+<p>Are you sure you want to delete your profile?</p>
+<%= form_with(model: @profile, method: :delete, url: profile_path(@profile)) do |f| %>
+  <%= f.submit "Delete Profile", class: "btn btn-danger" %>
+<% end %>
