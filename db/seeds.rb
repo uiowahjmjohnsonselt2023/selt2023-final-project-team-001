@@ -26,7 +26,8 @@ users = [
     password: "admin2",
     password_confirmation: "admin2",
     is_seller: false,
-    is_buyer: false
+    is_buyer: false,
+    is_admin: true
   }
 ]
 
