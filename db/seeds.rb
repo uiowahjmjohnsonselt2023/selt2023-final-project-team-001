@@ -32,7 +32,8 @@ users = [
 ]
 
 users.each do |user|
-  User.create!(user)
+  # only create the user if they don't already exist
+  User.create_with(user).find_or_create_by!(email: user[:email])
 end
 
 # This file should contain all the record creation needed to seed the database
