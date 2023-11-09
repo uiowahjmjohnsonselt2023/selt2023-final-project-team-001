@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get "home/index"
   get "pages/index"
-  resources :users
+
+  get "/signup", to: "users#new", as: "signup"
+  post "/signup", to: "users#create", as: "signup_submit"
 
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
