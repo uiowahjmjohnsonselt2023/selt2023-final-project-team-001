@@ -32,7 +32,7 @@ end
 
 Product.insert_all(
   100.times.map do
-    # saved separately to ensure created_at < updated_at
+    # created_at is separate to ensure created_at < updated_at
     created_at = Faker::Time.backward
     {
       name: Faker::Commerce.product_name,
@@ -47,6 +47,7 @@ Product.insert_all(
   end
 )
 
+# Create categorizations for each product
 max_num_categories = [5, category_ids.length].min
 Categorization.insert_all(
   Product.pluck(:id).flat_map do |product_id|
