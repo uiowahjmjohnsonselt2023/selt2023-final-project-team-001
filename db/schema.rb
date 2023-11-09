@@ -58,8 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_201942) do
     t.string "occupation"
     t.integer "seller_rating"
     t.integer "buyer_rating"
-    t.boolean "public_profile"
-    t.bigint "user_id", null: false
+    t.boolean "public_profile", default: true, null: false
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
