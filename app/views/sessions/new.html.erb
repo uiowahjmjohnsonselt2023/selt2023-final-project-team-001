@@ -1,15 +1,5 @@
-<%= form_with(model: @user, url: login_submit_path) do |form| %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-
-  <div>
-    <%= form.submit 'Log In' %>
-  </div>
+<%= bootstrap_form_with model: @user, url: login_submit_path, method: :post, local: true do |f| %>
+  <%= f.email_field :email, label: "Email: " %>
+  <%= f.password_field :password, label: "Password: " %>
+  <%= f.submit "Log In" %>
 <% end %>
