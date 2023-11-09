@@ -1,0 +1,5 @@
+<%= bootstrap_form_with model: @user, url: login_submit_path, method: :post, local: true do |f| %>
+  <%= f.email_field :email, label: "Email: " %>
+  <%= f.password_field :password, label: "Password: " %>
+  <%= f.submit "Log In" %>
+<% end %>
