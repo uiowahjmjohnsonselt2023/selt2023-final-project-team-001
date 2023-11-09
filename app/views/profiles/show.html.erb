@@ -1,0 +1,22 @@
+<!-- app/views/profiles/show.html.erb -->
+
+<h1>User Profile</h1>
+
+<% if @user.present? && @profile.present? %>
+  <p><strong>Name:</strong> <%= @profile.full_name %></p>
+  <p><strong>Bio:</strong> <%= @profile.bio %></p>
+  <p><strong>Location:</strong> <%= @profile.location %></p>
+  <!-- Add more profile attributes as needed -->
+
+  <!-- Example: Displaying the user's avatar if attached -->
+  <%# image_tag @profile.avatar if @profile.avatar.attached? %>
+
+  <!-- Example: Displaying seller and buyer ratings -->
+  <p><strong>Seller Rating:</strong> <%= @profile.seller_rating %></p>
+  <p><strong>Buyer Rating:</strong> <%= @profile.buyer_rating %></p>
+
+  <!-- Add other profile attributes as needed -->
+
+<% else %>
+  <p>User profile not found.</p>
+<% end %>
