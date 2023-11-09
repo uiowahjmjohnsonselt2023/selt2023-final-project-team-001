@@ -2,12 +2,33 @@ require "faker"
 
 random = Random.new(43110)
 Faker::Config.random = random
+
 conditions = Product.conditions.values
 category_ids = Category.pluck(:id)
 
-Product.destroy_all
-# Categorizations should be destroyed with the products, but just to be safe
-Categorization.destroy_all
+password_kwargs = {
+  min_length: 10,
+  max_length: 20,
+  mix_case: true,
+  special_characters: true
+}
+
+# We don't use #insert_all for users because we need bcrypt
+# to hash the passwords (which is done in the model)
+30.times do |i|
+  email = Faker::Internet.unique.email
+  password = Faker::Internet.password(**password_kwargs)
+  User.find_or_initialize_by(email: email).update!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email:,
+    password:,
+    password_confirmation: password,
+    # Ensure that the database has at least 5 sellers and 5 buyers.
+    is_seller: i < 5 || Faker::Boolean.boolean,
+    is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean
+  )
+end
 
 Product.insert_all(
   100.times.map do
