@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_09_191026) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_09_201942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,26 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_191026) do
     t.datetime "updated_at", null: false
     t.bigint "seller_id", null: false
     t.index ["seller_id"], name: "index_products_on_seller_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.text "bio"
+    t.string "location"
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birth_date"
+    t.string "twitter"
+    t.string "facebook"
+    t.string "instagram"
+    t.string "website"
+    t.string "occupation"
+    t.integer "seller_rating"
+    t.integer "buyer_rating"
+    t.boolean "public_profile"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
