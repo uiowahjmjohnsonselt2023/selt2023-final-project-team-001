@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   REQUIRED_FIELDS = %i[name description price quantity condition].freeze
 
-  # belongs_to :seller, class_name: "User"
+  belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
 

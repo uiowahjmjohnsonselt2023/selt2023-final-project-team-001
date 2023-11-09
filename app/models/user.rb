@@ -9,4 +9,6 @@ class User < ApplicationRecord
   scope :non_sellers, -> { where(is_seller: false) }
   scope :buyers, -> { where(is_buyer: true) }
   scope :non_buyers, -> { where(is_buyer: false) }
+
+  has_many :products, foreign_key: :seller_id, dependent: :destroy
 end
