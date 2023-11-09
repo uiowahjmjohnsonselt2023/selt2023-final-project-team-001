@@ -1,8 +1,9 @@
 class Product < ApplicationRecord
-  REQUIRED_FIELDS = %i[name description price quantity condition category].freeze
+  REQUIRED_FIELDS = %i[name description price quantity condition].freeze
 
   # belongs_to :seller, class_name: "User"
-  belongs_to :category
+  has_many :categorizations, dependent: :destroy
+  has_many :categories, through: :categorizations
 
   # Left 100 between each value to allow for future additions.
   # Taken from https://www.recycledcycles.com/service/used-item-condition-guide/
