@@ -22,6 +22,8 @@ gem "puma", ">= 5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[windows jruby]
 
+gem "money-rails", "~> 1.15"
+
 group :rubocop do
   gem "rubocop", "~> 1.56.4", require: false
   gem "rubocop-performance", require: false
@@ -32,6 +34,7 @@ group :rubocop do
 end
 
 group :development, :test do
+  gem "faker", "~> 3.2.2"
   gem "rspec-rails", "~> 6.0.0"
   gem "simplecov", require: false
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
