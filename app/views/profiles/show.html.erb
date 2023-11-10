@@ -3,22 +3,25 @@
 <h1>User Profile</h1>
 <%= csrf_meta_tags %>
 
-<% if @user.present? && @profile.present? %>
-  <p><strong>Name:</strong> <%= @profile.full_name %></p>
-  <p><strong>Bio:</strong> <%= @profile.bio %></p>
-  <p><strong>Location:</strong> <%= @profile.location %></p>
-  <!-- Add more profile attributes as needed -->
+<% if @profile_requested.present? %>
+  <p><strong>Name:</strong> <%= @profile_requested.full_name %></p>
+  <p><strong>Bio:</strong> <%= @profile_requested.bio %></p>
+  <p><strong>Location:</strong> <%= @profile_requested.location %></p>
+  <p><strong>Twitter:</strong> <%= @profile_requested.twitter %></p>
+  <p><strong>Facebook:</strong> <%= @profile_requested.facebook %></p>
+  <p><strong>Instagram:</strong> <%= @profile_requested.instagram %></p>
+  <p><strong>Website:</strong> <%= @profile_requested.website %></p>
+  <p><strong>Occupation:</strong> <%= @profile_requested.occupation %></p>
 
-  <!-- Example: Displaying the user's avatar if attached -->
-  <%# image_tag @profile.avatar if @profile.avatar.attached? %>
+  <!-- TODO: Displaying the user's avatar if attached -->
+  <%# image_tag @profile_requested.avatar if @profile_requested.avatar.attached? %>
 
-  <!-- Example: Displaying seller and buyer ratings -->
-  <p><strong>Seller Rating:</strong> <%= @profile.seller_rating %></p>
-  <p><strong>Buyer Rating:</strong> <%= @profile.buyer_rating %></p>
+  <p><strong>Seller Rating:</strong> <%= @profile_requested.seller_rating %></p>
+  <p><strong>Buyer Rating:</strong> <%= @profile_requested.buyer_rating %></p>
 
-  <!-- Add other profile attributes as needed -->
-
-  <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
+  <!-- Links -->
+  <%= link_to "Edit Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
+  <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
 <% else %>
   <p>User profile not found.</p>
 <% end %>

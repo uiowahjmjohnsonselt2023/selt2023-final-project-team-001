@@ -3,6 +3,10 @@ class SessionsController < ApplicationController
   # skip_before_filter :set_current_user
   def new
     # automatically renders the sign-in form
+    if session[:user_id].present?
+      flash[:alert] = "You are already signed in!"
+      redirect_to root_path
+    end
   end
 
   def create
