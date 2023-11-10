@@ -20,4 +20,16 @@ FactoryBot.define do
       create(:profile, user: user)
     end
   end
+
+  factory :user_with_public_profile, parent: :user do
+    after(:create) do |user|
+      create(:profile, user: user, public_profile: true)
+    end
+  end
+
+  factory :user_with_private_profile, parent: :user do
+    after(:create) do |user|
+      create(:profile, user: user, public_profile: false)
+    end
+  end
 end
