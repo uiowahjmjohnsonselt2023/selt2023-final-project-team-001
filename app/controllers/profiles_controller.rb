@@ -1,13 +1,40 @@
 class ProfilesController < ApplicationController
   before_action :set_user_and_profile
 
+  def edit
+    # Render the edit form
+    if params[:id].to_i != @profile.id
+      flash[:alert] = "You can only edit your own profile!"
+      redirect_to root_path and return
+    elsif @profile.blank?
+      flash[:alert] = "You don't have a profile to edit!"
+      redirect_to new_profile_path and return
+    end
+  end
+
+  def update
+    if params[:id].to_i != @profile.id
+      flash[:alert] = "You can only edit your own profile!"
+      redirect_to root_path and return
+    elsif @profile.blank?
+      flash[:alert] = "You don't have a profile to edit!"
+      redirect_to new_profile_path and return
+    end
+    if @profile.update(profile_params)
+      redirect_to @profile, notice: "Profile was successfully updated."
+    else
+      flash.now[:alert] = "Profile update failed. Please check the form."
+      render :edit
+    end
+  end
+
   def new
     if @profile.present?
       flash[:alert] = "You already have a profile!"
       redirect_to profile_path(@profile)
     elsif @user.blank?
       flash[:alert] = "You need to sign in before you can create a profile!"
-      redirect_to login_path
+      redirect_to login_path and return
     end
   end
 
@@ -43,6 +70,7 @@ class ProfilesController < ApplicationController
       flash[:alert] = "You don't have a profile to delete!"
       redirect_to root_path and return
     end
+    @profile.destroy
     flash[:notice] = "Profile deleted successfully!"
     redirect_to root_path
   end

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
 
-  resources :profiles, only: [:show, :new, :create], param: :id do
+  resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member
   end

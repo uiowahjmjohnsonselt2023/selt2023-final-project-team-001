@@ -20,7 +20,7 @@
   <p><strong>Buyer Rating:</strong> <%= @profile_requested.buyer_rating %></p>
 
   <!-- Links -->
-  <%= link_to "Edit Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
+  <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
   <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
 <% else %>
   <p>User profile not found.</p>

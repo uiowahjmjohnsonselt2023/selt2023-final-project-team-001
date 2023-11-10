@@ -5,4 +5,5 @@
 <%= link_to "Logout", logout_path %>
 <%= link_to "Show Profile", profile_path(@profile) if @profile %>
 <%= link_to "New Profile", new_profile_path %>
+<%= link_to "Edit Profile", edit_profile_path(@profile) if @profile %>
 <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @profile %>

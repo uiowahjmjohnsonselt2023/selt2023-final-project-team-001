@@ -1,0 +1,14 @@
+<%= bootstrap_form_with(model: @profile, url: profiles_path, scope: :profile, method: :post, local: true) do |f| %>
+  <%= f.label "Edit whatever info you'd like" %>
+  <%= f.text_field :first_name, label: "First Name:", value: @profile.first_name %>
+  <%= f.text_field :last_name, label: "Last Name:", value: @profile.last_name %>
+  <%= f.text_area :bio, label: "Bio:", value: @profile.bio %>
+  <%= f.text_field :location, label: "Location:", value: @profile.location %>
+  <%= f.text_field :twitter, label: "Twitter:", value: @profile.twitter %>
+  <%= f.text_field :facebook, label: "Facebook:", value: @profile.facebook %>
+  <%= f.text_field :instagram, label: "Instagram:", value: @profile.instagram %>
+  <%= f.text_field :website, label: "Website:", value: @profile.website %>
+  <%= f.text_field :occupation, label: "Occupation:", value: @profile.occupation %>
+  <%= f.select :public_profile, options_for_select([['Public', true], ['Private', false]]), label: "Profile Visibility:", selected: @profile.public_profile %>
+  <%= f.submit "Submit Updates", class: 'btn btn-primary' %>
+<% end %>
