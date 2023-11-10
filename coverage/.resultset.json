@@ -728,12 +728,14 @@
       "/mnt/c/Users/blake/selt2023-final-project-team-001/spec/factories/users.rb": {
         "lines": [
           1,
+          null,
           1,
           91,
           91,
           85,
+          null,
           90,
-          91,
+          90,
           null,
           40,
           2,
@@ -1781,7 +1783,7 @@
           1,
           1,
           1,
-          0,
+          1,
           null,
           null
         ]
@@ -1798,7 +1800,7 @@
           1,
           null,
           1,
-          0,
+          1,
           null,
           null
         ]
@@ -1938,21 +1940,21 @@
           1,
           1,
           1,
+          77,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
           76,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          75,
           null,
           null,
           null,
@@ -2099,6 +2101,6 @@
         ]
       }
     },
-    "timestamp": 1699661051
+    "timestamp": 1699661276
   }
 }
