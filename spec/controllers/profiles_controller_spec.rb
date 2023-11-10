@@ -87,14 +87,16 @@ describe ProfilesController, type: :controller do
   describe "POST #create" do
     context "with valid credentials" do
       it "creates a new profile" do
-        expect(valid_user.profile).to be_nil
+        user = create(:user)
+        session[:user_id] = user.id
+        expect(user.profile).to be_nil
         post :create, params: {
           profile: {
             first_name: "John",
             last_name: "Doe",
             bio: "I am a test user",
             location: "New York, NY",
-            twitter: "https://twitter.com/test",
+            twitter: "https://x.com/test",
             facebook: "https://facebook.com/test",
             instagram: "https://instagram.com/test",
             website: "https://test.com",
@@ -107,20 +109,20 @@ describe ProfilesController, type: :controller do
         # forces ActiveRecord to re-fetch the associated profile from the database.
         # This is a common solution in tests when dealing with associations that
         # might not be updated immediately in-memory during the course of a test.
-        expect(valid_user.reload.profile).to be_truthy
+        expect(user.reload.profile).to be_truthy
 
-        expect(valid_user.profile.first_name).to eq("John")
-        expect(valid_user.profile.last_name).to eq("Doe")
-        expect(valid_user.profile.bio).to eq("I am a test user")
-        expect(valid_user.profile.location).to eq("New York, NY")
-        expect(valid_user.profile.twitter).to eq("https://twitter.com/test")
-        expect(valid_user.profile.facebook).to eq("https://facebook.com/test")
-        expect(valid_user.profile.instagram).to eq("https://instagram.com/test")
-        expect(valid_user.profile.website).to eq("https://test.com")
-        expect(valid_user.profile.occupation).to eq("Test User")
-        expect(valid_user.profile.public_profile).to be_truthy
-        expect(valid_user.profile.avatar).to be_truthy
-        expect(response).to redirect_to(profile_path(valid_user.profile))
+        expect(user.profile.first_name).to eq("John")
+        expect(user.profile.last_name).to eq("Doe")
+        expect(user.profile.bio).to eq("I am a test user")
+        expect(user.profile.location).to eq("New York, NY")
+        expect(user.profile.twitter).to eq("https://x.com/test")
+        expect(user.profile.facebook).to eq("https://facebook.com/test")
+        expect(user.profile.instagram).to eq("https://instagram.com/test")
+        expect(user.profile.website).to eq("https://test.com")
+        expect(user.profile.occupation).to eq("Test User")
+        expect(user.profile.public_profile).to be_truthy
+        expect(user.profile.avatar).to be_truthy
+        expect(response).to redirect_to(profile_path(user.profile))
         expect(flash[:notice]).to eq("Profile created successfully!")
       end
     end
