@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
     redirect_to login unless @current_user
   end
 
-  protected
-
   def current_user?(id)
     @current_user.id.to_s == id
   end
