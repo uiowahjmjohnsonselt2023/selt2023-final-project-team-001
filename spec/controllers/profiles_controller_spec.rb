@@ -3,8 +3,6 @@
 require "rails_helper"
 
 describe ProfilesController, type: :controller do
-  # let(:valid_user) { create(:user, email: "admin@admin.com", password: "admin") }
-
   let(:valid_user) { create(:user) }
 
   before do
@@ -104,18 +102,112 @@ describe ProfilesController, type: :controller do
         expect(flash[:alert]).to eq("Profile creation failed. Please check the form.")
         expect(assigns(:profile).errors.full_messages).to include("Facebook is not a valid Facebook link")
       end
+
+      it "successfully creates a profile with blank fields" do
+        post :create, params: {
+          profile: {
+            first_name: "",
+            last_name: "",
+            bio: "",
+            location: "",
+            twitter: "",
+            facebook: "",
+            instagram: "",
+            website: "",
+            occupation: "",
+            public_profile: true,
+            avatar: ""
+          }
+        }
+
+        expect(valid_user.reload.profile).to be_truthy
+        expect(response).to redirect_to(profile_path(assigns(:profile)))
+        expect(flash[:notice]).to eq("Profile created successfully!")
+      end
+    end
+  end
+
+  describe "GET #edit" do
+    let!(:valid_user) { create(:user_with_profile) }
+
+    it "renders the edit form for the user's own profile" do
+      get :edit, params: {id: valid_user.profile.id}
+
+      expect(response).to render_template("edit")
+      expect(assigns(:profile)).to eq(valid_user.profile)
+    end
+
+    it "redirects to root_path with an alert for editing someone else's profile while they have their own profile" do
+      other_user = create(:user_with_profile)
+      session[:user_id] = other_user.id
+
+      get :edit, params: {id: valid_user.profile.id}
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You can only edit your own profile!")
+    end
+
+    it "redirects to new_profile_path with an alert for a user without a profile" do
+      user = create(:user)
+      session[:user_id] = user.id
+      get :edit, params: {id: 10} # Profile id is irrelevant here, could be anything
+
+      expect(response).to redirect_to(new_profile_path)
+      expect(flash[:alert]).to eq("You don't have a profile to edit!")
+    end
+  end
+
+  describe "PATCH #update" do
+    let!(:valid_user) { create(:user_with_profile) }
+
+    let(:profile_params) { {first_name: "Updated Name"} }
+
+    it "updates the user's own profile and redirects to the profile" do
+      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
+
+      expect(response).to redirect_to(profile_path(valid_user.profile))
+      expect(flash[:notice]).to eq("Profile was successfully updated.")
+    end
+
+    it "redirects to root_path with an alert for updating someone else's profile" do
+      other_user = create(:user)
+      patch :update, params: {id: other_user.profile.id, profile: profile_params}
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You can only edit your own profile!")
+    end
+
+    it "redirects to new_profile_path with an alert for a user without a profile" do
+      allow(valid_user).to receive(:profile).and_return(nil)
+      patch :update, params: {id: 123, profile: profile_params} # Non-existent profile
+
+      expect(response).to redirect_to(new_profile_path)
+      expect(flash[:alert]).to eq("You don't have a profile to edit!")
+    end
+
+    it "renders the edit form with an alert for a failed update" do
+      allow_any_instance_of(Profile).to receive(:update).and_return(false)
+      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
+
+      expect(response).to render_template("edit")
+      expect(flash.now[:alert]).to eq("Profile update failed. Please check the form.")
     end
   end
 
   describe "DELETE #destroy" do
-    pending "deletes the profile" do
+    let(:valid_user) { create(:user) }
+    let(:valid_profile) { create(:profile, user: valid_user) }
+
+    before do
+      session[:user_id] = valid_user.id
     end
-    # it "signs out the user" do
-    #   user = create(:user)
-    #   session[:user_id] = user.id
-    #   delete :destroy
-    #   expect(session[:user_id]).to be_nil
-    # end
+
+    it "signs out the user" do
+      user = create(:user)
+      session[:user_id] = user.id
+      delete :destroy
+      expect(session[:user_id]).to be_nil
+    end
     #
     # it "redirects to the root after logging in" do
     #   user = create(:user)
@@ -143,12 +235,10 @@ describe ProfilesController, type: :controller do
   end
 
   describe "GET #new" do
-    pending "renders the new profile page" do
+    it "renders the sign-in page" do
+      get :new
+      expect(response).to render_template("new")
     end
-    # it "renders the sign-in page" do
-    #   get :new
-    #   expect(response).to render_template("new")
-    # end
   end
 
   # Other tests can be added
