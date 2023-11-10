@@ -78,26 +78,27 @@ describe SessionsController, type: :controller do
   end
 
   describe "POST #register" do
-    it "redirects an unknown user to login" do
-      session[:user_id] = nil
-      post :new_seller
-      expect(response).to redirect_to("/login")
+    context "with an unknown user" do
+      it "redirects the user to login" do
+        session[:user_id] = nil
+        post :new_seller
+        expect(response).to redirect_to("/login")
+      end
+
+      it "tells the user to login before they register" do
+        session[:user_id] = nil
+        post :new_seller
+        expect(flash[:notice]).to eq("You need to sign in before you can register as a seller!")
+      end
     end
 
-    it "tells an unknown user to login before they register" do
-      session[:user_id] = nil
-      post :new_seller
-      expect(flash[:notice]).to eq("You need to sign in before you can register as a seller!")
-    end
-
-    it "retrieves a logged-in user's information from the database" do
-      # pending "add test body here"
-    end
-
-    it "changes a user's seller status to true" do
-      # pending "add test body here"
+    context "with a valid user logged in" do
+      it "retrieves a logged-in user's information from the database" do
+        user = create(:user)
+        session[:user_id] = user.id
+        post :new_seller, params: {storefront: "Fake flower shop", email: valid_user.email}
+        expect(flash[:notice]).to eq("Registration successful")
+      end
     end
   end
-
-  # Other tests can be added
 end
