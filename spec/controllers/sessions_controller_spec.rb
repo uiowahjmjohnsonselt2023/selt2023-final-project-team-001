@@ -3,7 +3,14 @@
 require "rails_helper"
 
 describe SessionsController, type: :controller do
-  let(:valid_user) { create(:user, email: "admin@admin.com", password: "admin") }
+  let(:valid_user) {
+    create(:user,
+      first_name: "test",
+      last_name: "test",
+      email: "admin@admin.com",
+      password: "admin000",
+      password_confirmation: "admin000")
+  }
 
   describe "POST #create" do
     context "with valid credentials" do
@@ -32,21 +39,21 @@ describe SessionsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "signs out the user" do
-      user = create(:user)
+      user = create(:user, email: "test1@test.com")
       session[:user_id] = user.id
       delete :destroy
       expect(session[:user_id]).to be_nil
     end
 
     it "redirects to the root after logging in" do
-      user = create(:user)
+      user = create(:user, email: "test2@test.com")
       session[:user_id] = user.id
       delete :destroy
       expect(response).to redirect_to("/")
     end
 
     it "displays a success flash message after logging in" do
-      user = create(:user)
+      user = create(:user, email: "test3@test.com")
       session[:user_id] = user.id
       delete :destroy
       expect(flash[:notice]).to eq("Signed out successfully!")

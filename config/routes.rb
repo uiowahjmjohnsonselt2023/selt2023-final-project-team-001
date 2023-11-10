@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :users
   resources :products
 
+  get "/signup", to: "users#new", as: "signup"
+  post "/signup", to: "users#create", as: "signup_submit"
+
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
   get "/logout", to: "sessions#destroy", as: "logout"
