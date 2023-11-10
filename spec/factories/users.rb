@@ -14,4 +14,10 @@ FactoryBot.define do
     factory :buyer, traits: [:buyer]
     factory :admin, traits: [:admin]
   end
+
+  factory :user_with_profile, parent: :user do
+    after(:create) do |user|
+      create(:profile, user: user)
+    end
+  end
 end
