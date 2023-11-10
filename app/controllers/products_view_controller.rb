@@ -1,4 +1,4 @@
-class ProductsViewController < ApplicationController::Base
+class ProductsViewController < ApplicationController
   def display
   end
 end
