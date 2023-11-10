@@ -1,8 +1,8 @@
-<%= bootstrap_form_with model: @user, url: register_path, help: "Register to sell", method: :post, local: true do |f| %>
+<%= bootstrap_form_with model: @user, url: register_path, title: "Register to sell", method: :post, local: true do |f| %>
   <%= f.text_field :storefront, label: "Storefront name: " %>
   <%= f.text_field :password, label: "Business email (Optional): ", help: " (Leaving this field blank will default
    to your account email)" %>
-  <%= f.check_box :info, label: "I want to make my name and email address visible to buyers" %>
+  <%= f.check_box :info, label: "I want to make my name and email address visible to other users" %>
   <%= f.check_box :agree, label: "I agree to the terms and conditions. (Required)" %>
   <%= f.submit "Submit" %>
 <% end %>
