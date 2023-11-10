@@ -52,7 +52,12 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @my_profile = (params[:id].to_i == @profile.id)
+    @my_profile = if @profile.blank?
+      false
+    else
+      (params[:id].to_i == @profile.id)
+    end
+
     @profile_requested = Profile.find_by(id: params[:id])
     if @profile_requested.blank?
       flash[:alert] = "This profile does not exist!"
