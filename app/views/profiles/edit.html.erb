@@ -1,5 +1,11 @@
-<%= bootstrap_form_with(model: @profile, url: profiles_path, scope: :profile, method: :post, local: true) do |f| %>
+<%= bootstrap_form_with(model: @profile, url: profile_path(@profile), method: :patch, local: true) do |f| %>
   <%= f.label "Edit whatever info you'd like" %>
+  <%#= f.label :avatar, "Profile Picture:" %>
+  <%= f.file_field :avatar %>
+  <%= f.label :old_avatar, "Current Profile Picture:" %>
+  <% if @profile.avatar.file.present? %>
+    <%= image_tag @profile.avatar.url, class: 'img-thumbnail', alt: 'Current Avatar' %>
+  <% end %>
   <%= f.text_field :first_name, label: "First Name:", value: @profile.first_name %>
   <%= f.text_field :last_name, label: "Last Name:", value: @profile.last_name %>
   <%= f.text_area :bio, label: "Bio:", value: @profile.bio %>

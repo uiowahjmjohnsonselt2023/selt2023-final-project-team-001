@@ -41,6 +41,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user = @user
+    @profile.avatar = params[:profile][:avatar] # Make sure to permit this in your strong params
     if @profile.save
       flash[:notice] = "Profile created successfully!"
       redirect_to profile_path(@profile)
@@ -87,6 +88,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :bio, :location, :twitter, :facebook, :instagram, :website, :occupation, :public_profile)
+    params.require(:profile).permit(:first_name, :last_name, :bio, :location, :twitter, :facebook, :instagram, :website, :occupation, :public_profile, :avatar)
   end
 end

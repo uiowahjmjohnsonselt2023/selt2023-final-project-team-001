@@ -4,6 +4,9 @@
 <%= csrf_meta_tags %>
 
 <% if @profile_requested.present? %>
+  <% if @profile.avatar.file.present? %>
+    <%= image_tag @profile.avatar.url, class: 'img-thumbnail', alt: 'Current Avatar' %>
+  <% end %>
   <p><strong>Name:</strong> <%= @profile_requested.full_name %></p>
   <p><strong>Bio:</strong> <%= @profile_requested.bio %></p>
   <p><strong>Location:</strong> <%= @profile_requested.location %></p>
