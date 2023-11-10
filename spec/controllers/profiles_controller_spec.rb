@@ -9,6 +9,81 @@ describe ProfilesController, type: :controller do
     session[:user_id] = valid_user.id
   end
 
+  describe "GET #edit" do
+    let!(:valid_user) { create(:user_with_profile) }
+
+    it "renders the edit form for the user's own profile" do
+      get :edit, params: {id: valid_user.profile.id}
+
+      expect(response).to render_template("edit")
+      expect(assigns(:profile)).to eq(valid_user.profile)
+    end
+
+    it "redirects to root_path with an alert for editing someone else's profile while they have their own profile" do
+      other_user = create(:user_with_profile)
+      session[:user_id] = other_user.id
+
+      get :edit, params: {id: valid_user.profile.id}
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You can only edit your own profile!")
+    end
+
+    it "redirects to new_profile_path with an alert for a user without a profile" do
+      user = create(:user)
+      session[:user_id] = user.id
+      get :edit, params: {id: 10} # Profile id is irrelevant here, could be anything
+
+      expect(response).to redirect_to(new_profile_path)
+      expect(flash[:alert]).to eq("You don't have a profile to edit!")
+    end
+  end
+
+  describe "PATCH #update" do
+    let!(:valid_user) { create(:user_with_profile) }
+
+    let(:profile_params) { {first_name: "Updated Name"} }
+
+    it "updates the user's own profile and redirects to the profile" do
+      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
+
+      expect(response).to redirect_to(profile_path(valid_user.profile))
+      expect(flash[:notice]).to eq("Profile was successfully updated.")
+    end
+
+    it "redirects to root_path with an alert for updating someone else's profile when they have a profile" do
+      other_user = create(:user_with_profile)
+      patch :update, params: {id: other_user.profile.id, profile: profile_params}
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You can only edit your own profile!")
+    end
+
+    it "redirects to new_profile_path with an alert for a user without a profile" do
+      other_user = create(:user)
+      session[:user_id] = other_user.id
+      patch :update, params: {id: 2812, profile: profile_params} # Profile id is irrelevant here, could be anything
+
+      expect(response).to redirect_to(new_profile_path)
+      expect(flash[:alert]).to eq("You don't have a profile to edit!")
+    end
+
+    it "renders the edit form with an alert for a failed update" do
+      allow_any_instance_of(Profile).to receive(:update).and_return(false)
+      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
+
+      expect(response).to render_template("edit")
+      expect(flash.now[:alert]).to eq("Profile update failed. Please check the form.")
+    end
+  end
+
+  describe "GET #new" do
+    it "renders the sign-in page" do
+      get :new
+      expect(response).to render_template("new")
+    end
+  end
+
   describe "POST #create" do
     context "with valid credentials" do
       it "creates a new profile" do
@@ -127,71 +202,47 @@ describe ProfilesController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    let!(:valid_user) { create(:user_with_profile) }
+  describe "GET #show" do
+    let(:valid_user) { create(:user_with_profile) }
 
-    it "renders the edit form for the user's own profile" do
-      get :edit, params: {id: valid_user.profile.id}
+    context "when viewing own profile" do
+      it "renders the show page" do
+        get :show, params: {id: valid_user.profile.id}
 
-      expect(response).to render_template("edit")
-      expect(assigns(:profile)).to eq(valid_user.profile)
+        expect(response).to render_template("show")
+        expect(assigns(:profile)).to eq(valid_user.profile)
+      end
     end
 
-    it "redirects to root_path with an alert for editing someone else's profile while they have their own profile" do
-      other_user = create(:user_with_profile)
-      session[:user_id] = other_user.id
+    context "when viewing another user's public profile" do
+      let(:public_user) { create(:user_with_public_profile) }
 
-      get :edit, params: {id: valid_user.profile.id}
+      it "renders the show page" do
+        get :show, params: {id: public_user.profile.id}
 
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to eq("You can only edit your own profile!")
+        expect(response).to render_template("show")
+        expect(assigns(:profile_requested)).to eq(public_user.profile)
+      end
     end
 
-    it "redirects to new_profile_path with an alert for a user without a profile" do
-      user = create(:user)
-      session[:user_id] = user.id
-      get :edit, params: {id: 10} # Profile id is irrelevant here, could be anything
+    context "when viewing another user's private profile" do
+      let(:private_user) { create(:user_with_private_profile) }
 
-      expect(response).to redirect_to(new_profile_path)
-      expect(flash[:alert]).to eq("You don't have a profile to edit!")
-    end
-  end
+      it "redirects to root_path with an alert" do
+        get :show, params: {id: private_user.profile.id}
 
-  describe "PATCH #update" do
-    let!(:valid_user) { create(:user_with_profile) }
-
-    let(:profile_params) { {first_name: "Updated Name"} }
-
-    it "updates the user's own profile and redirects to the profile" do
-      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
-
-      expect(response).to redirect_to(profile_path(valid_user.profile))
-      expect(flash[:notice]).to eq("Profile was successfully updated.")
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("This profile is private!")
+      end
     end
 
-    it "redirects to root_path with an alert for updating someone else's profile when they have a profile" do
-      other_user = create(:user_with_profile)
-      patch :update, params: {id: other_user.profile.id, profile: profile_params}
+    context "when viewing a non-existent profile" do
+      it "redirects to root_path with an alert" do
+        get :show, params: {id: 999} # Non-existent profile id
 
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to eq("You can only edit your own profile!")
-    end
-
-    it "redirects to new_profile_path with an alert for a user without a profile" do
-      other_user = create(:user)
-      session[:user_id] = other_user.id
-      patch :update, params: {id: 2812, profile: profile_params} # Profile id is irrelevant here, could be anything
-
-      expect(response).to redirect_to(new_profile_path)
-      expect(flash[:alert]).to eq("You don't have a profile to edit!")
-    end
-
-    it "renders the edit form with an alert for a failed update" do
-      allow_any_instance_of(Profile).to receive(:update).and_return(false)
-      patch :update, params: {id: valid_user.profile.id, profile: profile_params}
-
-      expect(response).to render_template("edit")
-      expect(flash.now[:alert]).to eq("Profile update failed. Please check the form.")
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("This profile does not exist!")
+      end
     end
   end
 
@@ -201,46 +252,42 @@ describe ProfilesController, type: :controller do
 
     before do
       session[:user_id] = valid_user.id
+      valid_user.profile = valid_profile
     end
 
-    it "signs out the user" do
-      user = create(:user)
-      session[:user_id] = user.id
-      delete :destroy
-      expect(session[:user_id]).to be_nil
-    end
-    #
-    # it "redirects to the root after logging in" do
-    #   user = create(:user)
-    #   session[:user_id] = user.id
-    #   delete :destroy
-    #   expect(response).to redirect_to("/")
-    # end
-    #
-    # it "displays a success flash message after logging in" do
-    #   user = create(:user)
-    #   session[:user_id] = user.id
-    #   delete :destroy
-    #   expect(flash[:notice]).to eq("Signed out successfully!")
-    # end
-    #
-    # it "redirects to the login when not logged in" do
-    #   delete :destroy
-    #   expect(response).to redirect_to("/login")
-    # end
-    #
-    # it "gives flash message telling to log in when not logged in" do
-    #   delete :destroy
-    #   expect(flash[:notice]).to eq("You need to sign in before you can sign out!")
-    # end
-  end
+    it "destroys the user's own profile and redirects to root_path" do
+      delete :destroy, params: {id: valid_user.profile.id}
 
-  describe "GET #new" do
-    it "renders the sign-in page" do
-      get :new
-      expect(response).to render_template("new")
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq("Profile deleted successfully!")
+    end
+
+    it "redirects to root_path with an alert for deleting someone else's profile" do
+      other_user = create(:user_with_profile)
+      delete :destroy, params: {id: other_user.profile.id}
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You can only delete your own profile!")
+    end
+
+    it "redirects to root_path with an alert for a user without a profile" do
+      other_user = create(:user)
+      session[:user_id] = other_user.id
+      delete :destroy, params: {id: 123} # profile id is irrelevant here, could be anything
+
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("You don't have a profile to delete!")
     end
   end
 
+  # delete
+  describe "GET #delete" do
+    it "renders the delete page" do
+      other_user = create(:user_with_profile)
+      session[:user_id] = other_user.id
+      get :delete, params: {id: other_user.profile.id}
+      expect(response).to render_template("delete")
+    end
+  end
   # Other tests can be added
 end
