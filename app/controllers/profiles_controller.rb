@@ -64,11 +64,11 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
-    if params[:id].to_i != @profile.id
-      flash[:alert] = "You can only delete your own profile!"
-      redirect_to root_path and return
-    elsif @profile.blank?
+    if @profile.blank?
       flash[:alert] = "You don't have a profile to delete!"
+      redirect_to root_path and return
+    elsif params[:id].to_i != @profile.id
+      flash[:alert] = "You can only delete your own profile!"
       redirect_to root_path and return
     end
     @profile.destroy
