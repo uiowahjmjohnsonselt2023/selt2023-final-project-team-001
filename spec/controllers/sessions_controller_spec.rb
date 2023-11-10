@@ -70,5 +70,12 @@ describe SessionsController, type: :controller do
     end
   end
 
+  describe "GET #register" do
+    it "renders the register page" do
+      get :register
+      expect(response).to render_template("register")
+    end
+  end
+
   # Other tests can be added
 end
