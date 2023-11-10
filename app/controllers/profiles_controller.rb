@@ -3,12 +3,12 @@ class ProfilesController < ApplicationController
 
   def edit
     # Render the edit form
-    if params[:id].to_i != @profile.id
-      flash[:alert] = "You can only edit your own profile!"
-      redirect_to root_path and return
-    elsif @profile.blank?
+    if @profile.blank?
       flash[:alert] = "You don't have a profile to edit!"
       redirect_to new_profile_path and return
+    elsif params[:id].to_i != @profile.id
+      flash[:alert] = "You can only edit your own profile!"
+      redirect_to root_path and return
     end
   end
 
