@@ -1,7 +1,6 @@
 <!-- app/views/profiles/show.html.erb -->
 
 <h1>User Profile</h1>
-<%= csrf_meta_tags %>
 
 <% if @profile_requested.present? %>
   <% if @profile_requested.avatar.file.present? %>
