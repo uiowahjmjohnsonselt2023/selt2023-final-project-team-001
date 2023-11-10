@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "home/index"
   get "pages/index"
   resources :users
+  resources :products
 
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
