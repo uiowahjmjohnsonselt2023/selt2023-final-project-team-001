@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Sign up successful!"
       redirect_to login_path
     else
-      flash[:alert] = @user.errors.messages
+      flash[:alert] = "Invalid input(s)!"
       render "new"
     end
   end
