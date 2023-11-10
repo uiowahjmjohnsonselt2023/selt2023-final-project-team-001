@@ -33,3 +33,10 @@ class SessionsController < ApplicationController
     redirect_to "/"
   end
 end
+
+def register
+  if session[:user_id].nil?
+    flash[:notice] = "You need to sign in before you can register as a seller!"
+    redirect_to "/login"
+  end
+end

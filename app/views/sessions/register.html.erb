@@ -1,0 +1,6 @@
+<%= bootstrap_form_with model: @user, url: register_path, help: "Register to sell", method: :post, local: true do |f| %>
+  <%= f.text_field :storefront, label: "Storefront name: ", help: "You cannot use an existing storefront name." %>
+  <%= f.password_field :password, label: "Password: " %>
+  <%= f.check_box :agree, label: "I agree to the terms and conditions." %>
+  <%= f.submit "Submit" %>
+<% end %>
