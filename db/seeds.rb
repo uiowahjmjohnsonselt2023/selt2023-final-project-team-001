@@ -51,7 +51,7 @@ users.each do |user_attributes|
       first_name: user_attributes[:first_name],
       last_name: user_attributes[:last_name],
       birth_date: Faker::Date.between(from: 40.years.ago, to: 18.years.ago),
-      twitter: "https://twitter.com/#{Faker::Internet.username}",
+      twitter: "https://x.com/#{Faker::Internet.username}",
       facebook: "https://facebook.com/#{Faker::Internet.username}",
       instagram: "https://instagram.com/#{Faker::Internet.username}",
       website: Faker::Internet.url,
