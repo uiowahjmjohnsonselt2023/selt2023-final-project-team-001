@@ -77,5 +77,27 @@ describe SessionsController, type: :controller do
     end
   end
 
+  describe "POST #register" do
+    it "redirects an unknown user to login" do
+      session[:user_id] = nil
+      post :new_seller
+      expect(response).to redirect_to("/login")
+    end
+
+    it "tells an unknown user to login before they register" do
+      session[:user_id] = nil
+      post :new_seller
+      expect(flash[:notice]).to eq("You need to sign in before you can register as a seller!")
+    end
+
+    it "retrieves a logged-in user's information from the database" do
+      # pending "add test body here"
+    end
+
+    it "changes a user's seller status to true" do
+      # pending "add test body here"
+    end
+  end
+
   # Other tests can be added
 end
