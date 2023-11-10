@@ -83,4 +83,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_040315) do
   add_foreign_key "categorizations", "categories"
   add_foreign_key "categorizations", "products"
   add_foreign_key "products", "users", column: "seller_id"
+  add_foreign_key "profiles", "users"
 end
