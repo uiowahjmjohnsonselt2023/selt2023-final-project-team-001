@@ -169,8 +169,8 @@ describe ProfilesController, type: :controller do
       expect(flash[:notice]).to eq("Profile was successfully updated.")
     end
 
-    it "redirects to root_path with an alert for updating someone else's profile" do
-      other_user = create(:user)
+    it "redirects to root_path with an alert for updating someone else's profile when they have a profile" do
+      other_user = create(:user_with_profile)
       patch :update, params: {id: other_user.profile.id, profile: profile_params}
 
       expect(response).to redirect_to(root_path)
@@ -178,8 +178,9 @@ describe ProfilesController, type: :controller do
     end
 
     it "redirects to new_profile_path with an alert for a user without a profile" do
-      allow(valid_user).to receive(:profile).and_return(nil)
-      patch :update, params: {id: 123, profile: profile_params} # Non-existent profile
+      other_user = create(:user)
+      session[:user_id] = other_user.id
+      patch :update, params: {id: 2812, profile: profile_params} # Profile id is irrelevant here, could be anything
 
       expect(response).to redirect_to(new_profile_path)
       expect(flash[:alert]).to eq("You don't have a profile to edit!")
