@@ -39,19 +39,22 @@ describe SessionsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "signs out the user" do
-      session[:user_id] = valid_user.id
+      user = create(:user)
+      session[:user_id] = user.id
       delete :destroy
       expect(session[:user_id]).to be_nil
     end
 
     it "redirects to the root after logging in" do
-      session[:user_id] = valid_user.id
+      user = create(:user)
+      session[:user_id] = user.id
       delete :destroy
       expect(response).to redirect_to("/")
     end
 
     it "displays a success flash message after logging in" do
-      session[:user_id] = valid_user.id
+      user = create(:user)
+      session[:user_id] = user.id
       delete :destroy
       expect(flash[:notice]).to eq("Signed out successfully!")
     end
