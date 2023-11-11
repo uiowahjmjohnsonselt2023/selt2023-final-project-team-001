@@ -38,3 +38,6 @@
 
 # Jetbrains IDEs
 /.idea
+
+# MacOS system file
+/app/views/layouts/.DS_Store
