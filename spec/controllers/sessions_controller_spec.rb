@@ -19,7 +19,7 @@ describe SessionsController, type: :controller do
         post :create, params: {email: valid_user.email, password: valid_user.password}
         expect(session[:user_id]).to be_truthy
 
-        expect(response).to redirect_to("/")
+        expect(response).to redirect_to(root_path)
         expect(flash[:notice]).to eq("Successfully signed in!")
       end
     end
@@ -49,7 +49,7 @@ describe SessionsController, type: :controller do
       user = create(:user, email: "test2@test.com")
       session[:user_id] = user.id
       delete :destroy
-      expect(response).to redirect_to("/")
+      expect(response).to redirect_to(root_path)
     end
 
     it "displays a success flash message after logging in" do
@@ -61,7 +61,7 @@ describe SessionsController, type: :controller do
 
     it "redirects to the login when not logged in" do
       delete :destroy
-      expect(response).to redirect_to("/login")
+      expect(response).to redirect_to(login_path)
     end
 
     it "gives flash message telling to log in when not logged in" do

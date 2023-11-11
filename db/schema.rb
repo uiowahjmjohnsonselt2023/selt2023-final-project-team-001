@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_09_191026) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_10_040315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_191026) do
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.text "bio"
+    t.string "location"
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birth_date"
+    t.string "twitter"
+    t.string "facebook"
+    t.string "instagram"
+    t.string "website"
+    t.string "occupation"
+    t.integer "seller_rating"
+    t.integer "buyer_rating"
+    t.boolean "public_profile", default: true, null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "avatar"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -62,4 +83,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_191026) do
   add_foreign_key "categorizations", "categories"
   add_foreign_key "categorizations", "products"
   add_foreign_key "products", "users", column: "seller_id"
+  add_foreign_key "profiles", "users"
 end

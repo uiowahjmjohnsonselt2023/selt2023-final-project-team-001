@@ -23,8 +23,8 @@ password_kwargs = {
   User.find_or_initialize_by(email: email).update!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    email:,
-    password:,
+    email: email,
+    password: password,
     password_confirmation: password,
     # Ensure that the database has at least 5 sellers and 5 buyers.
     is_seller: i < 5 || Faker::Boolean.boolean,
@@ -45,7 +45,7 @@ Product.insert_all(
       quantity: Faker::Number.within(range: 1..100),
       condition: Faker::Base.sample(conditions),
       private: Faker::Boolean.boolean,
-      created_at:,
+      created_at: created_at,
       updated_at: Faker::Time.between(from: created_at, to: Time.now)
     }
   end
@@ -57,7 +57,7 @@ Categorization.insert_all(
   Product.pluck(:id).flat_map do |product_id|
     num_categories = Faker::Number.within(range: 1..max_num_categories)
     Faker::Base.sample(category_ids, num_categories).map do |category_id|
-      {product_id:, category_id:}
+      {product_id: product_id, category_id: category_id}
     end
   end
 )

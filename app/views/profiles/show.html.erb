@@ -1,0 +1,29 @@
+<!-- app/views/profiles/show.html.erb -->
+
+<h1>User Profile</h1>
+
+<% if @profile_requested.present? %>
+  <% if @profile_requested.avatar.file.present? %>
+    <%= image_tag @profile_requested.avatar.url, class: 'img-thumbnail', alt: 'Current Avatar' %>
+  <% end %>
+  <p><strong>Name:</strong> <%= @profile_requested.full_name %></p>
+  <p><strong>Bio:</strong> <%= @profile_requested.bio %></p>
+  <p><strong>Location:</strong> <%= @profile_requested.location %></p>
+  <p><strong>Twitter:</strong> <%= @profile_requested.twitter %></p>
+  <p><strong>Facebook:</strong> <%= @profile_requested.facebook %></p>
+  <p><strong>Instagram:</strong> <%= @profile_requested.instagram %></p>
+  <p><strong>Website:</strong> <%= @profile_requested.website %></p>
+  <p><strong>Occupation:</strong> <%= @profile_requested.occupation %></p>
+
+  <!-- TODO: Displaying the user's avatar if attached -->
+  <%# image_tag @profile_requested.avatar if @profile_requested.avatar.attached? %>
+
+  <p><strong>Seller Rating:</strong> <%= @profile_requested.seller_rating %></p>
+  <p><strong>Buyer Rating:</strong> <%= @profile_requested.buyer_rating %></p>
+
+  <!-- Links -->
+  <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
+  <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" if @my_profile%>
+<% else %>
+  <p>User profile not found.</p>
+<% end %>

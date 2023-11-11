@@ -24,6 +24,10 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 gem "money-rails", "~> 1.15"
 
+# profile picture stuff
+gem "carrierwave"
+gem "mini_magick"
+
 group :rubocop do
   gem "rubocop", "~> 1.56.4", require: false
   gem "rubocop-performance", require: false

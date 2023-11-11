@@ -28,4 +28,6 @@ class User < ApplicationRecord
   scope :non_buyers, -> { where(is_buyer: false) }
 
   has_many :products, foreign_key: :seller_id, dependent: :destroy
+  has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
 end
