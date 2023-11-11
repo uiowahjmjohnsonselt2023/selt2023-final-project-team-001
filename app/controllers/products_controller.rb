@@ -5,8 +5,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
-    if @product.private
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:alert] = "That product doesn't exist."
+      redirect_to root_path
+    elsif @product.private
       # can't use set_current_user because it redirects
       current_user = User.find_by(id: session[:user_id])
       unless current_user == @product.seller || current_user&.is_admin
@@ -41,16 +44,22 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
-    unless current_user == @product.seller || current_user.is_admin
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:alert] = "That product doesn't exist."
+      redirect_to root_path
+    elsif current_user != @product.seller && !current_user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     end
   end
 
   def update
-    @product = Product.find(params[:id])
-    if current_user != @product.seller && !current_user.is_admin
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:alert] = "That product doesn't exist."
+      redirect_to root_path
+    elsif current_user != @product.seller && !current_user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     elsif @product.update(product_params)
