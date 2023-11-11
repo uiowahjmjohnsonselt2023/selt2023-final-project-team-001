@@ -7,6 +7,7 @@ describe ProductsViewController, type: :controller do
 
   describe "GET #products" do
     it "displays all products" do
+      get :display
       expect(response).to render_template("display")
     end
   end
