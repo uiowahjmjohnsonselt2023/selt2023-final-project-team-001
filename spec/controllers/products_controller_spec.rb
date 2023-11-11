@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe ProductsViewController, type: :controller do
+describe ProductsController, type: :controller do
   let(:valid_user) { create(:user, email: "admin@admin.com", password: "admin") }
 
   describe "GET #products" do

@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/products_view_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/products_controller_spec.rb": {
         "lines": [
           null,
           null,
@@ -481,7 +481,7 @@
           null
         ]
       },
-      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/products_view_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/products_controller.rb": {
         "lines": [
           1,
           1,
@@ -996,6 +996,6 @@
         ]
       }
     },
-    "timestamp": 1699661953
+    "timestamp": 1699671108
   }
 }
