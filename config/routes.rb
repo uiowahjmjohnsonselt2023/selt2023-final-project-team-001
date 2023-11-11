@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "home/index"
   get "pages/index"
-  resources :users
+
   resources :products
 
   get "/signup", to: "users#new", as: "signup"
