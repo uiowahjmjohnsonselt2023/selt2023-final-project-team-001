@@ -103,7 +103,7 @@ describe SessionsController, type: :controller do
       it "retrieves a logged-in user's information from the database" do
         user = create(:user)
         session[:user_id] = user.id
-        post :new_seller, params: {storefront: "Fake flower shop", email: valid_user.email}
+        post :new_seller, params: {storefront: "Fake flower shop", email: valid_user.email, submit: true}
         expect(flash[:notice]).to eq("Registration successful")
       end
     end

@@ -42,10 +42,8 @@ class SessionsController < ApplicationController
       redirect_to "/login" and return
     end
     user = User.find_by(id: session[:user_id])
-    user.update(is_seller: "t")
-    if user.save
-      flash[:notice] = "Registration successful"
-      redirect_to "/login"
-    end
+    user.is_seller = :t
+    user.save
+    flash[:notice] = "Registration successful"
   end
 end
