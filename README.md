@@ -1,5 +1,32 @@
 # selt2023-final-project-team-001
 
+## Project Summary
+
+This is a practical online platform designed for buying and selling goods. We aim to make the process straightforward, connecting buyers with a variety of products and allowing sellers to list their items easily.
+
+### Key Features
+
+- Users can create an account and login securely. 
+
+- Users can view products available for sale, with the option to sort and filter according to attributes like price, date posted, and tags.
+
+- Users can register to sell products, with the ability to sell as an independent seller (in the style of Facebook Marketplace or Craigslist) or set up a storefront to sell products regularly (more in the style of Etsy).
+
+- Buyers and sellers can make use of third-party plugins for UPS and FedEx to calculate shipping, prepare and print shipping labels, and track their orders.
+
+- Buyers and sellers can interact in a number of different ways: through on-platform messaging, commenting, and leaving product, seller, and buyer reviews.
+
+### Navigation
+
+- When users navigate to the \login page of the app, they are prompted to log in with their username and password.
+
+- If users do not have an account, they should visit \signup, where they will be prompted to create an account.
+
+- Users can register to sell products on the \register page.
+
+- Users can view products for sale on the \products page. 
+
+
 ## Installation
 
 Clone the repository. Then, you'll need to install some additional dependencies.
