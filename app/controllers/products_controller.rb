@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
-  before_action :set_current_user, except: [:show]
+  before_action :set_current_user, except: [:show, :index]
+
+  def index
+  end
 
   def show
     @product = Product.find(params[:id])

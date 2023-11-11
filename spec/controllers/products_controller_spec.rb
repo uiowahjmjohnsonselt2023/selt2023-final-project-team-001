@@ -6,6 +6,13 @@ describe ProductsController, type: :controller do
   let(:seller) { create(:seller) }
   let(:product) { create(:product) }
 
+  describe "GET #index" do
+    it "displays all products" do
+      get :index
+      expect(response).to render_template :index
+    end
+  end
+
   context "when not logged in" do
     describe "GET #show" do
       context "when the product is public" do

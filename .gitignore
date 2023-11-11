@@ -31,8 +31,13 @@
 
 /public/assets
 
+/database.yml
+
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
 # Jetbrains IDEs
 /.idea
+
+# MacOS system file
+/app/views/layouts/.DS_Store
