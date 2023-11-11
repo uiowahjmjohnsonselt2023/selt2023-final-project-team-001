@@ -13,6 +13,31 @@ describe ProductsController, type: :controller do
     end
   end
 
+  context "when passing in a product that doesn't exist" do
+    before { login_as seller }
+
+    describe "GET #show" do
+      it "redirects to the home page" do
+        get :show, params: {id: 0}
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    describe "GET #edit" do
+      it "redirects to the home page" do
+        get :edit, params: {id: 0}
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    describe "PUT #update" do
+      it "redirects to the home page" do
+        put :update, params: {id: 0, product: {name: "New Name"}}
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
   context "when not logged in" do
     describe "GET #show" do
       context "when the product is public" do
