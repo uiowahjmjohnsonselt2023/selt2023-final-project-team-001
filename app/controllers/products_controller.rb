@@ -3,9 +3,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    if @product.private && current_user != @product.seller && !current_user&.is_admin
-      flash[:alert] = "You don't have permission to view that product."
-      redirect_to root_path
+    if @product.private
+      # can't use set_current_user because it redirects
+      current_user = User.find_by(id: session[:user_id])
+      unless current_user == @product.seller || current_user&.is_admin
+        flash[:alert] = "You don't have permission to view that product."
+        redirect_to root_path
+      end
     end
   end
 
