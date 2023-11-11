@@ -1,0 +1,9 @@
+<h1>Product</h1>
+<p>Name: <%= @product.name %></p>
+<p>Description: <%= @product.description %></p>
+<p>Price: <%= @product.price %></p>
+<p>Quantity: <%= @product.quantity %></p>
+<p>Categories: <%= @product.categories.pluck(:name).join("; ") %></p>
+<p>Condition: <%= @product.condition %></p>
+<p>Created: <%= @product.created_at %></p>
+<p>Seller: <%= @product.seller.first_name %></p>

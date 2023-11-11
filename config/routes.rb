@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get "home/index"
   get "pages/index"
 
+  resources :products
+
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
 
@@ -10,8 +12,6 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#destroy", as: "logout"
   get "/register", to: "sessions#register", as: "register"
   post "/register", to: "sessions#new_seller", as: "seller"
-  get "/products", to: "products#display", as: "products"
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,0 +1,9 @@
+<%= bootstrap_form_with model: @product do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_area :description %>
+  <%= f.text_field :price, prepend: "$", inputmode: "decimal", pattern: "[0-9]*?(\\.[0-9]*)?" %>
+  <%= f.text_field :quantity, inputmode: "numeric", pattern: "[1-9][0-9]*" %>
+  <%= f.select :condition, Product.conditions.keys %>
+  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+  <%= f.primary %>
+<% end %>
