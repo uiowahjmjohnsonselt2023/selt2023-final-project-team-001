@@ -7,52 +7,59 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-require 'faker'
 
 users = [
   {
-    first_name: "admin",
-    last_name: "admin",
+    first_name: "Thomas",
+    last_name: "Anderson",
     email: "admin@admin.com",
     password: "admin000",
     password_confirmation: "admin000",
     is_seller: false,
     is_buyer: false,
-    is_admin: true
+    is_admin: true,
+    profile_attributes: {
+      bio: "I go by the hacker alias Neo and am guilty of virtually every" \
+        " computer crime there is a law for.",
+      location: "Lower Downtown, Capital City, USA",
+      first_name: "Thomas",
+      last_name: "Anderson",
+      birth_date: "March 11, 1962",
+      twitter: "https://x.com/neo",
+      website: "https://neo.com",
+      occupation: "Programmer",
+      public_profile: false
+    }
   },
   {
-    first_name: "admin2",
-    last_name: "admin2",
-    email: "admin2@admin.com",
-    password: "admin2000",
-    password_confirmation: "admin2000",
-    is_seller: false,
-    is_buyer: false,
-    is_admin: true
+    first_name: "John",
+    last_name: "Doe",
+    email: "jdoe@example.com",
+    password: "JohnDoe123",
+    password_confirmation: "JohnDoe123",
+    is_seller: true,
+    is_buyer: true,
+    is_admin: false,
+    profile_attributes: {
+      bio: "Hi! I'm John. I sell and buy pretty much anything, so feel free" \
+        " to shoot me a message :)",
+      location: "New York, NY",
+      first_name: "John",
+      last_name: "Doe",
+      birth_date: "January 4, 1990",
+      facebook: "https://facebook.com/jdoeAuctions",
+      instagram: "https://instagram.com/jdoeAuctions",
+      website: "https://jdoeAuctions.example",
+      occupation: "Auctioneer",
+      seller_rating: 4.5,
+      buyer_rating: 4.5,
+      public_profile: true
+    }
   }
 ]
 
 users.each do |user_attributes|
-  user = User.create_with(user_attributes).find_or_create_by!(email: user_attributes[:email])
-  # Explicitly define user_attributes within the loop
-  profile_attributes = {
-    bio: Faker::Lorem.paragraph(sentence_count: 2),
-    location: Faker::Address.city,
-    first_name: user_attributes[:first_name],
-    last_name: user_attributes[:last_name],
-    birth_date: Faker::Date.between(from: 40.years.ago, to: 18.years.ago),
-    twitter: "https://x.com/#{Faker::Internet.username}",
-    facebook: "https://facebook.com/#{Faker::Internet.username}",
-    instagram: "https://instagram.com/#{Faker::Internet.username}",
-    website: Faker::Internet.url,
-    occupation: Faker::Job.title,
-    seller_rating: Faker::Number.between(from: 1, to: 5),
-    buyer_rating: Faker::Number.between(from: 1, to: 5),
-    public_profile: true,
-    user: user
-  }
-
-  Profile.create!(profile_attributes)
+  User.create_with(user_attributes).find_or_create_by!(email: user_attributes[:email])
 end
 
 # This file should contain all the record creation needed to seed the database

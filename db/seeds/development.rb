@@ -17,10 +17,11 @@ password_kwargs = {
 # (which is done in the model). This is a lot slower unfortunately, but I couldn't
 # find a way to get around it. Note: the slow part is model instantiation, not the
 # database insertion.
-30.times do |i|
+users = 30.times.map do |i|
   email = "test" + (i * 3).to_s + "@test.com"
   password = Faker::Internet.password(**password_kwargs)
-  User.find_or_initialize_by(email: email).update!(
+  user = User.find_or_initialize_by(email: email)
+  user.update!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: email,
@@ -30,7 +31,30 @@ password_kwargs = {
     is_seller: i < 5 || Faker::Boolean.boolean,
     is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean
   )
+  user
 end
+
+Profile.insert_all(
+  users.map do |user|
+    username = Faker::Internet.username(specifier: user.full_name)
+    {
+      bio: Faker::Lorem.paragraph(sentence_count: 2),
+      location: Faker::Address.city,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+      twitter: "https://x.com/#{username}",
+      facebook: "https://facebook.com/#{username}",
+      instagram: "https://instagram.com/#{username}",
+      website: Faker::Internet.url(path: "/#{username}"),
+      occupation: Faker::Job.title,
+      seller_rating: Faker::Number.within(range: 1..5),
+      buyer_rating: Faker::Number.within(range: 1..5),
+      public_profile: Faker::Boolean.boolean,
+      user_id: user.id
+    }
+  end
+)
 
 seller_ids = User.sellers.pluck(:id)
 Product.insert_all(
