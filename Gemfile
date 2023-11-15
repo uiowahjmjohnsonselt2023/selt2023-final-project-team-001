@@ -12,17 +12,28 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 gem "bcrypt", "~> 3.1.7"
+gem "money-rails", "~> 1.15"
+
+# CSS and JS
 gem "bootstrap", "~> 5.0"
 gem "bootstrap_form", "~> 5.4"
+gem "importmap-rails", "~> 1.2"
 gem "sassc-rails"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Use Redis adapter to run Action Cable in production
+# gem "redis", ">= 4.0.1"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[windows jruby]
-
-gem "money-rails", "~> 1.15"
 
 # profile picture stuff
 gem "carrierwave"
