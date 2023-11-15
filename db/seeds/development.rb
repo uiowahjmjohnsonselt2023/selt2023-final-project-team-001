@@ -18,7 +18,7 @@ password_kwargs = {
 # find a way to get around it. Note: the slow part is model instantiation, not the
 # database insertion.
 users = 30.times.map do |i|
-  email = "test" + (i * 3).to_s + "@test.com"
+  email = Faker::Internet.email
   password = Faker::Internet.password(**password_kwargs)
   user = User.find_or_initialize_by(email: email)
   user.update!(
