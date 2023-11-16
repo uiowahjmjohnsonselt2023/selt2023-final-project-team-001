@@ -10,10 +10,8 @@
   </head>
 
   <body class="bg-light">
+    <%= render "navbar" %>
     <%= render "flash" %>
-
-    <%= link_to "Home", root_path %>
-
     <div class="container">
       <%= yield %>
     </div>
