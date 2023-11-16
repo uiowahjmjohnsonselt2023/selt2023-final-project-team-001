@@ -28,3 +28,9 @@
     padding: 10px;
     text-align: center;
 }
+
+// Any .bd-* comment refers to CSS classes taken from the Bootstrap docs' CSS
+
+.selt-gutter { // .bd-gutter
+    --bs-gutter-x: 3rem;
+}
