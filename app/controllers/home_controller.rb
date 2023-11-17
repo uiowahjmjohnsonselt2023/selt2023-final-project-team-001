@@ -8,5 +8,6 @@ class HomeController < ApplicationController
   def set_user_and_profile
     @user = User.find_by(id: session[:user_id])
     @profile = @user&.profile
+    @storefront = @user&.storefront
   end
 end

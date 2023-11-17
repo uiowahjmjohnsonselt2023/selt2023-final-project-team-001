@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get "storefront/show"
   get "home/index"
   get "pages/index"
 
   resources :products
+
+  resources :storefront
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
