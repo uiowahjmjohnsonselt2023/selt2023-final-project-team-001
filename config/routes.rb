@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "storefront/show"
   get "home/index"
   get "pages/index"
 
