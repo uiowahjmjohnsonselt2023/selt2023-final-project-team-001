@@ -15,15 +15,13 @@ class SessionsController < ApplicationController
     password = params[:password]
     user = User.find_by(email: email)
 
-    if user
-      if user&.authenticate(password)
-        session[:user_id] = user.id
-        flash[:notice] = "Successfully signed in!"
-        redirect_to root_path and return
-      end
+    if user&.authenticate(password)
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Signed in successfully!"
+    else
+      flash[:alert] = "Invalid email/password combination"
+      render "new", status: :unauthorized
     end
-    flash[:alert] = "Invalid email/password combination"
-    render "new"
   end
 
   def destroy
