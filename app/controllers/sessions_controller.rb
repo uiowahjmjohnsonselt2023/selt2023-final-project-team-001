@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  # mentioned in lecture but I'm not sure how it applies yet
+  # skip_before_filter :require_login
   def new
     # automatically renders the sign-in form
     if session[:user_id].present?
