@@ -11,8 +11,8 @@
 
   <body class="bg-body d-flex flex-column min-vh-100">
     <%= render "navbar" %>
-    <%= render "flash" %>
     <div class="container-xl selt-gutter my-md-4">
+      <%= flash_messages %>
       <%= yield %>
     </div>
     <%= render "footer" %>
