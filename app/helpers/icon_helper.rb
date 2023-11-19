@@ -1,5 +1,4 @@
 module IconHelper
-  # Note: The icons are from https://lucide.dev/
   def icon(name, **options)
     path = "icons/#{name}.svg"
     options[:class] = class_names "bi", options[:class]
