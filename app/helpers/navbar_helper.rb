@@ -45,17 +45,19 @@ module NavbarHelper
   def navbar_dropdown(text, **options, &block)
     li_options = options.delete(:li_options) || {}
     li_options[:class] = class_names "dropdown", li_options[:class]
+    ul_options = options.delete(:ul_options) || {}
+    ul_options[:class] = class_names "dropdown-menu", ul_options[:class]
 
-    a_options = options.delete(:a_options) || {}
-    a_options[:role] = "button"
-    a_options[:class] = class_names "nav-link", "dropdown-toggle", a_options[:class]
-    a_options[:data] = {bs_toggle: "dropdown"}.merge(a_options[:data] || {})
-    a_options[:aria] = {expanded: "false"}.merge(a_options[:aria] || {})
+    options = options.delete(:options) || {}
+    options[:role] = "button"
+    options[:class] = class_names "nav-link", "dropdown-toggle", options[:class]
+    options[:data] = {bs_toggle: "dropdown"}.merge(options[:data] || {})
+    options[:aria] = {expanded: "false"}.merge(options[:aria] || {})
 
     navbar_item(**li_options) do
       out = []
-      out << link_to(text, "#", **a_options)
-      out << tag.ul(class: "dropdown-menu", **options, &block)
+      out << link_to(text, "#", **options)
+      out << tag.ul(**ul_options, &block)
       safe_join out
     end
   end
