@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   def destroy
     # Handle sign-out logic
     if session[:user_id].nil?
-      flash[:notice] = "You need to sign in before you can sign out!"
+      flash[:alert] = "You need to sign in before you can sign out!"
       redirect_to login_path and return
     end
     session[:user_id] = nil
