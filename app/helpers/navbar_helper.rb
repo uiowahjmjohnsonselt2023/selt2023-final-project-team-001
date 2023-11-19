@@ -9,18 +9,24 @@ module NavbarHelper
   # Creates a navbar link.
   # If the current page is the linked page, the link is given the active class. This
   # can be overridden by passing the :active option.
+  #
   # <code>
   # <li class="nav-item">
   #     <a class="nav-link" href="#{path}">#{text}</a>
   # </li>
   # </code>
-  # @param [String] text The text to display in the link.
-  # @param [String] path The path to link to.
+  #
+  # @param [Array] args If a block is given, the argument is the path. Otherwise, the
+  #   arguments are the text and the path.
   # @param [Hash] options The options to pass to the link_to helper.
   # @option options [Hash] :li_options The options to pass to the navbar_item helper.
   # @option options [Boolean] :active Whether or not the link is active.
   # @option options [Boolean] :disabled Whether or not the link is disabled.
-  def navbar_link(text, path, **options)
+  # @yieldreturn [String] If given, the block is used as the link text.
+  # @return [String] The HTML for the navbar link.
+  def navbar_link(*args, **options, &block)
+    path = block ? args[0] : args[1]
+
     li_options = options.delete(:li_options) || {}
 
     active = options.delete(:active) { current_page?(path) } && "active"
@@ -28,7 +34,7 @@ module NavbarHelper
     options[:aria] = {current: "page"}.merge(options[:aria] || {}) if active
     options[:class] = class_names "nav-link", active, disabled, options[:class]
 
-    navbar_item(**li_options) { link_to(text, path, **options) }
+    navbar_item(**li_options) { link_to(*args, **options, &block) }
   end
 
   # Creates a navbar dropdown.
