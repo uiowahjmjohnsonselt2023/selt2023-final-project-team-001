@@ -14,10 +14,11 @@ gem "pg", "~> 1.1"
 gem "bcrypt", "~> 3.1.7"
 gem "money-rails", "~> 1.15"
 
-# CSS and JS
+# SVG, CSS and JS
 gem "bootstrap", "~> 5.0"
 gem "bootstrap_form", "~> 5.4"
 gem "importmap-rails", "~> 1.2"
+gem "inline_svg", "~> 1.9.0"
 gem "sassc-rails"
 
 # Use the Puma web server [https://github.com/puma/puma]
