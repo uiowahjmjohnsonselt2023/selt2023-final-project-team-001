@@ -75,4 +75,18 @@ module NavbarHelper
     options[:class] = class_names "dropdown-divider", options[:class]
     tag.li(**li_options) { tag.hr(**options) }
   end
+
+  def user_button(**options)
+    if Current.user
+      navbar_dropdown(Current.user.full_name, **options) do
+        out = []
+        out << dropdown_link("Profile", profile_path(Current.user))
+        out << dropdown_divider
+        out << dropdown_link("Logout", logout_path, method: :delete)
+        safe_join out
+      end
+    else
+      navbar_link("Login", login_path, **options)
+    end
+  end
 end
