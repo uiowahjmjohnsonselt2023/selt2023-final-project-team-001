@@ -62,4 +62,11 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "full_name" do
+    it "should properly format full name" do
+      user = build(:user, first_name: "John", last_name: "Doe")
+      expect(user.full_name).to eq("John Doe")
+    end
+  end
 end

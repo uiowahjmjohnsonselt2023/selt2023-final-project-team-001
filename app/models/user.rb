@@ -25,6 +25,10 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def create_session_token
