@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       flash[:warning] = "Can only show profile of logged-in user"
     end
   end
-  
+
   def new
     @user = User.new
   end
