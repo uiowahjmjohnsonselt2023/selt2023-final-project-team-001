@@ -69,4 +69,10 @@ module NavbarHelper
     options[:class] = class_names "dropdown-item", options[:class]
     tag.li(**li_options) { link_to(text, path, **options) }
   end
+
+  def dropdown_divider(**options)
+    li_options = options.delete(:li_options) || {}
+    options[:class] = class_names "dropdown-divider", options[:class]
+    tag.li(**li_options) { tag.hr(**options) }
+  end
 end
