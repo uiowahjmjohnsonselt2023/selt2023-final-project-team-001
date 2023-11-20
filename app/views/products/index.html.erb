@@ -6,21 +6,25 @@
   <%= f.check_box :filter_3, label: 'Filter 3' %>
 <% end %>
 
+<div class="container mt-4">
+  <h2>Product List</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price_cents %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>
-  <!-- Product Listings
-  <div class="products" id="productListings">
-     Product listings will be dynamically generated here -->
-    <!-- Placeholder content
-    <div class="product">
-      <h3>Product 1</h3>
-      <p>Description of Product 1</p>
-      <p>$15.55</p>
-    </div>
-    <div class="product">
-      <h3>Product 2</h3>
-      <p>Description of Product 2</p>
-      <p>$55.51</p>
-    </div>
-    End of placeholder content
-  </div> -->
