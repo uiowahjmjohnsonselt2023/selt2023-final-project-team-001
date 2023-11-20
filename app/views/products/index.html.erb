@@ -24,4 +24,24 @@
   </table>
 </div>
 
+<div class="container mt-4">
+  <h2>Product List</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price_cents %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
 </body>
