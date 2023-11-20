@@ -17,7 +17,7 @@ password_kwargs = {
 # (which is done in the model). This is a lot slower unfortunately, but I couldn't
 # find a way to get around it. Note: the slow part is model instantiation, not the
 # database insertion.
-users = 30.times.map do |i|
+30.times.map do |i|
   email = Faker::Internet.email
   password = Faker::Internet.password(**password_kwargs)
   user = User.find_or_initialize_by(email: email)
@@ -34,27 +34,27 @@ users = 30.times.map do |i|
   user
 end
 
-Profile.insert_all(
-  users.map do |user|
-    username = Faker::Internet.username(specifier: user.full_name)
-    {
-      bio: Faker::Lorem.paragraph(sentence_count: 2),
-      location: Faker::Address.city,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
-      twitter: "https://x.com/#{username}",
-      facebook: "https://facebook.com/#{username}",
-      instagram: "https://instagram.com/#{username}",
-      website: Faker::Internet.url(path: "/#{username}"),
-      occupation: Faker::Job.title,
-      seller_rating: Faker::Number.within(range: 1..5),
-      buyer_rating: Faker::Number.within(range: 1..5),
-      public_profile: Faker::Boolean.boolean,
-      user_id: user.id
-    }
-  end
-)
+# Profile.insert_all(
+#   users.map do |user|
+#     username = Faker::Internet.username(specifier: user.full_name)
+#     {
+#       bio: Faker::Lorem.paragraph(sentence_count: 2),
+#       location: Faker::Address.city,
+#       first_name: user.first_name,
+#       last_name: user.last_name,
+#       birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+#       twitter: "https://x.com/#{username}",
+#       facebook: "https://facebook.com/#{username}",
+#       instagram: "https://instagram.com/#{username}",
+#       website: Faker::Internet.url(path: "/#{username}"),
+#       occupation: Faker::Job.title,
+#       seller_rating: Faker::Number.within(range: 1..5),
+#       buyer_rating: Faker::Number.within(range: 1..5),
+#       public_profile: Faker::Boolean.boolean,
+#       user_id: user.id
+#     }
+#   end
+# )
 
 seller_ids = User.sellers.pluck(:id)
 Product.insert_all(

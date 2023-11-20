@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-    @products = [Product.new(name: "test1", price_cents: "31"), Product.new(name: "test2", price_cents: "1000000000")]
+    @products = Product.find_each
+    # @products = [Product.new(name: "test1", price_cents: "31"), Product.new(name: "test2", price_cents: "1000000000")]
   end
 
   def show
