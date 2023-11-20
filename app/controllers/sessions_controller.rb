@@ -32,4 +32,19 @@ class SessionsController < ApplicationController
     flash[:notice] = "Signed out successfully!"
     redirect_to root_path
   end
+
+  def register
+  end
+
+  def new_seller
+    if session[:user_id].nil?
+      flash[:notice] = "You need to sign in before you can register as a seller!"
+      redirect_to "/login" and return
+    end
+    user = User.find_by(id: session[:user_id])
+    if user.update_attribute(:is_seller, true)
+      flash[:notice] = "Registration successful"
+      redirect_to "/"
+    end
+  end
 end
