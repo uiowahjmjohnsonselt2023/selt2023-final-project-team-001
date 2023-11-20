@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
+  get "/checkout", to: "checkouts#index", as: "checkout"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
