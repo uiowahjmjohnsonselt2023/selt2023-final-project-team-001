@@ -1,0 +1,40 @@
+<%= stylesheet_link_tag "carts" %>
+<div class="cart-container">
+  <div class="cart-details">
+    <h2>Your Cart</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price Per Product</th>
+        <th>Quantity</th>
+        <th>Total Cost</th>
+        <th></th>
+      </tr>
+      </thead>
+      <% cart_price = 0 %>
+      <tbody>
+      <% @products_in_cart.each do |product| %>
+        <tr>
+          <td><%= product[:name] %></td>
+          <td>$<%= product[:price] / 100.00 %></td>
+          <td><%= product[:quantity] %></td>
+          <% total_price = product[:price] * product[:quantity] / 100.00 %>
+          <% cart_price += total_price %>
+          <td>$<%= total_price %></td>
+          <td><%= link_to "Delete", request.original_url, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="summary">
+    <h3>Summary</h3>
+    <p>Total: $<%= cart_price %></p>
+    <p>Tax: TBD</p>
+    <p>Shipping: TBD</p>
+    <%= link_to "Proceed to Payment", request.original_url, class: "btn btn-primary" %>
+  </div>
+</div>
+
