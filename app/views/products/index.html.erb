@@ -18,7 +18,7 @@
     <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.name %></td>
+        <td><%= link_to product.name, "/show" %></td>
         <td><%= product.price_cents %></td>
       </tr>
     <% end %>
