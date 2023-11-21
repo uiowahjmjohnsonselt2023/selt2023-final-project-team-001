@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(password)
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Signed in successfully!"
+      redirect_to root_path, notice: "Successfully signed in!"
     else
       flash[:alert] = "Invalid email/password combination"
       render "new", status: :unauthorized

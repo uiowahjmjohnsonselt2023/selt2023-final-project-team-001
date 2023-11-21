@@ -550,6 +550,24 @@
           null
         ]
       },
+      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/inline_svg.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/money.rb": {
         "lines": [
           null,
@@ -806,6 +824,32 @@
           null
         ]
       },
+      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/flash_helper.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          5,
+          null,
+          null
+        ]
+      },
       "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/footer_helper.rb": {
         "lines": [
           1,
@@ -815,6 +859,21 @@
           16,
           16,
           16,
+          null,
+          null
+        ]
+      },
+      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/icon_helper.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
           null,
           null
         ]
@@ -901,6 +960,8 @@
           null,
           1,
           4,
+          4,
+          0,
           0,
           0,
           0,
@@ -1578,12 +1639,10 @@
           3,
           1,
           1,
-          1,
-          1,
-          null,
           null,
           2,
           2,
+          null,
           null,
           null,
           1,
@@ -2239,6 +2298,11 @@
         ]
       }
     },
-    "timestamp": 1700357087
+    "timestamp": 1700591465
+  },
+  "Cucumber Features": {
+    "coverage": {
+    },
+    "timestamp": 1700590931
   }
 }

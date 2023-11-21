@@ -66,7 +66,7 @@ describe SessionsController, type: :controller do
 
     it "gives flash message telling to log in when not logged in" do
       delete :destroy
-      expect(flash[:notice]).to eq("You need to sign in before you can sign out!")
+      expect(flash[:alert]).to eq("You need to sign in before you can sign out!")
     end
   end
 
