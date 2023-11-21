@@ -77,10 +77,12 @@ module NavbarHelper
   end
 
   def user_button(**options)
-    if Current.user
-      navbar_dropdown(Current.user.full_name, **options) do
+    user = Current.user
+    if user
+      user_profile_path = user.profile ? profile_path(user) : new_profile_path
+      navbar_dropdown(user.full_name, **options) do
         out = []
-        out << dropdown_link("Profile", profile_path(Current.user))
+        out << dropdown_link("Profile", user_profile_path)
         out << dropdown_divider
         out << dropdown_link("Logout", logout_path, method: :delete)
         safe_join out
