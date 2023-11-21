@@ -16,7 +16,7 @@ along with some modifications
     </button>
 
     <div class="collapse navbar-collapse" id="appNavbar">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto">
         <%= navbar_link "Home", root_path %>
         <%= navbar_link "Products", products_path %>
         <%= navbar_dropdown "Categories" do %>
@@ -25,7 +25,7 @@ along with some modifications
           <% end %>
         <% end %>
       </ul>
-      <ul class="navbar-nav mb-2 mb-lg-0">
+      <ul class="navbar-nav">
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         </form>
