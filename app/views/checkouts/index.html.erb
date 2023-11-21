@@ -1,7 +1,14 @@
-<%= stylesheet_link_tag "carts" %>
+<%= stylesheet_link_tag "checkouts" %>
+<%= javascript_include_tag "checkouts" %>
 <div class="cart-container">
   <div class="cart-details">
-    <h2>Your Cart</h2>
+    <h2>
+      <% if @products_in_cart.empty? %>
+        <%= @empty %>
+      <% else %>
+        <%= "Your Cart" %>
+      <% end %>
+    </h2>
     <table class="table">
       <thead>
       <tr>
@@ -18,11 +25,22 @@
         <tr>
           <td><%= product[:name] %></td>
           <td>$<%= product[:price] / 100.00 %></td>
-          <td><%= product[:quantity] %></td>
+          <td>
+            <%= form_tag update_quantity_path, method: :post do %>
+              <%= hidden_field_tag :product_id, product[:id] %>
+              <%= select_tag :quantity, options_for_select((1..@current_quantity_of_product).to_a, selected: product[:quantity]) %>
+              <%= submit_tag "Update", class: "btn btn-secondary" %>
+            <% end %>
+          </td>
           <% total_price = product[:price] * product[:quantity] / 100.00 %>
           <% cart_price += total_price %>
           <td>$<%= total_price %></td>
-          <td><%= link_to "Delete", request.original_url, class: "btn btn-danger" %></td>
+          <td>
+            <%= form_tag remove_item_path, method: :delete, class: "delete-item" do %>
+              <%= hidden_field_tag :product_id, product[:id] %>
+              <%= submit_tag "Delete", class: "btn btn-danger" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>
@@ -36,5 +54,25 @@
     <p>Shipping: TBD</p>
     <%= link_to "Proceed to Payment", request.original_url, class: "btn btn-primary" %>
   </div>
+
+  <!-- Delete item confirmation -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to remove this item from your cart?
+        </div>
+        <div class="modal-footer">
+          <%= link_to "Cancel", checkout_path, method: :get, class: "btn btn-secondary"%>
+          <%= link_to "Delete", remove_item_path, method: :delete, class: "btn btn-danger", id: "confirmDeleteLink"%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
