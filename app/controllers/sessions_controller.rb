@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   # mentioned in lecture but I'm not sure how it applies yet
   # skip_before_filter :require_login
+  before_action :require_not_seller, only: [:register, :new_seller]
+  
   def new
     # automatically renders the sign-in form
     if session[:user_id].present?
@@ -36,6 +38,10 @@ class SessionsController < ApplicationController
   end
 
   def register
+    unless Current.user
+      flash[:notice] = "You need to sign in before you can register as a seller!"
+      redirect_to "/login" and return
+    end
   end
 
   def new_seller
@@ -46,5 +52,13 @@ class SessionsController < ApplicationController
     Current.user.update_attribute(:is_seller, true)
     flash[:notice] = "Registration successful"
     redirect_to root_path
+  end
+  
+  private
+  def require_not_seller
+    if Current.user.is_seller || Current.user.is_admin
+      flash[:alert] = "You already are a seller, no need to register again!"
+      redirect_to root_path and return
+    end
   end
 end
