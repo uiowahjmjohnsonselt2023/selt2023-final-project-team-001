@@ -78,9 +78,27 @@ describe SessionsController, type: :controller do
   end
 
   describe "GET #register" do
-    it "renders the register page" do
-      get :register
-      expect(response).to render_template("register")
+    context "when logged in" do
+      it "renders the register page" do
+        user = create(:user)
+        session[:user_id] = user.id
+        get :register
+        expect(response).to render_template("register")
+      end
+    end
+
+    context "when not logged in" do
+      it "redirects to the login page" do
+        session[:user_id] = nil
+        get :register
+        expect(response).to redirect_to(login_path)
+      end
+
+      it "tells the user to login before they register" do
+        session[:user_id] = nil
+        get :register
+        expect(flash[:alert]).to eq("You need to sign in before you can register as a seller!")
+      end
     end
   end
 
@@ -89,13 +107,13 @@ describe SessionsController, type: :controller do
       it "redirects the user to login" do
         session[:user_id] = nil
         post :new_seller
-        expect(response).to redirect_to("/login")
+        expect(response).to redirect_to(login_path)
       end
 
       it "tells the user to login before they register" do
         session[:user_id] = nil
         post :new_seller
-        expect(flash[:notice]).to eq("You need to sign in before you can register as a seller!")
+        expect(flash[:alert]).to eq("You need to sign in before you can register as a seller!")
       end
     end
 

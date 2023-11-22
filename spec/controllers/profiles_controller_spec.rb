@@ -223,7 +223,7 @@ describe ProfilesController, type: :controller do
         get :show, params: {id: public_user.profile.id}
 
         expect(response).to render_template("show")
-        expect(assigns(:profile_requested)).to eq(public_user.profile)
+        expect(assigns(:profile)).to eq(public_user.profile)
       end
     end
 
