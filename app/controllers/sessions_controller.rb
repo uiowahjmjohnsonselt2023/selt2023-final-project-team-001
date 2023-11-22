@@ -56,9 +56,11 @@ class SessionsController < ApplicationController
   
   private
   def require_not_seller
-    if Current.user.is_seller || Current.user.is_admin
-      flash[:alert] = "You already are a seller, no need to register again!"
-      redirect_to root_path and return
+    if Current.user
+      if Current.user.is_seller || Current.user.is_admin
+        flash[:alert] = "You already are a seller, no need to register again!"
+        redirect_to root_path and return
+      end
     end
   end
 end
