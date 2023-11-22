@@ -2,8 +2,6 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-<<<<<<< HEAD
-<<<<<<< HEAD
     sort = params[:sort]
     @products = case sort
     when "price"
@@ -15,13 +13,6 @@ class ProductsController < ApplicationController
     else
       Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
     end
-=======
-    @products = [Product.new(name: "test1", price_cents: "31"), Product.new(name: "test2", price_cents: "1000000000")]
->>>>>>> e3e75e1 (feat: dynamically populate products list)
-=======
-    @products = Product.find_each
-    # @products = [Product.new(name: "test1", price_cents: "31"), Product.new(name: "test2", price_cents: "1000000000")]
->>>>>>> a9f0b35 (feat: pull products from database to populate)
   end
 
   def show
