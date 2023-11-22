@@ -21,3 +21,12 @@
 .selt-gutter { // .bd-gutter
     --bs-gutter-x: 3rem;
 }
+
+.selt-badge {
+    --bs-badge-padding-x: 0.5em;
+    --bs-badge-font-size: 0.65em
+}
+
+.top-15 {
+    top: 15% !important;
+}
