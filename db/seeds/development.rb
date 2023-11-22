@@ -86,7 +86,7 @@ Categorization.insert_all(
   end
 )
 
-# Create carts for a couple users
+# Create carts
 User.create!({first_name: "Judy",
            last_name: "Rudy",
            email: "judy@rudy.com",
@@ -97,3 +97,5 @@ User.create!({first_name: "Judy",
            is_admin: false})
 
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
+Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})
+Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 3})
