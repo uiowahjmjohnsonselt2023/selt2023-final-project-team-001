@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  require_login:
+    default: "You need to login before you can access that page."
+    profiles:
+      default: "You need to login before you can %{action} your profile!"
+      new: "You need to login before you can create a profile!"
+      destroy: "You need to login before you can delete your profile!"
+    products:
+      default: "You need to login before you can %{action} a product!"
+      new: "You need to login before you can create a product!"
+    sessions:
+      register: "You need to sign in before you can register as a seller!"
+      new_seller: "You need to sign in before you can register as a seller!"
