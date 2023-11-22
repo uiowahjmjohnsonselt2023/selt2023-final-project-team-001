@@ -20,7 +20,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= link_to product.name, "/show" %></td>
-        <td>$<%= product.price_cents / 100 %></td>
+        <td>$<%= (product.price_cents / 100.00).to_s%><%= "0" if (product.price_cents / 100.00).to_s.match?(/^\d+.\d$/) %> </td>
         <td><%= product.created_at %></td>
       </tr>
     <% end %>
