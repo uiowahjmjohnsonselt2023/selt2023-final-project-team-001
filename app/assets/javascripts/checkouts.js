@@ -46,3 +46,11 @@ $(document).ready(function() {
         }
     }
 });
+
+// display product name in modal
+$(document).ready(function() {
+    $('.delete-item').on('click', function() {
+        var productName = $(this).data('productName');
+        $('#productNamePlaceholder').text(productName);
+    });
+});
