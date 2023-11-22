@@ -4,16 +4,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
   end
 
-  def index
-  end
-
-  def show
-    @user = Current.user
-    unless Current.user?(params[:id])
-      flash[:warning] = "Can only show profile of logged-in user"
-    end
-  end
-
   def new
     @user = User.new
   end
