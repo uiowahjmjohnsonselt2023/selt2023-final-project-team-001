@@ -30,3 +30,10 @@
 .top-15 {
     top: 15% !important;
 }
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
