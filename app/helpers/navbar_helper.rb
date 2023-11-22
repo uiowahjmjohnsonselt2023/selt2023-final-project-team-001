@@ -77,16 +77,8 @@ module NavbarHelper
   end
 
   def user_button(**options)
-    user = Current.user
-    if user
-      user_profile_path = user.profile ? profile_path(user) : new_profile_path
-      navbar_dropdown(user.full_name, **options) do
-        out = []
-        out << dropdown_link("Profile", user_profile_path)
-        out << dropdown_divider
-        out << dropdown_link("Logout", logout_path, method: :delete)
-        safe_join out
-      end
+    if Current.user
+      render "application/navbar/user_dropdown", user: Current.user, options: options
     else
       navbar_link("Login", login_path, **options)
     end
