@@ -30,7 +30,7 @@
               <td>
                 <%= form_tag update_quantity_path, method: :post do %>
                   <%= hidden_field_tag :product_id, product[:id] %>
-                  <%= select_tag :quantity, options_for_select((1..@current_quantity_of_product).to_a, selected: product[:quantity]) %>
+                  <%= select_tag :quantity, options_for_select((1..product[:original_quantity]).to_a, selected: product[:quantity]) %>
                   <%= submit_tag "Update", class: "btn btn-secondary" %>
                 <% end %>
               </td>
@@ -83,11 +83,11 @@
             </div>
           </div>
           <%= f.form_group :shipping, label: { text: "Shipping" } do %>
-            <%= f.radio_button :shipping, 999, label: "Expedited: 1-3 business days ($9.99)", required: true %>
-            <%= f.radio_button :shipping, 499, label: "Regular: 4-7 business days ($4.99)", required: true %>
+            <%= f.radio_button :shipping, 9.99, label: "Expedited: 1-3 business days ($9.99)", required: true, id: "expedited-shipping" %>
+            <%= f.radio_button :shipping, 4.99, label: "Regular: 4-7 business days ($4.99)", required: true, id: "regular-shipping" %>
           <% end %>
           <br>
-          <h3>Total: $<%= cart_price %></h3>
+          <h3 id="cart-price" data-cart-price="<%= cart_price %>">Total: $<%= number_with_precision(cart_price, precision: 2) %></h3>
 
           <%= f.submit "Pay Now", class: "btn btn-primary" %>
         <% end %>
