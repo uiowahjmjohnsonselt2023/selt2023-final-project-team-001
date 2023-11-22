@@ -1,5 +1,9 @@
 class StorefrontController < ApplicationController
-  before_action :require_login, except: [:show] # , :index]
+  before_action :require_login, except: [:show, :index]
+  before_action :require_seller, only: [:new, :create]
+
+  def index
+  end
 
   def new
     @products = Current.user.products
@@ -32,5 +36,19 @@ class StorefrontController < ApplicationController
     @user = @storefront.user
     @products = @user.products
     @custom_code = @storefront&.custom_code || "" # Fetch custom code or default to empty string
+  end
+
+  private
+
+  def require_seller
+    if Current.user
+      unless Current.user.is_seller || Current.user.is_admin
+        flash[:alert] = "You must be a seller to create a storefront."
+        redirect_to root_path and return
+      end
+    else
+      flash[:alert] = "You must be a seller to create a storefront."
+      redirect_to root_path and return
+    end
   end
 end
