@@ -47,5 +47,6 @@ class SessionsController < ApplicationController
     user.is_seller = :t
     user.save
     flash[:notice] = "Registration successful"
+    redirect_to root_path
   end
 end
