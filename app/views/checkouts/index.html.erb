@@ -25,7 +25,7 @@
           <% cart_price = 0 %>
           <tbody>
           <% @products_in_cart.each do |product| %>
-            <tr>
+            <tr data-product='<%= product.to_json %>'>
               <td><%= product[:name] %></td>
               <td>
                 <%= form_tag update_quantity_path, method: :post do %>
@@ -38,8 +38,8 @@
               <% cart_price += total_price %>
               <td>$<%= total_price %></td>
               <td>
-                <%= form_tag remove_item_path, method: :delete, class: "delete-item", data: { product_name: product[:name] } do %>
-                  <%= hidden_field_tag :product_id, product[:id] %>
+                <%= form_tag remove_item_path, method: :delete, class: "delete-item" do %>
+                  <%= hidden_field_tag :product_id %>
                   <%= submit_tag "Delete", class: "btn btn-danger" %>
                 <% end %>
               </td>

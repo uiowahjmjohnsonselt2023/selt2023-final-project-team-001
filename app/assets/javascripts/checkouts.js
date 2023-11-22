@@ -1,17 +1,19 @@
-
 // confirmation of item deletion from cart
 $(document).ready(function() {
-    // Show the confirmation modal when the "Delete" button is clicked
-    $('.delete-item').click(function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        $('#confirmationModal').modal('show');
-    });
 
-    $('#confirmationModal').on('show.bs.modal', function(event) {
+    $('.delete-item').click(function(event) {
+        var productData = $(this).closest('tr').data('product');
+        var productName = productData.name;
+        $('#productNamePlaceholder').text(productName);
+        event.preventDefault(); // Prevent the default form submission
+        var deleteItemId = productData.id;
+
         const form = $('.delete-item');
         const originalAction = form.attr('action');
-        const actionWithConfirmation = originalAction + '?confirmation=yes';
+        const actionWithConfirmation = `${originalAction}?confirmation=yes&product_id=${deleteItemId}`;
         form.attr('action', actionWithConfirmation);
+
+        $('#confirmationModal').modal('show');
     });
 
     // Handle the "Delete" link click in the modal
@@ -20,6 +22,9 @@ $(document).ready(function() {
         $('.delete-item').submit();
     });
 });
+
+
+
 
 // dynamically changes cart price based on chosen shipping cost
 $(document).ready(function() {
@@ -47,10 +52,3 @@ $(document).ready(function() {
     }
 });
 
-// display product name in modal
-$(document).ready(function() {
-    $('.delete-item').on('click', function() {
-        var productName = $(this).data('productName');
-        $('#productNamePlaceholder').text(productName);
-    });
-});
