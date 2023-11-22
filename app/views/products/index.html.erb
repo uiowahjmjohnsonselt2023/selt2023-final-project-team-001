@@ -13,6 +13,7 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
+      <th scope="col">Posted</th>
     </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= link_to product.name, "/show" %></td>
         <td>$<%= product.price_cents / 100 %></td>
+        <td><%= product.created_at %></td>
       </tr>
     <% end %>
     </tbody>
