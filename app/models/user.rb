@@ -12,12 +12,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 8}
   validates :password_confirmation, presence: true, length: {minimum: 8}
 
-  private
-
-  def create_session_token
-    self.session_token = SecureRandom.urlsafe_base64
-  end
-
   # Scopes allow us to write things like User.admins to get all admins
   # or User.non_sellers to get all users who aren't sellers.
   scope :admins, -> { where(is_admin: true) }
@@ -30,4 +24,14 @@ class User < ApplicationRecord
   has_many :products, foreign_key: :seller_id, dependent: :destroy
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def create_session_token
+    self.session_token = SecureRandom.urlsafe_base64
+  end
 end

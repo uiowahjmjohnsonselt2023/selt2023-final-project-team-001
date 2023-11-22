@@ -15,16 +15,26 @@
 @import "bootstrap";
 @import "rails_bootstrap_forms";
 
-.flash-notice {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+
+// Any .bd-* comment refers to CSS classes taken from the Bootstrap docs' CSS
+
+.selt-gutter { // .bd-gutter
+    --bs-gutter-x: 3rem;
 }
 
-.flash-alert {
-    background-color: #FF5733;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+.selt-badge {
+    --bs-badge-padding-x: 0.5em;
+    --bs-badge-font-size: 0.65em
+}
+
+.top-15 {
+    top: 15% !important;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }

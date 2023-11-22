@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_current_user, except: [:show, :index]
+  before_action :require_login, except: [:show, :index]
 
   def index
   end
@@ -10,9 +10,7 @@ class ProductsController < ApplicationController
       flash[:alert] = "That product doesn't exist."
       redirect_to root_path
     elsif @product.private
-      # can't use set_current_user because it redirects
-      current_user = User.find_by(id: session[:user_id])
-      unless current_user == @product.seller || current_user&.is_admin
+      unless Current.user == @product.seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
       end
@@ -20,7 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    unless current_user.is_seller || current_user.is_admin
+    unless Current.user.is_seller || Current.user.is_admin
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end
@@ -29,12 +27,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    unless current_user.is_seller || current_user.is_admin
+    unless Current.user.is_seller || Current.user.is_admin
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end
     @product = Product.new(product_params)
-    @product.seller = current_user
+    @product.seller = Current.user
     if @product.save
       redirect_to @product
     else
@@ -48,7 +46,7 @@ class ProductsController < ApplicationController
     if @product.nil?
       flash[:alert] = "That product doesn't exist."
       redirect_to root_path
-    elsif current_user != @product.seller && !current_user.is_admin
+    elsif Current.user != @product.seller && !Current.user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     end
@@ -59,7 +57,7 @@ class ProductsController < ApplicationController
     if @product.nil?
       flash[:alert] = "That product doesn't exist."
       redirect_to root_path
-    elsif current_user != @product.seller && !current_user.is_admin
+    elsif Current.user != @product.seller && !Current.user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     elsif @product.update(product_params)

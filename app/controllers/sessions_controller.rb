@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   # mentioned in lecture but I'm not sure how it applies yet
-  # skip_before_filter :set_current_user
+  # skip_before_filter :require_login
   def new
     # automatically renders the sign-in form
     if session[:user_id].present?
@@ -15,21 +15,19 @@ class SessionsController < ApplicationController
     password = params[:password]
     user = User.find_by(email: email)
 
-    if user
-      if user&.authenticate(password)
-        session[:user_id] = user.id
-        flash[:notice] = "Successfully signed in!"
-        redirect_to root_path and return
-      end
+    if user&.authenticate(password)
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Successfully signed in!"
+    else
+      flash[:alert] = "Invalid email/password combination"
+      render "new", status: :unauthorized
     end
-    flash[:alert] = "Invalid email/password combination"
-    render "new"
   end
 
   def destroy
     # Handle sign-out logic
     if session[:user_id].nil?
-      flash[:notice] = "You need to sign in before you can sign out!"
+      flash[:alert] = "You need to sign in before you can sign out!"
       redirect_to login_path and return
     end
     session[:user_id] = nil
@@ -41,13 +39,12 @@ class SessionsController < ApplicationController
   end
 
   def new_seller
-    if session[:user_id].nil?
+    unless Current.user
       flash[:notice] = "You need to sign in before you can register as a seller!"
       redirect_to "/login" and return
     end
-    user = User.find_by(id: session[:user_id])
-    user.is_seller = :t
-    user.save
+    Current.user.update_attribute(:is_seller, true)
     flash[:notice] = "Registration successful"
+    redirect_to root_path
   end
 end

@@ -1,0 +1,45 @@
+<%#
+Taken from https://getbootstrap.com/docs/5.2/examples/navbars/
+along with some modifications
+%>
+<header class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+  <nav class="container-xl flex-wrap flex-md-nowrap" aria-label="Navigation">
+    <a class="navbar-brand" href="#">Team-001</a>
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#appNavbar"
+            aria-controls="appNavbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="appNavbar">
+      <ul class="navbar-nav me-auto">
+        <%= navbar_link "Home", root_path %>
+        <%= navbar_link "Products", products_path %>
+        <%= navbar_dropdown "Categories" do %>
+          <% Category.all.each do |category| %>
+            <%= dropdown_link category.name, "#" %>
+          <% end %>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+        <%= user_button %>
+        <%= navbar_link "/checkout", style: "height: 40px;" do %>
+          <div class="position-relative">
+            <%= icon "shopping-cart", aria_label: "Shopping Cart" %>
+<!--            <span class="position-absolute start-100 top-15 translate-middle badge selt-badge rounded-pill bg-danger">-->
+              <%# cart items %>
+<!--              <span class="visually-hidden">items in your cart</span>-->
+<!--            </span>-->
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>

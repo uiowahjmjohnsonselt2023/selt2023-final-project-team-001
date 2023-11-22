@@ -1,0 +1,6 @@
+<%# locals: (type:, message:, icon_name:) %>
+<div class="alert alert-<%= type %> alert-dismissible fade show d-flex align-items-center" role="alert">
+  <%= icon icon_name, aria_label: "#{type.to_s.capitalize}:", class: "flex-shrink-0 me-2" %>
+  <div><%= message %></div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
