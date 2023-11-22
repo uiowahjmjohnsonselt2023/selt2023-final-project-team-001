@@ -11,9 +11,9 @@
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Posted</th>
+      <th scope="col"><%= link_to 'Name', products_path(:sort => 'name'), :id => 'title_header' %> </th>
+      <th scope="col"><%= link_to 'Price', products_path(:sort => 'price'), :id => 'title_header' %> </th>
+      <th scope="col"><%= link_to 'Posted', products_path(:sort => 'date'), :id => 'title_header' %> </th>
     </tr>
     </thead>
     <tbody>
