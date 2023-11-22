@@ -29,6 +29,7 @@ describe CheckoutsController, type: :controller do
       cart = FactoryBot.create(:cart, user: user, product: product)
       post :update_quantity, params: {product_id: product.id, quantity: 2}
       expect(cart.reload.quantity).to eq(2)
+      expect(flash[:success]).to eq("Item quantity updated successfully!")
       expect(response).to redirect_to(checkout_path)
     end
   end

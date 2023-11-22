@@ -21,6 +21,7 @@ class CheckoutsController < ApplicationController
   def update_quantity
     cart = Cart.where(user_id: session[:user_id], product_id: params[:product_id])
     cart.update(quantity: params[:quantity])
+    flash[:success] = "Item quantity updated successfully!"
     redirect_to checkout_path
   end
 
