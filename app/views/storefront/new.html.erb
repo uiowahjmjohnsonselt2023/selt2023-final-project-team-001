@@ -17,7 +17,6 @@
 
 <!-- Display custom code output -->
 <p>Preview of custom code:</p>
-<div id="customCodeOutput">
-  <!-- Preview will be displayed here -->
-  <%= raw @previewed_code if @previewed_code%>
+<div id="preview_section">
+  <%= render partial: "preview_section", locals: { previewed_code: @previewed_code } %>
 </div>

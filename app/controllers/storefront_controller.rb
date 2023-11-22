@@ -9,15 +9,19 @@ class StorefrontController < ApplicationController
   end
 
   def create
-    puts(params.inspect)
-    puts(params[:storefront][:custom_code])
     # Add logic to handle the 'Preview Custom Code' action
     if params[:storefront] && params[:preview_button]
       @user = User.find(session[:user_id])
       @products = @user.products
       @storefront = @user.storefront || @user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
-      render :new
+
+      render turbo_stream: turbo_stream.replace(
+        "preview_section",
+        partial: "preview_section",
+        locals: {previewed_code: @previewed_code}
+      )
+      # render :new
     elsif params[:storefront] && params[:save_button]
       user = User.find(session[:user_id])
       storefront = user.storefront || user.create_storefront
