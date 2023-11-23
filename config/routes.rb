@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
+  get "/register", to: "users#register", as: "register"
+  post "/register", to: "users#new_seller", as: "seller"
+
   get "/checkout", to: "checkouts#index", as: "checkout"
   post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"
   delete "/remove_item", to: "checkouts#remove_from_cart", as: "remove_item"
