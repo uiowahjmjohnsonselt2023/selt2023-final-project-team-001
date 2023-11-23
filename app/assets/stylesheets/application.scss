@@ -38,3 +38,15 @@
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.btn-earthy {
+    background-color: #8B4513;
+    border-color: #8B4513;
+    color: #FFF;
+}
+
+.btn-earthy:hover {
+    background-color: #6e3b0e; /* Darker green color on hover */
+    border-color: #6e3b0e; /* Darker green border color on hover */
+    color: white; /* Text color on hover */
+}

@@ -1,0 +1,56 @@
+<style>
+    /* Add this CSS to your stylesheet or in a style tag */
+    #templateCarousel {
+        max-height: 80vh; /* Adjust the height as needed */
+    }
+</style>
+
+<div id="templateCarousel" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#templateCarousel" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#templateCarousel" data-bs-slide-to="1"></li>
+    <!-- Add more li elements for additional indicators -->
+  </ol>
+  <div class="carousel-inner">
+    <!-- Template 1 -->
+    <div class="carousel-item active">
+      <img src="<%= asset_path('carousel/template1.jpg') %>" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Template 1">
+      <div class="carousel-caption d-none d-md-block" style="color: black;">
+        <h5 style="color: black;">Template 1</h5>
+        <p style="color: black;">Earthy Toned Store</p>
+      </div>
+    </div>
+    <!-- Template 2 -->
+    <div class="carousel-item">
+      <img src="<%= asset_path('carousel/template2.jpg') %>" class="d-block w-100" style="max-width: 100%; height: auto;" alt="Template 2">
+      <div class="carousel-caption d-none d-md-block" style="color: black;">
+        <h5 style="color: black;">Template 2</h5>
+        <p style="color: black;">Basic Blue Store</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12 text-center">
+      <%= link_to "Choose this for my storefront", "#", id: "chooseTemplateBtn", class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let chooseTemplateBtn = document.getElementById('chooseTemplateBtn');
+        let carousel = document.getElementById('templateCarousel');
+        chooseTemplateBtn.href = "<%= url_for(controller: 'storefront', action: 'choose_template') %>?template_number=1";
+
+
+        carousel.addEventListener('slide.bs.carousel', function (event) {
+            let activeIndex = event.to + 1;
+            chooseTemplateBtn.removeAttribute('href');
+            chooseTemplateBtn.href = "<%= url_for(controller: 'storefront', action: 'choose_template') %>?template_number=" + activeIndex;
+        });
+    });
+</script>
+
