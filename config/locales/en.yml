@@ -28,4 +28,22 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  require_login:
+    default: "You need to login before you can access that page."
+    checkouts:
+      index: "You need to login before you can view your cart and make purchases!"
+    profiles:
+      default: "You need to login before you can %{action} your profile!"
+      new: "You need to login before you can create a profile!"
+      destroy: "You need to login before you can delete your profile!"
+    products:
+      default: "You need to login before you can %{action} a product!"
+      new: "You need to login before you can create a product!"
+    users:
+      register: "You need to sign in before you can register as a seller!"
+      new_seller: "You need to sign in before you can register as a seller!"
+  require_not_seller:
+    default: "You cannot be a seller to access that page."
+    users:
+      register: "You already are a seller, no need to register again!"
+      new_seller: "You already are a seller, no need to register again!"

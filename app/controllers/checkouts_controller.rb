@@ -1,25 +1,20 @@
 class CheckoutsController < ApplicationController
-  before_action :require_login, except: [:index]
+  before_action :require_login
   before_action :index, except: [:index]
 
   def index
-    if session[:user_id].present?
-      cart = Cart.where(user_id: session[:user_id])
+    cart = Cart.where(user_id: session[:user_id])
 
-      @products_in_cart = []
-      @product_ids_and_quantity = []
-      @empty = "Your cart is empty!"
+    @products_in_cart = []
+    @product_ids_and_quantity = []
+    @empty = "Your cart is empty!"
 
-      if cart.present?
-        cart.each do |product|
-          p = Product.find_by(id: product.product_id)
-          @products_in_cart.push({name: p.name, price: p.price_cents, original_quantity: p.quantity, quantity: product.quantity, id: product.product_id})
-          @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
-        end
+    if cart.present?
+      cart.each do |product|
+        p = Product.find_by(id: product.product_id)
+        @products_in_cart.push({name: p.name, price: p.price_cents, original_quantity: p.quantity, quantity: product.quantity, id: product.product_id})
+        @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
       end
-    else
-      flash[:alert] = "Login to view your cart and make purchases!"
-      redirect_to login_path
     end
   end
 
