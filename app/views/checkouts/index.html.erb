@@ -1,0 +1,118 @@
+<head>
+  <title></title>
+  <%= javascript_include_tag 'checkouts', 'data-turbo-track': 'reload' %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<div class="row">
+      <div class="col-md-7">
+        <h2>
+          <% if @products_in_cart.empty? %>
+            <%= @empty %>
+          <% else %>
+            <%= "Your Cart" %>
+          <% end %>
+        </h2>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Cost</th>
+            <th></th>
+          </tr>
+          </thead>
+          <% cart_price = 0 %>
+          <tbody>
+          <% @products_in_cart.each do |product| %>
+            <tr data-product='<%= product.to_json %>'>
+              <td><%= product[:name] %></td>
+              <td>
+                <%= form_tag update_quantity_path, method: :post do %>
+                  <%= hidden_field_tag :product_id, product[:id] %>
+                  <%= select_tag :quantity, options_for_select((1..product[:original_quantity]).to_a, selected: product[:quantity]) %>
+                  <%= submit_tag "Update", class: "btn btn-secondary" %>
+                <% end %>
+              </td>
+              <% total_price = product[:price] * product[:quantity] / 100.00 %>
+              <% cart_price += total_price %>
+              <td>$<%= total_price %></td>
+              <td>
+                <%= form_tag remove_item_path, method: :delete, class: "delete-item" do %>
+                  <%= hidden_field_tag :product_id %>
+                  <%= submit_tag "Delete", class: "btn btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-5">
+
+<br>
+        <h3>Payment</h3>
+        <%= bootstrap_form_with url: update_product_inventory_path, method: :post, local: true do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.text_field :first_name, label: "First Name", placeholder: "First Name", required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.text_field :last_name, label: "Last Name", placeholder: "Last Name", required: true %>
+            </div>
+          </div>
+              <%= f.text_field :address, label: 'Street Address: ', placeholder: "Street Address", required: true%>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.text_field :city, label: 'City: ',placeholder: "City", required: true %>
+            </div>
+            <div class="col-md-2">
+              <%= f.text_field :state, label: 'State: ', placeholder: "State", required: true %>
+            </div>
+            <div class="col-md-4">
+              <%= f.text_field :zipcode, label: 'Zipcode: ',placeholder: "Zipcode", required: true %>
+            </div>
+          </div>
+              <%= f.text_field :card_number, label: 'Card Number: ',placeholder: "Card Number", required: true%>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.text_field :expiry_date, label: 'Expiration Date: ', placeholder: 'MM/YY', required: true %>
+            </div>
+            <div class="col-md-6">
+              <%= f.text_field :cvc, label: 'CVC: ', placeholder: "CVC", required: true %>
+            </div>
+          </div>
+          <%= f.form_group :shipping, label: { text: "Shipping" } do %>
+            <%= f.radio_button :shipping, 9.99, label: "Expedited: 1-3 business days ($9.99)", required: true, id: "expedited-shipping" %>
+            <%= f.radio_button :shipping, 4.99, label: "Regular: 4-7 business days ($4.99)", required: true, id: "regular-shipping" %>
+          <% end %>
+          <br>
+          <h3 id="cart-price" data-cart-price="<%= cart_price %>">Total: $<%= number_with_precision(cart_price, precision: 2) %></h3>
+
+          <%= f.submit "Pay Now", class: "btn btn-primary" %>
+        <% end %>
+
+      </div>
+      </div>
+
+  <!-- Delete item confirmation -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to remove <span id="productNamePlaceholder"></span> from your cart?
+        </div>
+        <div class="modal-footer">
+          <%= link_to "Cancel", checkout_path, method: :get, class: "btn btn-secondary"%>
+          <%= link_to "Delete", remove_item_path, method: :delete, class: "btn btn-danger", id: "confirmDeleteLink"%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

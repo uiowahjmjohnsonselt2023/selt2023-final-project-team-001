@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
+  has_many :carts
+  has_many :users, through: :carts
 
   # Left 100 between each value to allow for future additions.
   # Taken from https://www.recycledcycles.com/service/used-item-condition-guide/
@@ -19,6 +21,6 @@ class Product < ApplicationRecord
   validates(*REQUIRED_FIELDS, presence: true) # parentheses required for splat operator
   validates :name, length: {maximum: 100}
   validates :description, length: {maximum: 1000}
-  validates :quantity, numericality: {greater_than: 0}
+  validates :quantity, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
 end

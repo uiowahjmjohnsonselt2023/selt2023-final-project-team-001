@@ -85,3 +85,17 @@ Categorization.insert_all(
     end
   end
 )
+
+# Create carts
+User.create!({first_name: "Judy",
+           last_name: "Rudy",
+           email: "judy@rudy.com",
+           password: "judyrudy100",
+           password_confirmation: "judyrudy100",
+           is_seller: false,
+           is_buyer: true,
+           is_admin: false})
+
+Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
+Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})
+Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 3})

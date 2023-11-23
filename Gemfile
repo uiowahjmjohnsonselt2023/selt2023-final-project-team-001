@@ -20,6 +20,7 @@ gem "bootstrap_form", "~> 5.4"
 gem "importmap-rails", "~> 1.2"
 gem "inline_svg", "~> 1.9.0"
 gem "sassc-rails"
+gem "jquery-rails"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
