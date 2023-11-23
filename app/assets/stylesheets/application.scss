@@ -42,3 +42,14 @@
 .yellow {
     color: var(--bs-yellow);
 }
+
+.listing-row {
+    @extend .row;
+    @extend .mb-2;
+    @extend .align-items-center;
+}
+
+.listing-label {
+    @extend .col-3;
+    @extend .text-sm-end;
+}

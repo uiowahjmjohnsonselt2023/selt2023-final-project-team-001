@@ -1,0 +1,12 @@
+<div class="d-flex mb-2 mt-1">
+  <% names = product.categories.pluck(:name) %>
+  <% names[...-1].each do |name| %>
+    <%= link_to name, "#", class: "link-secondary link-underline-opacity-25" %>
+    <div class="vr mx-2"></div>
+  <% end %>
+  <%= link_to names[-1], "#", class: "link-secondary link-underline-opacity-25" %>
+
+  <%# product.categories.pluck(:name).each do |name| %>
+    <%# <span class="badge bg-light text-body-secondary me-2"><%#= name % ></span> %>
+  <%# end %>
+</div>
