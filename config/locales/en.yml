@@ -30,6 +30,8 @@
 en:
   require_login:
     default: "You need to login before you can access that page."
+    carts:
+      add_to_cart: "You need to login before you can add items to your cart!"
     checkouts:
       index: "You need to login before you can view your cart and make purchases!"
     profiles:

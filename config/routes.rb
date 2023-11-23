@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get "/register", to: "users#register", as: "register"
   post "/register", to: "users#new_seller", as: "seller"
 
+  post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
+
   get "/checkout", to: "checkouts#index", as: "checkout"
   post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"
   delete "/remove_item", to: "checkouts#remove_from_cart", as: "remove_item"
