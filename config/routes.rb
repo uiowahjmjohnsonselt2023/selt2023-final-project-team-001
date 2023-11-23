@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get "/register", to: "users#register", as: "register"
   post "/register", to: "users#new_seller", as: "seller"
 
+  get "/checkout", to: "checkouts#index", as: "checkout"
+  post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"
+  delete "/remove_item", to: "checkouts#remove_from_cart", as: "remove_item"
+  post "/pay", to: "checkouts#update_product_inventory", as: "update_product_inventory"
+
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member
@@ -27,4 +32,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "home#index"
+
+  # Defines routes for our custom error pages.
+  # to: "controller#action" specifies the controller and action.
+  # via: :all uses the same route for all HTTP methods (GET, POST, etc).
+  match "/404", to: "errors#not_found", via: :all, as: :not_found
+  match "/500", to: "errors#internal_server_error", via: :all, as: :internal_server_error
 end

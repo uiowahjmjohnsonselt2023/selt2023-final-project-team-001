@@ -51,12 +51,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = Profile.find_by(id: params[:id])
+    @profile = Profile.find params[:id] # renders 404 if nonexistent
     @is_current_user = Current.user&.profile == @profile
-    if @profile.blank?
-      flash[:alert] = "This profile does not exist!"
-      redirect_to root_path
-    elsif !@profile.public_profile && !@is_current_user
+    if !@profile.public_profile && !@is_current_user
       flash[:alert] = "This profile is private!"
       redirect_to root_path
     end

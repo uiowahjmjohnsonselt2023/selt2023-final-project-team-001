@@ -13,27 +13,32 @@ describe ProductsController, type: :controller do
     end
   end
 
+  # Can't test that these render 404 page because of how rspec-rails
+  # works, but we can at least test that they raise the error.
   context "when passing in a product that doesn't exist" do
     before { login_as seller }
 
     describe "GET #show" do
       it "redirects to the home page" do
-        get :show, params: {id: 0}
-        expect(response).to redirect_to root_path
+        expect {
+          get :show, params: {id: 0}
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     describe "GET #edit" do
       it "redirects to the home page" do
-        get :edit, params: {id: 0}
-        expect(response).to redirect_to root_path
+        expect {
+          get :edit, params: {id: 0}
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
     describe "PUT #update" do
       it "redirects to the home page" do
-        put :update, params: {id: 0, product: {name: "New Name"}}
-        expect(response).to redirect_to root_path
+        expect {
+          put :update, params: {id: 0, product: {name: "New Name"}}
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
