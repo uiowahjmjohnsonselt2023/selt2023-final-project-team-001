@@ -40,3 +40,8 @@ en:
     sessions:
       register: "You need to sign in before you can register as a seller!"
       new_seller: "You need to sign in before you can register as a seller!"
+  require_not_seller:
+    default: "You cannot be a seller to access that page."
+    sessions:
+      register: "You already are a seller, no need to register again!"
+      new_seller: "You already are a seller, no need to register again!"
