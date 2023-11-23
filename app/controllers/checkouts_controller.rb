@@ -3,26 +3,33 @@ class CheckoutsController < ApplicationController
   before_action :index, except: [:index]
 
   def index
-    cart = Cart.where(user_id: session[:user_id])
+    if session[:user_id].present?
+      cart = Cart.where(user_id: session[:user_id])
 
-    @products_in_cart = []
-    @product_ids_and_quantity = []
-    @empty = "Your cart is empty!"
+      @products_in_cart = []
+      @product_ids_and_quantity = []
+      @empty = "Your cart is empty!"
 
-    if cart.present?
-      cart.each do |product|
-        p = Product.find_by(id: product.product_id)
-        @products_in_cart.push({name: p.name, price: p.price_cents, original_quantity: p.quantity, quantity: product.quantity, id: product.product_id})
-        @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
+      if cart.present?
+        cart.each do |product|
+          p = Product.find_by(id: product.product_id)
+          @products_in_cart.push({name: p.name, price: p.price_cents, original_quantity: p.quantity, quantity: product.quantity, id: product.product_id})
+          @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
+        end
       end
+    else
+      flash[:alert] = "Log in to view your cart and make purchases!"
+      redirect_to login_path
     end
   end
 
   def update_quantity
     cart = Cart.where(user_id: session[:user_id], product_id: params[:product_id])
-    cart.update(quantity: params[:quantity])
-    flash[:success] = "Item quantity updated successfully!"
-    redirect_to checkout_path
+    if params[:quantity] != cart.pluck(:quantity).first.to_s
+      cart.update(quantity: params[:quantity])
+      flash[:success] = "Item quantity updated successfully!"
+      redirect_to checkout_path
+    end
   end
 
   def remove_from_cart
