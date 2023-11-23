@@ -44,7 +44,7 @@ $(document).ready(function() {
             const cartPriceElement = document.getElementById("cart-price");
             const cartPriceValue = cartPriceElement.dataset.cartPrice;
             const newCartPrice = parseFloat(cartPriceValue) + parseFloat(selectedShipping);
-            cartPriceElement.textContent = "$" + newCartPrice.toFixed(2);
+            cartPriceElement.textContent = "Total: $" + newCartPrice.toFixed(2);
             console.log(newCartPrice.toFixed(2));
         } else {
             console.log("No shipping option selected");
