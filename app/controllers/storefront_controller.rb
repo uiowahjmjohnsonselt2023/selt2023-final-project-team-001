@@ -7,6 +7,8 @@ class StorefrontController < ApplicationController
 
   def new
     @products = Current.user.products
+    puts(@products)
+    puts(Current.user)
     @storefront = Current.user.storefront || Current.user.create_storefront
     @previewed_code = @storefront.custom_code if params[:preview_button]
   end
@@ -43,14 +45,9 @@ class StorefrontController < ApplicationController
   private
 
   def require_seller
-    if Current.user
-      unless Current.user.is_seller || Current.user.is_admin
-        flash[:alert] = "You must be a seller to create a storefront."
-        redirect_to root_path and return
-      end
-    else
-      flash[:alert] = "You must be a seller to create a storefront."
-      redirect_to root_path and return
+    unless Current.user.is_seller || Current.user.is_admin
+      flash[:alert] = i18n_t scope: :require_seller
+      redirect_to root_path
     end
   end
 end
