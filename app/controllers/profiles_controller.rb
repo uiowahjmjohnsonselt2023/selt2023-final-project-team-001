@@ -58,11 +58,8 @@ class ProfilesController < ApplicationController
       (params[:id].to_i == @profile.id)
     end
 
-    @profile_requested = Profile.find_by(id: params[:id])
-    if @profile_requested.blank?
-      flash[:alert] = "This profile does not exist!"
-      redirect_to root_path
-    elsif !@profile_requested.public_profile && !@my_profile
+    @profile_requested = Profile.find params[:id] # renders 404 if nonexistent
+    if !@profile_requested.public_profile && !@my_profile
       flash[:alert] = "This profile is private!"
       redirect_to root_path
     end

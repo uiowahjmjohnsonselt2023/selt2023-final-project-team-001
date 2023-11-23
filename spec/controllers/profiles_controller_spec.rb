@@ -239,11 +239,12 @@ describe ProfilesController, type: :controller do
     end
 
     context "when viewing a non-existent profile" do
-      it "redirects to root_path with an alert" do
-        get :show, params: {id: 999} # Non-existent profile id
-
-        expect(response).to redirect_to(root_path)
-        expect(flash[:alert]).to eq("This profile does not exist!")
+      # Can't test that these render 404 page because of how rspec-rails
+      # works, but we can at least test that they raise the error.
+      it "raises ActiveRecord::RecordNotFound" do
+        expect {
+          get :show, params: {id: 999} # Non-existent profile id
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
