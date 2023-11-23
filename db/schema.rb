@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_10_040315) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_20_011401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.integer "quantity", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_carts_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_carts_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +53,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_040315) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "seller_id", null: false
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_products_on_cart_id"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
@@ -77,11 +90,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_040315) do
     t.boolean "is_admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cart_id"
+    t.index ["cart_id"], name: "index_users_on_cart_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "carts", "products"
+  add_foreign_key "carts", "users"
   add_foreign_key "categorizations", "categories"
   add_foreign_key "categorizations", "products"
+  add_foreign_key "products", "carts"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "users", "carts"
 end
