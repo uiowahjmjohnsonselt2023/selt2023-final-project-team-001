@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     $('.delete-item').click(function(event) {
         let productData = $(this).closest('tr').data('product');
-        var productName = productData.name;
+        let productName = productData.name;
         $('#productNamePlaceholder').text(productName);
         event.preventDefault(); // Prevent the default form submission
         var deleteItemId = productData.id;
