@@ -46,7 +46,15 @@
 }
 
 .btn-earthy:hover {
-    background-color: #6e3b0e; /* Darker green color on hover */
-    border-color: #6e3b0e; /* Darker green border color on hover */
-    color: white; /* Text color on hover */
+    background-color: #6e3b0e;
+    border-color: #6e3b0e;
+    color: white;
+}
+
+.carousel-indicators li.inactive{
+    background-color: grey;
+}
+
+.carousel-indicators li.active {
+    background-color: black;
 }
