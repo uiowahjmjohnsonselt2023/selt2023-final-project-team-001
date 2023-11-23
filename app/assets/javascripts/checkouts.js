@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     $('.delete-item').click(function(event) {
-        var productData = $(this).closest('tr').data('product');
+        let productData = $(this).closest('tr').data('product');
         var productName = productData.name;
         $('#productNamePlaceholder').text(productName);
         event.preventDefault(); // Prevent the default form submission
