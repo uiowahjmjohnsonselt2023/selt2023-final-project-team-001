@@ -1,9 +1,11 @@
 <h1>Product Page</h1>
 
-<%= bootstrap_form_with model: @user, url: signup_submit_path, method: :post, local: true do |f| %>
-  <%= f.check_box :filter_1, label: 'Filter 1' %>
-  <%= f.check_box :filter_2, label: 'Filter 2' %>
-  <%= f.check_box :filter_3, label: 'Filter 3' %>
+<%= bootstrap_form_with model: @products, url: products_path, method: :post, local: true do |f| %>
+  <%= f.check_box :filter_1, label: 'Price (low to high)'%>
+  <%= f.check_box :filter_2, label: 'Price (high to low)' %>
+  <%= f.check_box :filter_3, label: 'Condition (high to low)' %>
+  <%= f.check_box :filter_3, label: 'Condition (low to high)' %>
+  <input class="btn btn-primary" type="submit" value="Apply" id="apply_tags_button">
 <% end %>
 
 <div class="container mt-4">

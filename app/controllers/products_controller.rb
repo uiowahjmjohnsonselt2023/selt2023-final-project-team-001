@@ -3,17 +3,15 @@ class ProductsController < ApplicationController
 
   def index
     @price_reg = /^\$\d+.\d\d/
-    @products = Product.order(:created_at)
+    @products = Product.order(created_at: :desc)
     sort = params[:sort]
     case sort
     when "price"
-      # @products.sort_by {:price_cents}
       @products = Product.order(:price_cents)
-      # puts "PRICE"
     when "name"
       @products = Product.order(:name)
     when "date"
-      @products = Product.order(:created_at)
+      @products = Product.order(created_at: :desc)
     end
   end
 
