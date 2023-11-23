@@ -99,3 +99,28 @@ User.create!({first_name: "Judy",
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 3})
+
+# make one user with a known username and password with products
+store_test = User.create!({first_name: "Not",
+              last_name: "Real",
+              email: "test@storefront.com",
+              password: "testing123",
+              password_confirmation: "testing123",
+              is_seller: true,
+              is_buyer: true,
+              is_admin: false})
+# use this to add a product to the user
+number_of_products = 5 # Adjust as needed
+number_of_products.times do
+  Product.create!(
+    name: Faker::Commerce.product_name,
+    seller_id: store_test.id, # Assign the seller ID to the user's ID
+    description: Faker::Lorem.paragraph(sentence_count: 2),
+    price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
+    quantity: Faker::Number.within(range: 1..100),
+    condition: Faker::Base.sample(conditions),
+    private: Faker::Boolean.boolean,
+    created_at: Faker::Time.backward,
+    updated_at: Faker::Time.between(from: Faker::Time.backward, to: Time.now)
+  )
+end
