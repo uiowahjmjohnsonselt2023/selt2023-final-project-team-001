@@ -5,13 +5,13 @@ class ProductsController < ApplicationController
     sort = params[:sort]
     @products = case sort
     when "price"
-      Product.where(private: false).order(:price_cents)
+      Product.where.not(quantity: 0).where(private: false).order(:price_cents)
     when "name"
-      Product.where(private: false).order(:name)
+      Product.where.not(quantity: 0).where(private: false).order(:name)
     when "date"
-      Product.where(private: false).order(created_at: :desc)
+      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
     else
-      Product.where(private: false).order(created_at: :desc)
+      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
     end
   end
 
