@@ -1,6 +1,6 @@
 class StorefrontController < ApplicationController
-  before_action :require_login, except: [:show, :index]
-  before_action :require_seller, only: [:new, :create]
+  before_action :require_login, except: [:show]
+  before_action :require_seller, only: [:new, :create, :new_storefront_with_template, :choose_template]
 
   def new
     @products = Current.user.products
