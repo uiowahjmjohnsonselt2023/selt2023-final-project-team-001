@@ -18,7 +18,7 @@ class CheckoutsController < ApplicationController
         end
       end
     else
-      flash[:alert] = "Log in to view your cart and make purchases!"
+      flash[:alert] = "Login to view your cart and make purchases!"
       redirect_to login_path
     end
   end
