@@ -1,0 +1,19 @@
+<h1>Create a Review for: <%= @name %></h1>
+
+<%= bootstrap_form_with( url: create_review_path, method: :post, local: true) do |f| %>
+  <%= hidden_field_tag :seller_id, @seller_id %>
+  <%= hidden_field_tag :profile_id, @profile_id %>
+  <%= f.form_group :have_purchased, label: { text: "Have you purchased from this seller before?" } do %>
+    <%= f.radio_button :answer, 1, label: "Yes", required: true, id: "yes" %>
+    <%= f.radio_button :answer, 0, label: "No", required: true, id: "no" %>
+  <% end %>
+  <%= f.form_group :interaction_rating, label: { text: "Rate your interaction:" } do %>
+    <%= f.radio_button :rating, 5, label: "5 - Excellent", required: true, id: "5" %>
+    <%= f.radio_button :rating, 4, label: "4", required: true, id: "4" %>
+    <%= f.radio_button :rating, 3, label: "3 - Neutral", required: true, id: "3" %>
+    <%= f.radio_button :rating, 2, label: "2", required: true, id: "2" %>
+    <%= f.radio_button :rating, 1, label: "1 - Poor", required: true, id: "1" %>
+  <% end %>
+  <%= f.text_area :comment, hide_label: true, placeholder: "Leave a comment..." %>
+  <%= f.submit "Submit Review", class: 'btn btn-primary' %>
+<% end %>
