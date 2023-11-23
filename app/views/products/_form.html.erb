@@ -4,6 +4,12 @@
   <%= f.text_field :price, prepend: "$", inputmode: "decimal", pattern: "[0-9]*?(\\.[0-9]*)?" %>
   <%= f.text_field :quantity, inputmode: "numeric", pattern: "[1-9][0-9]*" %>
   <%= f.select :condition, Product.conditions.keys %>
+  <%= f.collection_select :category_ids,
+    Category.all, # selecting from all categories
+    :id, :name, # the value submitted and the text shown
+    { label: "Categories" },
+    { multiple: true, required: true }
+  %>
   <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
   <%= f.primary %>
 <% end %>
