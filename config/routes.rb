@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"
   delete "/remove_item", to: "checkouts#remove_from_cart", as: "remove_item"
   post "/pay", to: "checkouts#update_product_inventory", as: "update_product_inventory"
+  get "/register", to: "users#register", as: "register"
+  post "/register", to: "users#new_seller", as: "seller"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
@@ -19,8 +21,6 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
   get "/logout", to: "sessions#destroy", as: "logout"
-  get "/register", to: "sessions#register", as: "register"
-  post "/register", to: "sessions#new_seller", as: "seller"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
