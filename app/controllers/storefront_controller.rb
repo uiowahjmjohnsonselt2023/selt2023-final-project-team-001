@@ -2,11 +2,6 @@ class StorefrontController < ApplicationController
   before_action :require_login, except: [:show, :index]
   before_action :require_seller, only: [:new, :create]
 
-  # JUST FOR TESTING
-  def index
-    @products = Current.user.products
-  end
-
   def new
     @products = Current.user.products
     @storefront = Current.user.storefront || Current.user.create_storefront
