@@ -2,25 +2,27 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-    @price_reg = /^\$\d+.\d\d/
-    @products = Product.order(created_at: :desc)
     sort = params[:sort]
-    case sort
+    @products = case sort
     when "price"
-      @products = Product.order(:price_cents)
+      Product.where(private: false).order(:price_cents)
     when "name"
-      @products = Product.order(:name)
+      Product.where(private: false).order(:name)
     when "date"
-      @products = Product.order(created_at: :desc)
+      Product.where(private: false).order(created_at: :desc)
+    else
+      Product.where(private: false).order(created_at: :desc)
     end
   end
 
   def show
-    # Raises ActiveRecord::RecordNotFound if not
-    # found, which will render the 404 page.
-    @product = Product.find params[:id]
-    if @product.private
-      unless Current.user == @product.seller || Current.user&.is_admin
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      flash[:alert] = "That product doesn't exist."
+      redirect_to root_path
+    elsif @product.private
+      current_user = User.find_by(id: session[:user_id])
+      unless current_user == @product.seller || current_user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
       end
