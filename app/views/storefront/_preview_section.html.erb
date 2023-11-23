@@ -1,6 +1,6 @@
 <!-- _preview_section.html.erb -->
 <!-- Display custom code output -->
 <div id="customCodeOutput">
-  <!-- Preview will be displayed here -->
-  <%= raw @previewed_code %>
+  <!-- sanitize the code to avoid potentially harmful content from executing scripts or causing other security issues -->
+  <%= sanitize @previewed_code, tags: %w(div h1 p img h3 button a ul ol li), attributes: %w(style src alt href class) %>
 </div>

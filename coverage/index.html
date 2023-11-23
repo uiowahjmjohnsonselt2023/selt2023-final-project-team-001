@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-11-24T17:17:30-06:00">2023-11-24T17:17:30-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-11-24T17:18:59-06:00">2023-11-24T17:18:59-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  95.94%
+  95.47%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.85
+         2.82
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>1181</b> relevant lines,
-    <span class="green"><b>1133</b> lines covered</span> and
-    <span class="red"><b>48</b> lines missed. </span>
+    <b>1192</b> relevant lines,
+    <span class="green"><b>1138</b> lines covered</span> and
+    <span class="red"><b>54</b> lines missed. </span>
     (<span class="green">
-  95.94%
+  95.47%
 </span>
 )
   </div>
@@ -138,12 +138,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#a548956c4f45f16d441ca04d95bb0a9448726431" class="src_link" title="app/controllers/storefront_controller.rb">app/controllers/storefront_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">20.83 %</td>
+            <td class="red strong cell--number t-file__coverage">28.57 %</td>
+            <td class="cell--number">56</td>
             <td class="cell--number">35</td>
-            <td class="cell--number">24</td>
-            <td class="cell--number">5</td>
-            <td class="cell--number">19</td>
-            <td class="cell--number">0.21</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">25</td>
+            <td class="cell--number">0.29</td>
             
           </tr>
         
@@ -4953,7 +4953,7 @@
     <h3>app/controllers/storefront_controller.rb</h3>
     <h4>
       <span class="red">
-  20.83%
+  28.57%
 </span>
 
       lines covered
@@ -4962,9 +4962,9 @@
     
 
     <div class="t-line-summary">
-      <b>24</b> relevant lines.
-      <span class="green"><b>5</b> lines covered</span> and
-      <span class="red"><b>19</b> lines missed.</span>
+      <b>35</b> relevant lines.
+      <span class="green"><b>10</b> lines covered</span> and
+      <span class="red"><b>25</b> lines missed.</span>
     </div>
 
     
@@ -4986,18 +4986,29 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="2">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="2">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  # before_action :authenticate_user! # Assuming you&#39;re using Devise for authentication</code>
+            
+
+            <code class="ruby">  before_action :require_login, except: [:show, :index]</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="3">
+          <li class="covered" data-hits="1" data-linenumber="3">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  before_action :require_seller, only: [:new, :create]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
             
             
 
@@ -5008,62 +5019,18 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="4">
+          <li class="covered" data-hits="1" data-linenumber="5">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def new</code>
+            <code class="ruby">  def index</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="5">
-            
-            
-
-            
-
-            <code class="ruby">    @user = User.find(session[:user_id])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="6">
-            
-            
-
-            
-
-            <code class="ruby">    @products = @user.products</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="7">
-            
-            
-
-            
-
-            <code class="ruby">    @storefront = @user.storefront || @user.create_storefront</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="8">
-            
-            
-
-            
-
-            <code class="ruby">    @previewed_code = @storefront.custom_code if params[:preview_button]</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="9">
+          <li class="never" data-hits="" data-linenumber="6">
             
             
 
@@ -5074,7 +5041,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -5085,7 +5052,73 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="11">
+          <li class="covered" data-hits="1" data-linenumber="8">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="9">
+            
+            
+
+            
+
+            <code class="ruby">    @products = Current.user.products</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="10">
+            
+            
+
+            
+
+            <code class="ruby">    @storefront = Current.user.storefront || Current.user.create_storefront</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">    @previewed_code = @storefront.custom_code if params[:preview_button]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
             <span class="hits">1</span>
             
 
@@ -5096,29 +5129,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby">    puts(params.inspect)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">    puts(params[:storefront][:custom_code])</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
+          <li class="never" data-hits="" data-linenumber="15">
             
             
 
@@ -5129,7 +5140,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="15">
+          <li class="missed" data-hits="0" data-linenumber="16">
             
             
 
@@ -5140,24 +5151,13 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="16">
-            
-            
-
-            
-
-            <code class="ruby">      @user = User.find(session[:user_id])</code>
-          </li>
-        </div>
-      
-        <div>
           <li class="missed" data-hits="0" data-linenumber="17">
             
             
 
             
 
-            <code class="ruby">      @products = @user.products</code>
+            <code class="ruby">      @products = Current.user.products</code>
           </li>
         </div>
       
@@ -5168,7 +5168,7 @@
 
             
 
-            <code class="ruby">      @storefront = @user.storefront || @user.create_storefront</code>
+            <code class="ruby">      @storefront = Current.user.storefront || Current.user.create_storefront</code>
           </li>
         </div>
       
@@ -5184,13 +5184,13 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="20">
+          <li class="never" data-hits="" data-linenumber="20">
             
             
 
             
 
-            <code class="ruby">      render :new</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -5201,7 +5201,7 @@
 
             
 
-            <code class="ruby">    elsif params[:storefront] &amp;&amp; params[:save_button]</code>
+            <code class="ruby">      render :new</code>
           </li>
         </div>
       
@@ -5212,7 +5212,7 @@
 
             
 
-            <code class="ruby">      user = User.find(session[:user_id])</code>
+            <code class="ruby">    elsif params[:storefront] &amp;&amp; params[:save_button]</code>
           </li>
         </div>
       
@@ -5223,7 +5223,7 @@
 
             
 
-            <code class="ruby">      storefront = user.storefront || user.create_storefront</code>
+            <code class="ruby">      storefront = Current.user.storefront || Current.user.create_storefront</code>
           </li>
         </div>
       
@@ -5300,18 +5300,18 @@
 
             
 
-            <code class="ruby">    @user = User.find(session[:user_id])</code>
+            <code class="ruby">    @storefront = Storefront.find(params[:id])</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="missed" data-hits="0" data-linenumber="31">
             
             
 
             
 
-            <code class="ruby">    # @products = @user.products</code>
+            <code class="ruby">    @user = @storefront.user</code>
           </li>
         </div>
       
@@ -5322,7 +5322,7 @@
 
             
 
-            <code class="ruby">    @storefront = Storefront.find(params[:id]) # Retrieve the storefront for the current user</code>
+            <code class="ruby">    @products = @user.products</code>
           </li>
         </div>
       
@@ -5344,12 +5344,243 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">    respond_to do |format|</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby">      format.html do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="37">
+            
+            
+
+            
+
+            <code class="ruby">        headers[&quot;Content-Type&quot;] = &quot;text/html&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">        render :show</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="39">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="42">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="43">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="45">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def require_seller</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="46">
+            
+            
+
+            
+
+            <code class="ruby">    if Current.user</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="47">
+            
+            
+
+            
+
+            <code class="ruby">      unless Current.user.is_seller || Current.user.is_admin</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="48">
+            
+            
+
+            
+
+            <code class="ruby">        flash[:alert] = &quot;You must be a seller to create a storefront.&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="49">
+            
+            
+
+            
+
+            <code class="ruby">        redirect_to root_path and return</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="50">
+            
+            
+
+            
+
+            <code class="ruby">      end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="51">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby">      flash[:alert] = &quot;You must be a seller to create a storefront.&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="53">
+            
+            
+
+            
+
+            <code class="ruby">      redirect_to root_path and return</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 

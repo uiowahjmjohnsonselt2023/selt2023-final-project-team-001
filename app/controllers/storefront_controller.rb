@@ -18,12 +18,7 @@ class StorefrontController < ApplicationController
       @storefront = Current.user.storefront || Current.user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
 
-      render turbo_stream: turbo_stream.replace(
-        "preview_section",
-        partial: "preview_section",
-        locals: {previewed_code: @previewed_code}
-      )
-      # render :new
+      render :new
     elsif params[:storefront] && params[:save_button]
       storefront = Current.user.storefront || Current.user.create_storefront
       storefront.update(custom_code: params[:storefront][:custom_code])
@@ -36,6 +31,13 @@ class StorefrontController < ApplicationController
     @user = @storefront.user
     @products = @user.products
     @custom_code = @storefront&.custom_code || "" # Fetch custom code or default to empty string
+
+    respond_to do |format|
+      format.html do
+        headers["Content-Type"] = "text/html"
+        render :show
+      end
+    end
   end
 
   private
