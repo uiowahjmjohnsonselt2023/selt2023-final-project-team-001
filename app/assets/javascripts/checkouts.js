@@ -6,7 +6,7 @@ $(document).ready(function() {
         let productName = productData.name;
         $('#productNamePlaceholder').text(productName);
         event.preventDefault(); // Prevent the default form submission
-        var deleteItemId = productData.id;
+        let deleteItemId = productData.id;
 
         const form = $('.delete-item');
         const originalAction = form.attr('action');
