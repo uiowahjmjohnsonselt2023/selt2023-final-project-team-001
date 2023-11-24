@@ -5,13 +5,14 @@
     <% if user.storefront.present? %>
       <%= dropdown_link "Your Storefront", storefront_path(user.storefront.id) %>
     <% end %>
-    <li class="dropdown">
-      <a class="dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Add/Update Storefront</a>
-      <ul class="dropdown-menu dropdown-menu-start">
-        <li><a class="dropdown-item" href="/new_storefront_with_template">Use Template</a></li>
+    <li class="dropdown-submenu">
+      <a tabindex="-1" href="#">Add/Update Storefront</a>
+      <ul class="dropdown-menu">
+        <li><a tabindex="-1" class="dropdown-item" href="/new_storefront_with_template">Use Template</a></li>
         <li><a class="dropdown-item" href="/storefronts/new">Manually Code</a></li>
       </ul>
     </li>
+
   <% else %>
     <%= dropdown_link "Register as seller", register_path unless user.is_seller %>
   <% end %>
