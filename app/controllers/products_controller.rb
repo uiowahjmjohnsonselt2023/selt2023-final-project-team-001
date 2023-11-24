@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
       end
     end
     cat = params[:category]
+<<<<<<< HEAD
     @products = if cat.nil?
       case sort
       when "price"
@@ -31,6 +32,15 @@ class ProductsController < ApplicationController
       else
         Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
       end
+=======
+    @products = case sort
+    when "price"
+      Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
+    when "name"
+      Product.where.not(quantity: 0).where(private: false).order(:name)
+    when "date"
+      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+>>>>>>> 47bc522 (fix: remove duplicate body of products page)
     else
       case sort
       when "price"
