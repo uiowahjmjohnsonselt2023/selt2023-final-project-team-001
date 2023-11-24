@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
+    @products = Product.all
+    @products = @products.search_text(params[:search]) if params[:search].present?
   end
 
   def show
