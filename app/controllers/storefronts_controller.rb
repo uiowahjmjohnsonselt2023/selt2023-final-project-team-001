@@ -9,8 +9,6 @@ class StorefrontsController < ApplicationController
   end
 
   def new_storefront_with_template
-    # Logic to display template selection
-    # @templates = Template.all # Fetch templates from your database or define them manually
     render "new_storefront_with_template"
   end
 

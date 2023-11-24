@@ -18,10 +18,7 @@ RSpec.describe StorefrontsController, type: :controller do
       it "assigns necessary variables" do
         get :new
         expect(assigns(:products)).to eq(user.products)
-        # Add more variable assignment checks as needed
       end
-
-      # Add more tests for various scenarios (e.g., preview_button present or absent)
     end
 
     context "when user is not logged in" do
@@ -33,5 +30,20 @@ RSpec.describe StorefrontsController, type: :controller do
     end
   end
 
-  # More tests for other actions like create, choose_template, show, etc.
+  describe "Get #new_storefront_with_template" do
+    context "when user is logged in and is a seller" do
+      it "renders the new_storefront_with_template template" do
+        get :new_storefront_with_template
+        expect(response).to render_template(:new_storefront_with_template)
+      end
+    end
+
+    context "when user is not logged in" do
+      it "redirects to login" do
+        session[:user_id] = nil
+        get :new_storefront_with_template
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end
