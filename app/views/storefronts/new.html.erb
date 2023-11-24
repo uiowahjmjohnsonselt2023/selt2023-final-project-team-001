@@ -25,7 +25,4 @@
 
 <!-- Display custom code output -->
 <p>Preview of custom code:</p>
-<div id="customCodeOutput">
-  <!-- Preview will be displayed here -->
-  <%= sanitize @previewed_code, tags: %w(div h1 p img h3 button a ul ol li), attributes: %w(style src alt href class) %>
-</div>
+<%= render "custom_code_output", code: @previewed_code %>

@@ -1,4 +1,1 @@
-<div id="customCodeOutput">
-  <!-- Custom code output will be displayed here -->
-  <%= sanitize @custom_code, tags: %w(div h1 p img h3 button a ul ol li), attributes: %w(style src alt href class) %>
-</div>
+<%= render "custom_code_output", code: @custom_code %>
