@@ -62,38 +62,6 @@ module NavbarHelper
     end
   end
 
-  def navbar_dropstart(text, **options, &block)
-    li_options = options.delete(:li_options) || {}
-    li_options[:class] = class_names "btn-group", "dropstart", li_options[:class]
-
-    button_options = options.delete(:button_options) || {}
-    button_options[:type] = "button"
-    button_options[:class] = class_names "btn", "btn-secondary", "dropdown-toggle", button_options[:class]
-    button_options[:"data-bs-toggle"] = "dropdown"
-    button_options[:aria] = {expanded: "false"}.merge(button_options[:aria] || {})
-
-    ul_options = options.delete(:ul_options) || {}
-    ul_options[:class] = class_names "dropdown-menu", ul_options[:class]
-
-    dropdown_menu = tag.ul(**ul_options, &block)
-
-    out = []
-    out << tag.div(class: "btn-group dropstart") do
-      button_out = []
-      button_out << tag.button(text, **button_options)
-      safe_join(button_out)
-    end
-    out << dropdown_menu
-
-    safe_join(out)
-  end
-
-  def dropstart_link(text, path, **options)
-    li_options = options.delete(:li_options) || {}
-    options[:class] = class_names "dropstart-item", options[:class]
-    tag.li(**li_options) { link_to(text, path, **options) }
-  end
-
   # Creates a navbar dropdown link.
   # <li><a class="dropdown-item" href="#{path}">#{text}</a></li>
   def dropdown_link(text, path, **options)
