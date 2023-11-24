@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :products, foreign_key: :seller_id, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_many :carts, dependent: :destroy
-  has_many :products, through: :carts
+  has_many :cart_products, through: :carts, source: :product
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
 
   def full_name
