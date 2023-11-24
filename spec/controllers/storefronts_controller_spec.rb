@@ -10,7 +10,6 @@ RSpec.describe StorefrontsController, type: :controller do
   describe "GET #new" do
     context "when user is logged in and is a seller" do
       it "renders the new template" do
-        puts(user.is_seller)
         get :new
         expect(response).to render_template(:new)
       end
@@ -26,6 +25,14 @@ RSpec.describe StorefrontsController, type: :controller do
         session[:user_id] = nil
         get :new
         expect(response).to redirect_to(login_path)
+      end
+    end
+
+    context "when user is not a seller" do
+      it "redirects to root" do
+        user.update(is_seller: false)
+        get :new
+        expect(response).to redirect_to(root_path)
       end
     end
   end
@@ -45,6 +52,14 @@ RSpec.describe StorefrontsController, type: :controller do
         expect(response).to redirect_to(login_path)
       end
     end
+
+    context "when user is not a seller" do
+      it "redirects to root" do
+        user.update(is_seller: false)
+        get :new_storefront_with_template
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 
   describe "POST #create" do
@@ -62,12 +77,12 @@ RSpec.describe StorefrontsController, type: :controller do
       end
 
       context "when user clicks the 'Save' button" do
-        it "redirects to the storefront" do
+        it "redirects to the storefronts" do
           post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
           expect(response).to redirect_to(storefront_path(user.storefront))
         end
 
-        it "updates the storefront with the custom code" do
+        it "updates the storefronts with the custom code" do
           post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
           expect(user.storefront.reload.custom_code).to eq("1")
         end
@@ -85,12 +100,12 @@ RSpec.describe StorefrontsController, type: :controller do
 
   describe "POST #choose_template" do
     context "when user is logged in and is a seller" do
-      it "redirects to the storefront" do
+      it "redirects to the storefronts" do
         post :choose_template, params: {template_number: "1"}
         expect(response).to redirect_to(storefront_path(user.storefront))
       end
 
-      it "updates the storefront with the custom code" do
+      it "updates the storefronts with the custom code" do
         post :choose_template, params: {template_number: "1"}
         expect(user.storefront.reload.custom_code).to eq("1")
       end
@@ -101,6 +116,39 @@ RSpec.describe StorefrontsController, type: :controller do
         session[:user_id] = nil
         post :choose_template, params: {template_number: "1"}
         expect(response).to redirect_to(login_path)
+      end
+    end
+  end
+
+  describe "GET #show" do
+    before do
+      user.storefront = user.storefront || user.create_storefront
+      user.storefront.update(custom_code: "some html code")
+    end
+
+    context "when user is logged in and is a seller" do
+      it "renders the show template" do
+        get :show, params: {id: user.storefront.id}
+        expect(response).to render_template(:show)
+      end
+
+      it "renders the template1 template if the storefronts has custom code 1" do
+        user.storefront.update(custom_code: "1")
+        get :show, params: {id: user.storefront.id}
+        expect(response).to render_template(:template1)
+      end
+
+      it "renders the template2 template if the storefronts has custom code 2" do
+        user.storefront.update(custom_code: "2")
+        get :show, params: {id: user.storefront.id}
+        expect(response).to render_template(:template2)
+      end
+
+      it "assigns necessary variables" do
+        get :show, params: {id: user.storefront.id}
+        expect(assigns(:storefront)).to eq(user.storefront)
+        expect(assigns(:user)).to eq(user)
+        expect(assigns(:products)).to eq(user.products)
       end
     end
   end
