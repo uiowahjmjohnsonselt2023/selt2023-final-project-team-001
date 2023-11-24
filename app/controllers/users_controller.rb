@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       flash[:alert] = "Invalid input(s)!"
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
