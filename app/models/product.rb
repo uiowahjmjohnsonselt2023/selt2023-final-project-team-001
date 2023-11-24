@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include PgSearch::Model
+
   REQUIRED_FIELDS = %i[name description price quantity condition].freeze
 
   belongs_to :seller, class_name: "User"
@@ -23,4 +25,10 @@ class Product < ApplicationRecord
   validates :description, length: {maximum: 1000}
   validates :quantity, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
+
+  pg_search_scope :search_text,
+    against: {name: "A", description: "B"},
+    using: {
+      tsearch: {dictionary: "english", tsvector_column: "searchable"}
+    }
 end
