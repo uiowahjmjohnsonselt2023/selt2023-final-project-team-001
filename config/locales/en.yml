@@ -57,3 +57,5 @@ en:
     update:
       success: "Storefront successfully updated!"
       failure: "Failed to update storefront. Please try again."
+    preview:
+      success: "Storefront successfully previewed, scroll down to see!"

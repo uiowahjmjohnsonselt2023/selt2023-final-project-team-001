@@ -17,6 +17,8 @@ RSpec.describe StorefrontsController, type: :controller do
       it "assigns necessary variables" do
         get :new
         expect(assigns(:products)).to eq(user.products)
+        expect(assigns(:storefront)).to eq(user.storefront)
+        expect(assigns(:previewed_code)).to eq(user.storefront.custom_code)
       end
     end
 
@@ -25,6 +27,7 @@ RSpec.describe StorefrontsController, type: :controller do
         session[:user_id] = nil
         get :new
         expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("You need to login before you can create a storefront!")
       end
     end
 
@@ -50,14 +53,17 @@ RSpec.describe StorefrontsController, type: :controller do
         session[:user_id] = nil
         get :new_storefront_with_template
         expect(response).to redirect_to(login_path)
+        expect(flash[:alert]).to eq("You need to login before you can create a storefront!")
       end
     end
 
     context "when user is not a seller" do
       it "redirects to root" do
         user.update(is_seller: false)
+        session[:user_id] = user.id
         get :new_storefront_with_template
         expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("You must be a seller to create a storefront")
       end
     end
   end
@@ -65,14 +71,17 @@ RSpec.describe StorefrontsController, type: :controller do
   describe "POST #create" do
     context "when user is logged in and is a seller" do
       context "when user clicks the 'Preview Custom Code' button" do
-        it "renders the new template" do
+        it "renders the new template on preview" do
           post :create, params: {storefront: {custom_code: "1"}, preview_button: "Preview Custom Code"}
           expect(response).to render_template(:new)
+          expect(flash[:notice]).to eq("Storefront successfully previewed, scroll down to see!")
         end
 
         it "assigns necessary variables" do
           post :create, params: {storefront: {custom_code: "1"}, preview_button: "Preview Custom Code"}
           expect(assigns(:products)).to eq(user.products)
+          expect(assigns(:storefront)).to eq(user.storefront)
+          expect(assigns(:previewed_code)).to eq("1")
         end
       end
 
@@ -80,6 +89,7 @@ RSpec.describe StorefrontsController, type: :controller do
         it "redirects to the storefronts" do
           post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
           expect(response).to redirect_to(storefront_path(user.storefront))
+          expect(flash[:notice]).to eq("Storefront successfully updated!")
         end
 
         it "updates the storefronts with the custom code" do

@@ -18,16 +18,17 @@ class StorefrontsController < ApplicationController
       @products = Current.user.products
       @storefront = Current.user.storefront || Current.user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
-
+      flash.now[:notice] = t("storefronts.preview.success")
       render :new
     elsif params[:storefront] && params[:save_button]
       storefront = Current.user.storefront || Current.user.create_storefront
       if storefront.update(custom_code: params[:storefront][:custom_code])
         flash[:notice] = t("storefronts.update.success")
+        redirect_to storefront_path(storefront) and return
       else
         flash[:alert] = t("storefronts.update.failure")
+        redirect_to root_path and return
       end
-      redirect_to storefront_path(storefront)
     end
   end
 
