@@ -16,11 +16,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
-    if @product.nil?
-      flash[:alert] = "That product doesn't exist."
-      redirect_to root_path
-    elsif @product.private
+    # Raises ActiveRecord::RecordNotFound if not
+    # found, which will render the 404 page.
+    @product = Product.find params[:id]
+    if @product.private
       unless Current.user == @product.seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
@@ -53,22 +52,16 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
-    if @product.nil?
-      flash[:alert] = "That product doesn't exist."
-      redirect_to root_path
-    elsif Current.user != @product.seller && !Current.user.is_admin
+    @product = Product.find params[:id]
+    if Current.user != @product.seller && !Current.user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     end
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
-    if @product.nil?
-      flash[:alert] = "That product doesn't exist."
-      redirect_to root_path
-    elsif Current.user != @product.seller && !Current.user.is_admin
+    @product = Product.find params[:id]
+    if Current.user != @product.seller && !Current.user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     elsif @product.update(product_params)
