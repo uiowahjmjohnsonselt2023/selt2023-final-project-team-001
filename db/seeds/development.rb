@@ -17,7 +17,7 @@ password_kwargs = {
 # (which is done in the model). This is a lot slower unfortunately, but I couldn't
 # find a way to get around it. Note: the slow part is model instantiation, not the
 # database insertion.
-30.times.map do |i|
+users = 30.times.map do |i|
   email = Faker::Internet.email
   password = Faker::Internet.password(**password_kwargs)
   user = User.find_or_initialize_by(email: email)
