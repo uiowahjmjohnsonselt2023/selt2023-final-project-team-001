@@ -41,5 +41,8 @@ module Selt2023FinalProjectTeam001
 
     # Use our custom error pages.
     config.exceptions_app = routes
+
+    # Needed to use Postgres' advanced features like full-text search.
+    config.active_record.schema_format = :sql
   end
 end
