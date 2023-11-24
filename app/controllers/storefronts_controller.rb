@@ -3,7 +3,7 @@ class StorefrontsController < ApplicationController
   before_action :require_seller, only: [:new, :create, :new_storefront_with_template, :choose_template]
 
   def new
-    @products = Current.user.where(private: false).order(:price_cents)
+    @products = Current.user.products.where(private: false)
 
     @storefront = Current.user.storefront || Current.user.create_storefront
     @previewed_code = @storefront.custom_code if params[:preview_button]
@@ -16,7 +16,7 @@ class StorefrontsController < ApplicationController
   def create
     # Add logic to handle the 'Preview Custom Code' action
     if params[:storefront] && params[:preview_button]
-      @products = Current.user.where(private: false).order(:price_cents)
+      @products = Current.user.products.where(private: false)
 
       @storefront = Current.user.storefront || Current.user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
