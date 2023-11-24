@@ -1,5 +1,5 @@
 <!-- Allow sellers to input custom code -->
-<%= bootstrap_form_with(url: storefront_index_path, scope: :storefront, method: :post, local: true) do |f| %>
+<%= bootstrap_form_with(url: storefronts_path, scope: :storefront, method: :post, local: true) do |f| %>
   <%= f.text_area :custom_code, value: '', rows: 10, cols: 50 %>
   <%= f.submit 'Preview Custom Code', name: 'preview_button' %>
   <%= f.submit 'Save Custom Code', name: 'save_button' %>

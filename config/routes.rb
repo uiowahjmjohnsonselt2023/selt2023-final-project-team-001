@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   resources :products
 
-  resources :storefront
-  get "new_storefront_with_template", to: "storefront#new_storefront_with_template", as: "new_storefront_with_template"
-  get "choose_template", to: "storefront#choose_template", as: "choose_template"
+  resources :storefronts
+  get "new_storefront_with_template", to: "storefronts#new_storefront_with_template", as: "new_storefront_with_template"
+  get "choose_template", to: "storefronts#choose_template", as: "choose_template"
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"

@@ -42,9 +42,9 @@ en:
     users:
       register: "You need to sign in before you can register as a seller!"
       new_seller: "You need to sign in before you can register as a seller!"
-    storefront:
-      new: "You need to login before you can create a storefront!"
-      create: "You need to login before you can create a storefront!"
+    storefronts:
+      new: "You need to login before you can create a storefronts!"
+      create: "You need to login before you can create a storefronts!"
   require_not_seller:
     default: "You cannot be a seller to access that page."
     users:
@@ -52,6 +52,6 @@ en:
       new_seller: "You already are a seller, no need to register again!"
   require_seller:
     default: "You must be a seller to access that page."
-    storefront:
-      new: "You must be a seller to create a storefront."
-      create: "You must be a seller to create a storefront."
+    storefronts:
+      new: "You must be a seller to create a storefronts."
+      create: "You must be a seller to create a storefronts."
