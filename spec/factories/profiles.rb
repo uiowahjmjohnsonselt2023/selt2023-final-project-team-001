@@ -11,7 +11,6 @@ FactoryBot.define do
     website { "" }
     occupation { "MyString" }
     seller_rating { 1 }
-    buyer_rating { 1 }
     public_profile { false }
     user { nil }
   end

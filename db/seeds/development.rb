@@ -49,7 +49,6 @@ Profile.insert_all(
       website: Faker::Internet.url(path: "/#{username}"),
       occupation: Faker::Job.title,
       seller_rating: Faker::Number.within(range: 1..5),
-      buyer_rating: Faker::Number.within(range: 1..5),
       public_profile: Faker::Boolean.boolean,
       user_id: user.id
     }
@@ -85,7 +84,15 @@ Categorization.insert_all(
     end
   end
 )
-
+# Default seller
+User.create!({first_name: "Seller",
+              last_name: "1",
+              email: "seller@1.com",
+              password: "seller1000",
+              password_confirmation: "seller1000",
+              is_seller: true,
+              is_buyer: true,
+              is_admin: false})
 # Create carts
 User.create!({first_name: "Judy",
            last_name: "Rudy",
@@ -95,6 +102,14 @@ User.create!({first_name: "Judy",
            is_seller: false,
            is_buyer: true,
            is_admin: false})
+
+Review.create!({
+  reviewer_id: User.find_by(email: "judy@rudy.com").id,
+  seller_id: User.find_by(email: "seller@1.com").id,
+  has_purchased_from: true,
+  interaction_rating: 5,
+  description: "meh"
+})
 
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})

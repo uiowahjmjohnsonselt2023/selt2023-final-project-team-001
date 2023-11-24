@@ -18,8 +18,16 @@
   <!-- TODO: Displaying the user's avatar if attached -->
   <%# image_tag @profile.avatar if @profile.avatar.attached? %>
 
-  <p><strong>Seller Rating:</strong> <%= @profile.seller_rating %></p>
-  <p><strong>Buyer Rating:</strong> <%= @profile.buyer_rating %></p>
+  <% if @is_seller %>
+    <p><strong>Seller Rating (out of 5):</strong>
+      <% if @profile.seller_rating && @profile.seller_rating > 0 %>
+        <%= @profile.seller_rating %>
+      <% else %>
+        <%= "No rating yet" %>
+      <% end %>
+    </p>
+  <% end %>
+
 
   <!-- Links -->
   <% if @is_current_user %>
