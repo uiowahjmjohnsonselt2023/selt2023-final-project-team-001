@@ -22,7 +22,11 @@ class StorefrontsController < ApplicationController
       render :new
     elsif params[:storefront] && params[:save_button]
       storefront = Current.user.storefront || Current.user.create_storefront
-      storefront.update(custom_code: params[:storefront][:custom_code])
+      if storefront.update(custom_code: params[:storefront][:custom_code])
+        flash[:notice] = t("storefronts.update.success")
+      else
+        flash[:alert] = t("storefronts.update.failure")
+      end
       redirect_to storefront_path(storefront)
     end
   end
@@ -30,7 +34,11 @@ class StorefrontsController < ApplicationController
   def choose_template
     template_number = params[:template_number]
     storefront = Current.user.storefront || Current.user.create_storefront
-    storefront.update(custom_code: template_number)
+    if storefront.update(custom_code: template_number)
+      flash[:notice] = t("storefronts.update.success")
+    else
+      flash[:alert] = t("storefronts.update.failure")
+    end
     redirect_to storefront_path(storefront) and return
   end
 
