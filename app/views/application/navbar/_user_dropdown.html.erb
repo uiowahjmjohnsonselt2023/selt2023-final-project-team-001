@@ -1,6 +1,20 @@
 <%= navbar_dropdown user.full_name, **options do %>
   <%= dropdown_link "Profile", user.profile ? profile_path(user) : new_profile_path %>
-  <%= dropdown_link "Register as seller", register_path unless user.is_seller %>
+
+  <% if user.is_seller %>
+    <% if user.storefront.present? %>
+      <%= dropdown_link "Your Storefront", storefront_path(user.storefront.id) %>
+    <% end %>
+    <li class="dropdown">
+      <a class="dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Add/Update Storefront</a>
+      <ul class="dropdown-menu dropdown-menu-start">
+        <li><a class="dropdown-item" href="/new_storefront_with_template">Use Template</a></li>
+        <li><a class="dropdown-item" href="/storefronts/new">Manually Code</a></li>
+      </ul>
+    </li>
+  <% else %>
+    <%= dropdown_link "Register as seller", register_path unless user.is_seller %>
+  <% end %>
   <%= dropdown_divider %>
   <%= dropdown_link("Logout", logout_path, method: :delete) %>
 <% end %>

@@ -24,17 +24,6 @@ along with some modifications
             <%= dropdown_link category.name, "#" %>
           <% end %>
         <% end %>
-        <% if Current.user %>
-          <% if Current.user.storefront.present? %>
-            <%= navbar_link "Your Storefront", storefront_path(Current.user.storefront.id)%>
-          <% end %>
-          <% if Current.user.is_seller %>
-            <%= navbar_dropdown "Add/Update Storefront" do %>
-              <%= dropdown_link "Use Template", new_storefront_with_template_path %>
-              <%= dropdown_link "Manually Code", new_storefront_path %>
-            <% end %>
-          <% end %>
-        <% end %>
       </ul>
       <ul class="navbar-nav">
         <form class="d-flex" role="search">
