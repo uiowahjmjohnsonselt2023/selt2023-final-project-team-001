@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :products
 
-  resources :storefronts
+  resources :storefronts, only: [:show, :new, :create]
   get "new_storefront_with_template", to: "storefronts#new_storefront_with_template", as: "new_storefront_with_template"
   get "choose_template", to: "storefronts#choose_template", as: "choose_template"
 
