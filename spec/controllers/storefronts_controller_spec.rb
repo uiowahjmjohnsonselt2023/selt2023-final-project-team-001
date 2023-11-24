@@ -82,4 +82,26 @@ RSpec.describe StorefrontsController, type: :controller do
       end
     end
   end
+
+  describe "POST #choose_template" do
+    context "when user is logged in and is a seller" do
+      it "redirects to the storefront" do
+        post :choose_template, params: {template_number: "1"}
+        expect(response).to redirect_to(storefront_path(user.storefront))
+      end
+
+      it "updates the storefront with the custom code" do
+        post :choose_template, params: {template_number: "1"}
+        expect(user.storefront.reload.custom_code).to eq("1")
+      end
+    end
+
+    context "when user is not logged in" do
+      it "redirects to login" do
+        session[:user_id] = nil
+        post :choose_template, params: {template_number: "1"}
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end
