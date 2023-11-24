@@ -46,4 +46,40 @@ RSpec.describe StorefrontsController, type: :controller do
       end
     end
   end
+
+  describe "POST #create" do
+    context "when user is logged in and is a seller" do
+      context "when user clicks the 'Preview Custom Code' button" do
+        it "renders the new template" do
+          post :create, params: {storefront: {custom_code: "1"}, preview_button: "Preview Custom Code"}
+          expect(response).to render_template(:new)
+        end
+
+        it "assigns necessary variables" do
+          post :create, params: {storefront: {custom_code: "1"}, preview_button: "Preview Custom Code"}
+          expect(assigns(:products)).to eq(user.products)
+        end
+      end
+
+      context "when user clicks the 'Save' button" do
+        it "redirects to the storefront" do
+          post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
+          expect(response).to redirect_to(storefront_path(user.storefront))
+        end
+
+        it "updates the storefront with the custom code" do
+          post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
+          expect(user.storefront.reload.custom_code).to eq("1")
+        end
+      end
+    end
+
+    context "when user is not logged in" do
+      it "redirects to login" do
+        session[:user_id] = nil
+        post :create, params: {storefront: {custom_code: "1"}, save_button: "Save"}
+        expect(response).to redirect_to(login_path)
+      end
+    end
+  end
 end
