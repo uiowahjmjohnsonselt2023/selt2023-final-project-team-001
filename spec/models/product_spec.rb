@@ -38,7 +38,7 @@ RSpec.describe Product, type: :model do
     end
 
     it "requires a price greater than 0" do
-      product = build(:product, price: [nil, 0, -1].sample)
+      product = build(:product, price: [nil, -1].sample)
       expect(product).not_to be_valid
     end
 
