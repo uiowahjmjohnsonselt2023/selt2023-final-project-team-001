@@ -41,12 +41,8 @@ class CheckoutsController < ApplicationController
       render :index
     else
       @product_ids_and_quantity.each do |p|
-        # remove from cart and inventory
         Cart.find_by(user_id: session[:user_id], product_id: p[:id]).destroy
         product = Product.find_by(id: p[:id])
-        # need to figure out how to handle the case where the quantity is 1
-        # and the product is bought. By default the quantity has to be > 0, so
-        # if we try to update it to 0 it will fail and rollback
         product.update!(quantity: (product.quantity - Integer(p[:quantity])))
       end
       flash[:notice] = "Order placed successfully!"
