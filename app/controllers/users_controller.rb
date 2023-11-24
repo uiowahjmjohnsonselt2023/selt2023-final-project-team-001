@@ -1,9 +1,20 @@
 class UsersController < ApplicationController
+
   before_action :require_login, only: [:register, :new_seller]
   before_action :require_not_seller, only: [:register, :new_seller]
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def index
+  end
+
+  def show
+    @user = Current.user
+    unless Current.user?(params[:id])
+      flash[:warning] = "Can only show profile of logged-in user"
+    end
   end
 
   def new
