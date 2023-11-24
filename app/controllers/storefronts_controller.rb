@@ -3,7 +3,8 @@ class StorefrontsController < ApplicationController
   before_action :require_seller, only: [:new, :create, :new_storefront_with_template, :choose_template]
 
   def new
-    @products = Current.user.products
+    @products = Current.user.where(private: false).order(:price_cents)
+
     @storefront = Current.user.storefront || Current.user.create_storefront
     @previewed_code = @storefront.custom_code if params[:preview_button]
   end
@@ -15,7 +16,8 @@ class StorefrontsController < ApplicationController
   def create
     # Add logic to handle the 'Preview Custom Code' action
     if params[:storefront] && params[:preview_button]
-      @products = Current.user.products
+      @products = Current.user.where(private: false).order(:price_cents)
+
       @storefront = Current.user.storefront || Current.user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
       flash.now[:notice] = t("storefronts.preview.success")
@@ -46,7 +48,8 @@ class StorefrontsController < ApplicationController
   def show
     @storefront = Storefront.find(params[:id])
     @user = @storefront.user
-    @products = @user.products
+    @products = @user.products.where(private: false)
+
     if @storefront.custom_code == "1"
       render :template1 and return
     elsif @storefront.custom_code == "2"
