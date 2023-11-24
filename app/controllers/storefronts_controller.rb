@@ -21,7 +21,7 @@ class StorefrontsController < ApplicationController
       @storefront = Current.user.storefront || Current.user.create_storefront
       @previewed_code = params[:storefront][:custom_code]
       flash.now[:notice] = t("storefronts.preview.success")
-      render :new
+      render :new, locals: {previewed_code: @previewed_code}
     elsif params[:storefront] && params[:save_button]
       storefront = Current.user.storefront || Current.user.create_storefront
       if storefront.update(custom_code: params[:storefront][:custom_code])
