@@ -14,9 +14,6 @@
 /.env*
 !/.env*.erb
 
-#Ignore rspec coverage files
-/coverage/*
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
