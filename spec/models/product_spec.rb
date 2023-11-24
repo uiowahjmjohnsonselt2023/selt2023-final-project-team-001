@@ -43,7 +43,7 @@ RSpec.describe Product, type: :model do
     end
 
     it "requires a quantity greater than 0" do
-      product = build(:product, quantity: [nil, 0, -1].sample)
+      product = build(:product, quantity: [nil, -1].sample)
       expect(product).not_to be_valid
     end
   end

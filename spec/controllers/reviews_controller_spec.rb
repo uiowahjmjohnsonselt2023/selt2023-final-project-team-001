@@ -14,7 +14,7 @@ describe ReviewsController, type: :controller do
       it "redirects to the user profile with an alert message" do
         get :new, params: {profile_id: profile.id}
         expect(flash[:alert]).to eq("You cannot leave a review for yourself.")
-        expect(response).to redirect_to(profile_path(user.id))
+        expect(response).to redirect_to(profile_path(Profile.find_by(user_id: user.id).id))
       end
     end
 
@@ -28,7 +28,7 @@ describe ReviewsController, type: :controller do
       it "renders the new template" do
         get :new, params: {profile_id: profile.id}
 
-        expect(response).to redirect_to(profile_path(user.id))
+        expect(response).to redirect_to(profile_path(Profile.find_by(user_id: user.id).id))
       end
     end
   end
