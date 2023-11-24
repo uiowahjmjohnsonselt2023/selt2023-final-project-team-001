@@ -1,11 +1,12 @@
 class Product < ApplicationRecord
-  REQUIRED_FIELDS = %i[name description price quantity condition].freeze
+  REQUIRED_FIELDS = %i[name description price quantity condition photos].freeze
 
   belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
   has_many :carts
   has_many :users, through: :carts
+  mount_uploaders :photos, ProductPhotoUploader
 
   # Left 100 between each value to allow for future additions.
   # Taken from https://www.recycledcycles.com/service/used-item-condition-guide/

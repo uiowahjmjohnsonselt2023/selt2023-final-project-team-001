@@ -1,15 +1,24 @@
+<%# multipart: true is needed since we're uploading files %>
 <%= bootstrap_form_with model: @product do |f| %>
   <%= f.text_field :name %>
   <%= f.text_area :description %>
   <%= f.text_field :price, prepend: "$", inputmode: "decimal", pattern: "[0-9]*?(\\.[0-9]*)?" %>
   <%= f.text_field :quantity, inputmode: "numeric", pattern: "[1-9][0-9]*" %>
   <%= f.select :condition, Product.conditions.keys %>
+
   <%= f.collection_select :category_ids,
     Category.all, # selecting from all categories
     :id, :name, # the value submitted and the text shown
     { label: "Categories" },
     { multiple: true, required: true }
   %>
+
+  <%# Preserve existing files when uploading new ones %>
+  <% @product.photos.each do |photo| %>
+    <%= f.hidden_field :photos, multiple: true, value: photo.identifier %>
+  <% end %>
+  <%= f.file_field :photos, multiple: true, accept: "image/*" %>
+
   <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
   <%= f.primary %>
 <% end %>
