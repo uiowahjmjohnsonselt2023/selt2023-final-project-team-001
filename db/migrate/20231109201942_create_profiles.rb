@@ -12,7 +12,6 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.string :website
       t.string :occupation
       t.integer :seller_rating
-      t.integer :buyer_rating
       t.boolean :public_profile, null: false, default: true
       t.references :user, foreign_key: true
 
