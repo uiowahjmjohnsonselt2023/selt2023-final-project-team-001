@@ -13,7 +13,7 @@ class User < ApplicationRecord
   # this doesn't allow us to create a user without a password, since has_secure_password
   # requires a password on creation. See https://stackoverflow.com/a/45329148
   validates :password, presence: true, length: {minimum: 8}, allow_nil: true
-  validates :password_confirmation, presence: true, length: {minimum: 8}, allow_nil: true
+  validates :password_confirmation, presence: true, length: {minimum: 8}, on: :create
 
   # Scopes allow us to write things like User.admins to get all admins
   # or User.non_sellers to get all users who aren't sellers.
