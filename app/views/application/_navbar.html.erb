@@ -21,7 +21,7 @@ along with some modifications
         <%= navbar_link "Products", products_path %>
         <%= navbar_dropdown "Categories" do %>
           <% Category.all.each do |category| %>
-            <%= dropdown_link category.name, "#" %>
+            <%= dropdown_link category.name, products_path(category: category.id) %>
           <% end %>
         <% end %>
       </ul>
