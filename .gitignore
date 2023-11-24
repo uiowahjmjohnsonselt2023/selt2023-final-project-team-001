@@ -7,9 +7,6 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore rspec coverage files
-/coverage/*
-
 # Ignore all environment files (except templates).
 /.env*
 !/.env*.erb
