@@ -22,15 +22,28 @@ class ProductsController < ApplicationController
       end
     end
     cat = params[:category]
-    @products = case sort
-    when "price"
-      Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
-    when "name"
-      Product.where.not(quantity: 0).where(private: false).order(:name)
-    when "date"
-      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+    @products = if cat.nil?
+      case sort
+      when "price"
+        Product.where.not(quantity: 0).where(private: false).order(:price_cents)
+      when "name"
+        Product.where.not(quantity: 0).where(private: false).order(:name)
+      when "date"
+        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      else
+        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      end
     else
-      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      case sort
+      when "price"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
+      when "name"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:name)
+      when "date"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      else
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      end
     end
   end
 
