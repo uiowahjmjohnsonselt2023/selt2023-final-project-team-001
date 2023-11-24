@@ -29,6 +29,11 @@ class Product < ApplicationRecord
   pg_search_scope :search_text,
     against: {name: "A", description: "B"},
     using: {
-      tsearch: {dictionary: "english", tsvector_column: "searchable"}
+      tsearch: {
+        dictionary: "english",
+        tsvector_column: "searchable",
+        prefix: true,
+        any_word: true
+      }
     }
 end
