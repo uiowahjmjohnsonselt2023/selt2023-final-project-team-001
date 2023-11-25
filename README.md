@@ -10,7 +10,9 @@ This is a practical online platform designed for buying and selling goods. We ai
 
 - Users can view products available for sale, with the option to sort and filter according to attributes like price, date posted, and tags.
 
-- Users can register to sell products, with the ability to sell as an independent seller (in the style of Facebook Marketplace or Craigslist) or set up a storefront to sell products regularly (more in the style of Etsy).
+- Users can register to sell products, with the ability to sell as an independent seller (in the style of Facebook Marketplace or Craigslist) or set up a storefront to sell products regularly (more in the style of Etsy)
+- Sellers can choose to set up a storefront where they can establish a business selling their products
+- Sellers can customize their storefront's appearance with HTML
 
 - Buyers and sellers can make use of third-party plugins for UPS and FedEx to calculate shipping, prepare and print shipping labels, and track their orders.
 
@@ -18,13 +20,10 @@ This is a practical online platform designed for buying and selling goods. We ai
 
 ### Navigation
 
-- When users navigate to the \login page of the app, they are prompted to log in with their username and password.
-
-- If users do not have an account, they should visit \signup, where they will be prompted to create an account.
-
-- Users can register to sell products on the \register page.
-
-- Users can view products for sale on the \products page. 
+- From the home page, users can use the navigation bar to find what they are looking for.
+- All users will see links to view their storefronts (for users who are not logged in/registered, following this link will lead them to a page showing that they have no storefronts), as well as links to view all products sorted by recency.
+- On the left in the nav bar, there is also a dropdown menu listing the product categories. Any user can click a category to view all the products in that category.
+- On the right in the nav bar, a user who is not logged in will have a link to the login/sign up page, and a user who is logged in will have a dropdown menu allowing them to view their profile and create or update their storefront
 
 
 ## Installation
