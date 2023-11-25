@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/checkouts_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/checkouts_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -82,7 +82,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/rails_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/rails_helper.rb": {
         "lines": [
           1,
           1,
@@ -163,7 +163,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/support/helpers.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/support/helpers.rb": {
         "lines": [
           1,
           1,
@@ -172,7 +172,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/environment.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -181,7 +181,7 @@
           1
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/application.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/application.rb": {
         "lines": [
           1,
           null,
@@ -233,14 +233,14 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/boot.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/boot.rb": {
         "lines": [
           1,
           null,
           1
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/environments/test.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -298,7 +298,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/assets.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -316,17 +316,7 @@
           1
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/carrier_wave.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/content_security_policy.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -355,7 +345,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/filter_parameter_logging.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -367,7 +357,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/inflections.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -387,7 +377,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/inline_svg.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/inline_svg.rb": {
         "lines": [
           1,
           1,
@@ -405,7 +395,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/money 2.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/money 2.rb": {
         "lines": [
           null,
           null,
@@ -522,7 +512,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/money.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/money.rb": {
         "lines": [
           null,
           null,
@@ -639,7 +629,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/initializers/permissions_policy.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
           null,
@@ -656,7 +646,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/carts.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/carts.rb": {
         "lines": [
           1,
           1,
@@ -664,7 +654,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/products.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/products.rb": {
         "lines": [
           1,
           null,
@@ -676,7 +666,6 @@
           34,
           40,
           null,
-          null,
           1,
           1,
           null,
@@ -684,7 +673,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/profiles.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/profiles.rb": {
         "lines": [
           1,
           1,
@@ -705,7 +694,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/reviews.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/reviews.rb": {
         "lines": [
           1,
           1,
@@ -713,7 +702,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/storefronts.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/storefronts.rb": {
         "lines": [
           1,
           1,
@@ -725,7 +714,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/factories/users.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/users.rb": {
         "lines": [
           1,
           1,
@@ -765,7 +754,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/config/routes.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/routes.rb": {
         "lines": [
           1,
           1,
@@ -780,8 +769,6 @@
           1,
           1,
           1,
-          1,
-          null,
           1,
           null,
           1,
@@ -819,13 +806,13 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/application_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/flash_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/flash_helper.rb": {
         "lines": [
           1,
           1,
@@ -851,7 +838,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/footer_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/footer_helper.rb": {
         "lines": [
           1,
           null,
@@ -864,7 +851,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/icon_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/icon_helper.rb": {
         "lines": [
           1,
           1,
@@ -878,7 +865,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/navbar_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/navbar_helper.rb": {
         "lines": [
           1,
           null,
@@ -968,7 +955,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/products_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/products_helper.rb": {
         "lines": [
           1,
           1,
@@ -981,58 +968,31 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/profiles_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/profiles_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/ratings_helper.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/reviews_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/reviews_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/sessions_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/sessions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/helpers/storefront_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/storefront_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/checkouts_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/checkouts_controller.rb": {
         "lines": [
           1,
           1,
@@ -1088,7 +1048,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/application_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
@@ -1151,7 +1111,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/products_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/products_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -1421,7 +1381,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/products_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/products_controller.rb": {
         "lines": [
           1,
           1,
@@ -1430,11 +1390,38 @@
           2,
           2,
           2,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
           2,
+          null,
+          2,
+          2,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
           2,
           null,
           null,
           0,
+          0,
+          0,
+          null,
           0,
           null,
           0,
@@ -1453,7 +1440,6 @@
           null,
           8,
           7,
-          7,
           4,
           3,
           3,
@@ -1466,6 +1452,7 @@
           1,
           1,
           null,
+          1,
           1,
           null,
           null,
@@ -1512,17 +1499,10 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/profiles_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/profiles_controller_spec.rb": {
         "lines": [
           null,
           null,
@@ -1822,7 +1802,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/profiles_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/profiles_controller.rb": {
         "lines": [
           1,
           1,
@@ -1919,7 +1899,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/reviews_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/reviews_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -1988,7 +1968,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/reviews_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/reviews_controller.rb": {
         "lines": [
           1,
           1,
@@ -2020,7 +2000,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/sessions_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/sessions_controller_spec.rb": {
         "lines": [
           null,
           null,
@@ -2103,7 +2083,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/sessions_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           null,
@@ -2160,7 +2140,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/storefronts_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/storefronts_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -2329,7 +2309,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/storefronts_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/storefronts_controller.rb": {
         "lines": [
           1,
           1,
@@ -2409,7 +2389,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/controllers/users_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/users_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -2534,7 +2514,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/users_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/users_controller.rb": {
         "lines": [
           1,
           null,
@@ -2594,7 +2574,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/helpers/products_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/products_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -2613,7 +2593,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/helpers/profiles_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/profiles_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -2632,7 +2612,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/helpers/reviews_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/reviews_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -2651,7 +2631,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/helpers/sessions_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/sessions_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -2670,7 +2650,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/helpers/storefront_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/storefront_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -2689,7 +2669,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/cart_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/cart_spec.rb": {
         "lines": [
           1,
           null,
@@ -2698,7 +2678,51 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/cart.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/cart.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/categorization_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/categorization.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/category_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/category.rb": {
         "lines": [
           1,
           1,
@@ -2708,53 +2732,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/categorization_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/categorization.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/category_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/category.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/product_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/product_spec.rb": {
         "lines": [
           1,
           null,
@@ -2833,14 +2811,13 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/product.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/product.rb": {
         "lines": [
           1,
           1,
           null,
           1,
           null,
-          1,
           1,
           1,
           1,
@@ -2881,57 +2858,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/uploaders/product_photo_uploader.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/profile_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/profile_spec.rb": {
         "lines": [
           1,
           null,
@@ -2947,7 +2874,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/profile.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/profile.rb": {
         "lines": [
           1,
           1,
@@ -2964,7 +2891,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/uploaders/avatar_uploader.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/uploaders/avatar_uploader.rb": {
         "lines": [
           1,
           null,
@@ -3025,7 +2952,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/review_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/review_spec.rb": {
         "lines": [
           1,
           null,
@@ -3049,7 +2976,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/review.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/review.rb": {
         "lines": [
           1,
           1,
@@ -3060,7 +2987,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/storefront_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/storefront_spec.rb": {
         "lines": [
           1,
           null,
@@ -3069,14 +2996,14 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/storefront.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/storefront.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/models/user_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/user_spec.rb": {
         "lines": [
           1,
           null,
@@ -3152,7 +3079,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/user.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -3208,7 +3135,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/checkouts_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/checkouts_spec.rb": {
         "lines": [
           1,
           null,
@@ -3219,89 +3146,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/home_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/products_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/profiles_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/reviews_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/sessions_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/storefronts_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/requests/users_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/home_spec.rb": {
         "lines": [
           1,
           null,
@@ -3315,7 +3160,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/views/products/edit.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/products_spec.rb": {
         "lines": [
           1,
           null,
@@ -3324,7 +3169,57 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/views/products/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/profiles_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/reviews_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/sessions_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/storefronts_spec.rb": {
         "lines": [
           1,
           null,
@@ -3333,7 +3228,21 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/views/products/show.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/users_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/edit.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -3342,7 +3251,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/views/sessions/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/new.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -3351,7 +3260,7 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/spec/views/storefronts/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/show.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -3360,14 +3269,32 @@
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/models/current.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/sessions/new.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/storefronts/new.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/current.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/evan/Documents/School/2023-2024 Fall/Soft Engineering Langs and Tools/Project/selt2023-final-project-team-001/app/controllers/home_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/home_controller.rb": {
         "lines": [
           1,
           1,
@@ -3385,6 +3312,6 @@
         ]
       }
     },
-    "timestamp": 1700882311
+    "timestamp": 1700882286
   }
 }

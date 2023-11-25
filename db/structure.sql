@@ -138,7 +138,6 @@ CREATE TABLE public.products (
     updated_at timestamp(6) without time zone NOT NULL,
     seller_id bigint NOT NULL,
     cart_id bigint,
-    photos json,
     searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED
 );
 
@@ -667,7 +666,6 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20231124050558'),
 ('20231124045627'),
-('20231124002516'),
 ('20231123022551'),
 ('20231120011401'),
 ('20231120011257'),
