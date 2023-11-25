@@ -1,16 +1,18 @@
-<div class="d-flex mb-2 mt-1">
-  <% categories = product.categories %>
-  <% categories.each do |category| %>
-    <%= link_to category.name,
-      products_path(category: category.id),
+<% if product.categories.length > 0 %>
+  <div class="d-flex mb-2 mt-1">
+    <% categories = product.categories %>
+    <% categories.each do |category| %>
+      <%= link_to category.name,
+        products_path(category: category.id),
+        class: "link-secondary link-underline-opacity-25" %>
+      <div class="vr mx-2"></div>
+    <% end %>
+    <%= link_to categories.last.name,
+      products_path(category: categories.last.id),
       class: "link-secondary link-underline-opacity-25" %>
-    <div class="vr mx-2"></div>
-  <% end %>
-  <%= link_to categories.last.name,
-    products_path(category: categories.last.id),
-    class: "link-secondary link-underline-opacity-25" %>
 
-  <%# product.categories.pluck(:name).each do |name| %>
-    <%# <span class="badge bg-light text-body-secondary me-2"><%#= name % ></span> %>
-  <%# end %>
-</div>
+    <%# product.categories.pluck(:name).each do |name| %>
+      <%# <span class="badge bg-light text-body-secondary me-2"><%#= name % ></span> %>
+    <%# end %>
+  </div>
+<% end %>
