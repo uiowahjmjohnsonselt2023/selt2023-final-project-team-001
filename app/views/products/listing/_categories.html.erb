@@ -1,7 +1,7 @@
 <% if product.categories.length > 0 %>
   <div class="d-flex mb-2 mt-1">
     <% categories = product.categories %>
-    <% categories.each do |category| %>
+    <% categories[...-1].each do |category| %>
       <%= link_to category.name,
         products_path(category: category.id),
         class: "link-secondary link-underline-opacity-25" %>
