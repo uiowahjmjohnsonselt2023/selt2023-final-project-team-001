@@ -1,9 +1,20 @@
 class UsersController < ApplicationController
+
   before_action :require_login, only: [:register, :new_seller]
   before_action :require_not_seller, only: [:register, :new_seller]
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def index
+  end
+
+  def show
+    @user = Current.user
+    unless Current.user?(params[:id])
+      flash[:warning] = "Can only show profile of logged-in user"
+    end
   end
 
   def new
@@ -17,7 +28,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     else
       flash[:alert] = "Invalid input(s)!"
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -37,7 +48,7 @@ class UsersController < ApplicationController
   # the requested controller and action under the :require_not_seller scope.
   # See #i18n_t.
   def require_not_seller
-    if Current.user.is_seller || Current.user.is_admin
+    if Current.user.is_seller
       flash[:alert] = i18n_t scope: :require_not_seller
       redirect_to root_path
     end

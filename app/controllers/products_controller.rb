@@ -2,6 +2,18 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
+    @products = Product.only_public.in_stock
+    sort = params[:sort]
+    @products = case sort
+    when "price"
+      @products.order(:price_cents)
+    when "name"
+      @products.order(:name)
+    when "date"
+      @products.order(created_at: :desc)
+    else
+      @products.order(created_at: :desc)
+    end
   end
 
   def show
@@ -18,7 +30,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    unless Current.user.is_seller || Current.user.is_admin
+    unless Current.user.is_seller
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end
@@ -26,7 +38,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    unless Current.user.is_seller || Current.user.is_admin
+    unless Current.user.is_seller
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end

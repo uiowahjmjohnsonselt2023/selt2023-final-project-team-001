@@ -35,9 +35,10 @@
     display: none;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover > .dropdown-menu {
     display: block;
 }
+
 
 .yellow {
     color: var(--bs-yellow);
@@ -52,4 +53,88 @@
 .listing-label {
     @extend .col-3;
     @extend .text-sm-end;
+}
+
+.dropstart:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: auto; /* Reset left */
+    right: 100%; /* Set right to position it */
+    margin-top: -6px;
+    margin-left: -1px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+/* Adjust the arrow's position to the left side */
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    position: absolute; /* Set the arrow as absolute */
+    top: 10px; /* Adjust vertical position as needed */
+    left: -10px; /* Position the arrow to the left side */
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 5px 5px 0; /* Adjust border to create left-pointing arrow */
+    border-left-color: #ccc; /* Set arrow color */
+}
+
+/* Adjust hover arrow color if needed */
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff; /* Set hover arrow color */
+}
+
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.btn-earthy {
+    background-color: #8B4513;
+    border-color: #8B4513;
+    color: #FFF;
+}
+
+.btn-earthy:hover {
+    background-color: #6e3b0e;
+    border-color: #6e3b0e;
+    color: white;
+}
+
+.carousel-indicators li.inactive{
+    background-color: grey;
+}
+
+.carousel-indicators li.active {
+    background-color: black;
+}
+
+
+.carousel-control-prev-icon {
+    background-color: black;
+
+}
+
+.carousel-control-next-icon {
+    background-color: black;
 }
