@@ -12,15 +12,8 @@ class ForgotPasswordController < ApplicationController
       flash[:alert] = "Emails do not match!"
       render :new
     else
-      all_emails = User.pluck(:email)
-      if all_emails.include?(params[:confirm_email])
-        flash[:success] = "Password reset instructions have been sent to your email!"
-        redirect_to login_path
-      else
-        @option_to_signup = true
-        flash[:alert] = "There is no account associated with that email."
-        render :new
-      end
+      flash[:success] = "If an account with that email was found we have sent a link to reset your password!"
+      redirect_to login_path
     end
   end
 end
