@@ -2,9 +2,7 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-    @products = Product.all
     @products = Product.only_public.in_stock
-    @products = @products.search_text(params[:search]) if params[:search].present?
     sort = params[:sort]
     if sort
       # This is needed to clear the sort order imposed
@@ -19,6 +17,35 @@ class ProductsController < ApplicationController
         @products.order(created_at: :desc)
       else
         @products
+      end
+    end
+    cat = params[:category]
+
+    @products = if cat.nil?
+      case sort
+      when "price"
+        Product.where.not(quantity: 0).where(private: false).order(:price_cents)
+      when "name"
+        Product.where.not(quantity: 0).where(private: false).order(:name)
+      when "date"
+        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      else
+        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      end
+    else
+      if Category.where(id: cat).blank?
+        flash[:alert] = "#{cat} isn't a valid category."
+        redirect_to products_path(sort: params[:sort]) and return
+      end
+      case sort
+      when "price"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
+      when "name"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:name)
+      when "date"
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      else
+        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
       end
     end
   end
