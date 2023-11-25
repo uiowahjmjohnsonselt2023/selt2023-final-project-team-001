@@ -7,7 +7,7 @@
         <%= f.password_field :password, label: "Password", placeholder: "Password" %>
         <div class="d-flex justify-content-between mt-3">
           <%= f.check_box :remember_me %>
-          <%= link_to "Forgot password?", "#" %>
+          <%= link_to "Forgot password?", forgot_password_path %>
         </div>
         <div class="d-flex justify-content-center">
           <%= f.submit "Login", extra_class: "btn-lg w-75" %>
