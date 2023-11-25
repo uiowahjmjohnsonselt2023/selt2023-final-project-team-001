@@ -7,6 +7,7 @@
       <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :category => params[:category]}) %> </th>
       <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :category => params[:category] }) %> </th>
       <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :category => params[:category] }) %> </th>
+      <th scope="col"><%= link_to 'Views', request.query_parameters.merge({ :sort => 'name', :category => params[:category] }) %> </th>
     </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
         <td><%= link_to product.name, product_path(product.id) %></td>
         <td><%= number_to_currency product.price %></td>
         <td><%= product.created_at %></td>
+        <td><%= product.views %>
       </tr>
     <% end %>
     </tbody>
