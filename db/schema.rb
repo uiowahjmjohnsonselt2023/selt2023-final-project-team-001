@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_24_002516) do
     t.bigint "seller_id", null: false
     t.bigint "cart_id"
     t.json "photos"
+    t.integer "views", default: 0, null: false
     t.index ["cart_id"], name: "index_products_on_cart_id"
     t.index ["seller_id"], name: "index_products_on_seller_id"
   end
