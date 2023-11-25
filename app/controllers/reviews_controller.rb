@@ -9,6 +9,11 @@ class ReviewsController < ApplicationController
     if Current.user.id == @seller_id.to_i
       flash[:alert] = "You cannot leave a review for yourself."
       redirect_to profile_path(Profile.find_by(user_id: Current.user.id).id)
+    else
+      unless User.find_by(id: @seller_id).is_seller
+        flash[:alert] = "You cannot leave a review for someone who is not a seller."
+        redirect_to profile_path(Profile.find_by(user_id: @seller_id))
+      end
     end
   end
 
