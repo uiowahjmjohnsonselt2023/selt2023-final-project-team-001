@@ -26,8 +26,12 @@ along with some modifications
         <% end %>
       </ul>
       <ul class="navbar-nav">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" action="<%= products_path %>" method="get">
+          <input class="form-control me-2"
+                 type="search"
+                 name="search"
+                 placeholder="Search"
+                 aria-label="Search">
         </form>
         <%= user_button %>
         <%= navbar_link "/checkout", style: "height: 40px;" do %>

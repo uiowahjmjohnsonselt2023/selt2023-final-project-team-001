@@ -10,6 +10,8 @@ gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+# For searching products
+gem "pg_search", "~> 2.3.6"
 
 gem "bcrypt", "~> 3.1.7"
 gem "money-rails", "~> 1.15"
