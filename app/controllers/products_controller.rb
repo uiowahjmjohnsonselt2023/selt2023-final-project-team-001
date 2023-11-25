@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    unless Current.user.is_seller || Current.user.is_admin
+    unless Current.user.is_seller
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    unless Current.user.is_seller || Current.user.is_admin
+    unless Current.user.is_seller
       flash[:alert] = "You must be a seller to create a product."
       redirect_to root_path and return
     end

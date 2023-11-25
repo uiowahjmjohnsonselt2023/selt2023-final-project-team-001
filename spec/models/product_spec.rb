@@ -37,13 +37,28 @@ RSpec.describe Product, type: :model do
       expect(product).not_to be_valid
     end
 
-    it "requires a price greater than 0" do
-      product = build(:product, price: [nil, -1].sample)
+    it "requires a non-nil price" do
+      product = build(:product, price: nil)
       expect(product).not_to be_valid
     end
 
-    it "requires a quantity greater than 0" do
-      product = build(:product, quantity: [nil, -1].sample)
+    it "requires a non-negative price" do
+      product = build(:product, price: -1)
+      expect(product).not_to be_valid
+    end
+
+    it "requires a non-zero price" do
+      product = build(:product, price: 0)
+      expect(product).not_to be_valid
+    end
+
+    it "requires a non-nil quantity" do
+      product = build(:product, quantity: nil)
+      expect(product).not_to be_valid
+    end
+
+    it "requires a non-negative quantity" do
+      product = build(:product, quantity: -1)
       expect(product).not_to be_valid
     end
   end
