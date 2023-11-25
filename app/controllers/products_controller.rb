@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
       end
     else
       if Category.where(id: cat).blank?
-        flash[:warning] = "#{cat} is not a valid category."
+        flash[:alert] = "#{cat} isn't a valid category."
         redirect_to products_path(sort: params[:sort]) and return
       end
       case sort
