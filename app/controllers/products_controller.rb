@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
       end
     end
     cat = params[:category]
+
     @products = if cat.nil?
       case sort
       when "price"
@@ -32,6 +33,10 @@ class ProductsController < ApplicationController
         Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
       end
     else
+      if Category.where(id: cat).blank?
+        flash[:warning] = "#{cat} is not a valid category."
+        redirect_to products_path(sort: params[:sort]) and return
+      end
       case sort
       when "price"
         Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
