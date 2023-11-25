@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:alert] = "Please fix the errors below."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
