@@ -7,9 +7,9 @@ class CartsController < ApplicationController
     if cart
       cart.quantity += params[:quantity].to_i
     else
-      cart = Cart.new(product: product, user: Current.user)
-      # -1 because a new cart is initialized with quantity 1
-      cart.quantity = params[:quantity].to_i - 1
+      cart = Cart.new(
+        product: product, user: Current.user, quantity: params[:quantity].to_i
+      )
     end
     cart.quantity = [cart.quantity, product.quantity].min
     if cart.save
