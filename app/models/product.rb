@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
-  REQUIRED_FIELDS = %i[name description price quantity condition photos].freeze
+  include PgSearch::Model
+
+  REQUIRED_FIELDS = %i[name description price quantity condition].freeze
 
   belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
@@ -28,4 +30,15 @@ class Product < ApplicationRecord
   scope :only_public, -> { where(private: false) }
   scope :only_private, -> { where(private: true) }
   scope :in_stock, -> { where("quantity > 0") }
+
+  pg_search_scope :search_text,
+    against: {name: "A", description: "B"},
+    using: {
+      tsearch: {
+        dictionary: "english",
+        tsvector_column: "searchable",
+        prefix: true,
+        any_word: true
+      }
+    }
 end

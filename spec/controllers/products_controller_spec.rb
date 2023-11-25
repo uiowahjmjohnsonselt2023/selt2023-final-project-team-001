@@ -7,8 +7,13 @@ describe ProductsController, type: :controller do
   let(:product) { create(:product) }
 
   describe "GET #index" do
-    it "displays all products" do
+    it "displays products" do
       get :index
+      expect(response).to render_template :index
+    end
+
+    it "displays products with search" do
+      get :index, params: {search: "test"}
       expect(response).to render_template :index
     end
   end
