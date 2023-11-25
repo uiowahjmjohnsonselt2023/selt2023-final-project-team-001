@@ -4,7 +4,10 @@
     <%= image_tag photo_url, class: "img-fluid rounded border border-secondary-subtle" %>
   </div>
 
-  <h2 class="mb-1"><%= @product.name %></h2>
+  <div class="d-flex align-items-center justify-content-between">
+    <h2 class="mb-1"><%= @product.name %></h2>
+    <%= render "products/listing/seller_dropdown", product: @product %>
+  </div>
   <%= render "products/listing/categories", product: @product %>
   <%= render "products/listing/seller_info", seller: @seller %>
 

@@ -31,14 +31,13 @@
     top: 15% !important;
 }
 
-.dropdown-menu {
+.navbar .dropdown-menu {
     display: none;
 }
 
-.dropdown:hover > .dropdown-menu {
+.navbar .dropdown:hover > .dropdown-menu {
     display: block;
 }
-
 
 .yellow {
     color: var(--bs-yellow);
