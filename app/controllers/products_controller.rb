@@ -2,9 +2,7 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-    @products = Product.all
     @products = Product.only_public.in_stock
-    @products = @products.search_text(params[:search]) if params[:search].present?
     sort = params[:sort]
     if sort
       # This is needed to clear the sort order imposed
