@@ -2,16 +2,17 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
+    @products = Product.only_public.in_stock
     sort = params[:sort]
     @products = case sort
     when "price"
-      Product.where.not(quantity: 0).where(private: false).order(:price_cents)
+      @products.order(:price_cents)
     when "name"
-      Product.where.not(quantity: 0).where(private: false).order(:name)
+      @products.order(:name)
     when "date"
-      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      @products.order(created_at: :desc)
     else
-      Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+      @products.order(created_at: :desc)
     end
   end
 
