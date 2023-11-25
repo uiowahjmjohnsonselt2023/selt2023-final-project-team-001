@@ -7,6 +7,7 @@ FactoryBot.define do
     price { 1 }
     quantity { 1 }
     condition { :new }
+    # photos { [Rack::Test::UploadedFile.new(Rails.root.join("spec/support/images/product.png"), "image/png")] }
 
     factory :product do
       seller

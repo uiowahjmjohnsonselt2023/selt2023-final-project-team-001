@@ -54,8 +54,9 @@ class ProductsController < ApplicationController
     # Raises ActiveRecord::RecordNotFound if not
     # found, which will render the 404 page.
     @product = Product.find params[:id]
+    @seller = @product.seller
     if @product.private
-      unless Current.user == @product.seller || Current.user&.is_admin
+      unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
       end
@@ -68,7 +69,6 @@ class ProductsController < ApplicationController
       redirect_to root_path and return
     end
     @product = Product.new
-    @product.categorizations.build
   end
 
   def create
@@ -82,7 +82,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:alert] = "Please fix the errors below."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -111,7 +111,14 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(
-      :name, :description, :price, :quantity, :condition, :private
+      :name,
+      :description,
+      :price,
+      :quantity,
+      :condition,
+      :private,
+      {photos: []},
+      category_ids: []
     )
   end
 end

@@ -48,7 +48,6 @@ Profile.insert_all(
       instagram: "https://instagram.com/#{username}",
       website: Faker::Internet.url(path: "/#{username}"),
       occupation: Faker::Job.title,
-      seller_rating: Faker::Number.within(range: 1..5),
       public_profile: Faker::Boolean.boolean,
       user_id: user.id
     }
