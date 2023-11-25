@@ -17,8 +17,9 @@
     <%= render "products/listing/quantity_input", product: @product, form: form %>
     <%= render "products/listing/payment", product: @product, form: form %>
   <% end %>
-
-  <h5 class="mb-2 mt-3">Product Description</h5>
-  <p><%= @product.description %></p>
 </div>
 
+<div class="mx-3">
+  <h5 class="mb-2 mt-3">Product Description</h5>
+  <p class="pre-wrap"><%= @product.description %></p>
+</div>
