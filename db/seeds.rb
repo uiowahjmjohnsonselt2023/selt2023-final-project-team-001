@@ -51,8 +51,7 @@ users = [
       instagram: "https://instagram.com/jdoeAuctions",
       website: "https://jdoeAuctions.example",
       occupation: "Auctioneer",
-      seller_rating: 4.5,
-      buyer_rating: 4.5,
+      seller_rating: 0,
       public_profile: true
     }
   }
