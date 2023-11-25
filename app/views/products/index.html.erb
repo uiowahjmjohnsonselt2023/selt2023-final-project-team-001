@@ -5,16 +5,17 @@
   <table class="table">
     <thead>
     <tr>
-      <th scope="col"><%= link_to 'Name', products_path(:sort => 'name'), :id => 'title_header' %> </th>
-      <th scope="col"><%= link_to 'Price', products_path(:sort => 'price'), :id => 'title_header' %> </th>
-      <th scope="col"><%= link_to 'Posted', products_path(:sort => 'date'), :id => 'title_header' %> </th>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name'}) %> </th>
+      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price' }) %> </th>
+      <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date' }) %> </th>
     </tr>
     </thead>
     <tbody>
     <% @products.each do |product| %>
       <tr>
         <td><%= link_to product.name, product_path(product.id) %></td>
-        <td>$<%= (product.price_cents / 100.00).to_s%><%= "0" if (product.price_cents / 100.00).to_s.match?(/^\d+.\d$/) %> </td>
+        <td><%= number_to_currency product.price %></td>
         <td><%= product.created_at %></td>
       </tr>
     <% end %>

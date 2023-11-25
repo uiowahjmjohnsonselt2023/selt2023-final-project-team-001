@@ -6,15 +6,20 @@ class ProductsController < ApplicationController
     @products = Product.only_public.in_stock
     @products = @products.search_text(params[:search]) if params[:search].present?
     sort = params[:sort]
-    @products = case sort
-    when "price"
-      @products.order(:price_cents)
-    when "name"
-      @products.order(:name)
-    when "date"
-      @products.order(created_at: :desc)
-    else
-      @products.order(created_at: :desc)
+    if sort
+      # This is needed to clear the sort order imposed
+      # by search_text (which orders by search rank).
+      @products.order_values = []
+      @products = case sort
+      when "price"
+        @products.order(:price_cents)
+      when "name"
+        @products.order(:name)
+      when "date"
+        @products.order(created_at: :desc)
+      else
+        @products
+      end
     end
   end
 
