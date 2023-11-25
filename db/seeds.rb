@@ -15,8 +15,8 @@ users = [
     email: "admin@admin.com",
     password: "admin000",
     password_confirmation: "admin000",
-    is_seller: false,
-    is_buyer: false,
+    is_seller: true,
+    is_buyer: true,
     is_admin: true,
     profile_attributes: {
       bio: "I go by the hacker alias Neo and am guilty of virtually every" \

@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :products
 
+  resources :storefronts, only: [:show, :new, :create]
+  get "new_storefront_with_template", to: "storefronts#new_storefront_with_template", as: "new_storefront_with_template"
+  get "choose_template", to: "storefronts#choose_template", as: "choose_template"
+
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
   get "/register", to: "users#register", as: "register"
@@ -24,6 +28,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
   get "/logout", to: "sessions#destroy", as: "logout"
+  get "/shop", to: "products#index", as: "shop"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

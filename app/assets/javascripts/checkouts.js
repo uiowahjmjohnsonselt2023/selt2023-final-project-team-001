@@ -31,8 +31,12 @@ $(document).ready(function() {
         const expeditedShipping = document.getElementById("expedited-shipping");
         const regularShipping = document.getElementById("regular-shipping");
 
-        expeditedShipping.addEventListener("change", updateCartPrice);
-        regularShipping.addEventListener("change", updateCartPrice);
+        if (expeditedShipping !== undefined && expeditedShipping !== null){
+            expeditedShipping.addEventListener("change", updateCartPrice);
+        }
+        if (regularShipping !== undefined && regularShipping !== null) {
+            regularShipping.addEventListener("change", updateCartPrice);
+        }
 
     function updateCartPrice() {
         // Get the selected shipping option element

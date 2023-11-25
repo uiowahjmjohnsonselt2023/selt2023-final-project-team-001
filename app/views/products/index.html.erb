@@ -1,24 +1,25 @@
 <h1>Product Page</h1>
 
-<%= bootstrap_form_with model: @user, url: signup_submit_path, method: :post, local: true do |f| %>
-  <%= f.check_box :filter_1, label: 'Filter 1' %>
-  <%= f.check_box :filter_2, label: 'Filter 2' %>
-  <%= f.check_box :filter_3, label: 'Filter 3' %>
-<% end %>
+<div class="container mt-4">
+  <h2>All Items for Sale</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col"><%= link_to 'Name', products_path(:sort => 'name'), :id => 'title_header' %> </th>
+      <th scope="col"><%= link_to 'Price', products_path(:sort => 'price'), :id => 'title_header' %> </th>
+      <th scope="col"><%= link_to 'Posted', products_path(:sort => 'date'), :id => 'title_header' %> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td>$<%= (product.price_cents / 100.00).to_s%><%= "0" if (product.price_cents / 100.00).to_s.match?(/^\d+.\d$/) %> </td>
+        <td><%= product.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
-  <!-- Product Listings -->
-  <div class="products" id="productListings">
-    <!-- Product listings will be dynamically generated here -->
-    <!-- Placeholder content -->
-    <div class="product">
-      <h3>Product 1</h3>
-      <p>Description of Product 1</p>
-      <p>$15.55</p>
-    </div>
-    <div class="product">
-      <h3>Product 2</h3>
-      <p>Description of Product 2</p>
-      <p>$55.51</p>
-    </div>
-    <!-- End of placeholder content -->
-  </div>
+

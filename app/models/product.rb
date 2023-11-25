@@ -23,4 +23,8 @@ class Product < ApplicationRecord
   validates :description, length: {maximum: 1000}
   validates :quantity, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
+
+  scope :only_public, -> { where(private: false) }
+  scope :only_private, -> { where(private: true) }
+  scope :in_stock, -> { where("quantity > 0") }
 end
