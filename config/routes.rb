@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :products
 
-  resources :storefronts, only: [:show, :new, :create]
+  resources :storefronts, only: [:show, :new, :create, :index]
   get "new_storefront_with_template", to: "storefronts#new_storefront_with_template", as: "new_storefront_with_template"
   get "choose_template", to: "storefronts#choose_template", as: "choose_template"
 
@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create", as: "signup_submit"
   get "/register", to: "users#register", as: "register"
   post "/register", to: "users#new_seller", as: "seller"
+
+  post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
 
   get "/checkout", to: "checkouts#index", as: "checkout"
   post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"

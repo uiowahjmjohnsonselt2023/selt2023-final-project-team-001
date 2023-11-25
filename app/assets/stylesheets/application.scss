@@ -31,12 +31,27 @@
     top: 15% !important;
 }
 
-.dropdown-menu {
+.navbar .dropdown-menu {
     display: none;
 }
 
-.dropdown:hover > .dropdown-menu {
+.navbar .dropdown:hover > .dropdown-menu {
     display: block;
+}
+
+.yellow {
+    color: var(--bs-yellow);
+}
+
+.listing-row {
+    @extend .row;
+    @extend .mb-2;
+    @extend .align-items-center;
+}
+
+.listing-label {
+    @extend .col-3;
+    @extend .text-sm-end;
 }
 
 .dropstart:hover > .dropdown-menu {
@@ -121,4 +136,8 @@
 
 .carousel-control-next-icon {
     background-color: black;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
 }

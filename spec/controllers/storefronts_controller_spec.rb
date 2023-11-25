@@ -7,6 +7,37 @@ RSpec.describe StorefrontsController, type: :controller do
     session[:user_id] = user.id
   end
 
+  describe "GET #index" do
+    context "when user is logged in and is a seller" do
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template(:index)
+      end
+
+      it "assigns necessary variables" do
+        get :index
+        expect(assigns(:storefronts)).to eq(Storefront.all)
+      end
+    end
+
+    context "when user is not logged in" do
+      before do
+        session[:user_id] = nil
+      end
+
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template(:index)
+      end
+
+      it "assigns necessary variables" do
+        get :index
+        # I won't use this in the future sorry
+        expect(assigns(:storefronts)).to eq(Storefront.all)
+      end
+    end
+  end
+
   describe "GET #new" do
     context "when user is logged in and is a seller" do
       it "renders the new template" do

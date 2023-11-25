@@ -1,0 +1,9 @@
+<div class="listing-row">
+  <div class="listing-label">Price:</div>
+  <div class="col-6 d-flex">
+    <strong class="fs-4 me-3">
+      <%= number_to_currency product.price %>
+    </strong>
+    <%= form.submit "Add to Cart", class: "btn btn-primary" %>
+  </div>
+</div>
