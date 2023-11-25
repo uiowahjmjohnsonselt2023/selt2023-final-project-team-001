@@ -1,5 +1,5 @@
 <%= navbar_dropdown user.full_name, **options do %>
-  <%= dropdown_link "Profile", user.profile ? profile_path(user) : new_profile_path %>
+  <%= dropdown_link "Profile", user.profile ? profile_path(user.profile) : new_profile_path %>
   <% if user.is_seller %>
     <% if user.storefront.present? %>
       <%= dropdown_link "Your Storefront", storefront_path(user.storefront.id) %>
