@@ -147,6 +147,7 @@ CREATE TABLE public.products (
     price_currency character varying DEFAULT 'USD'::character varying NOT NULL,
     quantity integer DEFAULT 1 NOT NULL,
     condition integer DEFAULT 400 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
     private boolean DEFAULT false NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
