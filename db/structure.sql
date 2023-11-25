@@ -217,6 +217,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: storefronts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.storefronts (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    custom_code text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: storefronts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.storefronts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: storefronts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.storefronts_id_seq OWNED BY public.storefronts.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -291,6 +323,13 @@ ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: storefronts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.storefronts ALTER COLUMN id SET DEFAULT nextval('public.storefronts_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -351,6 +390,14 @@ ALTER TABLE ONLY public.profiles
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: storefronts storefronts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.storefronts
+    ADD CONSTRAINT storefronts_pkey PRIMARY KEY (id);
 
 
 --
@@ -439,6 +486,13 @@ CREATE INDEX index_profiles_on_user_id ON public.profiles USING btree (user_id);
 
 
 --
+-- Name: index_storefronts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_storefronts_on_user_id ON public.storefronts USING btree (user_id);
+
+
+--
 -- Name: index_users_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -466,6 +520,14 @@ ALTER TABLE ONLY public.categorizations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT fk_rails_1d13818f0e FOREIGN KEY (cart_id) REFERENCES public.carts(id);
+
+
+--
+-- Name: storefronts fk_rails_39ff2b2ecf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.storefronts
+    ADD CONSTRAINT fk_rails_39ff2b2ecf FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -529,6 +591,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231120011401'),
 ('20231120011257'),
 ('20231120002253'),
+('20231117052029'),
 ('20231110040315'),
 ('20231109201942'),
 ('20231109191026'),
