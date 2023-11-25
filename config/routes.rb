@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
   get "/logout", to: "sessions#destroy", as: "logout"
+  get "/shop", to: "products#index", as: "shop"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -66,7 +66,7 @@ Product.insert_all(
       seller_id: Faker::Base.sample(seller_ids),
       description: Faker::Lorem.paragraph(sentence_count: 2),
       price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
-      quantity: Faker::Number.within(range: 1..100),
+      quantity: Faker::Number.within(range: 0..100),
       condition: Faker::Base.sample(conditions),
       private: Faker::Boolean.boolean,
       created_at: created_at,

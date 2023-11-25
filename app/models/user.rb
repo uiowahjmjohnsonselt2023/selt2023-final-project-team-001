@@ -9,8 +9,11 @@ class User < ApplicationRecord
   validates :email, presence: true,
     format: {with: VALID_EMAIL_REGEX},
     uniqueness: {case_sensitive: false}
-  validates :password, presence: true, length: {minimum: 8}
-  validates :password_confirmation, presence: true, length: {minimum: 8}
+  # allow_nil allows us to update a user without changing their password. Note that
+  # this doesn't allow us to create a user without a password, since has_secure_password
+  # requires a password on creation. See https://stackoverflow.com/a/45329148
+  validates :password, presence: true, length: {minimum: 8}, allow_nil: true
+  validates :password_confirmation, presence: true, length: {minimum: 8}, on: :create
 
   # Scopes allow us to write things like User.admins to get all admins
   # or User.non_sellers to get all users who aren't sellers.
@@ -26,6 +29,13 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :cart_products, through: :carts, source: :product
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
+
+  # Override the is_admin setter so that all admins are sellers and buyers.
+  def is_admin=(value)
+    super(value)
+    self.is_seller ||= value
+    self.is_buyer ||= value
+  end
 
   def full_name
     "#{first_name} #{last_name}"

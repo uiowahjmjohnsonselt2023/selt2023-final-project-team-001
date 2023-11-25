@@ -26,6 +26,10 @@ class Product < ApplicationRecord
   validates :quantity, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
 
+  scope :only_public, -> { where(private: false) }
+  scope :only_private, -> { where(private: true) }
+  scope :in_stock, -> { where("quantity > 0") }
+
   pg_search_scope :search_text,
     against: {name: "A", description: "B"},
     using: {
