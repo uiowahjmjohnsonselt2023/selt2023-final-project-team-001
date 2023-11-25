@@ -79,6 +79,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_011401) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "storefronts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "custom_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_storefronts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -102,5 +110,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_011401) do
   add_foreign_key "products", "carts"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "storefronts", "users"
   add_foreign_key "users", "carts"
 end

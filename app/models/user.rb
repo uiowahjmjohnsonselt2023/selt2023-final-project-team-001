@@ -29,6 +29,7 @@ class User < ApplicationRecord
   has_many :carts, dependent: :destroy
   has_many :cart_products, through: :carts, source: :product
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
+  has_one :storefront, dependent: :destroy
 
   # Override the is_admin setter so that all admins are sellers and buyers.
   def is_admin=(value)
