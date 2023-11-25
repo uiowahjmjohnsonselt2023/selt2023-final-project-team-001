@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[7.1]
       t.monetize :price, null: false, default: 1
       t.integer :quantity, null: false, default: 1
       t.integer :condition, null: false, default: 400 # enum, default is new
+      t.integer :views, null: false, default: 0
       t.boolean :private, null: false, default: false
       t.timestamps
     end
