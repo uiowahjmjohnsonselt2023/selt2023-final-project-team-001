@@ -179,7 +179,6 @@ CREATE TABLE public.profiles (
     website character varying,
     occupation character varying,
     seller_rating integer,
-    buyer_rating integer,
     public_profile boolean DEFAULT true NOT NULL,
     user_id bigint,
     created_at timestamp(6) without time zone NOT NULL,

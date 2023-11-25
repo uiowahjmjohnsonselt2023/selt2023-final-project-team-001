@@ -18,6 +18,7 @@ along with some modifications
     <div class="collapse navbar-collapse" id="appNavbar">
       <ul class="navbar-nav me-auto">
         <%= navbar_link "Home", root_path %>
+        <%= navbar_link "Storefronts", storefronts_path %>
         <%= navbar_link "Products", products_path %>
         <%= navbar_dropdown "Categories" do %>
           <% Category.all.each do |category| %>

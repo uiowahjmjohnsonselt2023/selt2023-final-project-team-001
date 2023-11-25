@@ -73,6 +73,26 @@ Product.insert_all(
   end
 )
 
+# Give every seller a storefront
+User.sellers.each do |seller|
+  seller.create_storefront(custom_code: Faker::Number.within(range: 1..2))
+end
+
+# Give some sellers reviews
+sellers_to_review = User.sellers.limit(5)
+sellers_to_review.each do |seller|
+  Review.create!({
+    reviewer_id: Faker::Base.sample(User.buyers).id,
+    seller_id: seller.id,
+    has_purchased_from: Faker::Boolean.boolean,
+    interaction_rating: Faker::Number.within(range: 1..5),
+    description: Faker::Lorem.paragraph(sentence_count: 2)
+  })
+  # update the sellers profile to have seller_rating of interaction_rating of the review left, this is usually handled
+  # by the review controller but we are not using that here
+  seller.profile.update(seller_rating: seller.reviews_for_sellers.average(:interaction_rating).to_i)
+end
+
 # Create categorizations for each product
 max_num_categories = [5, category_ids.length].min
 Categorization.insert_all(
@@ -83,6 +103,7 @@ Categorization.insert_all(
     end
   end
 )
+
 # Default seller
 User.create!({first_name: "Seller",
               last_name: "1",
