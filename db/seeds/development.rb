@@ -73,6 +73,11 @@ Product.insert_all(
   end
 )
 
+# Give every seller a storefront
+User.sellers.each do |seller|
+  seller.create_storefront(custom_code: Faker::Number.within(range: 1..2))
+end
+
 # Create categorizations for each product
 max_num_categories = [5, category_ids.length].min
 Categorization.insert_all(
@@ -83,6 +88,7 @@ Categorization.insert_all(
     end
   end
 )
+
 # Default seller
 User.create!({first_name: "Seller",
               last_name: "1",
