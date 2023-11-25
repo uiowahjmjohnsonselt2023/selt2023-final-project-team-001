@@ -1,10 +1,8 @@
 class ForgotPasswordController < ApplicationController
   def new
-    @email = params[:email] if params[:send_link]
-    @confirm_email = params[:confirm_email] if params[:send_link]
   end
 
-  def check_for_email
+  def send_link
     @email = params[:email]
     @confirm_email = params[:confirm_email]
 
@@ -13,15 +11,14 @@ class ForgotPasswordController < ApplicationController
       render :new
     else
       all_emails = User.pluck(:email)
-      unless all_emails.include?(params[:confirm_email])
+      if !all_emails.include?(params[:confirm_email])
+        flash[:success] = "Password reset instructions have been sent to your email!"
+        redirect_to login_path
+      else
         @option_to_signup = true
         flash[:alert] = "There is no account associated with that email."
         redirect_to forgot_password_path
       end
     end
-  end
-
-  def send_link
-    check_for_email
   end
 end
