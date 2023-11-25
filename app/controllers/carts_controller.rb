@@ -3,11 +3,14 @@ class CartsController < ApplicationController
 
   def add_to_cart
     product = Product.find params[:product_id]
-    cart = Cart.find_or_initialize_by(
-      product_id: product.id, user: Current.user
-    )
-    cart.quantity ||= 0
-    cart.quantity += params[:quantity].to_i
+    cart = Cart.find_by(product: product, user: Current.user)
+    if cart
+      cart.quantity += params[:quantity].to_i
+    else
+      cart = Cart.new(product: product, user: Current.user)
+      # -1 because a new cart is initialized with quantity 1
+      cart.quantity = params[:quantity].to_i - 1
+    end
     cart.quantity = [cart.quantity, product.quantity].min
     if cart.save
       flash[:notice] = "Item added to cart."
