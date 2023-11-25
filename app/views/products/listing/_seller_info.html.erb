@@ -1,9 +1,9 @@
 <div class="d-flex mb-3 align-items-center">
   <%= link_to seller.full_name, profile_path(seller.profile), class: "me-1 link-primary" %>
-  <%#= rating_stars @seller.profile.seller_rating %>
+  <%= rating_stars(@seller.profile.seller_rating || 0) %>
   <span class="ms-1">(</span>
-  <%= link_to "#" do %>
-    <small><%#= seller.profile.seller_reviews.count %> reviews</small>
-  <% end %>
+  <%#= link_to "#" do # add once we have an index for reviews %>
+  <small><%= seller.reviews_for_sellers.count %> reviews</small>
+  <%# end %>
   <span>)</span>
 </div>
