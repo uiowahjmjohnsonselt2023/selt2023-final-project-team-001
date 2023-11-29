@@ -48,8 +48,6 @@ Profile.insert_all(
       instagram: "https://instagram.com/#{username}",
       website: Faker::Internet.url(path: "/#{username}"),
       occupation: Faker::Job.title,
-      seller_rating: Faker::Number.within(range: 1..5),
-      buyer_rating: Faker::Number.within(range: 1..5),
       public_profile: Faker::Boolean.boolean,
       user_id: user.id
     }
@@ -75,6 +73,26 @@ Product.insert_all(
   end
 )
 
+# Give every seller a storefront
+User.sellers.each do |seller|
+  seller.create_storefront(custom_code: Faker::Number.within(range: 1..2))
+end
+
+# Give some sellers reviews
+sellers_to_review = User.sellers.limit(5)
+sellers_to_review.each do |seller|
+  Review.create!({
+    reviewer_id: Faker::Base.sample(User.buyers).id,
+    seller_id: seller.id,
+    has_purchased_from: Faker::Boolean.boolean,
+    interaction_rating: Faker::Number.within(range: 1..5),
+    description: Faker::Lorem.paragraph(sentence_count: 2)
+  })
+  # update the sellers profile to have seller_rating of interaction_rating of the review left, this is usually handled
+  # by the review controller but we are not using that here
+  seller.profile.update(seller_rating: seller.reviews_for_sellers.average(:interaction_rating).to_i)
+end
+
 # Create categorizations for each product
 max_num_categories = [5, category_ids.length].min
 Categorization.insert_all(
@@ -86,6 +104,15 @@ Categorization.insert_all(
   end
 )
 
+# Default seller
+User.create!({first_name: "Seller",
+              last_name: "1",
+              email: "seller@1.com",
+              password: "seller1000",
+              password_confirmation: "seller1000",
+              is_seller: true,
+              is_buyer: true,
+              is_admin: false})
 # Create carts
 User.create!({first_name: "Judy",
            last_name: "Rudy",
@@ -95,6 +122,14 @@ User.create!({first_name: "Judy",
            is_seller: false,
            is_buyer: true,
            is_admin: false})
+
+Review.create!({
+  reviewer_id: User.find_by(email: "judy@rudy.com").id,
+  seller_id: User.find_by(email: "seller@1.com").id,
+  has_purchased_from: true,
+  interaction_rating: 5,
+  description: "meh"
+})
 
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})

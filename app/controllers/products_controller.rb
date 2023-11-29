@@ -2,17 +2,31 @@ class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
 
   def index
-    @products = Product.only_public.in_stock
+    @products = Product.joins(:categories).only_public.in_stock
+    @products = @products.search_text(params[:search]) if params[:search]
     sort = params[:sort]
-    @products = case sort
-    when "price"
-      @products.order(:price_cents)
-    when "name"
-      @products.order(:name)
-    when "date"
-      @products.order(created_at: :desc)
-    else
-      @products.order(created_at: :desc)
+    if sort
+      # This is needed to clear the sort order imposed
+      # by search_text (which orders by search rank).
+      @products.order_values = []
+      @products = case sort
+      when "price"
+        @products.order(:price_cents)
+      when "name"
+        @products.order(:name)
+      when "date"
+        @products.order(created_at: :desc)
+      else
+        @products
+      end
+    end
+    cat = params[:category]
+    if cat
+      if Category.where(id: cat).blank?
+        flash[:alert] = "#{cat} isn't a valid category."
+        redirect_to products_path(sort: params[:sort], search: params[:search]) and return
+      end
+      @products = @products.where(categories: cat)
     end
   end
 
@@ -20,8 +34,9 @@ class ProductsController < ApplicationController
     # Raises ActiveRecord::RecordNotFound if not
     # found, which will render the 404 page.
     @product = Product.find params[:id]
+    @seller = @product.seller
     if @product.private
-      unless Current.user == @product.seller || Current.user&.is_admin
+      unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
       end
@@ -34,7 +49,6 @@ class ProductsController < ApplicationController
       redirect_to root_path and return
     end
     @product = Product.new
-    @product.categorizations.build
   end
 
   def create
@@ -48,7 +62,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:alert] = "Please fix the errors below."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -77,7 +91,14 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(
-      :name, :description, :price, :quantity, :condition, :private
+      :name,
+      :description,
+      :price,
+      :quantity,
+      :condition,
+      :private,
+      {photos: []},
+      category_ids: []
     )
   end
 end

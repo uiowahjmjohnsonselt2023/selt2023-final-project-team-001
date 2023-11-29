@@ -1,0 +1,7 @@
+<%# locals: (rating:, max: 5, width: "16px", height: "16px") %>
+
+<div class="d-flex" title="Rating: <%= rating %>">
+  <% star_names(rating, max).each do |name| %>
+    <%= icon name, class: "yellow", width:, height: %>
+  <% end %>
+</div>

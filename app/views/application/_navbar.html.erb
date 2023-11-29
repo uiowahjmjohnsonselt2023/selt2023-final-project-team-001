@@ -18,16 +18,21 @@ along with some modifications
     <div class="collapse navbar-collapse" id="appNavbar">
       <ul class="navbar-nav me-auto">
         <%= navbar_link "Home", root_path %>
+        <%= navbar_link "Storefronts", storefronts_path %>
         <%= navbar_link "Products", products_path %>
         <%= navbar_dropdown "Categories" do %>
           <% Category.all.each do |category| %>
-            <%= dropdown_link category.name, "#" %>
+            <%= dropdown_link category.name, products_path(sort: params[:sort], category: category.id) %>
           <% end %>
         <% end %>
       </ul>
       <ul class="navbar-nav">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" action="<%= products_path %>" method="get">
+          <input class="form-control me-2"
+                 type="search"
+                 name="search"
+                 placeholder="Search"
+                 aria-label="Search">
         </form>
         <%= user_button %>
         <%= navbar_link "/checkout", style: "height: 40px;" do %>

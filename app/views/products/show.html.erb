@@ -1,9 +1,28 @@
-<h1>Product</h1>
-<p>Name: <%= @product.name %></p>
-<p>Description: <%= @product.description %></p>
-<p>Price: <%= @product.price %></p>
-<p>Quantity: <%= @product.quantity %></p>
-<p>Categories: <%= @product.categories.pluck(:name).join("; ") %></p>
-<p>Condition: <%= @product.condition %></p>
-<p>Created: <%= @product.created_at %></p>
-<p>Seller: <%= @product.seller.first_name %></p>
+<div class="clearfix mx-3">
+  <div class="col-md-5 col-lg-4 float-md-start mb-3 me-md-3 me-lg-4 mt-2">
+    <% photo_url = @product.photos.first&.main&.url || "fallbacks/products/main_default.png" %>
+    <%= image_tag photo_url, class: "img-fluid rounded border border-secondary-subtle" %>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between">
+    <h2 class="mb-1"><%= @product.name %></h2>
+    <%= render "products/listing/seller_dropdown", product: @product %>
+  </div>
+  <%= render "products/listing/categories", product: @product %>
+  <%= render "products/listing/seller_info", seller: @seller %>
+
+  <hr />
+
+  <%= render "products/listing/condition", product: @product %>
+  <%# We don't use bootstrap_form_with because we want to use custom styles %>
+  <%= form_with url: add_to_cart_path do |form| %>
+    <%= form.hidden_field :product_id, value: @product.id %>
+    <%= render "products/listing/quantity_input", product: @product, form: form %>
+    <%= render "products/listing/payment", product: @product, form: form %>
+  <% end %>
+</div>
+
+<div class="mx-3">
+  <h5 class="mb-2 mt-3">Product Description</h5>
+  <p class="pre-wrap"><%= @product.description %></p>
+</div>
