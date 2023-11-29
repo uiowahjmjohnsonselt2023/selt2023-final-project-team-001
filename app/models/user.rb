@@ -43,6 +43,8 @@ class User < ApplicationRecord
   has_many :reviews_user_has_given, class_name: "Review", foreign_key: :reviewer_id, dependent: :destroy
   has_many :reviews_for_sellers, class_name: "Review", foreign_key: :seller_id, dependent: :destroy
   has_many :cart_products, through: :carts, source: :product
+  has_many :viewed_products
+  has_many :viewed, through: :viewed_products, source: :product
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
   has_one :storefront, dependent: :destroy
   accepts_nested_attributes_for :storefront

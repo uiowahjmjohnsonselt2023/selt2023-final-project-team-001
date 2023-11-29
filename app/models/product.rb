@@ -8,6 +8,8 @@ class Product < ApplicationRecord
   has_many :categories, through: :categorizations
   has_many :carts
   has_many :users, through: :carts
+  has_many :viewed_products
+  has_many :viewed_by_users, through: :viewed_products, source: :user
   mount_uploaders :photos, ProductPhotoUploader
 
   # Left 100 between each value to allow for future additions.
