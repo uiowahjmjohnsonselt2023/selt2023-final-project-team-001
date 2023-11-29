@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   post "/pay", to: "checkouts#update_product_inventory", as: "update_product_inventory"
   get "/forgot_password", to: "forgot_password#new", as: "forgot_password"
   post "/forgot_password_send_link", to: "forgot_password#send_link", as: "forgot_password_submit"
+  get "/forgot_password_reset_password", to: "forgot_password#edit", as: "forgot_password_reset"
+  post "/forgot_password_reset_password_submit", to: "forgot_password#update", as: "forgot_password_reset_submit"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
