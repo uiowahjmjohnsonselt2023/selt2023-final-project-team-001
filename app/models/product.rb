@@ -28,7 +28,6 @@ class Product < ApplicationRecord
   validates :name, length: {maximum: 100}
   validates :description, length: {maximum: 1000}
   validates :quantity, numericality: {greater_than_or_equal_to: 0}
-  validates :views, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
 
   scope :only_public, -> { where(private: false) }
