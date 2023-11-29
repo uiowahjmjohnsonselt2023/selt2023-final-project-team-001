@@ -12,13 +12,13 @@ class ProductsController < ApplicationController
       @products.order_values = []
       @products = case sort
       when "price"
-        @products.order(:price_cents)
+        @products.order(price_cents: params[:order].to_sym)
       when "name"
-        @products.order(:name)
+        @products.order(name: params[:order].to_sym)
       when "date"
-        @products.order(created_at: :desc)
+        @products.order(created_at: params[:order].to_sym)
       when "views"
-        @products.order(views: :desc)
+        @products.order(views: params[:order].to_sym)
       else
         @products
       end
@@ -28,15 +28,15 @@ class ProductsController < ApplicationController
     @products = if cat.nil?
       case sort
       when "price"
-        Product.where.not(quantity: 0).where(private: false).order(:price_cents)
+        Product.where.not(quantity: 0).where(private: false).order(price_cents: params[:order].to_sym)
       when "name"
-        Product.where.not(quantity: 0).where(private: false).order(:name)
+        Product.where.not(quantity: 0).where(private: false).order(name: params[:order].to_sym)
       when "date"
-        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+        Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
       when "views"
-        Product.where.not(quantity: 0).where(private: false).order(views: :asc)
+        Product.where.not(quantity: 0).where(private: false).order(views: params[:order].to_sym)
       else
-        Product.where.not(quantity: 0).where(private: false).order(created_at: :desc)
+        Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
       end
     else
       if Category.where(id: cat).blank?
