@@ -147,14 +147,14 @@ CREATE TABLE public.products (
     price_currency character varying DEFAULT 'USD'::character varying NOT NULL,
     quantity integer DEFAULT 1 NOT NULL,
     condition integer DEFAULT 400 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     private boolean DEFAULT false NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     seller_id bigint NOT NULL,
     cart_id bigint,
     photos json,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED,
+    views integer DEFAULT 0 NOT NULL
 );
 
 
@@ -697,6 +697,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231130152310'),
 ('20231130152251'),
 ('20231129233947'),
+('20231129145552'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),
