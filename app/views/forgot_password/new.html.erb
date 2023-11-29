@@ -11,8 +11,6 @@
           <%= f.email_field :confirm_email, label: "Confirm Email", placeholder: "Email", value: (@confirm_email.present? ? @confirm_email : '') %>
           <div class="d-flex justify-content-between mt-3">
             <%= link_to "Back to Login", login_path %>
-            <%= link_to "Create an Account", signup_path %>
-
           </div>
           <div class="d-flex justify-content-center mt-4">
             <%= f.submit "Send Link", name: "send_link", extra_class: "btn-lg w-75" %>
