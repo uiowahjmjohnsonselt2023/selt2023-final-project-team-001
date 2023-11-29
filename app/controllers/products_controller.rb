@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     @products = Product.includes(:categories).only_public.in_stock
     @products = @products.search_text(params[:search]) if params[:search]
     sort = params[:sort]
+    unless %w[asc desc].include?(params[:order].to_s)
+      flash[:alert] = "#{params[:order]} isn't a valid sorting order."
+      redirect_to products_path(sort: params[:sort], order: "desc") and return
+    end
     if sort
       # This is needed to clear the sort order imposed
       # by search_text (which orders by search rank).
@@ -24,7 +28,6 @@ class ProductsController < ApplicationController
       end
     end
     cat = params[:category]
-
     @products = if cat.nil?
       case sort
       when "price"
