@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post "/pay", to: "checkouts#update_product_inventory", as: "update_product_inventory"
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
+  get "/auth/:provider/callback", to: "sessions#omniauth"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member

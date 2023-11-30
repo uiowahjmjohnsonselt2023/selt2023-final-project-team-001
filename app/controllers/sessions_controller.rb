@@ -50,4 +50,24 @@ class SessionsController < ApplicationController
       flash[:notice] = "Registration could not be completed"
     end
   end
+
+  def omniauth
+    info = request.env["omniauth.auth"]
+    puts info
+    user = User.find_or_create_by!(uid: info[:uid], provider: info[:provider]) do |u|
+      u.first_name = info[:info][:first_name]
+      u.last_name = info[:info][:last_name]
+      u.email = info[:info][:email]
+      p = SecureRandom.hex(15)
+      u.password = p
+      u.password_confirmation = p
+    end
+    if user.valid?
+      session[:user_id] = user.id
+      redirect_to root_path, notice: "Successfully signed in through Google!"
+    else
+      flash[:alert] = "error"
+      redirect_to login_path
+    end
+  end
 end
