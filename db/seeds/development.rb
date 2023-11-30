@@ -163,7 +163,6 @@ number_of_products.times do
     quantity: Faker::Number.within(range: 1..100),
     condition: Faker::Base.sample(conditions),
     private: Faker::Boolean.boolean,
-    views: Faker::Number.within(range: 0..1000_00), # will stick with max 100,000 views for now
     created_at: Faker::Time.backward,
     updated_at: Faker::Time.between(from: Faker::Time.backward, to: Time.now)
   )

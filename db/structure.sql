@@ -153,8 +153,7 @@ CREATE TABLE public.products (
     seller_id bigint NOT NULL,
     cart_id bigint,
     photos json,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED,
-    views integer DEFAULT 0 NOT NULL
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED
 );
 
 
@@ -775,7 +774,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231130152251'),
 ('20231129233947'),
 ('20231129232534'),
-('20231129145552'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),
