@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
       when "date"
         Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
       when "views"
-        Product.where.not(quantity: 0).where(private: false).order(views: params[:order].to_sym)
+        Product.where.not(quantity: 0).where(private: false).order(name: params[:order].to_sym)
       else
         Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
       end
