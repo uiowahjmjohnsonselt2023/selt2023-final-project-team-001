@@ -6,8 +6,8 @@
         <div class="col-md-4 mb-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><%= link_to storefront.user.full_name + "'s Storefront", storefront_path(storefront.id) %></h5>
-              <p class="card-text">Storefront Description: to be implemented</p>
+              <h5 class="card-title"><%= link_to storefront.name, storefront_path(storefront.id) %></h5>
+              <p class="card-text"><%= storefront.short_description %></p>
               <% if storefront.user.profile.seller_rating.present? && storefront.user.profile.seller_rating > 0 %>
                 <p class="card-text"><%= "#{storefront.user.full_name}'s avg. rating: #{storefront.user.profile.seller_rating}" %></p>
               <% else %>
