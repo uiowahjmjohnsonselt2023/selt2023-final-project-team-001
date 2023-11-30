@@ -4,6 +4,7 @@ class StorefrontsController < ApplicationController
 
   def index
     @storefronts = Storefront.all
+    @storefronts = @storefronts.search_text(params[:search]) if params[:search]
   end
 
   def new
