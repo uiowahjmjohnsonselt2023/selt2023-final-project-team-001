@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   # skip_before_filter :require_login
   def new
     # automatically renders the sign-in form
+    @email = params[:email]
     if session[:user_id].present?
       flash[:alert] = "You are already signed in!"
       redirect_to root_path
@@ -11,9 +12,9 @@ class SessionsController < ApplicationController
 
   def create
     # Handle sign-in and authentication logic
-    email = params[:email]
+    @email = params[:email]
     password = params[:password]
-    user = User.find_by(email: email)
+    user = User.find_by(email: @email)
 
     if user&.authenticate(password)
       session[:user_id] = user.id
@@ -54,13 +55,20 @@ class SessionsController < ApplicationController
   def omniauth
     info = request.env["omniauth.auth"]
     puts info
-    user = User.find_or_create_by!(uid: info[:uid], provider: info[:provider]) do |u|
-      u.first_name = info[:info][:first_name]
-      u.last_name = info[:info][:last_name]
-      u.email = info[:info][:email]
-      p = SecureRandom.hex(15)
-      u.password = p
-      u.password_confirmation = p
+    begin
+      user = User.find_or_create_by!(uid: info[:uid], provider: info[:provider]) do |u|
+        u.first_name = info[:info][:first_name]
+        u.last_name = info[:info][:last_name]
+        u.email = info[:info][:email]
+        p = SecureRandom.hex(15)
+        u.password = p
+        u.password_confirmation = p
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      if e.record.errors[:email].include?("has already been taken")
+        flash[:alert] = "You may already have an account with us. Try logging in with your email and password or request a password reset! "
+        redirect_to login_path
+      end
     end
     if user.valid?
       session[:user_id] = user.id
