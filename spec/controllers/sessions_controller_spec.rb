@@ -76,4 +76,43 @@ describe SessionsController, type: :controller do
       expect(response).to render_template("new")
     end
   end
+
+  describe "GET #omniauth" do
+    let(:provider) { "google_oauth2" }
+    let(:uid) { "123456789" }
+    let(:email) { "omni@auth.com" }
+    let(:first_name) { "John" }
+    let(:last_name) { "Doe" }
+
+    before do
+      request.env["omniauth.auth"] = OmniAuth::AuthHash.new(
+        provider: provider,
+        uid: uid,
+        info: {
+          email: email,
+          first_name: first_name,
+          last_name: last_name
+        }
+      )
+    end
+
+    it "creates a new user with valid omniauth data" do
+      expect do
+        get :omniauth, params: {provider: provider}
+      end.to change(User, :count).by(1)
+
+      expect(response).to redirect_to(root_path)
+      expect(session[:user_id]).to be_present
+      expect(flash[:success]).to eq("Successfully signed in through Google!")
+    end
+
+    it "redirects to login_path if the user already exists" do
+      User.create!(uid: nil, provider: nil, email: email, first_name: first_name, last_name: last_name, password: "password!P", password_confirmation: "password!P")
+
+      get :omniauth, params: {provider: provider}
+
+      expect(response).to redirect_to(login_path)
+      expect(flash[:alert]).to include("already have an account with us")
+    end
+  end
 end
