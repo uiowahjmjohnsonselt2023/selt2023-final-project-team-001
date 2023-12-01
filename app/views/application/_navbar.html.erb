@@ -27,13 +27,7 @@ along with some modifications
         <% end %>
       </ul>
       <ul class="navbar-nav">
-        <form class="d-flex" role="search" action="<%= products_path %>" method="get">
-          <input class="form-control me-2"
-                 type="search"
-                 name="search"
-                 placeholder="Search"
-                 aria-label="Search">
-        </form>
+        <%= render "application/navbar/search_bar" %>
         <%= user_button %>
         <%= navbar_link "/checkout", style: "height: 40px;" do %>
           <div class="position-relative">
