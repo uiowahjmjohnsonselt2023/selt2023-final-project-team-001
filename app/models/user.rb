@@ -23,6 +23,9 @@ class User < ApplicationRecord
     unless /[!@#$%^&*(),.?":{}|<>]/.match?(password)
       errors.add(:password, "must contain at least one special character")
     end
+    unless /[0-9]/.match?(password)
+      errors.add(:password, "must contain at least one number")
+    end
   end
 
   # Scopes allow us to write things like User.admins to get all admins
