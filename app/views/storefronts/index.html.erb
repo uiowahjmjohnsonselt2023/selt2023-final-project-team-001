@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h1 class="mb-4">Storefronts</h1>
+  <h2 class="mb-4"><%= storefronts_index_header %></h2>
   <div class="row">
     <% if @storefronts.present? %>
       <% @storefronts.each do |storefront| %>
@@ -19,7 +19,7 @@
         <% end %>
     <% else %>
       <div class="col-md-12">
-        <p>There are no storefronts to display.</p>
+        <p><%= no_products_message %></p>
       </div>
     <% end %>
   </div>
