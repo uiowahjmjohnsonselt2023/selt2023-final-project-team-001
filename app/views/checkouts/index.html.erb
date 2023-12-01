@@ -1,8 +1,6 @@
-<head>
-  <title></title>
-  <%= javascript_include_tag 'checkouts', 'data-turbo-track': 'reload' %>
-  <%= javascript_importmap_tags %>
-</head>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "checkouts" %>
+<% end %>
 
 <div class="row">
       <div class="col-md-7">
@@ -38,10 +36,16 @@
               <% cart_price += total_price %>
               <td>$<%= total_price %></td>
               <td>
-                <%= form_tag remove_item_path, method: :delete, class: "delete-item" do %>
-                  <%= hidden_field_tag :product_id %>
-                  <%= submit_tag "Delete", class: "btn btn-danger" %>
-                <% end %>
+                <%#= form_tag remove_item_path, method: :delete, class: "delete-item" do %>
+                  <%#= hidden_field_tag :product_id %>
+                <button class="btn btn-danger delete-item"
+                        type="button"
+                        data-product-id="<%= product[:id] %>"
+                        data-bs-toggle="modal"
+                        data-bs-target="#confirmationModal">
+                  Delete
+                </button>
+                <%# end %>
               </td>
             </tr>
           <% end %>
@@ -106,8 +110,14 @@
           Are you sure you want to remove <span id="productNamePlaceholder"></span> from your cart?
         </div>
         <div class="modal-footer">
-          <%= link_to "Cancel", checkout_path, method: :get, class: "btn btn-secondary"%>
-          <%= link_to "Delete", remove_item_path, method: :delete, class: "btn btn-danger", id: "confirmDeleteLink"%>
+          <%#= link_to "Delete", remove_item_path, method: :delete, class: "btn btn-danger", id: "confirmDeleteLink"%>
+          <%#= link_to "Cancel", checkout_path, method: :get, class: "btn btn-secondary"%>
+          <%= bootstrap_form_with url: remove_item_path, method: :delete, id: "confirmDeleteForm" do |f| %>
+            <%= f.hidden_field :product_id, id: "productIdPlaceholder" %>
+            <%= f.hidden_field :confirmation, value: "yes" %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            <%= f.submit "Delete", class: "btn btn-danger" %>
+          <% end %>
         </div>
       </div>
     </div>
