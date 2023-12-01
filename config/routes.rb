@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   post "/update_quantity", to: "checkouts#update_quantity", as: "update_quantity"
   delete "/remove_item", to: "checkouts#remove_from_cart", as: "remove_item"
   post "/pay", to: "checkouts#update_product_inventory", as: "update_product_inventory"
+  get "/forgot_password", to: "forgot_password#new", as: "forgot_password"
+  post "/forgot_password_send_link", to: "forgot_password#send_link", as: "forgot_password_submit"
+  get "/forgot_password_reset_password", to: "forgot_password#edit", as: "forgot_password_reset"
+  post "/forgot_password_reset_password_submit", to: "forgot_password#update", as: "forgot_password_reset_submit"
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
 
