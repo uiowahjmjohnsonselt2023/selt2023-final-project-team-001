@@ -8,8 +8,8 @@ describe SessionsController, type: :controller do
       first_name: "test",
       last_name: "test",
       email: "admin@admin.com",
-      password: "admin000",
-      password_confirmation: "admin000")
+      password: "admin000!P",
+      password_confirmation: "admin000!P")
   }
 
   describe "POST #create" do

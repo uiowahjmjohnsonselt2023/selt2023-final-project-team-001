@@ -6,8 +6,8 @@ RSpec.describe UsersController, type: :controller do
       first_name: "John",
       last_name: "Doe",
       email: "john.doe@example.com",
-      password: "password123",
-      password_confirmation: "password123"
+      password: "password123!P",
+      password_confirmation: "password123!P"
     }
   end
 
