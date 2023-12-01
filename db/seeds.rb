@@ -35,7 +35,7 @@ users = [
       short_description: "I sell red and blue pills. The red pills are" \
         " delicious cinnamon candy, and the blue pills are scrumptious blue" \
         " raspberry candy. They're not drugs, I promise!",
-      custom_code: 1
+      custom_code: 2
     }
   },
   {
@@ -65,7 +65,7 @@ users = [
       name: "jdoe Auctions",
       short_description: "I sell pretty much anything, so feel free to shoot" \
         " me a message :)",
-      custom_code: 1
+      custom_code: 2
     }
   }
 ]
