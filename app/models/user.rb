@@ -20,7 +20,7 @@ class User < ApplicationRecord
     unless /[A-Z]/.match?(password)
       errors.add(:password, "must contain at least one capital letter")
     end
-    unless /[!$?]/.match?(password)
+    unless /[!@#$%^&*(),.?":{}|<>]/.match?(password)
       errors.add(:password, "must contain at least one special character")
     end
   end
