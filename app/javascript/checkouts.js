@@ -1,25 +1,13 @@
+import "jquery";
+
 // confirmation of item deletion from cart
 $(document).ready(function() {
-
     $('.delete-item').click(function(event) {
         let productData = $(this).closest('tr').data('product');
         let productName = productData.name;
         $('#productNamePlaceholder').text(productName);
-        event.preventDefault(); // Prevent the default form submission
-        let deleteItemId = productData.id;
-
-        const form = $('.delete-item');
-        const originalAction = form.attr('action');
-        const actionWithConfirmation = `${originalAction}?confirmation=yes&product_id=${deleteItemId}`;
-        form.attr('action', actionWithConfirmation);
-
-        $('#confirmationModal').modal('show');
-    });
-
-    // Handle the "Delete" link click in the modal
-    $('#confirmDeleteLink').click(function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        $('.delete-item').submit();
+        let productId = productData.id;
+        $('#productIdPlaceholder').val(productId);
     });
 });
 
