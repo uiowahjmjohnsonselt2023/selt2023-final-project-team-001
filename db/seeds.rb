@@ -28,7 +28,14 @@ users = [
       twitter: "https://x.com/neo",
       website: "https://neo.com",
       occupation: "Programmer",
-      public_profile: false
+      public_profile: true
+    },
+    storefront_attributes: {
+      name: "Neo's (Candy) Pills",
+      short_description: "I sell red and blue pills. The red pills are" \
+        " delicious cinnamon candy, and the blue pills are scrumptious blue" \
+        " raspberry candy. They're not drugs, I promise!",
+      custom_code: 1
     }
   },
   {
@@ -53,6 +60,12 @@ users = [
       occupation: "Auctioneer",
       seller_rating: 0,
       public_profile: true
+    },
+    storefront_attributes: {
+      name: "jdoe Auctions",
+      short_description: "I sell pretty much anything, so feel free to shoot" \
+        " me a message :)",
+      custom_code: 1
     }
   }
 ]
