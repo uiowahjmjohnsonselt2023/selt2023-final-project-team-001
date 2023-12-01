@@ -1,7 +1,9 @@
 import "jquery";
 
 // confirmation of item deletion from cart
-$(document).ready(function() {
+// turbo:load instead of ready to work when navigating back to the page (e.g., using
+// the back or forward buttons in the browser)
+$(document).on('turbo:load', function() {
     $('.delete-item').click(function(event) {
         let productData = $(this).closest('tr').data('product');
         let productName = productData.name;
@@ -15,7 +17,7 @@ $(document).ready(function() {
 
 
 // dynamically changes cart price based on chosen shipping cost
-$(document).ready(function() {
+$(document).on('turbo:load', function() {
         const expeditedShipping = document.getElementById("expedited-shipping");
         const regularShipping = document.getElementById("regular-shipping");
 
