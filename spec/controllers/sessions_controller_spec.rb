@@ -107,7 +107,7 @@ describe SessionsController, type: :controller do
     end
 
     it "redirects to login_path if the user already exists" do
-      User.create!(uid: nil, provider: nil, email: email, first_name: first_name, last_name: last_name, password: "password!P", password_confirmation: "password!P")
+      User.create!(uid: nil, provider: nil, email: email, first_name: first_name, last_name: last_name, password: "password1!P", password_confirmation: "password1!P")
 
       get :omniauth, params: {provider: provider}
 
