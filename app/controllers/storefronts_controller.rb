@@ -10,7 +10,7 @@ class StorefrontsController < ApplicationController
   def new
     if Current.user.storefront
       flash[:alert] = t("storefronts.create.already_exists")
-      redirect_to root_path
+      redirect_to storefront_path(Current.user.storefront)
     else
       @storefront = Storefront.new({user: Current.user})
     end
@@ -19,7 +19,7 @@ class StorefrontsController < ApplicationController
   def create
     if Current.user.storefront
       flash[:alert] = t("storefronts.create.already_exists")
-      redirect_to root_path
+      redirect_to storefront_path(Current.user.storefront)
     else
       @storefront = Current.user.create_storefront storefront_params
       if @storefront.save
@@ -93,9 +93,6 @@ class StorefrontsController < ApplicationController
   end
 
   def preview
-    unless Current.user.is_seller
-      render "errors/not_found", status: :not_found
-    end
     @custom_code = params[:custom_code] || ""
   end
 
