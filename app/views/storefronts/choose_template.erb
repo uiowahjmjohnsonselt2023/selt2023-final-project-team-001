@@ -46,7 +46,11 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-12 text-center">
-      <%= link_to "Choose this for my storefront", "#", id: "chooseTemplateBtn", class: "btn btn-primary" %>
+      <%#= link_to "Choose this for my storefront", "#", id: "chooseTemplateBtn", class: "btn btn-primary" %>
+      <%= bootstrap_form_with model: @storefront, method: :patch do |f| %>
+        <%= f.hidden_field :custom_code, value: "1" %>
+        <%= f.submit "Choose this for my storefront", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let chooseTemplateBtn = document.getElementById('chooseTemplateBtn');
+    let storefront_custom_code = document.getElementById('storefront_custom_code');
     let carousel = document.getElementById('templateCarousel');
-    chooseTemplateBtn.href = "<%= url_for(controller: 'storefronts', action: 'choose_template') %>?template_number=1";
 
     carousel.addEventListener('slide.bs.carousel', function (event) {
-        let activeIndex = event.to + 1;
-        chooseTemplateBtn.removeAttribute('href');
-        chooseTemplateBtn.href = "<%= url_for(controller: 'storefronts', action: 'choose_template') %>?template_number=" + activeIndex;
+        storefront_custom_code.value = event.to + 1;
     });
 });
