@@ -1,4 +1,8 @@
 <div class="d-flex mb-3 align-items-center">
+  <% if show_storefront && seller.storefront %>
+    <%= link_to seller.storefront.name, seller.storefront %>
+    <div class="vr mx-2"></div>
+  <% end %>
   <% if seller.profile %>
     <%= link_to seller.full_name, profile_path(seller.profile), class: "me-1 link-primary" %>
     <%= rating_stars(seller.profile.seller_rating || 0) %>
