@@ -70,6 +70,13 @@ class StorefrontsController < ApplicationController
     end
   end
 
+  def preview
+    unless Current.user.is_seller
+      render "errors/not_found", status: :not_found
+    end
+    @custom_code = params[:custom_code] || ""
+  end
+
   private
 
   def require_seller
