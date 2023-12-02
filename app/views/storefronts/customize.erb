@@ -11,7 +11,7 @@
     preview.html.erb file has a turbo_frame_tag with the same id so that Turbo knows
     what content from the response to add to the page. %>
 <!-- Allow sellers to input custom code -->
-<%= bootstrap_form_with model: @storefront, class: "mb-3" do |f| %>
+<%= bootstrap_form_with model: @storefront, method: :patch, class: "mb-3" do |f| %>
   <%= f.text_area :custom_code, value: (@previewed_code.present? ? @previewed_code : ''), rows: 10, cols: 50 %>
   <%= f.submit 'Preview Custom Code',
     formmethod: :get,
