@@ -73,9 +73,10 @@ Product.insert_all(
   end
 )
 
-# Give every seller a storefront
+# Give half of the sellers a storefront
+half_seller_ids = Faker::Base.sample(seller_ids, seller_ids.length / 2)
 Storefront.insert_all(
-  seller_ids.map do |seller_id|
+  half_seller_ids.map do |seller_id|
     {
       name: Faker::Company.name,
       short_description: Faker::Company.catch_phrase,
