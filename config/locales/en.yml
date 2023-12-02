@@ -45,7 +45,9 @@ en:
       register: "You need to sign in before you can register as a seller!"
       new_seller: "You need to sign in before you can register as a seller!"
     storefronts:
-      default: "You need to login before you can create a storefront!"
+      default: "You need to login before you can %{action} a storefront!"
+      new: "You need to login before you can create a storefront!"
+      choose_template: "You need to login before you can choose a storefront template!"
   require_not_seller:
     default: "You cannot be a seller to access that page."
     users:
@@ -54,7 +56,9 @@ en:
   require_seller:
     default: "You must be a seller to access that page."
     storefronts:
-      default: "You must be a seller to create a storefront"
+      default: "You must be a seller to %{action} a storefront!"
+      new: "You must be a seller to create a storefront!"
+      choose_template: "You must be a seller to choose a storefront template!"
   storefronts:
     create:
       success: "Storefront successfully created!"
