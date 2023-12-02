@@ -1,1 +1,38 @@
-<%= render "custom_code_output", code: @custom_code %>
+<% if @custom_code.present? %>
+  <%= render "custom_code_output", code: @custom_code %>
+<% else %>
+  <%# Display a default storefront %>
+
+  <%# If the current user is the seller, provide info
+      on how to customize their storefront %>
+  <% if Current.user == @user %>
+    <div class="alert alert-info d-flex align-items-center">
+      <%= icon "info", aria_label: "Note:", class: "flex-shrink-0 me-3" %>
+      <div class="me-lg-5">
+        <p class="mb-0 me-xl-5">
+          You haven't set the look of your storefront yet.
+          To update the look of your storefront,
+          <%= link_to "choose a template", choose_template_storefront_path %>.
+          (If you're feeling adventurous, you can also
+          <%= link_to "write your own HTML", customize_storefront_path %>.)
+          Until you do so, other users will see this:
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+  <h2><%= @storefront.name %></h2>
+  <p><%= @storefront.short_description %></p>
+
+  <% if @products.any? %>
+    <h3>Products</h3>
+    <% @products.each do |product| %>
+      <div class="product">
+        <%= link_to product.name, product, class: "fs-5" %>
+        <p class="mb-0"><%= product.description %></p>
+        <p>$<%= product.price %></p>
+      </div>
+    <% end %>
+  <% end %>
+
+<% end %>
