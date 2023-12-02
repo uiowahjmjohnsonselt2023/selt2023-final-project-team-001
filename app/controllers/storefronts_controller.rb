@@ -93,7 +93,7 @@ class StorefrontsController < ApplicationController
   end
 
   def preview
-    @custom_code = params[:custom_code] || ""
+    @custom_code = storefront_params[:custom_code] || ""
   end
 
   private
