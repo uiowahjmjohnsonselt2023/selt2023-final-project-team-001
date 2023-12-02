@@ -1,2 +1,11 @@
 <h1>Edit Storefront</h1>
 <%= render "form" %>
+<%# Instruct user how to edit the look of their storefront by
+    linking to the choose_template_storefront_path and the
+    customize_storefront_path (for advanced users) %>
+<p class="mt-3">
+  To update the look of your storefront,
+  <%= link_to "choose a template", choose_template_storefront_path %>.
+  (If you're feeling adventurous, you can also
+  <%= link_to "write your own HTML", customize_storefront_path %>.)
+</p>
