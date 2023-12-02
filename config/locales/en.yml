@@ -56,8 +56,13 @@ en:
     storefronts:
       default: "You must be a seller to create a storefront"
   storefronts:
+    create:
+      success: "Storefront successfully created!"
+      failure: "Please fix the errors below."
+      already_exists: "You already have a storefront."
     update:
       success: "Storefront successfully updated!"
-      failure: "Failed to update storefront. Please try again."
+      failure: "Please fix the errors below."
+      permission_denied: "You can only update your own storefront!"
     preview:
       success: "Storefront successfully previewed, scroll down to see!"
