@@ -1,6 +1,6 @@
 class StorefrontsController < ApplicationController
   before_action :require_login, except: [:index, :show]
-  before_action :require_seller, only: [:new, :create, :new_storefront_with_template, :choose_template]
+  before_action :require_seller, except: [:index, :show]
 
   def index
     @storefronts = Storefront.all
