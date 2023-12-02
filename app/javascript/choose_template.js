@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
     let storefront_custom_code = document.getElementById('storefront_custom_code');
     let carousel = document.getElementById('templateCarousel');
 
