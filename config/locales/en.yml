@@ -48,6 +48,8 @@ en:
       default: "You need to login before you can %{action} a storefront!"
       new: "You need to login before you can create a storefront!"
       choose_template: "You need to login before you can choose a storefront template!"
+    price_alerts:
+      default: "You need to login before you can have price alerts!"
   require_not_seller:
     default: "You cannot be a seller to access that page."
     users:
@@ -76,3 +78,13 @@ en:
       permission_denied: "You can only update your own storefront!"
     preview:
       success: "Storefront successfully previewed, scroll down to see!"
+  price_alerts:
+    create:
+      success: "Price alert successfully created!"
+      failure: "Failed to create price alert. Please try again."
+    update:
+      success: "Price alert successfully updated!"
+      failure: "Failed to update price alert. Please try again."
+    destroy:
+      success: "Price alert successfully deleted!"
+      failure: "Failed to delete price alert. Please try again."
