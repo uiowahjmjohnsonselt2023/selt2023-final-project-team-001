@@ -7,8 +7,7 @@ class ProductsController < ApplicationController
     @products = @products.search_text(params[:search]) if params[:search]
     sort = params[:sort]
     unless %w[asc desc].include?(params[:order].to_s)
-      flash[:alert] = "#{params[:order]} isn't a valid sorting order."
-      redirect_to products_path(sort: params[:sort], order: "desc") and return
+      redirect_to products_path(sort: params[:sort], search: params[:search], cat: params[:cat], order: "desc") and return
     end
     if sort
       # This is needed to clear the sort order imposed
@@ -22,7 +21,7 @@ class ProductsController < ApplicationController
       when "date"
         @products.order(created_at: params[:order].to_sym)
       when "views"
-        @products.order(views: params[:order].to_sym)
+        @products.order(created_at: params[:order].to_sym)
       else
         @products
       end
@@ -47,6 +46,7 @@ class ProductsController < ApplicationController
       end
       @products = @products.joins(:categories).where(categories: {id: cat})
     end
+    @products = @products.search_text(params[:search]) if params[:search]
   end
 
   def show

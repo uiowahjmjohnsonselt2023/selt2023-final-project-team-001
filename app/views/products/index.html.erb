@@ -4,10 +4,10 @@
     <thead>
     <tr>
       <%# link_to defaults to the current URL when none is specified %>
-      <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category]}) %> </th>
-      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category] }) %> </th>
-      <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category] }) %> </th>
-      <th scope="col"><%= link_to 'Views', request.query_parameters.merge({ :sort => 'views', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category] }) %> </th>
+      <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
+      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
+      <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
+      <th scope="col"><%= link_to 'Views', request.query_parameters.merge({ :sort => 'views', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
     </tr>
     </thead>
     <tbody>
