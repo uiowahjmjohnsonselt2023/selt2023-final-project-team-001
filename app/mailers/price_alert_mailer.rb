@@ -6,8 +6,4 @@ class PriceAlertMailer < ApplicationMailer
 
     mail(to: email, subject: "Price Alert for #{@product_name}")
   end
-
-  def test_email(email)
-    mail(to: email, subject: "Test Email", body: "This is a test email.")
-  end
 end
