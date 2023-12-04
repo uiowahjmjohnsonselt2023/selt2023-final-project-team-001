@@ -79,6 +79,8 @@ en:
     preview:
       success: "Storefront successfully previewed, scroll down to see!"
   price_alerts:
+    new:
+      already_exists: "You already have a price alert for this product!"
     create:
       success: "Price alert successfully created!"
       failure: "Failed to create price alert. Please try again."
