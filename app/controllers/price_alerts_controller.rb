@@ -2,8 +2,12 @@ class PriceAlertsController < ApplicationController
   before_action :require_login
 
   def new
+    if PriceAlert.exists?(product_id: params[:product_id], user_id: Current.user.id)
+      price_alert = PriceAlert.find_by(product_id: params[:product_id], user_id: Current.user.id)
+      flash[:alert] = t("price_alerts.new.already_exists")
+      redirect_to price_alert_path(price_alert.id)
+    end
     @product = Product.find(params[:product_id])
-    # TODO: don't allow duplicate price alerts for the same product on the same user
   end
 
   def create
