@@ -1,8 +1,6 @@
 class PriceAlertsController < ApplicationController
   before_action :require_login
 
-  # TODO: update flash to new style Evan introduced
-
   def new
     @product = Product.find(params[:product_id])
     # TODO: don't allow duplicate price alerts for the same product on the same user
@@ -10,14 +8,14 @@ class PriceAlertsController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-
     @price_alert = PriceAlert.new(product: @product, user: Current.user, threshold: params[:new_threshold])
 
     if @price_alert.save
+      flash.now[:notice] = t("price_alerts.create.success")
       redirect_to @price_alert
     else
-      flash[:alert] = "Please fix the errors below."
-      render "new", status: :unprocessable_entity
+      flash[:alert] = t("price_alerts.create.failure")
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -30,9 +28,10 @@ class PriceAlertsController < ApplicationController
 
     @price_alert = PriceAlert.find(params[:id])
     if @price_alert.update(threshold: params[:price_alert][:new_threshold])
+      flash[:notice] = t("price_alerts.update.success")
       redirect_to @price_alert
     else
-      flash[:alert] = "Please fix the errors below."
+      flash.now[:alert] = t("price_alerts.update.failure")
       render "edit"
     end
   end
@@ -47,9 +46,13 @@ class PriceAlertsController < ApplicationController
 
   def destroy
     @price_alert = PriceAlert.find(params[:id])
-    @price_alert.destroy
-    flash[:notice] = "Price alert deleted successfully!"
-    redirect_to price_alerts_path
+    if @price_alert.destroy
+      flash[:notice] = t("price_alerts.destroy.success")
+      redirect_to price_alerts_path
+    else
+      flash.now[:alert] = t("price_alerts.destroy.failure")
+      render "delete"
+    end
   end
 
   def delete
