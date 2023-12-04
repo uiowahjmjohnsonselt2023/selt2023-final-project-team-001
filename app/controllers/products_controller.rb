@@ -54,6 +54,7 @@ class ProductsController < ApplicationController
     # found, which will render the 404 page.
     @product = Product.find params[:id]
     @seller = @product.seller
+    g @user = Current.user
     if @product.private
       unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
@@ -98,6 +99,13 @@ class ProductsController < ApplicationController
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
     elsif @product.update(product_params)
+      # if the price is now lower than any price alert thresholds, send an email
+      @product.price_alerts.each do |price_alert|
+        if @product.price < price_alert.threshold
+          PriceAlertMailer.send_price_alert(Current.user.email, @product.name, @product.price, price_alert.threshold).deliver_now
+          price_alert.destroy
+        end
+      end
       redirect_to @product
     else
       flash[:alert] = "Please fix the errors below."

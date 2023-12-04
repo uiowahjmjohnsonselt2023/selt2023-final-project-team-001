@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get "price_alerts/send_price_alert"
-  get "emails/send_test_email"
+  # get "price_alerts/send_price_alert"
   get "home/index"
   get "pages/index"
 
@@ -12,8 +11,9 @@ Rails.application.routes.draw do
     get :customize, on: :member
   end
 
+  resources :price_alerts, only: [:show, :new, :create, :index]
+
   get "/send_price_alert", to: "price_alerts#send_price_alert", as: "send_price_alert"
-  get "/send_test_email", to: "price_alerts#send_test_email", as: "send_test_email"
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"

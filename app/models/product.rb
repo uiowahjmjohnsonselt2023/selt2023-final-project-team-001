@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   has_many :users, through: :carts
   has_many :viewed_products
   has_many :viewed_by_users, through: :viewed_products, source: :user
+  has_many :price_alerts, dependent: :destroy
   mount_uploaders :photos, ProductPhotoUploader
 
   # Left 100 between each value to allow for future additions.

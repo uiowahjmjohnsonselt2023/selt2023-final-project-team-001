@@ -1,0 +1,6 @@
+<div class="d-flex mb-3 align-items-center">
+  <% if user %>
+    <%= link_to "Add to Your Price Alerts", new_price_alert_path(product_id: @product.id), class: "me-1 link-primary" %>
+    <%#= rating_stars(@seller.profile.seller_rating || 0) %>
+  <% end %>
+</div>

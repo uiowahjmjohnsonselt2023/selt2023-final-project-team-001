@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2><%= products_index_header %></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :category => params[:category]}) %> </th>
+      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :category => params[:category] }) %> </th>
+      <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :category => params[:category] }) %> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td><%= number_to_currency product.price %></td>
+        <td><%= product.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
