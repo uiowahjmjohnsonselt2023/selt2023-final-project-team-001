@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get "/history", to: "products#history", as: "products_history"
 
+  get "/history", to: "products#history", as: "products_history"
+
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member
