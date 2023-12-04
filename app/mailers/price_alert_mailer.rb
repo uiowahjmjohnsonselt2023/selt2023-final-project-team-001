@@ -4,6 +4,6 @@ class PriceAlertMailer < ApplicationMailer
     @current_price = current_price
     @threshold_price = threshold_price
 
-    mail(to: email, subject: "Price Alert for #{@product_name}")
+    mail(to: email, subject: "Price Alert for #{@product_name}", body: "Current Price: #{@current_price}")
   end
 end

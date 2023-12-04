@@ -101,8 +101,8 @@ class ProductsController < ApplicationController
     elsif @product.update(product_params)
       # if the price is now lower than any price alert thresholds, send an email
       @product.price_alerts.each do |price_alert|
-        if @product.price < price_alert.threshold
-          PriceAlertMailer.send_price_alert(Current.user.email, @product.name, @product.price, price_alert.threshold).deliver_now
+        if @product.price.to_i < price_alert.threshold.to_i
+          PriceAlertMailer.send_price_alert(price_alert.user.email, @product.name, @product.price, price_alert.threshold).deliver_now
           price_alert.destroy
         end
       end
