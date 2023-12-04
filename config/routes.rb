@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get "/reply", to: "messages#reply", as: "reply"
   post "/send_reply", to: "messages#create_reply", as: "send_reply"
 
+  get "/history", to: "products#history", as: "products_history"
+
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member
