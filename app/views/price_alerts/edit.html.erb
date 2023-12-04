@@ -1,7 +1,7 @@
 <h1>Edit Price Alert</h1>
 
-<%= bootstrap_form_with model: @price_alert do |f| %>
-  <%= f.hidden_field :product_id, value: @product.id %>
+<%= bootstrap_form_with model: @price_alert, url: price_alert_path(@price_alert), method: :patch do |f| %>
+  <%= f.hidden_field :product_id, value: @price_alert.product.id %>
   <%= f.text_field :new_threshold, prepend: "$", inputmode: "decimal", pattern: "[0-9]*?(\\.[0-9]*)?", class: "form-control" %>
 
   <%= f.submit "Update Price Alert", class: "btn btn-primary" %>

@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     get :customize, on: :member
   end
 
+  resources :price_alerts, only: [:show, :new, :create, :index, :edit, :update]
+  get "/send_price_alert", to: "price_alerts#send_price_alert", as: "send_price_alert"
+
   resources :price_alerts, only: [:show, :new, :create, :index]
 
   get "/send_price_alert", to: "price_alerts#send_price_alert", as: "send_price_alert"

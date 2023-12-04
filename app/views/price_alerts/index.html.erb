@@ -9,9 +9,8 @@
               <h5 class="card-title"><%= link_to price_alert.product.name, price_alert.product %></h5>
               <p class="card-text">Current Price: $<%= price_alert.product.price %></p>
               <p class="card-text">Threshold: $<%= price_alert.threshold %></p>
-              <p class="card-text"><%= link_to "Edit threshold", edit_price_alert_path(price_alert), class: "btn btn-primary" %>
-<!--              <p class="card-text"><%#= link_to "Delete", delete_price_alert_path(price_alert), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>-->
-              <!-- Add more details here -->
+              <%= link_to "Edit threshold", edit_price_alert_path(price_alert), class: "btn btn-primary" %>
+              <!--              <p class="card-text"><%#= link_to "Delete", delete_price_alert_path(price_alert), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>-->
             </div>
           </div>
         </div>

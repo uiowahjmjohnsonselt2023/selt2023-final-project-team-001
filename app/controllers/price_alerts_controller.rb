@@ -20,12 +20,13 @@ class PriceAlertsController < ApplicationController
 
   def edit
     @price_alert = PriceAlert.find(params[:id])
-    @product = Product.find(params[:product_id])
   end
 
   def update
+    puts(params[:price_alert][:new_threshold])
+
     @price_alert = PriceAlert.find(params[:id])
-    if @price_alert.update(threshold: params[:new_threshold])
+    if @price_alert.update(threshold: params[:price_alert][:new_threshold])
       redirect_to @price_alert
     else
       flash[:alert] = "Please fix the errors below."
