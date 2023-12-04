@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
       when "date"
         @products.order(created_at: params[:order].to_sym)
       when "views"
-        @products.order(views: params[:order].to_sym)
+        @products.order(created_at: params[:order].to_sym)
       else
         @products
       end
