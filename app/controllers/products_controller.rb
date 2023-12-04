@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
     # found, which will render the 404 page.
     @product = Product.find params[:id]
     @seller = @product.seller
-    g @user = Current.user
+    @user = Current.user
     if @product.private
       unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
