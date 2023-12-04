@@ -95,6 +95,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find params[:id]
+    old_price = @product.price
     if Current.user != @product.seller && !Current.user.is_admin
       flash[:alert] = "You don't have permission to edit that product."
       redirect_to root_path
@@ -102,7 +103,7 @@ class ProductsController < ApplicationController
       # if the price is now lower than any price alert thresholds, send an email
       @product.price_alerts.each do |price_alert|
         if @product.price.to_i < price_alert.threshold.to_i
-          PriceAlertMailer.send_price_alert(price_alert.user.email, @product.name, @product.price, price_alert.threshold).deliver_now
+          PriceAlertMailer.send_price_alert(price_alert.user.email, @product.name, @product.price, price_alert.threshold, old_price).deliver_now
           price_alert.destroy
         end
       end
