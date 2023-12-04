@@ -18,6 +18,21 @@ class PriceAlertsController < ApplicationController
     end
   end
 
+  def edit
+    @price_alert = PriceAlert.find(params[:id])
+    @product = Product.find(params[:product_id])
+  end
+
+  def update
+    @price_alert = PriceAlert.find(params[:id])
+    if @price_alert.update(threshold: params[:new_threshold])
+      redirect_to @price_alert
+    else
+      flash[:alert] = "Please fix the errors below."
+      render "edit"
+    end
+  end
+
   def index
     @price_alerts = Current.user.price_alerts # Assuming the association is set correctly
   end
