@@ -1,22 +1,25 @@
-<div class="container mt-4">
-  <h2><%= products_index_header %></h2>
-  <table class="table">
-    <thead>
-    <tr>
-      <%# link_to defaults to the current URL when none is specified %>
-      <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :category => params[:category]}) %> </th>
-      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :category => params[:category] }) %> </th>
-      <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :category => params[:category] }) %> </th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= link_to product.name, product_path(product.id) %></td>
-        <td><%= number_to_currency product.price %></td>
-        <td><%= product.created_at %></td>
-      </tr>
+<div class="container mt-5">
+  <h1 class="mb-4">Price Alerts</h1>
+  <div class="row">
+    <% if @price_alerts.present? %>
+      <% @price_alerts.each do |price_alert| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to price_alert.product.name, price_alert.product %></h5>
+              <p class="card-text">Current Price: $<%= price_alert.product.price %></p>
+              <p class="card-text">Threshold: $<%= price_alert.threshold %></p>
+              <p class="card-text"><%= link_to "Edit threshold", edit_price_alert_path(price_alert), class: "btn btn-primary" %>
+              <p class="card-text"><%= link_to "Delete", delete_price_alert_path(price_alert), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+              <!-- Add more details here -->
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-md-12">
+        <p>No price alerts found.</p>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+  </div>
 </div>
