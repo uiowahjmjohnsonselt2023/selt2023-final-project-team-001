@@ -4,6 +4,7 @@
     <thead>
     <tr>
       <%# link_to defaults to the current URL when none is specified %>
+      <th> </th>
       <th scope="col"><%= link_to 'Name', request.query_parameters.merge({:sort => 'name', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
       <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
       <th scope="col"><%= link_to 'Posted', request.query_parameters.merge({ :sort => 'date', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
@@ -13,6 +14,12 @@
     <tbody>
     <% @products.each do |product| %>
       <tr>
+        <td>
+          <div class="col-md-5 col-lg-4 float-md-start mb-3 me-md-3 me-lg-4 mt-2">
+          <% photo_url = product.photos.first&.main&.url || "fallbacks/products/main_default.png" %>
+          <%= image_tag photo_url, class: "img-fluid rounded border border-secondary-subtle" %>
+          </div>
+        </td>
         <td><%= link_to product.name, product_path(product.id) %></td>
         <td><%= number_to_currency product.price %></td>
         <td><%= product.created_at %></td>
