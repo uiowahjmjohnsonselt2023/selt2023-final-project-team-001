@@ -28,20 +28,7 @@ class ProductsController < ApplicationController
       end
     end
     cat = params[:category]
-    @products = if cat.nil?
-      case sort
-      when "price"
-        Product.where.not(quantity: 0).where(private: false).order(price_cents: params[:order].to_sym)
-      when "name"
-        Product.where.not(quantity: 0).where(private: false).order(name: params[:order].to_sym)
-      when "date"
-        Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
-      when "views"
-        Product.where.not(quantity: 0).where(private: false).order(name: params[:order].to_sym)
-      else
-        Product.where.not(quantity: 0).where(private: false).order(created_at: params[:order].to_sym)
-      end
-    else
+    if cat
       if Category.where(id: cat).blank?
         flash[:alert] = "#{cat} isn't a valid category."
         redirect_to products_path(sort: params[:sort]) and return
