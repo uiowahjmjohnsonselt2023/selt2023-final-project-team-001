@@ -68,13 +68,4 @@ class StorefrontsController < ApplicationController
       end
     end
   end
-
-  private
-
-  def require_seller
-    unless Current.user.is_seller || Current.user.is_admin
-      flash[:alert] = i18n_t scope: :require_seller
-      redirect_to root_path
-    end
-  end
 end
