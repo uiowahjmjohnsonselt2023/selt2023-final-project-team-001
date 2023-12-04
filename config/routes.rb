@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   post "/create_review", to: "reviews#create", as: "create_review"
   get "/auth/:provider/callback", to: "sessions#omniauth"
 
+  get "/history", to: "products#history", as: "products_history"
+
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member

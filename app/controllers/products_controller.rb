@@ -99,6 +99,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def history
+    if Current.user.nil?
+      flash[:alert] = "Please log in to view your shopping history."
+      redirect_to login_path
+    else
+      @user = Current.user
+      # @products = Product.where(viewed_by_users: [@user])
+    end
+  end
+
   private
 
   def product_params
