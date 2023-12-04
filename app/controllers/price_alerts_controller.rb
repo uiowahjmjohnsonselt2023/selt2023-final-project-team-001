@@ -1,8 +1,11 @@
 class PriceAlertsController < ApplicationController
   before_action :require_login
 
+  # TODO: update flash to new style Evan introduced
+
   def new
     @product = Product.find(params[:product_id])
+    # TODO: don't allow duplicate price alerts for the same product on the same user
   end
 
   def create
@@ -40,5 +43,16 @@ class PriceAlertsController < ApplicationController
 
   def show
     @price_alert_item = PriceAlert.find(params[:id])
+  end
+
+  def destroy
+    @price_alert = PriceAlert.find(params[:id])
+    @price_alert.destroy
+    flash[:notice] = "Price alert deleted successfully!"
+    redirect_to price_alerts_path
+  end
+
+  def delete
+    @price_alert = PriceAlert.find(params[:id])
   end
 end
