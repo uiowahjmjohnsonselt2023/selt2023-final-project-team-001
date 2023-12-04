@@ -10,7 +10,7 @@
   </div>
   <%= render "products/listing/categories", product: @product %>
   <%= render "application/seller_info", seller: @seller, show_storefront: true %>
-
+  <%= render "products/listing/price_alert", user: @user, product: @product %>
   <hr />
 
   <%= render "products/listing/condition", product: @product %>
