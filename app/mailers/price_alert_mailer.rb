@@ -3,6 +3,6 @@ class PriceAlertMailer < ApplicationMailer
     @product = Product.find(product_id)
     product_name = @product.name
     current_price = @product.price
-    mail(to: email, subject: "Price Alert for #{product_name}", body: "Current Price: #{current_price}\nOld Price: #{old_price}\nThreshold Price: #{threshold_price}\nLink: #{url_for(controller: "products", action: "show", id: product_id, only_path: false)}")
+    mail(to: email, subject: "Price Alert for #{product_name}", body: "Current Price: $#{current_price}\nOld Price: $#{old_price}\nThreshold Price: $#{format("%.2f", threshold_price)}\nLink: #{url_for(controller: "products", action: "show", id: product_id, only_path: false)}")
   end
 end
