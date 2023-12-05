@@ -102,8 +102,22 @@ RSpec.describe PriceAlertsController, type: :controller do
       expect(response).to render_template :index
     end
   end
-  #
-  # describe "GET #show" do
-  #
-  # end
+
+  describe "GET #show" do
+    context "when the price alert belongs to the user" do
+      it "renders the show template" do
+        price_alert = FactoryBot.create(:price_alert, user: user)
+        get :show, params: {id: price_alert.id}
+        expect(response).to render_template :show
+      end
+    end
+
+    context "when the price alert does not belong to the user" do
+      it "redirects to the home page" do
+        price_alert = FactoryBot.create(:price_alert)
+        get :show, params: {id: price_alert.id}
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 end
