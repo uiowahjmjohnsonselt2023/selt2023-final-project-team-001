@@ -115,20 +115,18 @@ class ProductsController < ApplicationController
         ids.append(vp.product_id)
       end
       @products = Product.where(id: ids)
-      sort = params[:order]
-      if sort
-        @products = case sort
-        when "price"
-          Product.where(id: ids).order(price_cents: params[:order].to_sym)
-        when "name"
-          Product.where(id: ids).order(name: params[:order].to_sym)
-        when "date"
-          Product.where(id: ids).order(created_at: params[:order].to_sym)
-        when "views"
-          Product.where(id: ids).order(views: params[:order].to_sym)
-        else
-          Product.where(id: ids)
-        end
+      sort = params[:sort]
+      @products = case sort
+      when "price"
+        @products.order(price_cents: params[:order].to_sym)
+      when "name"
+        @products.order(name: params[:order].to_sym)
+      when "date"
+        @products.order(created_at: params[:order].to_sym)
+      when "views"
+        @products.order(views: params[:order].to_sym)
+      else
+        @products
       end
     end
   end
