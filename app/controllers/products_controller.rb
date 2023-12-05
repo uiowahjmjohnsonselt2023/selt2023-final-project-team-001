@@ -107,7 +107,11 @@ class ProductsController < ApplicationController
       redirect_to login_path
     else
       @user = Current.user
-      @products = @user.viewed_products
+      ids = []
+      @user.viewed_products.each do |vp|
+        ids.append(vp.product_id)
+      end
+      @products = Product.where(id: ids)
     end
   end
 
