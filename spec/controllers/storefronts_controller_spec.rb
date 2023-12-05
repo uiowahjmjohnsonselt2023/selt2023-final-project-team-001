@@ -109,7 +109,7 @@ RSpec.describe StorefrontsController, type: :controller do
 
       describe "GET #preview" do
         it "renders the preview template" do
-          get :preview, params: {custom_code: "<h1>Test</h1>"}
+          get :preview, params: {storefront: {custom_code: "<h1>Test</h1>"}}
           expect(response).to render_template(:preview)
         end
       end
