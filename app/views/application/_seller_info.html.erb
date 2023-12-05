@@ -1,3 +1,5 @@
+<%# locals: (seller:, show_storefront: false) %>
+
 <div class="d-flex mb-3 align-items-center">
   <% if show_storefront && seller.storefront %>
     <%= link_to seller.storefront.name, seller.storefront %>
