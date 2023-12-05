@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post "/forgot_password_reset_password_submit", to: "forgot_password#update", as: "forgot_password_reset_submit"
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
+  get "/auth/:provider/callback", to: "sessions#omniauth"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member

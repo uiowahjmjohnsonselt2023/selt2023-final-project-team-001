@@ -4,8 +4,8 @@ FactoryBot.define do
     sequence(:last_name) { |n| "user#{n}" }
     sequence(:email) { |n| "person#{n}@example.com" }
 
-    password { "password123" }
-    password_confirmation { "password123" }
+    password { "password123P!" }
+    password_confirmation { "password123P!" }
 
     trait(:seller) { is_seller { true } }
     trait(:buyer) { is_buyer { true } }

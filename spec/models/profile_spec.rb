@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Profile, type: :model do
-  let(:valid_user) { create(:user, email: "testtests@admin.com", password: "admin1000", password_confirmation: "admin1000") }
+  let(:valid_user) { create(:user, email: "testtests@admin.com", password: "admin1000!P", password_confirmation: "admin1000!P") }
 
   # full name is first_name plus last name
   it "has a full name" do
