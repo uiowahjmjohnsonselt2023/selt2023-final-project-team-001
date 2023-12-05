@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
       when "date"
         @products.order(created_at: params[:order].to_sym)
       when "views"
-        @products.order(name: params[:order].to_sym)
+        @products.order(views: params[:order].to_sym)
       else
         @products
       end
@@ -57,6 +57,7 @@ class ProductsController < ApplicationController
     unless Current.user.nil?
       unless @product.viewed_by_users.include? Current.user
         @product.viewed_by_users << Current.user
+        @product.views = @product.views + 1
       end
     end
     if @product.private
