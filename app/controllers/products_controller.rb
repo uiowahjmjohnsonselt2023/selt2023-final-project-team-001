@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
     unless Current.user.nil?
       unless @product.viewed_by_users.include? Current.user
         @product.viewed_by_users << Current.user
-        @product.views = @product.views + 1
+        @product.update(views: @product.views + 1)
       end
     end
   end
