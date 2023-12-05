@@ -140,4 +140,23 @@ RSpec.describe PriceAlertsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #delete" do
+    context "when the price alert belongs to the user" do
+      it "renders the delete template" do
+        price_alert = FactoryBot.create(:price_alert, user: user)
+        delete :delete, params: {id: price_alert.id}
+        expect(response).to render_template :delete
+      end
+    end
+
+    context "when the price alert does not belong to the user" do
+      it "redirects to the home page" do
+        price_alert = FactoryBot.create(:price_alert)
+        delete :delete, params: {id: price_alert.id}
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq I18n.t("price_alerts.delete.not_yours")
+      end
+    end
+  end
 end
