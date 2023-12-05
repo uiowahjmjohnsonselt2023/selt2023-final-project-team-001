@@ -26,7 +26,6 @@ gem "jquery-rails"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
-gem "dotenv-rails"
 gem "pry"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -64,6 +63,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
   gem "rails-controller-testing"
+  gem "dotenv-rails" # Load environment variables from .env into ENV in development
 end
 
 group :development do
