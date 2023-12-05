@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   # skip_before_filter :require_login
   def new
     # automatically renders the sign-in form
+    @email = params[:email]
     if session[:user_id].present?
       flash[:alert] = "You are already signed in!"
       redirect_to root_path
@@ -11,9 +12,9 @@ class SessionsController < ApplicationController
 
   def create
     # Handle sign-in and authentication logic
-    email = params[:email]
+    @email = params[:email]
     password = params[:password]
-    user = User.find_by(email: email)
+    user = User.find_by(email: @email)
 
     if user&.authenticate(password)
       session[:user_id] = user.id
@@ -48,6 +49,36 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:notice] = "Registration could not be completed"
+    end
+  end
+
+  def omniauth
+    info = request.env["omniauth.auth"]
+    user = User.find_by(uid: info[:uid], provider: info[:provider])
+    if user
+      session[:user_id] = user.id
+      flash[:success] = "Successfully signed in through Google!"
+      redirect_to root_path
+    else
+      user = User.new(
+        uid: info[:uid],
+        provider: info[:provider],
+        first_name: info[:info][:first_name],
+        last_name: info[:info][:last_name],
+        email: info[:info][:email]
+      )
+      p = SecureRandom.hex(15) + "!P"
+      user.password = p
+      user.password_confirmation = p
+
+      if user.save
+        session[:user_id] = user.id
+        flash[:success] = "Successfully signed in through Google!"
+        redirect_to root_path
+      else
+        flash[:alert] = "You may already have an account with us, log in with your email and password."
+        redirect_to login_path
+      end
     end
   end
 end

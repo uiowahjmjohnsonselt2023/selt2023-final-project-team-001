@@ -1,25 +1,15 @@
-// confirmation of item deletion from cart
-$(document).ready(function() {
+import "jquery";
 
+// confirmation of item deletion from cart
+// turbo:load instead of ready to work when navigating back to the page (e.g., using
+// the back or forward buttons in the browser)
+$(document).on('turbo:load', function() {
     $('.delete-item').click(function(event) {
         let productData = $(this).closest('tr').data('product');
         let productName = productData.name;
         $('#productNamePlaceholder').text(productName);
-        event.preventDefault(); // Prevent the default form submission
-        let deleteItemId = productData.id;
-
-        const form = $('.delete-item');
-        const originalAction = form.attr('action');
-        const actionWithConfirmation = `${originalAction}?confirmation=yes&product_id=${deleteItemId}`;
-        form.attr('action', actionWithConfirmation);
-
-        $('#confirmationModal').modal('show');
-    });
-
-    // Handle the "Delete" link click in the modal
-    $('#confirmDeleteLink').click(function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        $('.delete-item').submit();
+        let productId = productData.id;
+        $('#productIdPlaceholder').val(productId);
     });
 });
 
@@ -27,7 +17,7 @@ $(document).ready(function() {
 
 
 // dynamically changes cart price based on chosen shipping cost
-$(document).ready(function() {
+$(document).on('turbo:load', function() {
         const expeditedShipping = document.getElementById("expedited-shipping");
         const regularShipping = document.getElementById("regular-shipping");
 
