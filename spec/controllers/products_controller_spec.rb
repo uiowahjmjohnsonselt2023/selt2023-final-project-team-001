@@ -264,4 +264,22 @@ describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe "GET #history" do
+    context "when the user is not logged in" do
+      it "redirects to the login page" do
+        get :history
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    context "when the user is logged in" do
+      before { login_as user }
+
+      it "displays the history page" do
+        get :history
+        expect(response).to render_template :history
+      end
+    end
+  end
 end
