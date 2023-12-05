@@ -298,7 +298,9 @@ CREATE TABLE public.users (
     is_admin boolean DEFAULT false NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    cart_id bigint
+    cart_id bigint,
+    uid character varying,
+    provider character varying
 );
 
 
@@ -664,6 +666,7 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231129233947'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),

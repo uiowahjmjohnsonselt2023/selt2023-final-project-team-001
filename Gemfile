@@ -23,7 +23,11 @@ gem "importmap-rails", "~> 1.2"
 gem "inline_svg", "~> 1.9.0"
 gem "sassc-rails"
 gem "jquery-rails"
-
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+gem "dotenv-rails"
+gem "pry"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 

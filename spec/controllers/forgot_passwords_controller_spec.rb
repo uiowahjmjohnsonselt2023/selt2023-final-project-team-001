@@ -56,7 +56,7 @@ describe ForgotPasswordController, type: :controller do
 
     context "with valid password parameters" do
       it "resets the password and redirects to login path" do
-        patch :update, params: {token: token, user: {password: "new_password", password_confirmation: "new_password"}}
+        patch :update, params: {token: token, user: {password: "new_password1!P", password_confirmation: "new_password1!P"}}
         expect(response).to redirect_to(login_path)
         expect(flash[:success]).to eq("Your password was reset successfully!")
       end

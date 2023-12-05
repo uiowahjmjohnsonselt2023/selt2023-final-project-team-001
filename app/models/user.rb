@@ -14,6 +14,19 @@ class User < ApplicationRecord
   # requires a password on creation. See https://stackoverflow.com/a/45329148
   validates :password, presence: true, length: {minimum: 8}, allow_nil: true
   validates :password_confirmation, presence: true, length: {minimum: 8}, on: :create
+  validate :password_is_secure
+
+  def password_is_secure
+    unless /[A-Z]/.match?(password)
+      errors.add(:password, "must contain at least one capital letter")
+    end
+    unless /[!@#$%^&*(),.?":{}|<>]/.match?(password)
+      errors.add(:password, "must contain at least one special character")
+    end
+    unless /[0-9]/.match?(password)
+      errors.add(:password, "must contain at least one number")
+    end
+  end
 
   # Scopes allow us to write things like User.admins to get all admins
   # or User.non_sellers to get all users who aren't sellers.
