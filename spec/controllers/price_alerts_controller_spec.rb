@@ -66,6 +66,35 @@ RSpec.describe PriceAlertsController, type: :controller do
       end
     end
   end
+
+  describe "PATCH #update" do
+    context "when the price alert belongs to the user" do
+      it "updates the price alert" do
+        price_alert = FactoryBot.create(:price_alert, user: user)
+        patch :update, params: {id: price_alert.id, price_alert: {new_threshold: 100}}
+        expect(response).to redirect_to price_alert_path(price_alert.id)
+        expect(flash[:notice]).to eq I18n.t("price_alerts.update.success")
+      end
+    end
+
+    context "when the price alert does not belong to the user" do
+      it "redirects to the home page" do
+        price_alert = FactoryBot.create(:price_alert)
+        patch :update, params: {id: price_alert.id, price_alert: {new_threshold: 100}}
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq I18n.t("price_alerts.update.not_yours")
+      end
+    end
+
+    context "when the price alert does not update" do
+      it "redirects to root with proper flash" do
+        price_alert = FactoryBot.create(:price_alert, user: user)
+        patch :update, params: {id: price_alert.id, price_alert: {new_threshold: -1}}
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq I18n.t("price_alerts.update.failure")
+      end
+    end
+  end
   #
   # describe "GET #show" do
   #

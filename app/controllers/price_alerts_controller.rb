@@ -36,14 +36,12 @@ class PriceAlertsController < ApplicationController
     if @price_alert.user != Current.user
       flash[:alert] = t("price_alerts.update.not_yours")
       redirect_to root_path
-    end
-
-    if @price_alert.update(threshold: params[:price_alert][:new_threshold])
+    elsif @price_alert.update(threshold: params[:price_alert][:new_threshold])
       flash[:notice] = t("price_alerts.update.success")
       redirect_to @price_alert
     else
-      flash.now[:alert] = t("price_alerts.update.failure")
-      render "edit"
+      flash[:alert] = t("price_alerts.update.failure")
+      redirect_to root_path
     end
   end
 
