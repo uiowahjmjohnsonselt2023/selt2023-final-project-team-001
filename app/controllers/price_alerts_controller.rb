@@ -50,7 +50,12 @@ class PriceAlertsController < ApplicationController
   end
 
   def show
-    @price_alert_item = PriceAlert.find(params[:id])
+    if PriceAlert.exists?(id: params[:id], user_id: Current.user.id)
+      @price_alert_item = PriceAlert.find(params[:id])
+    else
+      flash[:alert] = t("price_alerts.show.not_yours")
+      redirect_to root_path
+    end
   end
 
   def destroy
