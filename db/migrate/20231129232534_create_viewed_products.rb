@@ -3,7 +3,6 @@ class CreateViewedProducts < ActiveRecord::Migration[7.1]
     create_table :viewed_products do |t|
       t.references :user, null: false, foreign_key: true
       t.references :product, null: false, foreign_key: true
-
       t.timestamps
     end
   end

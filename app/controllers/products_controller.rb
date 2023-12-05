@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
       when "date"
         @products.order(created_at: params[:order].to_sym)
       when "views"
-        @products.order(created_at: params[:order].to_sym)
+        @products.order(views: params[:order].to_sym)
       else
         @products
       end
@@ -54,7 +54,9 @@ class ProductsController < ApplicationController
     # found, which will render the 404 page.
     @product = Product.find params[:id]
     @seller = @product.seller
-    @product.update(viewed_by_users: [Current.user])
+    unless Current.user.nil?
+      @product.viewed_by_users << Current.user
+    end
     if @product.private
       unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
@@ -105,7 +107,7 @@ class ProductsController < ApplicationController
       redirect_to login_path
     else
       @user = Current.user
-      # @products = Product.where(viewed_by_users: [@user])
+      @products = ViewedProduct.where(user_id: @user.__id__)
     end
   end
 
