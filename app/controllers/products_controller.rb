@@ -107,7 +107,7 @@ class ProductsController < ApplicationController
       redirect_to login_path
     else
       @user = Current.user
-      @products = ViewedProduct.where(user_id: @user.__id__)
+      @products = @user.viewed_products
     end
   end
 
