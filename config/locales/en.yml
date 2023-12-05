@@ -84,9 +84,12 @@ en:
     create:
       success: "Price alert successfully created!"
       failure: "Failed to create price alert. Please try again."
+    edit:
+      not_yours: "You cannot edit someone else's price alert!"
     update:
       success: "Price alert successfully updated!"
       failure: "Failed to update price alert. Please try again."
+      not_yours: "You cannot update someone else's price alert!"
     destroy:
       success: "Price alert successfully deleted!"
       failure: "Failed to delete price alert. Please try again."

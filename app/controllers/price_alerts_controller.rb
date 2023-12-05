@@ -25,12 +25,19 @@ class PriceAlertsController < ApplicationController
 
   def edit
     @price_alert = PriceAlert.find(params[:id])
+    if @price_alert.user != Current.user
+      flash[:alert] = t("price_alerts.edit.not_yours")
+      redirect_to root_path
+    end
   end
 
   def update
-    puts(params[:price_alert][:new_threshold])
-
     @price_alert = PriceAlert.find(params[:id])
+    if @price_alert.user != Current.user
+      flash[:alert] = t("price_alerts.update.not_yours")
+      redirect_to root_path
+    end
+
     if @price_alert.update(threshold: params[:price_alert][:new_threshold])
       flash[:notice] = t("price_alerts.update.success")
       redirect_to @price_alert
