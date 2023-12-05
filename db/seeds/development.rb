@@ -65,6 +65,7 @@ Product.insert_all(
       description: Faker::Lorem.paragraph(sentence_count: 2),
       price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
       quantity: Faker::Number.within(range: 0..100),
+      views: Faker::Number.within(range: 0..1000),
       condition: Faker::Base.sample(conditions),
       private: Faker::Boolean.boolean,
       created_at: created_at,
@@ -161,6 +162,7 @@ number_of_products.times do
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price_cents: Faker::Number.within(range: 1..1000_00), # $0.01 to $1000.00
     quantity: Faker::Number.within(range: 1..100),
+    views: Faker::Number.within(range: 1..1000),
     condition: Faker::Base.sample(conditions),
     private: Faker::Boolean.boolean,
     created_at: Faker::Time.backward,

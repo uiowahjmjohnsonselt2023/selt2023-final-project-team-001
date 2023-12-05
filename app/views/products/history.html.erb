@@ -23,7 +23,7 @@
         <td><%= link_to product.name, product_path(product.id) %></td>
         <td><%= number_to_currency product.price_cents %></td>
         <td><%= product.created_at %></td>
-        <td><%= product.viewed_by_users.count %></td>
+        <td><%= product.views %></td>
       </tr>
     <% end %>
     </tbody>
