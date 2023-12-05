@@ -8,12 +8,12 @@ describe ProductsController, type: :controller do
 
   describe "GET #index" do
     it "displays products" do
-      get :index
+      get :index, params: {sort: "name", order: "desc"}
       expect(response).to render_template :index
     end
 
     it "displays products with search" do
-      get :index, params: {search: "test"}
+      get :index, params: {search: "test", sort: "name", order: "desc"}
       expect(response).to render_template :index
     end
   end
@@ -52,6 +52,7 @@ describe ProductsController, type: :controller do
     describe "GET #show" do
       context "when the product is public" do
         it "renders the show template" do
+          product = create(:product)
           get :show, params: {id: product.id}
           expect(response).to render_template :show
         end

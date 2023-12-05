@@ -115,6 +115,24 @@ class ProductsController < ApplicationController
         ids.append(vp.product_id)
       end
       @products = Product.where(id: ids)
+      sort = params[:order]
+      unless %w[asc desc].include?(params[:order].to_s)
+        redirect_to products_path(sort: params[:sort], search: params[:search], cat: params[:cat], order: "desc") and return
+      end
+      if sort
+        @products = case sort
+        when "price"
+          @products.order(price_cents: params[:order].to_sym)
+        when "name"
+          @products.order(name: params[:order].to_sym)
+        when "date"
+          @products.order(created_at: params[:order].to_sym)
+        when "views"
+          @products.order(views: params[:order].to_sym)
+        else
+          @products
+        end
+      end
     end
   end
 
