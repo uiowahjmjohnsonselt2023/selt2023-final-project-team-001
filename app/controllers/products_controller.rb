@@ -55,7 +55,9 @@ class ProductsController < ApplicationController
     @product = Product.find params[:id]
     @seller = @product.seller
     unless Current.user.nil?
-      @product.viewed_by_users << Current.user
+      unless @product.viewed_by_users.include? Current.user
+        @product.viewed_by_users << Current.user
+      end
     end
     if @product.private
       unless Current.user == @seller || Current.user&.is_admin
