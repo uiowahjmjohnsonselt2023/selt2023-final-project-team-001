@@ -54,16 +54,16 @@ class ProductsController < ApplicationController
     # found, which will render the 404 page.
     @product = Product.find params[:id]
     @seller = @product.seller
-    unless Current.user.nil?
-      unless @product.viewed_by_users.include? Current.user
-        @product.viewed_by_users << Current.user
-        @product.views = @product.views + 1
-      end
-    end
     if @product.private
       unless Current.user == @seller || Current.user&.is_admin
         flash[:alert] = "You don't have permission to view that product."
         redirect_to root_path
+      end
+    end
+    unless Current.user.nil?
+      unless @product.viewed_by_users.include? Current.user
+        @product.viewed_by_users << Current.user
+        @product.views = @product.views + 1
       end
     end
   end
