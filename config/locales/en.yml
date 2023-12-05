@@ -90,6 +90,8 @@ en:
       success: "Price alert successfully updated!"
       failure: "Failed to update price alert. Please try again."
       not_yours: "You cannot update someone else's price alert!"
+    show:
+      not_yours: "You cannot view someone else's price alert!"
     destroy:
       success: "Price alert successfully deleted!"
       failure: "Failed to delete price alert. Please try again."
