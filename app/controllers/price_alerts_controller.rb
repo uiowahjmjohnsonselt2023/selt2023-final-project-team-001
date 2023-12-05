@@ -46,7 +46,7 @@ class PriceAlertsController < ApplicationController
   end
 
   def index
-    @price_alerts = Current.user.price_alerts # Assuming the association is set correctly
+    @price_alerts = Current.user.price_alerts
   end
 
   def show
