@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     # automatically renders the sign-in form
     @email = params[:email]
     if session[:user_id].present?
+      puts session[:user_id]
       flash[:alert] = "You are already signed in!"
       redirect_to root_path
     end
