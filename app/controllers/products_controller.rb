@@ -139,6 +139,7 @@ class ProductsController < ApplicationController
       :description,
       :price,
       :quantity,
+      :views,
       :condition,
       :private,
       {photos: []},
