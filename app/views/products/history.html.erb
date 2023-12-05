@@ -13,10 +13,10 @@
     <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.name, product_path(product.ids) %></td>
-        <td><%= number_to_currency product.price_cents %></td>
-        <td><%= product.created_at %></td>
-        <td><%= product.viewed_by_users.count %>
+        <td><%= link_to product.product_id, product_path(product.product_id) %></td>
+        <td><%= product.id %></td>
+        <td><%= product.id %></td>
+        <td><%= product.id %>
       </tr>
     <% end %>
     </tbody>
