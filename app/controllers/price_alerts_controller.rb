@@ -59,17 +59,27 @@ class PriceAlertsController < ApplicationController
   end
 
   def destroy
-    @price_alert = PriceAlert.find(params[:id])
-    if @price_alert.destroy
-      flash[:notice] = t("price_alerts.destroy.success")
-      redirect_to price_alerts_path
+    if PriceAlert.exists?(id: params[:id], user_id: Current.user.id)
+      @price_alert = PriceAlert.find(params[:id])
+      if @price_alert.destroy
+        flash[:notice] = t("price_alerts.destroy.success")
+        redirect_to price_alerts_path
+      else
+        flash[:alert] = t("price_alerts.destroy.failure")
+        redirect_to root_path
+      end
     else
-      flash.now[:alert] = t("price_alerts.destroy.failure")
-      render "delete"
+      flash[:alert] = t("price_alerts.destroy.not_yours")
+      redirect_to root_path
     end
   end
 
   def delete
-    @price_alert = PriceAlert.find(params[:id])
+    if PriceAlert.exists?(id: params[:id], user_id: Current.user.id)
+      @price_alert = PriceAlert.find(params[:id])
+    else
+      flash[:alert] = t("price_alerts.delete.not_yours")
+      redirect_to root_path
+    end
   end
 end

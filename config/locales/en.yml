@@ -95,3 +95,6 @@ en:
     destroy:
       success: "Price alert successfully deleted!"
       failure: "Failed to delete price alert. Please try again."
+      not_yours: "You cannot delete someone else's price alert!"
+    delete:
+      not_yours: "You cannot delete someone else's price alert!"
