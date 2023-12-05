@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :require_login, except: [:show, :index]
+  before_action :require_seller, only: [:new, :create]
 
   def index
     @products = Product.joins(:categories).only_public.in_stock
@@ -44,18 +45,10 @@ class ProductsController < ApplicationController
   end
 
   def new
-    unless Current.user.is_seller
-      flash[:alert] = "You must be a seller to create a product."
-      redirect_to root_path and return
-    end
     @product = Product.new
   end
 
   def create
-    unless Current.user.is_seller
-      flash[:alert] = "You must be a seller to create a product."
-      redirect_to root_path and return
-    end
     @product = Product.new(product_params)
     @product.seller = Current.user
     if @product.save
