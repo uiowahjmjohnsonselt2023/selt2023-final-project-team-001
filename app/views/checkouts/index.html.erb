@@ -1,5 +1,11 @@
 <% content_for :head do %>
-  <%= javascript_import_module_tag "checkouts" %>
+  <%#= javascript_import_module_tag "checkouts" %>
+  <%# I don't like having to do this, but javascript_import_module_tag doesn't allow
+      specifying attributes like data-turbo-track. However, data-turbo-track is needs
+      to be used here so that the checkouts module is removed from <head> when the
+      user navigates away from the checkout page. Without it, the checkouts module
+      will be loaded on every page once the user visits the checkout page. %>
+  <script type="module" data-turbo-track="reload">import "checkouts"</script>
 <% end %>
 
 <div class="row">

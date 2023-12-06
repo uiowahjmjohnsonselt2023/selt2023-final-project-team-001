@@ -1,5 +1,8 @@
 <% content_for :head do %>
-  <%= javascript_import_module_tag "choose_template" %>
+  <%#= javascript_import_module_tag "choose_template" %>
+  <%# See views/checkouts/index.html.erb for why we have to use <script>
+    instead of the above. %>
+  <script type="module" data-turbo-track="reload">import "choose_template"</script>
 <% end %>
 
 <style>
