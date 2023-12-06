@@ -143,12 +143,16 @@
 }
 
 .search-bar-select {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .accordion-button-no-active-change {
-    @extend .accordion-button;
-    --bs-accordion-active-color: var(--accordian-color) !important;
-    --bs-accordion-active-bg: var(--accordian-bg) !important;
+  @extend .accordion-button;
+  --bs-accordion-active-color: var(--accordian-color) !important;
+  --bs-accordion-active-bg: var(--accordian-bg) !important;
+}
+label.required:after {
+  content:" *";
+  color: red;
 }
