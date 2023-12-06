@@ -6,7 +6,7 @@
       <%# "form-label" is inaccurate since this isn't actually an input, but
           we use it so that the page stays consistent. %>
       <p class="form-label">Current Profile Picture:</p>
-      <%= image_tag @profile.avatar.url, class: 'img-thumbnail', alt: 'Current Avatar' %>
+      <%= image_tag @profile.avatar.url, class: "img-thumbnail", alt: "Current Avatar" %>
     </div>
   <% end %>
   <%= f.text_field :first_name, label: "First Name:" %>
@@ -20,7 +20,7 @@
   <%= f.text_field :occupation, label: "Occupation:" %>
   <%= f.select(
         :public_profile,
-        [['Public', true], ['Private', false]],
+        [["Public", true], ["Private", false]],
         label: "Profile Visibility:"
       ) %>
   <%= f.primary %>
