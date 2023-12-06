@@ -101,15 +101,10 @@ Given("I am not a seller") do
 end
 
 When("I register as a seller") do
-  sleep(10) # Pause for 2 seconds
   visit "/register"
-  sleep(2) # Pause for 2 seconds
   fill_in "Storefront name:", with: "Sample Storefront"
-  sleep(2) # Pause for 2 seconds
   check "I agree to the terms and conditions"
-  sleep(2) # Pause for 2 seconds
   click_button "Submit"
-  sleep(2) # Pause for 2 seconds
 end
 
 Then("I should see a registration success message") do
