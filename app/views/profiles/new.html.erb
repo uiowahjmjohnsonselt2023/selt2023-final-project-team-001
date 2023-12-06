@@ -11,5 +11,5 @@
   <%= f.text_field :website, label: "Website:" %>
   <%= f.text_field :occupation, label: "Occupation:" %>
   <%= f.select :public_profile, options_for_select([['Public', true], ['Private', false]]), label: "Profile Visibility:" %>
-  <%= f.submit "Create Profile", class: 'btn btn-primary' %>
+  <%= f.primary "Create Profile" %>
 <% end %>
