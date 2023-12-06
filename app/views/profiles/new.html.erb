@@ -1,5 +1,5 @@
 <p>Add whatever info you'd like</p>
-<%= bootstrap_form_with(model: @profile, url: profiles_path, scope: :profile, method: :post, local: true) do |f| %>
+<%= bootstrap_form_with model: @profile do |f| %>
   <%= f.file_field :avatar, label: "Profile Picture:" %>
   <%= f.text_field :first_name, label: "First Name:" %>
   <%= f.text_field :last_name, label: "Last Name:" %>
