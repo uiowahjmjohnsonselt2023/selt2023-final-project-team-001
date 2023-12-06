@@ -1,4 +1,4 @@
-<%= bootstrap_form_with model: profile, html: {autocomplete: false} do |f| %>
+<%= bootstrap_form_with model: profile, html: {autocomplete: "off"} do |f| %>
   <%= f.file_field :avatar, label: "Profile Picture:" %>
   <% if profile.avatar.file.present? %>
     <div class="mb-3">
