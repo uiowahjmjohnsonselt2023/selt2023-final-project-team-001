@@ -22,21 +22,24 @@
 
 <!-- your products -->
 <% if @products.present? %>
-  <h3>Your Products:</h3>
-  <% @products.each do |product| %>
-    <div class="product">
-      <h4><%= product.name %></h4>
-      <p><%= product.description %></p>
-      <p>$<%= product.price %></p>
-      <!-- Help users know how to link to the product -->
-      <div>
-        <h5>Link to This Product:</h5>
-        <p>
-          HTML Link:
-          <code>&lt;a href="/products/<%= product.id %>"&gt;Link to <%= product.name %>&lt;/a&gt;</code>
-        </p>
-      </div>
-    </div>
+  <%= accordion class: "mb-3" do %>
+    <%= accordion_item "Your Products", id: "products_list" do %>
+      <% @products.each do |product| %>
+        <div class="product">
+          <h4><%= product.name %></h4>
+          <p><%= product.description %></p>
+          <p>$<%= product.price %></p>
+          <!-- Help users know how to link to the product -->
+          <div>
+            <h5>Link to This Product:</h5>
+            <p>
+              HTML Link:
+              <code>&lt;a href="/products/<%= product.id %>"&gt;Link to <%= product.name %>&lt;/a&gt;</code>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>
 
