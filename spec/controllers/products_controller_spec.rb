@@ -16,6 +16,15 @@ describe ProductsController, type: :controller do
       get :index, params: {search: "test", sort: "name", order: "desc"}
       expect(response).to render_template :index
     end
+
+    it "displays products by category" do
+      cg = 0
+      11.times do
+        cg += 1
+        get :index, params: {sort: "name", order: "desc", cat: cg}
+        expect(response).to render_template :index
+      end
+    end
   end
 
   # Can't test that these render 404 page because of how rspec-rails
@@ -92,6 +101,32 @@ describe ProductsController, type: :controller do
       it "redirects to the login page" do
         put :update, params: {id: product.id, product: {name: "New Name"}}
         expect(response).to redirect_to login_path
+      end
+    end
+  end
+
+  context "when looking at products for the first time" do
+    before {
+      user = create(:user)
+      login_as user
+    }
+
+    describe "GET #show" do
+      it "updates the user's viewed products" do
+        product = create(:product, private: false)
+        expect {
+          get :show, params: {id: product.id}
+          user.reload
+        }.to change(ViewedProduct, :count).by(1)
+      end
+
+      it "updates the product view count" do
+        product = create(:product, private: false)
+        get :show, params: {id: product.id}
+        expect {
+          get :show, params: {id: product.id}
+          product.reload
+        }.to change(product, :views).by(1)
       end
     end
   end
