@@ -1,31 +1,38 @@
-<%= bootstrap_form_with model: profile, html: {autocomplete: "off"} do |f| %>
-  <%= f.file_field :avatar, label: "Profile Picture:" %>
-  <% if profile.avatar.file.present? %>
-    <div class="mb-3">
-      <%# "form-label" is inaccurate since this isn't actually an input, but
-          we use it so that the page stays consistent. %>
-      <p class="form-label">Current Profile Picture:</p>
-      <%= image_tag profile.avatar.url, class: "img-thumbnail", alt: "Current Avatar" %>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h1 class="text-center mb-3"><%= local_assigns[:header] || "Profile" %></h1>
+      <%= bootstrap_form_with model: profile, html: {autocomplete: "off"} do |f| %>
+        <%= f.file_field :avatar, label: "Profile Picture:" %>
+        <% if profile.avatar.file.present? %>
+          <div class="mb-3">
+            <%# "form-label" is inaccurate since this isn't actually an input, but
+                we use it so that the page stays consistent. %>
+            <p class="form-label">Current Profile Picture:</p>
+            <%= image_tag profile.avatar.url, class: "img-thumbnail", alt: "Current Avatar" %>
+          </div>
+        <% end %>
+
+        <%= f.text_field :first_name, label: "First Name:" %>
+        <%= f.text_field :last_name, label: "Last Name:" %>
+        <%= f.text_area :bio, label: "Bio:", rows: 5 %>
+        <%= f.text_field :location, label: "Location:" %>
+        <%= f.text_field :occupation, label: "Occupation:" %>
+
+        <%= f.url_field :twitter, label: "Twitter:" %>
+        <%= f.url_field :facebook, label: "Facebook:" %>
+        <%= f.url_field :instagram, label: "Instagram:" %>
+        <%= f.url_field :website, label: "Website:" %>
+
+        <%= f.select(
+              :public_profile,
+              [["Public", true], ["Private", false]],
+              label: "Profile Visibility:"
+            ) %>
+
+        <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+        <%= f.primary %>
+      <% end %>
     </div>
-  <% end %>
-
-  <%= f.text_field :first_name, label: "First Name:" %>
-  <%= f.text_field :last_name, label: "Last Name:" %>
-  <%= f.text_area :bio, label: "Bio:" %>
-  <%= f.text_field :location, label: "Location:" %>
-  <%= f.text_field :occupation, label: "Occupation:" %>
-
-  <%= f.url_field :twitter, label: "Twitter:" %>
-  <%= f.url_field :facebook, label: "Facebook:" %>
-  <%= f.url_field :instagram, label: "Instagram:" %>
-  <%= f.url_field :website, label: "Website:" %>
-
-  <%= f.select(
-        :public_profile,
-        [["Public", true], ["Private", false]],
-        label: "Profile Visibility:"
-      ) %>
-
-  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-  <%= f.primary %>
-<% end %>
+  </div>
+</div>
