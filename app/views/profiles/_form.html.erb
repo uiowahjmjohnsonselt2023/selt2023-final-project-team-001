@@ -13,8 +13,14 @@
           </div>
         <% end %>
 
-        <%= f.text_field :first_name, label: "First Name:" %>
-        <%= f.text_field :last_name, label: "Last Name:" %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.text_field :first_name, label: "First Name:" %>
+          </div>
+          <div class="col-md-6">
+            <%= f.text_field :last_name, label: "Last Name:" %>
+          </div>
+        </div>
         <%= f.text_area :bio, label: "Bio:", rows: 5 %>
         <%= f.text_field :location, label: "Location:" %>
         <%= f.text_field :occupation, label: "Occupation:" %>
