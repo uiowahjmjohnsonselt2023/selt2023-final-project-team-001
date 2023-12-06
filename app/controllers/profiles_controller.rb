@@ -46,8 +46,11 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Profile created successfully!"
       redirect_to profile_path(@profile)
     else
+      # Need to set user to nil because otherwise the navbar/_user_dropdown partial
+      # sees the profile and tries to render a link to it, but profile.id is nil.
+      @profile.user = nil
       flash.now[:alert] = "Profile creation failed. Please check the form."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
