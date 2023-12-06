@@ -18,6 +18,10 @@
   <%= f.text_field :instagram, label: "Instagram:" %>
   <%= f.text_field :website, label: "Website:" %>
   <%= f.text_field :occupation, label: "Occupation:" %>
-  <%= f.select :public_profile, options_for_select([['Public', true], ['Private', false]]), label: "Profile Visibility:", selected: @profile.public_profile %>
+  <%= f.select(
+        :public_profile,
+        [['Public', true], ['Private', false]],
+        label: "Profile Visibility:"
+      ) %>
   <%= f.primary %>
 <% end %>
