@@ -29,8 +29,7 @@ class CheckoutsController < ApplicationController
 
   def remove_from_cart
     if params[:confirmation] == "yes"
-      cart = Cart.find_by(user_id: session[:user_id], product_id: params[:product_id])
-      cart.destroy
+      Cart.find_by(user_id: session[:user_id], product_id: params[:product_id]).destroy
       flash[:success] = "Item removed from cart."
     end
     redirect_to checkout_path
