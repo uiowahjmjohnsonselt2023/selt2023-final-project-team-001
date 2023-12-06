@@ -75,10 +75,10 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "with a valid non-seller logged in" do
-      it "retrieves a logged-in user's information from the database" do
+      it "makes the user a seller" do
         user = create(:user)
         login_as user
-        post :new_seller
+        expect { post :new_seller }.to change { user.reload.is_seller }.to(true)
         expect(flash[:notice]).to eq("Registration successful")
       end
     end
