@@ -1,5 +1,5 @@
 <p>Edit whatever info you'd like</p>
-<%= bootstrap_form_with(model: @profile, url: profile_path(@profile), method: :patch, local: true) do |f| %>
+<%= bootstrap_form_with model: @profile do |f| %>
   <%= f.file_field :avatar, label: "Profile Picture:" %>
   <% if @profile.avatar.file.present? %>
     <div class="mb-3">
