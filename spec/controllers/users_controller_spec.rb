@@ -36,7 +36,7 @@ RSpec.describe UsersController, type: :controller do
       it "does not creates a new user" do
         expect {
           post :create, params: {user: invalid_user}
-        }.to change(User, :count).by(0)
+        }.to_not change(User, :count)
         expect(response).to render_template(:new)
         expect(flash[:alert]).to eq("Invalid input(s)!")
       end
