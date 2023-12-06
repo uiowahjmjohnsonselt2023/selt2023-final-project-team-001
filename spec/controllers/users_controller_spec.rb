@@ -75,11 +75,21 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "with a valid non-seller logged in" do
+      let(:user) { login_as create(:user) }
+
       it "makes the user a seller" do
-        user = create(:user)
-        login_as user
         expect { post :new_seller }.to change { user.reload.is_seller }.to(true)
         expect(flash[:notice]).to eq("Registration successful")
+      end
+
+      it "creates a public profile for the user" do
+        expect { post :new_seller }.to change { user.reload.profile }.from(nil)
+        expect(user.profile.public_profile).to eq(true)
+      end
+
+      it "makes the user's profile public if it already exists" do
+        profile = user.create_profile public_profile: false
+        expect { post :new_seller }.to change { profile.reload.public_profile }.to(true)
       end
     end
 
