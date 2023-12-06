@@ -1,0 +1,19 @@
+<%# locals: (id:, header:, opened: false) %>
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="<%= class_names "accordion-button-no-active-change", collapsed: !opened %>"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#<%= id %>"
+            aria-controls="<%= id %>"
+            aria-expanded="<%= opened %>">
+      <%= header %>
+    </button>
+  </h2>
+  <div id="<%= id %>"
+       class="<%= class_names "accordion-collapse collapse", show: opened %>">
+    <div class="accordion-body">
+      <%= yield %>
+    </div>
+  </div>
+</div>
