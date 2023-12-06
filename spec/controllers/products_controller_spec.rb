@@ -221,13 +221,13 @@ describe ProductsController, type: :controller do
       context "with valid attributes" do
         it "saves the new product in the database" do
           expect {
-            post :create, params: {product: attributes_for(:product_without_seller), id: user.id}
+            post :create, params: {product: attributes_for(:product_without_seller)}
           }.to change(Product, :count).by(1)
         end
 
         it "redirects to the home page" do
           post :create, params: {product: attributes_for(:product_without_seller)}
-          expect(response).to redirect_to products_path(Product.last)
+          expect(response).to redirect_to product_path(Product.last)
         end
       end
 
