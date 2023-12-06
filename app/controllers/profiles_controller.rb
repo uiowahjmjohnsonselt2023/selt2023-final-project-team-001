@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
       flash[:alert] = "You already have a profile!"
       redirect_to profile_path(Current.user.profile)
     end
+    @profile = Profile.new
   end
 
   def create
