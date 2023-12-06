@@ -1,8 +1,45 @@
-<%= bootstrap_form_with model: @user, url: register_path, title: "Register to sell", method: :post, local: true do |f| %>
-  <%= f.text_field :storefront, label: "Storefront name: " %>
-  <%= f.text_field :email, label: "Business email (Optional): ", help: " (Leaving this field blank will default
-   to your account email)" %>
-  <%= f.check_box :info, label: "I want to make my name and email address visible to other users" %>
-  <%= f.check_box :agree, label: "I agree to the terms and conditions. (Required)" %>
-  <%= f.submit "Submit" %>
-<% end %>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h2 class="text-center mb-3">Register to sell</h2>
+      <p>
+        To sell items on the marketplace, you must fill out the form below.
+        Note that sellers are
+        <span class="fw-bold">required</span>
+        to have a public profile:
+      </p>
+      <ul>
+        <li>
+          If you don't have a profile, a public one will be created for you
+          automatically.
+        </li>
+        <li>
+          If you do have one, it will be made public if it isn't already.
+        </li>
+      </ul>
+      <p class="mb-5">
+        Once you register, your profile cannot be made private. Along with this,
+        <strong class="text-danger">
+          you will not be able to delete your account.
+        </strong>
+      </p>
+      <%= bootstrap_form_with model: @user, url: register_path do |f| %>
+        <%= f.check_box(
+              :understand_above,
+              required: true,
+              label: "I understand the above"
+            ) %>
+        <%= f.check_box(
+              :agree_tos,
+              required: true,
+              label: "I agree to the #{
+                  future_link_to "terms and conditions"
+                }".html_safe
+            ) %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.submit "Register", extra_class: "w-25" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
