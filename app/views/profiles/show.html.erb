@@ -30,7 +30,7 @@
 
   <!-- Links -->
   <% if @is_current_user %>
-    <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-danger" %>
+    <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-primary" %>
     <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
   <% end %>
   <% if @show_review_link %>
