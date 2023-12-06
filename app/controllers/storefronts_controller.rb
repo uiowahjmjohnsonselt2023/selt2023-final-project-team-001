@@ -101,11 +101,4 @@ class StorefrontsController < ApplicationController
   def storefront_params
     params.require(:storefront).permit(:name, :short_description, :custom_code)
   end
-
-  def require_seller
-    unless Current.user.is_seller || Current.user.is_admin
-      flash[:alert] = i18n_t scope: :require_seller
-      redirect_to root_path
-    end
-  end
 end
