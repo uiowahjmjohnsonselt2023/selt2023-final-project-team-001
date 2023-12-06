@@ -1,7 +1,6 @@
+<p>Edit whatever info you'd like</p>
 <%= bootstrap_form_with(model: @profile, url: profile_path(@profile), method: :patch, local: true) do |f| %>
-  <%= f.label "Edit whatever info you'd like" %>
-  <%#= f.label :avatar, "Profile Picture:" %>
-  <%= f.file_field :avatar %>
+  <%= f.file_field :avatar, label: "Profile Picture:" %>
   <%= f.label :old_avatar, "Current Profile Picture:" %>
   <% if @profile.avatar.file.present? %>
     <%= image_tag @profile.avatar.url, class: 'img-thumbnail', alt: 'Current Avatar' %>
