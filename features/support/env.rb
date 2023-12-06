@@ -5,6 +5,8 @@
 # files.
 
 require "cucumber/rails"
+require "capybara/cucumber"
+Capybara.default_driver = :rack_test # :selenium_chrome # or :selenium
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how

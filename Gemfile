@@ -66,6 +66,8 @@ group :development, :test do
   gem "dotenv-rails" # Load environment variables from .env into ENV in development
   gem "cucumber-rails", require: false
   gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem "launchy"
 end
 
 group :development do
