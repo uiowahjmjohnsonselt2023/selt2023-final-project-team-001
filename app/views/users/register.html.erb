@@ -27,12 +27,12 @@
         <%= f.check_box(
               :understand_above,
               required: true,
-              label: "I understand the above"
+              label: "I understand the above and wish to register"
             ) %>
         <%= f.check_box(
               :agree_tos,
               required: true,
-              label: "I agree to the #{
+              label: "I have read and agree to the #{
                   future_link_to "terms and conditions"
                 }".html_safe
             ) %>
