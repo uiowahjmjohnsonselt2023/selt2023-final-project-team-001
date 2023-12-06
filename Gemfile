@@ -64,6 +64,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "dotenv-rails" # Load environment variables from .env into ENV in development
+  gem "cucumber-rails", require: false
+  gem "database_cleaner"
 end
 
 group :development do
