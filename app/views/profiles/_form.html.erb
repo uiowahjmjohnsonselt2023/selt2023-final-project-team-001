@@ -12,10 +12,10 @@
   <%= f.text_field :last_name, label: "Last Name:" %>
   <%= f.text_area :bio, label: "Bio:" %>
   <%= f.text_field :location, label: "Location:" %>
-  <%= f.text_field :twitter, label: "Twitter:" %>
-  <%= f.text_field :facebook, label: "Facebook:" %>
-  <%= f.text_field :instagram, label: "Instagram:" %>
-  <%= f.text_field :website, label: "Website:" %>
+  <%= f.url_field :twitter, label: "Twitter:" %>
+  <%= f.url_field :facebook, label: "Facebook:" %>
+  <%= f.url_field :instagram, label: "Instagram:" %>
+  <%= f.url_field :website, label: "Website:" %>
   <%= f.text_field :occupation, label: "Occupation:" %>
   <%= f.select(
         :public_profile,
