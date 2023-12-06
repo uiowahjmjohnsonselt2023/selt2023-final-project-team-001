@@ -141,3 +141,8 @@
 .pre-wrap {
     white-space: pre-wrap;
 }
+
+label.required:after {
+    content:" *";
+    color: red;
+}
