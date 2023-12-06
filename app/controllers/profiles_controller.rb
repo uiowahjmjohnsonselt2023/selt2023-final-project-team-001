@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
       redirect_to @profile, notice: "Profile was successfully updated."
     else
       flash.now[:alert] = "Profile update failed. Please check the form."
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +46,7 @@ class ProfilesController < ApplicationController
       redirect_to profile_path(@profile)
     else
       flash.now[:alert] = "Profile creation failed. Please check the form."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 

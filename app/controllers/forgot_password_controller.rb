@@ -10,7 +10,7 @@ class ForgotPasswordController < ApplicationController
 
     if @email != @confirm_email
       flash[:alert] = "Emails do not match!"
-      render :new
+      render :new, status: :unprocessable_entity
     else
       @user = User.find_by(email: @email)
       if @user.present?

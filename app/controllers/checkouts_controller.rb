@@ -38,7 +38,7 @@ class CheckoutsController < ApplicationController
   def update_product_inventory
     if @products_in_cart.empty?
       flash[:alert] = "You must add products to your cart to purchase them!"
-      render :index
+      render :index, status: :unprocessable_entity
     else
       @product_ids_and_quantity.each do |p|
         Cart.find_by(user_id: session[:user_id], product_id: p[:id]).destroy
