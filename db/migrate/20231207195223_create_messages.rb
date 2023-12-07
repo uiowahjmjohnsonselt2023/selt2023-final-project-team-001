@@ -7,7 +7,7 @@ class CreateMessages < ActiveRecord::Migration[7.1]
       t.text :message, null: false, default: ""
       t.timestamps
 
-      t.index [:sender, :receiver, :subject, :message], unique: true
+      t.index [:sender_id, :receiver_id, :subject, :message], unique: true
     end
   end
 end
