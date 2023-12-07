@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
   get "/auth/:provider/callback", to: "sessions#omniauth"
+  get "/send_message", to: "messages#new", as: "send_message"
+  post "/send_message_submit", to: "messages#create", as: "send_message_submit"
+  get "/view_messages", to: "messages#index", as: "view_messages"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
