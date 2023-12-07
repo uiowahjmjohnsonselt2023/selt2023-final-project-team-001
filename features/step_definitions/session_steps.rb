@@ -58,6 +58,7 @@ Then("I should see an error message") do
 end
 
 Given("I am logged in") do
+  visit "/logout"
   steps %(
     Given I am on the login page
     And I enter valid credentials
