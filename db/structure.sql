@@ -173,6 +173,39 @@ ALTER SEQUENCE public.messages_id_seq OWNED BY public.messages.id;
 
 
 --
+-- Name: price_alerts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.price_alerts (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    threshold numeric(10,2),
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.price_alerts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.price_alerts_id_seq OWNED BY public.price_alerts.id;
+
+
+--
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -440,6 +473,13 @@ ALTER TABLE ONLY public.messages ALTER COLUMN id SET DEFAULT nextval('public.mes
 
 
 --
+-- Name: price_alerts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts ALTER COLUMN id SET DEFAULT nextval('public.price_alerts_id_seq'::regclass);
+
+
+--
 -- Name: products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -519,6 +559,14 @@ ALTER TABLE ONLY public.categorizations
 
 ALTER TABLE ONLY public.messages
     ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: price_alerts price_alerts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT price_alerts_pkey PRIMARY KEY (id);
 
 
 --
@@ -649,6 +697,20 @@ CREATE INDEX index_messages_on_sender_id ON public.messages USING btree (sender_
 
 
 --
+-- Name: index_price_alerts_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_product_id ON public.price_alerts USING btree (product_id);
+
+
+--
+-- Name: index_price_alerts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_user_id ON public.price_alerts USING btree (user_id);
+
+
+--
 -- Name: index_products_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -765,6 +827,14 @@ ALTER TABLE ONLY public.storefronts
 
 
 --
+-- Name: price_alerts fk_rails_49aac91261; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_49aac91261 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: categorizations fk_rails_5a40b79a1d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -810,6 +880,14 @@ ALTER TABLE ONLY public.carts
 
 ALTER TABLE ONLY public.viewed_products
     ADD CONSTRAINT fk_rails_95ac6b7bea FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: price_alerts fk_rails_95c3a9b293; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_95c3a9b293 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -873,6 +951,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231207195703'),
 ('20231207195223'),
 ('20231205154444'),
+('20231204035349'),
 ('20231130163958'),
 ('20231130152546'),
 ('20231130152310'),
