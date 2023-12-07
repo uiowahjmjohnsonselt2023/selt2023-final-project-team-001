@@ -17,11 +17,11 @@ RSpec.describe PriceAlertsController, type: :controller do
     end
 
     context "when price alert exists" do
-      it "redirects to the price alert show page" do
+      it "redirects to the price alert index page" do
         product = FactoryBot.create(:product)
-        price_alert = FactoryBot.create(:price_alert, product: product, user: user)
+        FactoryBot.create(:price_alert, product: product, user: user)
         get :new, params: {product_id: product.id}
-        expect(response).to redirect_to price_alert_path(price_alert.id)
+        expect(response).to redirect_to price_alerts_path
         expect(flash[:alert]).to eq I18n.t("price_alerts.new.already_exists")
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe PriceAlertsController, type: :controller do
       it "creates a new price alert" do
         product = FactoryBot.create(:product)
         post :create, params: {product_id: product.id, new_threshold: 100}
-        expect(response).to redirect_to price_alert_path(PriceAlert.last.id)
+        expect(response).to redirect_to price_alerts_path
         expect(flash[:notice]).to eq I18n.t("price_alerts.create.success")
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe PriceAlertsController, type: :controller do
       it "updates the price alert" do
         price_alert = FactoryBot.create(:price_alert, user: user)
         patch :update, params: {id: price_alert.id, price_alert: {new_threshold: 100}}
-        expect(response).to redirect_to price_alert_path(price_alert.id)
+        expect(response).to redirect_to price_alerts_path
         expect(flash[:notice]).to eq I18n.t("price_alerts.update.success")
       end
     end
@@ -100,24 +100,6 @@ RSpec.describe PriceAlertsController, type: :controller do
     it "renders the index template" do
       get :index
       expect(response).to render_template :index
-    end
-  end
-
-  describe "GET #show" do
-    context "when the price alert belongs to the user" do
-      it "renders the show template" do
-        price_alert = FactoryBot.create(:price_alert, user: user)
-        get :show, params: {id: price_alert.id}
-        expect(response).to render_template :show
-      end
-    end
-
-    context "when the price alert does not belong to the user" do
-      it "redirects to the home page" do
-        price_alert = FactoryBot.create(:price_alert)
-        get :show, params: {id: price_alert.id}
-        expect(response).to redirect_to root_path
-      end
     end
   end
 

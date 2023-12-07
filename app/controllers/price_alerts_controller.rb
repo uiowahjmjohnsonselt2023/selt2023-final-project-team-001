@@ -3,9 +3,9 @@ class PriceAlertsController < ApplicationController
 
   def new
     if PriceAlert.exists?(product_id: params[:product_id], user_id: Current.user.id)
-      price_alert = PriceAlert.find_by(product_id: params[:product_id], user_id: Current.user.id)
+      PriceAlert.find_by(product_id: params[:product_id], user_id: Current.user.id)
       flash[:alert] = t("price_alerts.new.already_exists")
-      redirect_to price_alert_path(price_alert.id)
+      redirect_to price_alerts_path
     end
     @product = Product.find(params[:product_id])
   end
@@ -16,7 +16,7 @@ class PriceAlertsController < ApplicationController
 
     if @price_alert.save
       flash.now[:notice] = t("price_alerts.create.success")
-      redirect_to @price_alert
+      redirect_to price_alerts_path
     else
       flash[:alert] = t("price_alerts.create.failure")
       redirect_back(fallback_location: root_path)
@@ -38,7 +38,7 @@ class PriceAlertsController < ApplicationController
       redirect_to root_path
     elsif @price_alert.update(threshold: params[:price_alert][:new_threshold])
       flash[:notice] = t("price_alerts.update.success")
-      redirect_to @price_alert
+      redirect_to price_alerts_path
     else
       flash[:alert] = t("price_alerts.update.failure")
       redirect_to root_path
@@ -47,15 +47,6 @@ class PriceAlertsController < ApplicationController
 
   def index
     @price_alerts = Current.user.price_alerts
-  end
-
-  def show
-    if PriceAlert.exists?(id: params[:id], user_id: Current.user.id)
-      @price_alert_item = PriceAlert.find(params[:id])
-    else
-      flash[:alert] = t("price_alerts.show.not_yours")
-      redirect_to root_path
-    end
   end
 
   def destroy

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get :customize, on: :member
   end
 
-  resources :price_alerts, only: [:show, :new, :create, :index, :edit, :update], param: :id do
+  resources :price_alerts, only: [:new, :create, :index, :edit, :update], param: :id do
     get :delete, on: :member
     delete :destroy, on: :member
   end
