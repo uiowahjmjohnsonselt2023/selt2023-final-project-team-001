@@ -32,21 +32,14 @@ Given("I am on the login page") do
   visit "/login"
 end
 
-When("I enter valid credentials") do
+And("I enter valid credentials") do
   email = "test@email.com"
   password = "P4ssw0rd!"
-  # @user = User.find_by(email: email)
-  # unless @user
-  #   visit '/signup'
-  #   fill_in 'First Name', with: 'John'
-  #   fill_in 'Last Name', with: 'Doe'
-  #   fill_in 'Email', with: email
-  #   fill_in 'Password', with: password
-  #   fill_in 'Confirm Password', with: password
-  #   click_button 'Signup'
-  # end
   fill_in "email", with: email
   fill_in "password", with: password
+end
+
+When("I click the login button") do
   click_button "Login"
 end
 
@@ -55,10 +48,9 @@ Then("I should be redirected to the homepage with a success message") do
   expect(page).to have_content("Successfully signed in!")
 end
 
-When("I enter invalid credentials") do
+And("I enter invalid credentials") do
   fill_in "email", with: "not@real.com"
   fill_in "password", with: "b4dP4ssw0rd"
-  click_button "Login"
 end
 
 Then("I should see an error message") do
@@ -68,12 +60,10 @@ end
 Given("I am logged in") do
   steps %(
     Given I am on the login page
-    When I enter valid credentials
+    And I enter valid credentials
+    When I click the login button
     Then I should be redirected to the homepage with a success message
   )
-  email = "test@email.com"
-  user = User.find_by(email: email)
-  puts(user.is_seller)
 end
 
 Then("I should be redirected to the homepage with a signed-out message") do
@@ -93,11 +83,10 @@ Then("I should be logged out") do
   expect(page).to have_content("Signed out successfully!")
 end
 
-Given("I am not a seller") do
+And("I am not a seller") do
   email = "test@email.com"
   user = User.find_by(email: email)
   user.update_attribute(:is_seller, false)
-  puts(user.is_seller)
 end
 
 When("I register as a seller") do
@@ -130,4 +119,40 @@ end
 Then("I should be logged in through Google and see a success message") do
   expect(page).to have_content("Successfully signed in through Google!")
   expect(page).to have_current_path("/")
+end
+
+# Sad paths
+And("I am a seller") do
+  steps %(
+    And I am not a seller
+    When I register as a seller
+  )
+end
+
+When("I try to register") do
+  visit "/register"
+end
+
+Then("I should see a registration failure message") do
+  expect(page).to have_content("You already are a seller, no need to register again!")
+end
+
+Then("I should see a logout failure message") do
+  expect(page).to have_content("You need to sign in before you can sign out!")
+end
+
+Given("I am not logged in") do
+  visit "/logout"
+end
+
+Then("I should see a not logged in registration failure message") do
+  expect(page).to have_content("You need to sign in before you can register as a seller!")
+end
+
+And("I try to log in") do
+  visit "/login"
+end
+
+Then("I should see an already logged in failure message") do
+  expect(page).to have_content("You are already signed in!")
 end
