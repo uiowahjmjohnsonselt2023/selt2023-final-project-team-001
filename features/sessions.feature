@@ -13,11 +13,13 @@ Feature: User Authentication
     When I click the login button
     Then I should be redirected to the homepage with a success message
 
+  @needs_user
   Scenario: Logout
     Given I am logged in
     When I log out
     Then I should be redirected to the homepage with a signed-out message
 
+  @needs_user
   Scenario: Registration as a Seller
     Given I am logged in
     And I am not a seller
@@ -45,6 +47,7 @@ Feature: User Authentication
     When I try to register
     Then I should see a registration failure message
 
+  @needs_user
   Scenario: Logout when already not signed in
     Given I am logged in
     And I log out
@@ -56,6 +59,7 @@ Feature: User Authentication
     When I try to register
     Then I should see a not logged in registration failure message
 
+  @needs_user
   Scenario: Login when already logged in
     Given I am logged in
     And I try to log in
