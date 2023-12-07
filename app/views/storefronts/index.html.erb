@@ -1,25 +1,21 @@
 <div class="container mt-5">
-  <h1 class="mb-4">Storefronts</h1>
+  <h2 class="mb-4"><%= storefronts_index_header %></h2>
   <div class="row">
     <% if @storefronts.present? %>
       <% @storefronts.each do |storefront| %>
         <div class="col-md-4 mb-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title"><%= link_to storefront.user.full_name + "'s Storefront", storefront_path(storefront.id) %></h5>
-              <p class="card-text">Storefront Description: to be implemented</p>
-              <% if storefront.user.profile.seller_rating.present? && storefront.user.profile.seller_rating > 0 %>
-                <p class="card-text"><%= "#{storefront.user.full_name}'s avg. rating: #{storefront.user.profile.seller_rating}" %></p>
-              <% else %>
-                <p class="card-text"><%= "#{storefront.user.full_name} has not been rated yet." %></p>
-              <% end %>
+              <h5 class="card-title"><%= link_to storefront.name, storefront_path(storefront.id) %></h5>
+              <p class="card-text"><%= storefront.short_description %></p>
+              <%= render "application/seller_info", seller: storefront.user %>
             </div>
           </div>
         </div>
         <% end %>
     <% else %>
       <div class="col-md-12">
-        <p>There are no storefronts to display.</p>
+        <p><%= no_products_message %></p>
       </div>
     <% end %>
   </div>
