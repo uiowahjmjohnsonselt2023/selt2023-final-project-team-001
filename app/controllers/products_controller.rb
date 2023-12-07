@@ -28,8 +28,6 @@ class ProductsController < ApplicationController
         redirect_to products_path(sort: params[:sort], search: params[:search]) and return
       end
       @products = @products.joins(:categories).where(categories: {id: cat})
-      puts "second"
-      puts @products
     end
   end
 
