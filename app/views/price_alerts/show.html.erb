@@ -1,5 +1,0 @@
-<h1>Price Alert Item Details</h1>
-<p>Name: <%= @price_alert_item.product.name %></p>
-<p>Price: $<%= @price_alert_item.product.price %></p>
-<p>Threshold: $<%= format('%.2f', @price_alert_item.threshold) %></p>
-<%= link_to "Delete threshold", delete_price_alert_path(@price_alert_item), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
