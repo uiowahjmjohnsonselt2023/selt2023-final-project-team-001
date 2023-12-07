@@ -60,6 +60,7 @@ class StorefrontsController < ApplicationController
       flash[:alert] = t("storefronts.update.permission_denied")
       redirect_to root_path
     end
+    flash[:notice] = t("storefronts.update.success")
   end
 
   def customize
