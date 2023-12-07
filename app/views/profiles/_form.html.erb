@@ -33,7 +33,10 @@
         <%= f.select(
               :public_profile,
               [["Public", true], ["Private", false]],
-              label: "Profile Visibility:"
+              {label: "Profile Visibility:"}, # select options
+              profile.user&.is_seller ? # html options
+                {disabled: true, title: "Sellers must have public profiles."} :
+                {}
             ) %>
 
         <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
