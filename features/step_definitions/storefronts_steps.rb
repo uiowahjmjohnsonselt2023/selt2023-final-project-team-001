@@ -16,6 +16,8 @@ Before("@needs_storefronts") do
 
   user.storefront = Storefront.create(
     custom_code: "1",
+    name: "John Doe's Storefront",
+    short_description: "We've got stuff",
     user_id: user.id
   )
   user.save
@@ -34,6 +36,8 @@ Before("@needs_storefronts") do
 
   user2.storefront = Storefront.create(
     custom_code: "1",
+    name: "Jim Smith's Storefront",
+    short_description: "We've got better stuff",
     user_id: user2.id
   )
   user2.save
