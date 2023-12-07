@@ -136,6 +136,39 @@ ALTER SEQUENCE public.categorizations_id_seq OWNED BY public.categorizations.id;
 
 
 --
+-- Name: price_alerts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.price_alerts (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    threshold numeric(10,2),
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.price_alerts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.price_alerts_id_seq OWNED BY public.price_alerts.id;
+
+
+--
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -153,7 +186,8 @@ CREATE TABLE public.products (
     seller_id bigint NOT NULL,
     cart_id bigint,
     photos json,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED,
+    views integer
 );
 
 
@@ -341,6 +375,38 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: viewed_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.viewed_products (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.viewed_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.viewed_products_id_seq OWNED BY public.viewed_products.id;
+
+
+--
 -- Name: carts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -359,6 +425,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.c
 --
 
 ALTER TABLE ONLY public.categorizations ALTER COLUMN id SET DEFAULT nextval('public.categorizations_id_seq'::regclass);
+
+
+--
+-- Name: price_alerts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts ALTER COLUMN id SET DEFAULT nextval('public.price_alerts_id_seq'::regclass);
 
 
 --
@@ -397,6 +470,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
+-- Name: viewed_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products ALTER COLUMN id SET DEFAULT nextval('public.viewed_products_id_seq'::regclass);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -426,6 +506,14 @@ ALTER TABLE ONLY public.categories
 
 ALTER TABLE ONLY public.categorizations
     ADD CONSTRAINT categorizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: price_alerts price_alerts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT price_alerts_pkey PRIMARY KEY (id);
 
 
 --
@@ -485,6 +573,14 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: viewed_products viewed_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT viewed_products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_carts_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -531,6 +627,20 @@ CREATE INDEX index_categorizations_on_product_id ON public.categorizations USING
 --
 
 CREATE UNIQUE INDEX index_categorizations_on_product_id_and_category_id ON public.categorizations USING btree (product_id, category_id);
+
+
+--
+-- Name: index_price_alerts_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_product_id ON public.price_alerts USING btree (product_id);
+
+
+--
+-- Name: index_price_alerts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_user_id ON public.price_alerts USING btree (user_id);
 
 
 --
@@ -597,6 +707,20 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
+-- Name: index_viewed_products_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_product_id ON public.viewed_products USING btree (product_id);
+
+
+--
+-- Name: index_viewed_products_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_user_id ON public.viewed_products USING btree (user_id);
+
+
+--
 -- Name: reviews fk_rails_007031d9cb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -629,11 +753,27 @@ ALTER TABLE ONLY public.storefronts
 
 
 --
+-- Name: price_alerts fk_rails_49aac91261; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_49aac91261 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: categorizations fk_rails_5a40b79a1d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.categorizations
     ADD CONSTRAINT fk_rails_5a40b79a1d FOREIGN KEY (category_id) REFERENCES public.categories(id);
+
+
+--
+-- Name: viewed_products fk_rails_7d150f3af7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_7d150f3af7 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -650,6 +790,22 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.carts
     ADD CONSTRAINT fk_rails_916f2a1419 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- Name: viewed_products fk_rails_95ac6b7bea; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_95ac6b7bea FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: price_alerts fk_rails_95c3a9b293; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_95c3a9b293 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -691,11 +847,14 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231205154444'),
+('20231204035349'),
 ('20231130163958'),
 ('20231130152546'),
 ('20231130152310'),
 ('20231130152251'),
 ('20231129233947'),
+('20231129232534'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),
