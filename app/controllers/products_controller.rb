@@ -27,7 +27,9 @@ class ProductsController < ApplicationController
         flash[:alert] = "#{cat} isn't a valid category."
         redirect_to products_path(sort: params[:sort], search: params[:search]) and return
       end
-      @products = @products.where(categories: cat)
+      @products = @products.joins(:categories).where(categories: {id: cat})
+      puts "second"
+      puts @products
     end
   end
 
