@@ -35,11 +35,6 @@ class UsersController < ApplicationController
   end
 
   def new_seller
-    if Current.user.profile.nil?
-      Current.user.create_profile public_profile: true
-    else
-      Current.user.profile.update_attribute(:public_profile, true)
-    end
     Current.user.update_attribute(:is_seller, true)
     flash[:notice] = "Registration successful"
     redirect_to root_path

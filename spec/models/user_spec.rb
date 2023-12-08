@@ -69,4 +69,34 @@ RSpec.describe User, type: :model do
       expect(user.full_name).to eq("John Doe")
     end
   end
+
+  describe "update_profile_visibility" do
+    it "creates a public profile if user is a seller without a profile" do
+      user = build(:user)
+      expect {
+        # Have to use `update` here since we need to commit for the callback to run
+        user.update(is_seller: true)
+      }.to change { user.profile }.from(nil)
+      expect(user.profile.public_profile).to eq(true)
+    end
+
+    it "sets public_profile to true if user is a seller with a profile" do
+      user = create(:user_with_private_profile)
+      expect {
+        user.update(is_seller: true)
+      }.to change { user.profile.public_profile }.from(false).to(true)
+    end
+
+    it "isn't called if user is not a seller" do
+      user = build(:user)
+      expect(user).to_not receive(:update_profile_visibility)
+      user.save
+    end
+
+    it "isn't called if is_seller is set to false" do
+      user = create(:user)
+      expect(user).to_not receive(:update_profile_visibility)
+      user.update(is_seller: false)
+    end
+  end
 end
