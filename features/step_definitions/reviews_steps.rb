@@ -19,9 +19,10 @@ Before("@needs_user") do
   new_user.update_attribute(:is_admin, false)
 end
 
-And("There is a seller with a profile") do
+And("There is a seller with a public profile") do
   @seller = FactoryBot.create(:seller)
   @profile = FactoryBot.create(:profile, user: @seller)
+  @profile.update_attribute(:public_profile, true)
   @seller.save
   puts(@seller.profile.id)
 end
@@ -32,11 +33,22 @@ end
 
 Then("I should see a form to leave a review") do
   expect(page).to have_current_path("/profiles/#{@profile.id}")
+  expect(page).to have_content("Name")
+  expect(page).to have_content("Bio")
+  expect(page).to have_content("Location")
+  expect(page).to have_content("Twitter")
+  expect(page).to have_content("Facebook")
+  expect(page).to have_content("Instagram")
+  expect(page).to have_content("Website")
+  expect(page).to have_content("Occupation")
+  expect(page).to have_content("Seller Rating (out of 5)")
+  expect(page).to have_content("Leave A Review")
 end
 
 When("I fill in the review form with valid information") do
-  choose "yes"
-  choose "5"
+  expect(page).to have_content("Leave A Review")
+  choose "Yes"
+  click_on "5 - Excellent"
 end
 
 And("I submit the review") do
