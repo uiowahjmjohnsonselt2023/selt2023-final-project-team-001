@@ -8,7 +8,7 @@ class PriceAlertsController < ApplicationController
       redirect_to price_alerts_path
     elsif Current.user.products.present? && Current.user.products.ids.include?(params[:product_id].to_i)
       flash[:alert] = t("price_alerts.new.cannot_add_own_product")
-      redirect_to root_path
+      redirect_to root_path and return
     else
       @price_alert = PriceAlert.new
     end
@@ -16,6 +16,10 @@ class PriceAlertsController < ApplicationController
   end
 
   def create
+    if Current.user.products.present? && Current.user.products.ids.include?(params[:product_id].to_i)
+      flash[:alert] = t("price_alerts.new.cannot_add_own_product")
+      redirect_to root_path and return
+    end
     @product = Product.find(params[:product_id])
     @price_alert = PriceAlert.new(product: @product, user: Current.user, threshold: params[:new_threshold])
 
