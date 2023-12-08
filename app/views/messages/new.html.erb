@@ -1,0 +1,14 @@
+<h1>Send a Message</h1>
+<p><em>
+  <% unless @name.blank? %>
+    <%=  "You are messaging: #{@name}"  %>
+  <%  end %>
+</em></p>
+
+<%= bootstrap_form_with( url: send_message_submit_path, method: :post, local: true) do |f| %>
+  <%= hidden_field_tag :receiver_id, @receiver_id %>
+  <%= hidden_field_tag :profile_id, @profile_id %>
+  <%= f.text_field :subject, label: "Subject", placeholder: "Subject" %>
+  <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;" %>
+  <%= f.submit "Send", class: 'btn btn-primary' %>
+<% end %>
