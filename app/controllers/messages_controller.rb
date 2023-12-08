@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    Message.create(receiver_id: @receiver_id, sender_id: Current.user.id, subject: params[:subject], message: params[:message])
+    Message.create(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:subject], message: params[:message])
     flash[:success] = "Message successfully sent!"
     redirect_to profile_path(params[:profile_id])
   end
