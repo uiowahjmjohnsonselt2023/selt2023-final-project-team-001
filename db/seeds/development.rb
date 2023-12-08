@@ -48,7 +48,7 @@ Profile.insert_all(
       instagram: "https://instagram.com/#{username}",
       website: Faker::Internet.url(path: "/#{username}"),
       occupation: Faker::Job.title,
-      public_profile: Faker::Boolean.boolean,
+      public_profile: user.is_seller || Faker::Boolean.boolean,
       user_id: user.id
     }
   end
@@ -73,10 +73,18 @@ Product.insert_all(
   end
 )
 
-# Give every seller a storefront
-User.sellers.each do |seller|
-  seller.create_storefront(custom_code: Faker::Number.within(range: 1..2))
-end
+# Give half of the sellers a storefront
+half_seller_ids = Faker::Base.sample(seller_ids, seller_ids.length / 2)
+Storefront.insert_all(
+  half_seller_ids.map do |seller_id|
+    {
+      name: Faker::Company.name,
+      short_description: Faker::Company.catch_phrase,
+      custom_code: Faker::Number.within(range: 1..2),
+      user_id: seller_id
+    }
+  end
+)
 
 # Give some sellers reviews
 sellers_to_review = User.sellers.limit(5)

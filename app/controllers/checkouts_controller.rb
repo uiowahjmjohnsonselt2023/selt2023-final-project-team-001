@@ -7,12 +7,21 @@ class CheckoutsController < ApplicationController
 
     @products_in_cart = []
     @product_ids_and_quantity = []
+    @cart_price = 0
     @empty = "Your cart is empty!"
 
     if cart.present?
       cart.each do |product|
         p = Product.find_by(id: product.product_id)
-        @products_in_cart.push({name: p.name, price: p.price_cents, original_quantity: p.quantity, quantity: product.quantity, id: product.product_id})
+        total_price = p.price * product.quantity
+        @cart_price += total_price
+        @products_in_cart.push({
+          name: p.name,
+          total_price: total_price,
+          original_quantity: p.quantity,
+          quantity: product.quantity,
+          id: product.product_id
+        })
         @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
       end
     end
@@ -38,7 +47,7 @@ class CheckoutsController < ApplicationController
   def update_product_inventory
     if @products_in_cart.empty?
       flash[:alert] = "You must add products to your cart to purchase them!"
-      render :index
+      render :index, status: :unprocessable_entity
     else
       @product_ids_and_quantity.each do |p|
         Cart.find_by(user_id: session[:user_id], product_id: p[:id]).destroy

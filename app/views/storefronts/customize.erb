@@ -1,0 +1,44 @@
+<%# Okay this might be kind of hard to follow but here's what we're doing:
+    We want the preview button *and* the save button to be able to use the code input,
+    so we have to put them in the same form. Since they need to do different things,
+    we use the formaction and formmethod attributes to tell the form what to do for
+    the preview button. The save button will just submit the form normally.
+
+    The other thing we need to do is make sure the preview button adds the previewed
+    code to the current page. We do this by using a turbo frame. The preview button
+    has data-turbo-frame="custom_code_output" which tells it to add the response of
+    the preview action to the turbo frame with the id "custom_code_output". The
+    preview.html.erb file has a turbo_frame_tag with the same id so that Turbo knows
+    what content from the response to add to the page. %>
+<!-- Allow sellers to input custom code -->
+<%= bootstrap_form_with model: @storefront, method: :patch, class: "mb-3" do |f| %>
+  <%= f.text_area :custom_code, value: (@previewed_code.present? ? @previewed_code : ''), rows: 10, cols: 50 %>
+  <%= f.submit 'Preview Custom Code',
+    formmethod: :get,
+    formaction: storefronts_preview_path,
+    data: {"turbo-frame" => "custom_code_output"} %>
+  <%= f.submit 'Save Custom Code' %>
+<% end %>
+
+<!-- your products -->
+<% if @products.present? %>
+  <%= accordion class: "mb-3" do %>
+    <%= accordion_item "Your Products", id: "products_list" do %>
+      <% @products.each do |product| %>
+        <div class="product">
+          <h4><%= product.name %></h4>
+          <p class="mb-0"><%= product.description %></p>
+          <p class="mb-0">$<%= product.price %></p>
+          <!-- Help users know how to link to the product -->
+          <p>
+            HTML Link:
+            <code>&lt;a href="/products/<%= product.id %>"&gt;Link to <%= product.name %>&lt;/a&gt;</code>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<!-- Display custom code output -->
+<%= turbo_frame_tag "custom_code_output" %>

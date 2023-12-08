@@ -76,4 +76,6 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.action_controller.raise_on_missing_callback_actions = true
+  config.action_mailer.default_url_options = {host: "https://final-project-team-001-s3-c1ff8f16f5bc.herokuapp.com/"}
 end

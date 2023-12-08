@@ -1,0 +1,33 @@
+<div data-controller="search-bar">
+  <%# The action attribute gets set by JavaScript when submit.
+      See app/javascript/controllers/search_bar_controller.js %>
+  <form class="d-flex"
+        role="search"
+        method="get"
+        data-action="search-bar#search">
+    <div class="input-group">
+      <div class="input-group-addon">
+        <select class="form-select search-bar-select"
+                aria-label="Select type of item to search for"
+                autocomplete="off"
+                data-search-bar-target="path">
+          <option <%= tag.attributes selected: current_page?(products_path),
+                        value: products_path %>>
+            Products
+          </option>
+          <option <%= tag.attributes selected: current_page?(storefronts_path),
+                        value: storefronts_path %>>
+            Storefronts
+          </option>
+        </select>
+      </div>
+      <input class="form-control me-2"
+             type="search"
+             name="search"
+             placeholder="Search"
+             aria-label="Search"
+             autocomplete="off"
+             value="<%= params[:search] || "" %>">
+    </div>
+  </form>
+</div>

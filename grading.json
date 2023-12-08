@@ -1,7 +1,8 @@
 {
-  “GROUP“ : “G001“,
-  “ALL_SPRINTS“ : {
-    “SPRINT1_URL“ : https://final-project-team-001-fabc72e5fdcb.herokuapp.com/,
-    “SPRINT2_URL“ : https://final-project-team-001-s2-25e7c5f69a35.herokuapp.com/
+  "GROUP" : "G001",
+  "ALL_SPRINTS" : {
+    "SPRINT1_URL" : "https://final-project-team-001-fabc72e5fdcb.herokuapp.com/",
+    "SPRINT2_URL" : "https://final-project-team-001-s2-25e7c5f69a35.herokuapp.com/",
+    "SPRINT3_URL" : "https://final-project-team-001-s3-c1ff8f16f5bc.herokuapp.com/"
   }
 }
