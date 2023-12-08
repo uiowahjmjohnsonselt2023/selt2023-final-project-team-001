@@ -39,17 +39,4 @@ class UsersController < ApplicationController
     flash[:notice] = "Registration successful"
     redirect_to root_path
   end
-
-  private
-
-  # Redirects to the root path if the user is a seller.
-  # An :alert flash is set before redirecting, using the translation for
-  # the requested controller and action under the :require_not_seller scope.
-  # See #i18n_t.
-  def require_not_seller
-    if Current.user.is_seller
-      flash[:alert] = i18n_t scope: :require_not_seller
-      redirect_to root_path
-    end
-  end
 end
