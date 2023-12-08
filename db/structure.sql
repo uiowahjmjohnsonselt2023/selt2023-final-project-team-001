@@ -177,6 +177,16 @@ ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 
 
 --
+-- Name: products_promotions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.products_promotions (
+    product_id bigint NOT NULL,
+    promotion_id bigint NOT NULL
+);
+
+
+--
 -- Name: profiles; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -218,6 +228,74 @@ CREATE SEQUENCE public.profiles_id_seq
 --
 
 ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
+
+
+--
+-- Name: promotions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.promotions (
+    id bigint NOT NULL,
+    name character varying,
+    starts_on timestamp(6) without time zone NOT NULL,
+    ends_on timestamp(6) without time zone NOT NULL,
+    multiple boolean DEFAULT true NOT NULL,
+    promotionable_type character varying,
+    promotionable_id integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    seller_id bigint NOT NULL
+);
+
+
+--
+-- Name: promotions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.promotions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: promotions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.promotions_id_seq OWNED BY public.promotions.id;
+
+
+--
+-- Name: promotions_percent_offs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.promotions_percent_offs (
+    id bigint NOT NULL,
+    percentage integer NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: promotions_percent_offs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.promotions_percent_offs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: promotions_percent_offs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.promotions_percent_offs_id_seq OWNED BY public.promotions_percent_offs.id;
 
 
 --
@@ -376,6 +454,20 @@ ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.pro
 
 
 --
+-- Name: promotions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions ALTER COLUMN id SET DEFAULT nextval('public.promotions_id_seq'::regclass);
+
+
+--
+-- Name: promotions_percent_offs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions_percent_offs ALTER COLUMN id SET DEFAULT nextval('public.promotions_percent_offs_id_seq'::regclass);
+
+
+--
 -- Name: reviews id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -442,6 +534,22 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.profiles
     ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: promotions_percent_offs promotions_percent_offs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions_percent_offs
+    ADD CONSTRAINT promotions_percent_offs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: promotions promotions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions
+    ADD CONSTRAINT promotions_pkey PRIMARY KEY (id);
 
 
 --
@@ -555,10 +663,31 @@ CREATE INDEX index_products_on_seller_id ON public.products USING btree (seller_
 
 
 --
+-- Name: index_products_promotions_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_products_promotions_on_product_id ON public.products_promotions USING btree (product_id);
+
+
+--
+-- Name: index_products_promotions_on_promotion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_products_promotions_on_promotion_id ON public.products_promotions USING btree (promotion_id);
+
+
+--
 -- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_profiles_on_user_id ON public.profiles USING btree (user_id);
+
+
+--
+-- Name: index_promotions_on_seller_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_promotions_on_seller_id ON public.promotions USING btree (seller_id);
 
 
 --
@@ -669,6 +798,14 @@ ALTER TABLE ONLY public.reviews
 
 
 --
+-- Name: promotions fk_rails_d60b765d0e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions
+    ADD CONSTRAINT fk_rails_d60b765d0e FOREIGN KEY (seller_id) REFERENCES public.users(id);
+
+
+--
 -- Name: profiles fk_rails_e424190865; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -691,6 +828,10 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231208061249'),
+('20231208060725'),
+('20231205142620'),
+('20231204233551'),
 ('20231130163958'),
 ('20231130152546'),
 ('20231130152310'),
