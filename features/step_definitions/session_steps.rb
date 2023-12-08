@@ -92,9 +92,9 @@ end
 
 When("I register as a seller") do
   visit "/register"
-  fill_in "Storefront name:", with: "Sample Storefront"
-  check "I agree to the terms and conditions"
-  click_button "Submit"
+  check "I understand the above and wish to register"
+  check "I have read and agree to the terms and conditions"
+  click_button "Register"
 end
 
 Then("I should see a registration success message") do

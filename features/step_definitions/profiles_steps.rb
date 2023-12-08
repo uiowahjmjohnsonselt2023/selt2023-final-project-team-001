@@ -36,11 +36,11 @@ When("I go to edit my profile page") do
 end
 
 Then("I should see the profile edit form") do
-  expect(page).to have_content("Edit whatever info you'd like")
+  expect(page).to have_content("Edit Profile")
   expect(page).to have_content("First Name")
   expect(page).to have_content("Last Name")
   expect(page).to have_content("Bio")
-  expect(page).to have_content("Avatar")
+  expect(page).to have_content("Profile Picture")
   expect(page).to have_content("Location")
   expect(page).to have_content("Twitter")
   expect(page).to have_content("Facebook")
@@ -55,7 +55,7 @@ When("I update my profile information") do
   fill_in "Last Name", with: "Lee"
   fill_in "Bio", with: "I'm a person"
   fill_in "Location", with: "USA"
-  click_button "Submit Updates"
+  click_button "Update Profile"
 end
 
 Then("My profile should be updated with the new information") do
