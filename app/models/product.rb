@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   has_many :categories, through: :categorizations
   has_many :carts
   has_many :users, through: :carts
+  has_and_belongs_to_many :promotions
   mount_uploaders :photos, ProductPhotoUploader
 
   # Left 100 between each value to allow for future additions.
