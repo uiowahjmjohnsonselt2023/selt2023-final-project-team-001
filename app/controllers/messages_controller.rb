@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @profile_id = params[:profile_id]
     @profile = Profile.find @profile_id
     @receiver_id = @profile.user_id
-    @name = @profile.first_name + " " + @profile.last_name
+    @name = (@profile.first_name || "") + " " + (@profile.last_name || "")
 
     if Current.user.id == @receiver_id.to_i
       flash[:alert] = "You cannot send a message to yourself."
@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
     @message = Message.new
 
     @message_replying_to = params[:message]
-    @subject_replying_to = params[:message]
+    @subject_replying_to = params[:subject]
     @receiver_name = params[:sender_name]
     @receiver_id = params[:sender_id]
   end
