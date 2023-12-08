@@ -51,6 +51,9 @@ en:
     users:
       register: "You already are a seller, no need to register again!"
       new_seller: "You already are a seller, no need to register again!"
+    profiles:
+      destroy: "Sellers cannot delete their profiles!"
+      delete: "Sellers cannot delete their profiles!"
   require_seller:
     default: "You must be a seller to access that page."
     storefronts:

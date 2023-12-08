@@ -281,6 +281,13 @@ describe ProfilesController, type: :controller do
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to eq("You don't have a profile to delete!")
     end
+
+    it "redirects to the root path with an alert for a seller" do
+      valid_user.update(is_seller: true)
+      delete :destroy, params: {id: valid_user.profile.id}
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("Sellers cannot delete their profiles!")
+    end
   end
 
   # delete
@@ -290,6 +297,13 @@ describe ProfilesController, type: :controller do
       session[:user_id] = other_user.id
       get :delete, params: {id: other_user.profile.id}
       expect(response).to render_template("delete")
+    end
+
+    it "redirects to the root path with an alert for a seller" do
+      user = login_as create(:user_with_profile, is_seller: true)
+      get :delete, params: {id: user.profile.id}
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq("Sellers cannot delete their profiles!")
     end
   end
   # Other tests can be added
