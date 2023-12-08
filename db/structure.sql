@@ -221,8 +221,8 @@ CREATE TABLE public.products (
     updated_at timestamp(6) without time zone NOT NULL,
     seller_id bigint NOT NULL,
     cart_id bigint,
+    photos json,
     searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED,
-    photos json
 );
 
 
@@ -411,6 +411,38 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: viewed_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.viewed_products (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.viewed_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.viewed_products_id_seq OWNED BY public.viewed_products.id;
+
+
+--
 -- Name: carts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -478,6 +510,13 @@ ALTER TABLE ONLY public.storefronts ALTER COLUMN id SET DEFAULT nextval('public.
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: viewed_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products ALTER COLUMN id SET DEFAULT nextval('public.viewed_products_id_seq'::regclass);
 
 
 --
@@ -582,6 +621,14 @@ ALTER TABLE ONLY public.storefronts
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: viewed_products viewed_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT viewed_products_pkey PRIMARY KEY (id);
 
 
 --
@@ -732,6 +779,20 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
+-- Name: index_viewed_products_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_product_id ON public.viewed_products USING btree (product_id);
+
+
+--
+-- Name: index_viewed_products_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_user_id ON public.viewed_products USING btree (user_id);
+
+
+--
 -- Name: index_users_on_message_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -795,6 +856,14 @@ ALTER TABLE ONLY public.messages
 
 
 --
+-- Name: viewed_products fk_rails_7d150f3af7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_7d150f3af7 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
 -- Name: products fk_rails_82f3b66938; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -816,6 +885,14 @@ ALTER TABLE ONLY public.carts
 
 ALTER TABLE ONLY public.price_alerts
     ADD CONSTRAINT fk_rails_95c3a9b293 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- Name: viewed_products fk_rails_95ac6b7bea; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_95ac6b7bea FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -882,6 +959,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231130152310'),
 ('20231130152251'),
 ('20231129233947'),
+('20231205154444'),
+('20231129232534'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),

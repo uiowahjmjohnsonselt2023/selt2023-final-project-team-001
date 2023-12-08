@@ -1,31 +1,11 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  let(:valid_user) do
-    {
-      first_name: "John",
-      last_name: "Doe",
-      email: "john.doe@example.com",
-      password: "password123!P",
-      password_confirmation: "password123!P"
-    }
-  end
-
-  let(:invalid_user) do
-    {
-      first_name: "John",
-      last_name: "Doe",
-      email: "john.doeexample.com",
-      password: "pass",
-      password_confirmation: "password123"
-    }
-  end
-
   describe "POST #create" do
     context "with valid attributes" do
       it "creates a new user and redirects" do
         expect {
-          post :create, params: {user: valid_user}
+          post :create, params: {user: attributes_for(:user)}
         }.to change(User, :count).by(1)
         expect(response).to redirect_to(login_path)
         expect(flash[:notice]).to eq("Sign up successful!")
@@ -35,8 +15,8 @@ RSpec.describe UsersController, type: :controller do
     context "with invalid attributes" do
       it "does not creates a new user" do
         expect {
-          post :create, params: {user: invalid_user}
-        }.to change(User, :count).by(0)
+          post :create, params: {user: attributes_for(:user, password: "pass")}
+        }.to_not change(User, :count)
         expect(response).to render_template(:new)
         expect(flash[:alert]).to eq("Invalid input(s)!")
       end
@@ -95,10 +75,9 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "with a valid non-seller logged in" do
-      it "retrieves a logged-in user's information from the database" do
-        user = create(:user)
-        login_as user
-        post :new_seller
+      it "makes the user a seller" do
+        user = login_as create(:user)
+        expect { post :new_seller }.to change { user.reload.is_seller }.to(true)
         expect(flash[:notice]).to eq("Registration successful")
       end
     end

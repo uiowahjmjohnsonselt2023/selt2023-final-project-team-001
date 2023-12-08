@@ -70,6 +70,18 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "is_admin=" do
+    it "sets is_seller when is_admin is set to true" do
+      user = build(:user)
+      expect { user.is_admin = true }.to change { user.is_seller }.from(false).to(true)
+    end
+
+    it "sets is_buyer when is_admin is set to true" do
+      user = build(:user)
+      expect { user.is_admin = true }.to change { user.is_buyer }.from(false).to(true)
+    end
+  end
+
   describe "update_profile_visibility" do
     it "creates a public profile if user is a seller without a profile" do
       user = build(:user)

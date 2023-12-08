@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :require_login, except: [:show]
+  before_action :require_not_seller, only: [:destroy, :delete]
 
   def edit
     @profile = Current.user.profile
@@ -35,6 +36,7 @@ class ProfilesController < ApplicationController
       flash[:alert] = "You already have a profile!"
       redirect_to profile_path(Current.user.profile)
     end
+    @profile = Profile.new
   end
 
   def create
@@ -45,6 +47,9 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Profile created successfully!"
       redirect_to profile_path(@profile)
     else
+      # Need to set user to nil because otherwise the navbar/_user_dropdown partial
+      # sees the profile and tries to render a link to it, but profile.id is nil.
+      @profile.user = nil
       flash.now[:alert] = "Profile creation failed. Please check the form."
       render "new", status: :unprocessable_entity
     end
