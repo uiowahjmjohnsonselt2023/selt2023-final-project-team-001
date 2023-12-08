@@ -10,6 +10,11 @@ class Promotion < ApplicationRecord
 
   validates :name, length: {maximum: 50}, allow_blank: true
   validates :starts_on, :ends_on, presence: true
+  validates :min_quantity, numericality: {only_integer: true}
+  validates :max_quantity, numericality: {only_integer: true}
+  validates :max_quantity,
+    comparison: {greater_than: :min_quantity},
+    unless: -> { max_quantity <= 0 }
 
   scope :active, -> { where("starts_on <= ? AND ends_on >= ?", Time.now, Time.now) }
 
