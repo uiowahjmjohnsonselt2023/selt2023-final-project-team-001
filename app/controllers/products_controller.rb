@@ -75,6 +75,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.seller = Current.user
+    @product.views = 0
     if @product.save
       redirect_to @product
     else
