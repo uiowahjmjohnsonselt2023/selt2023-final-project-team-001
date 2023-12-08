@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <h2>Your Messages</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>From</th>
+      <th>Subject</th>
+      <th>Message</th>
+      <th></th>
+      <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message[:sender_name] %></td>
+        <td>
+          <%= truncate(message[:subject], length: 20) %>
+        </td>
+        <td>
+          <%= truncate(message[:message], length: 20) %>
+        </td>
+        <td>
+          <%= link_to "View Details", message_details_path(message_id: message[:id]), method: :get, class: "btn btn-primary" %>
+        </td>
+        <td>
+          <%= form_tag message_details_path, method: :get do %>
+            <%= hidden_field_tag :message_id, message[:id] %>
+            <%= submit_tag "Delete", class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+
+  </table>
+</div>
