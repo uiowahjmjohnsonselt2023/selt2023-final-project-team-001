@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   resources :products
 
-  resources :storefronts, only: [:show, :new, :create, :index]
-  get "new_storefront_with_template", to: "storefronts#new_storefront_with_template", as: "new_storefront_with_template"
-  get "choose_template", to: "storefronts#choose_template", as: "choose_template"
+  get "/storefronts/preview", to: "storefronts#preview" # has to be before next line
+  resources :storefronts, except: [:destroy] do
+    get :choose_template, on: :member
+    get :customize, on: :member
+  end
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"

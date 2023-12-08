@@ -1,52 +1,76 @@
 class StorefrontsController < ApplicationController
   before_action :require_login, except: [:index, :show]
-  before_action :require_seller, only: [:new, :create, :new_storefront_with_template, :choose_template]
+  before_action :require_seller, except: [:index, :show]
 
   def index
     @storefronts = Storefront.all
+    @storefronts = @storefronts.search_text(params[:search]) if params[:search].present?
   end
 
   def new
-    @products = Current.user.products.where(private: false)
-
-    @storefront = Current.user.storefront || Current.user.create_storefront
-    @previewed_code = @storefront.custom_code if params[:preview_button]
-  end
-
-  def new_storefront_with_template
-    render "new_storefront_with_template"
+    if Current.user.storefront
+      flash[:alert] = t("storefronts.create.already_exists")
+      redirect_to storefront_path(Current.user.storefront)
+    else
+      @storefront = Storefront.new({user: Current.user})
+    end
   end
 
   def create
-    # Add logic to handle the 'Preview Custom Code' action
-    if params[:storefront] && params[:preview_button]
-      @products = Current.user.products.where(private: false)
-
-      @storefront = Current.user.storefront || Current.user.create_storefront
-      @previewed_code = params[:storefront][:custom_code]
-      flash.now[:notice] = t("storefronts.preview.success")
-      render :new, locals: {previewed_code: @previewed_code}
-    elsif params[:storefront] && params[:save_button]
-      storefront = Current.user.storefront || Current.user.create_storefront
-      if storefront.update(custom_code: params[:storefront][:custom_code])
-        flash[:notice] = t("storefronts.update.success")
-        redirect_to storefront_path(storefront) and return
+    if Current.user.storefront
+      flash[:alert] = t("storefronts.create.already_exists")
+      redirect_to storefront_path(Current.user.storefront)
+    else
+      @storefront = Current.user.create_storefront storefront_params
+      if @storefront.save
+        flash[:notice] = t("storefronts.create.success")
+        redirect_to @storefront
       else
-        flash[:alert] = t("storefronts.update.failure")
-        redirect_to root_path and return
+        flash[:alert] = t("storefronts.create.failure")
+        render "new", status: :unprocessable_entity
       end
     end
   end
 
-  def choose_template
-    template_number = params[:template_number]
-    storefront = Current.user.storefront || Current.user.create_storefront
-    if storefront.update(custom_code: template_number)
+  def edit
+    @storefront = Storefront.find(params[:id])
+    if Current.user != @storefront.user && !Current.user.is_admin
+      flash[:alert] = t("storefronts.update.permission_denied")
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @storefront = Storefront.find(params[:id])
+    if Current.user != @storefront.user && !Current.user.is_admin
+      flash[:alert] = t("storefronts.update.permission_denied")
+      redirect_to root_path
+    elsif @storefront.update(storefront_params)
       flash[:notice] = t("storefronts.update.success")
+      redirect_to @storefront
     else
       flash[:alert] = t("storefronts.update.failure")
+      render "edit", status: :unprocessable_entity
     end
-    redirect_to storefront_path(storefront) and return
+  end
+
+  def choose_template
+    @storefront = Storefront.find(params[:id])
+    if Current.user != @storefront.user && !Current.user.is_admin
+      flash[:alert] = t("storefronts.update.permission_denied")
+      redirect_to root_path
+    end
+    flash[:notice] = t("storefronts.update.success")
+  end
+
+  def customize
+    @storefront = Storefront.find(params[:id])
+    if Current.user != @storefront.user && !Current.user.is_admin
+      flash[:alert] = t("storefronts.update.permission_denied")
+      redirect_to root_path
+    else
+      @products = Current.user.products.where(private: false)
+    end
   end
 
   def show
@@ -67,5 +91,15 @@ class StorefrontsController < ApplicationController
         render :show
       end
     end
+  end
+
+  def preview
+    @custom_code = storefront_params[:custom_code] || ""
+  end
+
+  private
+
+  def storefront_params
+    params.require(:storefront).permit(:name, :short_description, :custom_code)
   end
 end

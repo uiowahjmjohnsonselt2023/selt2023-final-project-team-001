@@ -9,6 +9,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -259,7 +273,10 @@ CREATE TABLE public.storefronts (
     user_id bigint NOT NULL,
     custom_code text,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    name character varying NOT NULL,
+    short_description text DEFAULT ''::text NOT NULL,
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, short_description), 'B'::"char"))) STORED
 );
 
 
@@ -441,6 +458,14 @@ ALTER TABLE ONLY public.reviews
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: storefronts storefronts_name_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.storefronts
+    ADD CONSTRAINT storefronts_name_unique UNIQUE (name);
 
 
 --
@@ -666,6 +691,10 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231130163958'),
+('20231130152546'),
+('20231130152310'),
+('20231130152251'),
 ('20231129233947'),
 ('20231124050558'),
 ('20231124045627'),
