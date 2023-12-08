@@ -152,3 +152,12 @@
     --bs-accordion-active-color: var(--accordian-color) !important;
     --bs-accordion-active-bg: var(--accordian-bg) !important;
 }
+
+label.required:after {
+    content:" *";
+    color: red;
+}
+
+.future-link {
+    text-decoration: line-through;
+}

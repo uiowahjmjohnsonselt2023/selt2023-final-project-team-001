@@ -30,8 +30,20 @@
 
   <!-- Links -->
   <% if @is_current_user %>
-    <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-danger" %>
-    <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
+    <%= link_to "Edit Profile", edit_profile_path(@profile), method: :get, class: "btn btn-primary" %>
+    <% if Current.user.is_seller %>
+      <%# Have to wrap in span since .disabled adds `pointer-events: none` which
+          prevents the title appearing on hover. The `d-inline-block` class is
+          added so that the span takes up the same space as the link. %>
+      <span class="d-inline-block" title="Sellers cannot delete their profiles.">
+        <%# https://getbootstrap.com/docs/5.3/components/buttons/#disabled-state %>
+        <a class="btn btn-danger disabled" role="button" aria-disabled="true">
+          Delete Profile
+        </a>
+      </span>
+    <% else %>
+      <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
+    <% end %>
   <% end %>
   <% if @show_review_link %>
     <%= link_to "Leave A Review", review_path(profile_id: @profile), method: :get, class: "btn btn-secondary" %>

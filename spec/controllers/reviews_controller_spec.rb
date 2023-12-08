@@ -35,7 +35,7 @@ describe ReviewsController, type: :controller do
 
   describe "create" do
     let(:seller) { create(:user, is_seller: true) }
-    let(:seller_profile) { create(:profile, user: seller) }
+    let(:seller_profile) { create(:profile, user: seller, public_profile: true) }
     let(:valid_attributes) do
       {
         seller_id: seller.id,
