@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get "/show_message", to: "messages#show", as: "message_details"
   get "/reply", to: "messages#reply", as: "reply"
   post "/send_reply", to: "messages#create_reply", as: "send_reply"
+  delete "/delete_message", to: "messages#delete", as: "delete_message"
 
   get "/history", to: "products#history", as: "products_history"
 
