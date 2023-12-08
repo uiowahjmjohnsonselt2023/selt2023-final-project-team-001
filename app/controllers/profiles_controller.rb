@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :require_login, except: [:show]
+  before_action :require_not_seller, only: [:destroy, :delete]
 
   def edit
     @profile = Current.user.profile
