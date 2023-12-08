@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
         flash[:alert] = "#{cat} isn't a valid category."
         redirect_to products_path(sort: params[:sort], search: params[:search]) and return
       end
-      @products = @products.where(categories: cat)
+      @products = @products.joins(:categories).where(categories: {id: cat})
     end
   end
 
@@ -76,7 +76,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       flash[:alert] = "Please fix the errors below."
-      render "edit"
+      render "edit", status: :unprocessable_entity
     end
   end
 
