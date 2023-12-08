@@ -1,13 +1,20 @@
-<h1>Send a Reply</h1>
-<p><em>
-    <%=  "You are replying to: #{@receiver_name}"  %>
-</em></p>
-<p style="word-wrap: break-word; max-width: 100%;"><strong>Subject:</strong> <%= @subject %></p>
-<p style="word-wrap: break-word; max-width: 100%;"><strong>Message:</strong> <%= @message %></p>
-<br>
-<%= bootstrap_form_with( url: send_reply_path, method: :post, local: true) do |f| %>
-  <%= hidden_field_tag :receiver_id, @receiver_id %>
-  <%= f.text_field :subject, label: "Subject", placeholder: "Subject", maxlength: 100 %>
-  <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500 %>
-  <%= f.submit "Send", class: 'btn btn-primary' %>
-<% end %>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h1 class="text-center mb-3">Send a Reply</h1>
+      <p class="text-center mb-3"><em>
+          <%=  "You are replying to: #{@receiver_name}"  %>
+      </em></p>
+      <p style="word-wrap: break-word; max-width: 100%;"><strong>Subject:</strong> <%= @subject_replying_to %></p>
+      <p style="word-wrap: break-word; max-width: 100%;"><strong>Message:</strong> <%= @message_replying_to %></p>
+      <br>
+      <%= bootstrap_form_with model: @message, url: send_reply_path do |f| %>
+        <%= hidden_field_tag :receiver_id, @receiver_id %>
+        <%= f.text_field :subject, label: "Subject", placeholder: "Subject", maxlength: 100 %>
+        <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500 %>
+        <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+        <%= f.submit "Send", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

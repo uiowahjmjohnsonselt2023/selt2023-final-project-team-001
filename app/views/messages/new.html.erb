@@ -1,14 +1,23 @@
-<h1>Send a Message</h1>
-<p><em>
-  <% unless @name.blank? %>
-    <%=  "You are messaging: #{@name}"  %>
-  <%  end %>
-</em></p>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h1 class="text-center mb-3">Send a Message</h1>
+      <p class="text-center mb-3"><em>
+        <% unless @name.blank? %>
+          <%=  "You are messaging: #{@name}"  %>
+        <%  end %>
+      </em></p>
+      <%= bootstrap_form_with model: @message, url: send_message_submit_path do |f| %>
+        <%= hidden_field_tag :receiver_id, @receiver_id %>
+        <%= hidden_field_tag :profile_id, @profile_id %>
 
-<%= bootstrap_form_with( url: send_message_submit_path, method: :post, local: true) do |f| %>
-  <%= hidden_field_tag :receiver_id, @receiver_id %>
-  <%= hidden_field_tag :profile_id, @profile_id %>
-  <%= f.text_field :subject, label: "Subject", placeholder: "Subject", maxlength: 100 %>
-  <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500 %>
-  <%= f.submit "Send", class: 'btn btn-primary' %>
-<% end %>
+        <%= f.text_field :subject, label: "Subject", placeholder: "Subject", maxlength: 100 %>
+        <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500 %>
+
+
+        <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+        <%= f.submit "Send", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
