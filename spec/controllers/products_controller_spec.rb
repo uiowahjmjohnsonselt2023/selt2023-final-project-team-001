@@ -8,13 +8,22 @@ describe ProductsController, type: :controller do
 
   describe "GET #index" do
     it "displays products" do
-      get :index
+      get :index, params: {sort: "name", order: "desc"}
       expect(response).to render_template :index
     end
 
     it "displays products with search" do
-      get :index, params: {search: "test"}
+      get :index, params: {search: "test", sort: "name", order: "desc"}
       expect(response).to render_template :index
+    end
+
+    it "displays products by category" do
+      cg = 0
+      11.times do
+        cg += 1
+        get :index, params: {sort: "name", order: "desc", cat: cg}
+        expect(response).to render_template :index
+      end
     end
   end
 
@@ -52,6 +61,7 @@ describe ProductsController, type: :controller do
     describe "GET #show" do
       context "when the product is public" do
         it "renders the show template" do
+          product = create(:product)
           get :show, params: {id: product.id}
           expect(response).to render_template :show
         end
@@ -91,6 +101,32 @@ describe ProductsController, type: :controller do
       it "redirects to the login page" do
         put :update, params: {id: product.id, product: {name: "New Name"}}
         expect(response).to redirect_to login_path
+      end
+    end
+  end
+
+  context "when looking at products for the first time" do
+    before {
+      user = create(:user)
+      login_as user
+    }
+
+    describe "GET #show" do
+      it "updates the user's viewed products" do
+        product = create(:product, private: false)
+        expect {
+          get :show, params: {id: product.id}
+          user.reload
+        }.to change(ViewedProduct, :count).by(1)
+      end
+
+      it "updates the product view count" do
+        product = create(:product, private: false)
+        get :show, params: {id: product.id}
+        expect {
+          get :show, params: {id: product.id}
+          product.reload
+        }.to change(product, :views).by(1)
       end
     end
   end
@@ -260,6 +296,24 @@ describe ProductsController, type: :controller do
           put :update, params: {id: product.id, product: {price: -1}}
           expect(response).to render_template :edit
         end
+      end
+    end
+  end
+
+  describe "GET #history" do
+    context "when the user is not logged in" do
+      it "redirects to the login page" do
+        get :history
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    context "when the user is logged in" do
+      before { login_as user }
+
+      it "displays the history page" do
+        get :history
+        expect(response).to render_template :history
       end
     end
   end

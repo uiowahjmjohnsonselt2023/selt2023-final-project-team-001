@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2><%= products_index_header %></h2>
+  <h2>Shopping history for <%= @user.first_name %></h2>
   <table class="table">
     <thead>
     <tr>
@@ -16,14 +16,14 @@
       <tr>
         <td>
           <div class="col-md-5 col-lg-4 float-md-start mb-3 me-md-3 me-lg-4 mt-2">
-          <% photo_url = product.photos.first&.main&.url || "fallbacks/products/main_default.png" %>
-          <%= image_tag photo_url, class: "img-fluid rounded border border-secondary-subtle" %>
+            <% photo_url = product.photos.first&.main&.url || "fallbacks/products/main_default.png" %>
+            <%= image_tag photo_url, class: "img-fluid rounded border border-secondary-subtle" %>
           </div>
         </td>
         <td><%= link_to product.name, product_path(product.id) %></td>
-        <td><%= number_to_currency product.price %></td>
+        <td><%= number_to_currency product.price_cents %></td>
         <td><%= product.created_at %></td>
-        <td><%= product.views %>
+        <td><%= product.views %></td>
       </tr>
     <% end %>
     </tbody>
