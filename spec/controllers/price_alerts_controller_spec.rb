@@ -31,7 +31,7 @@ RSpec.describe PriceAlertsController, type: :controller do
     context "when price alert does not exists" do
       it "creates a new price alert" do
         product = FactoryBot.create(:product)
-        post :create, params: {product_id: product.id, new_threshold: 100}
+        post :create, params: {price_alert: {product_id: product.id, new_threshold: 100}}
         expect(response).to redirect_to price_alerts_path
         expect(flash[:notice]).to eq I18n.t("price_alerts.create.success")
       end
@@ -41,7 +41,7 @@ RSpec.describe PriceAlertsController, type: :controller do
       it "redirects to the price alert show page" do
         product = FactoryBot.create(:product)
         FactoryBot.create(:price_alert, product: product, user: user)
-        post :create, params: {product_id: product.id, new_threshold: 100}
+        post :create, params: {price_alert: {product_id: product.id, new_threshold: 100}}
         expect(response).not_to redirect_to price_alert_path(PriceAlert.last.id)
         expect(flash[:alert]).to eq I18n.t("price_alerts.create.failure")
       end
