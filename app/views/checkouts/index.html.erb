@@ -30,10 +30,7 @@
                   <%= submit_tag "Update", class: "btn btn-secondary" %>
                 <% end %>
               </td>
-              <% total_price = product[:price] * product[:quantity] / 100.00 %>
-              <% cart_price += total_price %>
-              <td><%= number_to_currency total_price %></td>
-              <td>$<%= product[:total_price] %></td>
+              <td><%= number_to_currency product[:total_price] %></td>
               <td>
                 <button class="btn btn-danger delete-item"
                         type="button"
@@ -101,7 +98,7 @@
           <% end %>
           <br>
           <h3 id="cart-price" data-checkouts-target="totalPrice">
-            Total: <%= number_to_currency(@cart_price) %>
+            Total: <%= number_to_currency @cart_price %>
           </h3>
 
           <%= f.submit "Pay Now", class: "btn btn-primary" %>
