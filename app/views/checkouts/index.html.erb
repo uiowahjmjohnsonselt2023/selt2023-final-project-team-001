@@ -101,7 +101,7 @@
           <% end %>
           <br>
           <h3 id="cart-price" data-checkouts-target="totalPrice">
-            Total: $<%= number_with_precision(@cart_price, precision: 2) %>
+            Total: <%= number_to_currency(@cart_price) %>
           </h3>
 
           <%= f.submit "Pay Now", class: "btn btn-primary" %>
