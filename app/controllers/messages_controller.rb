@@ -13,13 +13,34 @@ class MessagesController < ApplicationController
     end
   end
 
+  def reply
+    @message = params[:message]
+    @subject = params[:subject]
+    @receiver_name = params[:sender_name]
+    @receiver_id = params[:sender_id]
+  end
+
+  def create_reply
+    @sender_name = User.find_by(id: Current.user.id.to_s).full_name
+    Message.create(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:subject], message: params[:message], sender_name: @sender_name)
+    flash[:success] = "Reply successfully sent!"
+    redirect_to view_messages_path
+  end
+
   def create
-    Message.create(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:subject], message: params[:message])
+    @sender_name = User.find_by(id: Current.user.id.to_s).full_name
+    Message.create(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:subject], message: params[:message], sender_name: @sender_name)
     flash[:success] = "Message successfully sent!"
+
     redirect_to profile_path(params[:profile_id])
   end
 
   def index
     # display all messages
+    @messages = Message.where(receiver_id: Current.user.id)
+  end
+
+  def show
+    @message = Message.find_by(id: params[:message_id])
   end
 end
