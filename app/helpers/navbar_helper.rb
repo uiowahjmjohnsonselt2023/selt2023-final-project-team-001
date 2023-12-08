@@ -34,7 +34,13 @@ module NavbarHelper
     options[:aria] = {current: "page"}.merge(options[:aria] || {}) if active
     options[:class] = class_names "nav-link", active, disabled, options[:class]
 
-    navbar_item(**li_options) { link_to(*args, **options, &block) }
+    link = if options.delete(:future_link)
+      future_link_to(*args, **options, &block)
+    else
+      link_to(*args, **options, &block)
+    end
+
+    navbar_item(**li_options) { link }
   end
 
   # Creates a navbar dropdown.
