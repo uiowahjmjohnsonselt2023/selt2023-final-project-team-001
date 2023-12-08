@@ -81,6 +81,7 @@ en:
   price_alerts:
     new:
       already_exists: "You already have a price alert for this product!"
+      cannot_add_own_product: "You cannot add your own product to your price alerts!"
     create:
       success: "Price alert successfully created!"
       failure: "Failed to create price alert. Please try again."
