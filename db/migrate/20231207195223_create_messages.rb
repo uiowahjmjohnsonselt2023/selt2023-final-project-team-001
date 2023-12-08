@@ -3,11 +3,9 @@ class CreateMessages < ActiveRecord::Migration[7.1]
     create_table :messages do |t|
       t.references :sender, index: true, foreign_key: {to_table: :users}, null: false
       t.references :receiver, index: true, foreign_key: {to_table: :users}, null: false
-      t.text :subject, null: false, default: ""
-      t.text :message, null: false, default: ""
+      t.text :subject, null: false
+      t.text :message, null: false
       t.timestamps
-
-      t.index [:sender_id, :receiver_id, :subject, :message], unique: true
     end
   end
 end
