@@ -3,6 +3,12 @@ class User < ApplicationRecord
   has_secure_password
   before_save { |user| user.email = user.email.downcase }
   before_save :create_session_token
+  # If a user's is_seller attribute is changed to true, make sure they have a profile.
+  # This has to be after a commit because (for new users) we need to save the user
+  # before we can create a profile for them.
+  after_save_commit :update_profile_visibility,
+    if: [:saved_change_to_is_seller?, :is_seller?]
+
   validates :first_name, presence: true, length: {maximum: 50}
   validates :last_name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,24})\z/i
@@ -66,5 +72,12 @@ class User < ApplicationRecord
 
   def create_session_token
     self.session_token = SecureRandom.urlsafe_base64
+  end
+
+  def update_profile_visibility
+    if is_seller? && (profile.nil? || !profile.public_profile)
+      build_profile(public_profile: true) unless profile
+      profile.update(public_profile: true)
+    end
   end
 end
