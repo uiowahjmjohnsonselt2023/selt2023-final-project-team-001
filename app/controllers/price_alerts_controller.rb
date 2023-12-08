@@ -6,6 +6,11 @@ class PriceAlertsController < ApplicationController
       PriceAlert.find_by(product_id: params[:product_id], user_id: Current.user.id)
       flash[:alert] = t("price_alerts.new.already_exists")
       redirect_to price_alerts_path
+    elsif Current.user.products.present? && Current.user.products.ids.include?(params[:product_id].to_i)
+      flash[:alert] = t("price_alerts.new.cannot_add_own_product")
+      redirect_to root_path
+    else
+      @price_alert = PriceAlert.new
     end
     @product = Product.find(params[:product_id])
   end
