@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :require_seller, only: [:new, :create]
 
   def index
-    @products = Product.joins(:categories).only_public.in_stock
+    @products = Product.includes(:categories).only_public.in_stock
     @products = @products.search_text(params[:search]) if params[:search]
     sort = params[:sort]
     if sort

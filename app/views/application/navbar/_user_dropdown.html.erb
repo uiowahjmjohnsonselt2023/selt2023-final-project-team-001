@@ -1,16 +1,12 @@
 <%= navbar_dropdown user.full_name, **options do %>
   <%= dropdown_link "Profile", user.profile ? profile_path(user.profile) : new_profile_path %>
   <% if user.is_seller %>
-    <% if user.storefront.present? %>
+    <% if user.storefront&.id.present? %>
       <%= dropdown_link "Your Storefront", storefront_path(user.storefront.id) %>
+      <%= dropdown_link "Edit Storefront", edit_storefront_path(user.storefront.id) %>
+    <% else %>
+      <%= dropdown_link "Create Storefront", new_storefront_path %>
     <% end %>
-    <li class="dropdown-submenu">
-      <a tabindex="-1" href="#">Add/Update Storefront</a>
-      <ul class="dropdown-menu">
-        <li><a tabindex="-1" class="dropdown-item" href="/new_storefront_with_template">Use Template</a></li>
-        <li><a class="dropdown-item" href="/storefronts/new">Manually Code</a></li>
-      </ul>
-    </li>
     <%= dropdown_link "Post a product", new_product_path %>
   <% else %>
     <%= dropdown_link "Register as seller", register_path %>

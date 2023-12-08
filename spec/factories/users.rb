@@ -33,4 +33,10 @@ FactoryBot.define do
       create(:profile, user: user, public_profile: false)
     end
   end
+
+  factory :seller_with_storefront, parent: :seller do
+    after(:create) do |user|
+      create(:storefront, user: user)
+    end
+  end
 end
