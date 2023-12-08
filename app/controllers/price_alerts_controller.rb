@@ -20,8 +20,8 @@ class PriceAlertsController < ApplicationController
       flash[:alert] = t("price_alerts.new.cannot_add_own_product")
       redirect_to root_path and return
     end
-    @product = Product.find(params[:product_id])
-    @price_alert = PriceAlert.new(product: @product, user: Current.user, threshold: params[:new_threshold])
+    @product = Product.find(params[:price_alert][:product_id])
+    @price_alert = PriceAlert.new(product: @product, user: Current.user, threshold: params[:price_alert][:new_threshold])
 
     if @price_alert.save
       flash.now[:notice] = t("price_alerts.create.success")
