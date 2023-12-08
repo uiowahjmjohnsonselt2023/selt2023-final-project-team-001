@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get "/send_message", to: "messages#new", as: "send_message"
   post "/send_message_submit", to: "messages#create", as: "send_message_submit"
   get "/view_messages", to: "messages#index", as: "view_messages"
+  get "/show_message", to: "messages#show", as: "message_details"
+  get "/reply", to: "messages#reply", as: "reply"
+  post "/send_reply", to: "messages#create_reply", as: "send_reply"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member
