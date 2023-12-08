@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
     @profile_id = params[:profile_id]
     @profile = Profile.find @profile_id
     @seller_id = @profile.user_id
-    @name = @profile.first_name + " " + @profile.last_name
+    @name = @profile.user.full_name
 
     if Current.user.id == @seller_id.to_i
       flash[:alert] = "You cannot leave a review for yourself."
