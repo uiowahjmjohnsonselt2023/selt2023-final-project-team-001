@@ -1,0 +1,12 @@
+<h1>Message Details</h1>
+  <p><strong>From:</strong> <%= @message.sender_name %></p>
+  <p style="word-wrap: break-word; max-width: 100%;"><strong>Subject:</strong> <%= @message.subject %></p>
+  <p style="word-wrap: break-word; max-width: 100%;"><strong>Message:</strong> <%= @message.message %></p>
+<%= form_tag reply_path, method: :get do %>
+  <%= hidden_field_tag :message, @message.message %>
+  <%= hidden_field_tag :subject, @message.subject %>
+  <%= hidden_field_tag :sender_name, @message.sender_name %>
+  <%= hidden_field_tag :sender_id, @message.sender_id %>
+  <%= submit_tag "Reply", class: "btn btn-primary" %>
+<% end %>
+<%= link_to "Back to Messages", view_messages_path, method: :get, class: "btn btn-secondary" %>
