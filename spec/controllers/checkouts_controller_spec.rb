@@ -18,7 +18,7 @@ describe CheckoutsController, type: :controller do
       allow(controller).to receive(:session).and_return(user_id: user.id)
       allow(Cart).to receive(:where).and_return([Cart.new(product_id: product.id, quantity: 1)])
       get :index
-      expect(assigns(:products_in_cart)).to eq([{name: product.name, price: product.price_cents, original_quantity: product.quantity, quantity: 1, id: product.id}])
+      expect(assigns(:products_in_cart)).to eq([{name: product.name, total_price: product.price, original_quantity: product.quantity, quantity: 1, id: product.id}])
     end
   end
 
