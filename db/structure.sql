@@ -40,14 +40,45 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: cart_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cart_items (
+    id bigint NOT NULL,
+    product_id bigint,
+    quantity integer DEFAULT 1,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    cart_id bigint NOT NULL
+);
+
+
+--
+-- Name: cart_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cart_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cart_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cart_items_id_seq OWNED BY public.cart_items.id;
+
+
+--
 -- Name: carts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.carts (
     id bigint NOT NULL,
     user_id bigint,
-    product_id bigint,
-    quantity integer DEFAULT 1,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -239,13 +270,46 @@ CREATE TABLE public.promotions (
     name character varying,
     starts_on timestamp(6) without time zone NOT NULL,
     ends_on timestamp(6) without time zone NOT NULL,
-    multiple boolean DEFAULT true NOT NULL,
     promotionable_type character varying,
     promotionable_id integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    seller_id bigint NOT NULL
+    seller_id bigint NOT NULL,
+    min_quantity integer DEFAULT 1 NOT NULL,
+    max_quantity integer DEFAULT 1 NOT NULL
 );
+
+
+--
+-- Name: promotions_fixed_amount_offs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.promotions_fixed_amount_offs (
+    id bigint NOT NULL,
+    amount_cents integer DEFAULT 0 NOT NULL,
+    amount_currency character varying DEFAULT 'USD'::character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: promotions_fixed_amount_offs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.promotions_fixed_amount_offs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: promotions_fixed_amount_offs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.promotions_fixed_amount_offs_id_seq OWNED BY public.promotions_fixed_amount_offs.id;
 
 
 --
@@ -273,7 +337,7 @@ ALTER SEQUENCE public.promotions_id_seq OWNED BY public.promotions.id;
 
 CREATE TABLE public.promotions_percent_offs (
     id bigint NOT NULL,
-    percentage integer NOT NULL,
+    percentage numeric(7,6) NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -419,6 +483,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: cart_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_items ALTER COLUMN id SET DEFAULT nextval('public.cart_items_id_seq'::regclass);
+
+
+--
 -- Name: carts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -461,6 +532,13 @@ ALTER TABLE ONLY public.promotions ALTER COLUMN id SET DEFAULT nextval('public.p
 
 
 --
+-- Name: promotions_fixed_amount_offs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions_fixed_amount_offs ALTER COLUMN id SET DEFAULT nextval('public.promotions_fixed_amount_offs_id_seq'::regclass);
+
+
+--
 -- Name: promotions_percent_offs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -494,6 +572,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: cart_items cart_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_items
+    ADD CONSTRAINT cart_items_pkey PRIMARY KEY (id);
 
 
 --
@@ -534,6 +620,14 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.profiles
     ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: promotions_fixed_amount_offs promotions_fixed_amount_offs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.promotions_fixed_amount_offs
+    ADD CONSTRAINT promotions_fixed_amount_offs_pkey PRIMARY KEY (id);
 
 
 --
@@ -593,10 +687,24 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: index_carts_on_product_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_cart_items_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_carts_on_product_id ON public.carts USING btree (product_id);
+CREATE INDEX index_cart_items_on_cart_id ON public.cart_items USING btree (cart_id);
+
+
+--
+-- Name: index_cart_items_on_cart_id_and_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_cart_items_on_cart_id_and_product_id ON public.cart_items USING btree (cart_id, product_id);
+
+
+--
+-- Name: index_cart_items_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_cart_items_on_product_id ON public.cart_items USING btree (product_id);
 
 
 --
@@ -604,13 +712,6 @@ CREATE INDEX index_carts_on_product_id ON public.carts USING btree (product_id);
 --
 
 CREATE INDEX index_carts_on_user_id ON public.carts USING btree (user_id);
-
-
---
--- Name: index_carts_on_user_id_and_product_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_carts_on_user_id_and_product_id ON public.carts USING btree (user_id, product_id);
 
 
 --
@@ -746,7 +847,7 @@ ALTER TABLE ONLY public.categorizations
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_1d13818f0e FOREIGN KEY (cart_id) REFERENCES public.carts(id);
+    ADD CONSTRAINT fk_rails_1d13818f0e FOREIGN KEY (cart_id) REFERENCES public.cart_items(id);
 
 
 --
@@ -766,6 +867,14 @@ ALTER TABLE ONLY public.categorizations
 
 
 --
+-- Name: cart_items fk_rails_6cdb1f0139; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cart_items
+    ADD CONSTRAINT fk_rails_6cdb1f0139 FOREIGN KEY (cart_id) REFERENCES public.carts(id);
+
+
+--
 -- Name: products fk_rails_82f3b66938; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -774,10 +883,10 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: carts fk_rails_916f2a1419; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: cart_items fk_rails_916f2a1419; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.carts
+ALTER TABLE ONLY public.cart_items
     ADD CONSTRAINT fk_rails_916f2a1419 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
@@ -786,7 +895,7 @@ ALTER TABLE ONLY public.carts
 --
 
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT fk_rails_99518e1c1e FOREIGN KEY (cart_id) REFERENCES public.carts(id);
+    ADD CONSTRAINT fk_rails_99518e1c1e FOREIGN KEY (cart_id) REFERENCES public.cart_items(id);
 
 
 --
@@ -828,6 +937,13 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231209040207'),
+('20231209040104'),
+('20231209032617'),
+('20231209022607'),
+('20231208235133'),
+('20231208220151'),
+('20231208215630'),
 ('20231208061249'),
 ('20231208060725'),
 ('20231205142620'),
