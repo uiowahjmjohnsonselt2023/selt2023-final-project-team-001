@@ -14,6 +14,30 @@ module Promotionable
     end
   end
 
+  # @param [Array<CartItem>] cart_items
+  # @return [Array<CartItem>] The first cart items whose total quantity
+  #   is less than the maximum quantity allowed by the promotion. For simplicity,
+  #   we don't try to find the best combination of cart items that maximizes the
+  #   total quantity while staying below the maximum quantity.
+  # @todo Account for individual products, e.g.,
+  #   Product1 quantity 3 and Product2 quantity 2 with max_quantity 4
+  #   -> Product1 quantity 3 and Product2 quantity 1, leaving 1 Product2
+  def below_max_quantity(cart_items)
+    if max_quantity <= 0 || cart_items.sum(&:quantity) <= max_quantity
+      return cart_items
+    end
+
+    included_items = []
+    total_quantity = 0
+    cart_items.each do |item|
+      if total_quantity + item.quantity <= max_quantity
+        included_items << item
+        total_quantity += item.quantity
+      end
+    end
+    included_items
+  end
+
   # Returns whether the given cart item is eligible for this promotion. This
   # doesn't include checking whether the item meet's the promotion's minimum
   # quantity requirement, since that depends on the cart as a whole (since the
