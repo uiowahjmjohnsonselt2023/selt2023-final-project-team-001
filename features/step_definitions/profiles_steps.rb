@@ -6,7 +6,7 @@ Before("@needs_log_in") do
 
   user&.destroy
 
-  new_user = User.create(
+  @new_user = User.create(
     first_name: "John",
     last_name: "Doe",
     email: email,
@@ -15,8 +15,8 @@ Before("@needs_log_in") do
     is_seller: false,
     is_admin: false
   )
-  new_user.update_attribute(:is_seller, false)
-  new_user.update_attribute(:is_admin, false)
+  @new_user.update_attribute(:is_seller, false)
+  @new_user.update_attribute(:is_admin, false)
 end
 
 Given("I am logged in as a user") do
@@ -30,9 +30,7 @@ Given("I am logged in as a user") do
 end
 
 When("I go to edit my profile page") do
-  email = "test@email.com"
-  user = User.find_by(email: email)
-  visit "/profiles/#{user.profile.id}/edit"
+  visit "/profiles/#{@new_user.profile.id}/edit"
 end
 
 Then("I should see the profile edit form") do
@@ -66,18 +64,18 @@ Then("My profile should be updated with the new information") do
   expect(page).to have_content("USA")
 end
 
-Given("I do not have a profile") do
-  email = "test@email.com"
-  user = User.find_by(email: email)
-  user.profile.destroy
+And("I do not have a profile") do
+  if @new_user.profile.present?
+    @new_user.profile.destroy
+  end
 end
 
-When("I go to create a profile") do
+When("I go to create a new profile") do
   visit "/profiles/new"
 end
 
-Then("I should see the profile creation form") do
-  expect(page).to have_content("Create Profile")
+Then("I should see a profile creation form") do
+  expect(page).to have_content("New Profile")
   expect(page).to have_content("First Name")
   expect(page).to have_content("Last Name")
   expect(page).to have_content("Bio")
@@ -89,4 +87,29 @@ Then("I should see the profile creation form") do
   expect(page).to have_content("Website")
   expect(page).to have_content("Occupation")
   expect(page).to have_content("Profile Visibility")
+end
+
+And("I have a profile") do
+  # make profile
+  @new_user.create_profile
+end
+
+When("I fill in the profile creation form with valid information") do
+  fill_in "First Name", with: "Jimmy"
+  fill_in "Last Name", with: "Lee"
+  fill_in "Bio", with: "I'm a person"
+end
+
+And("I submit the profile creation form") do
+  click_button "Create Profile"
+end
+
+Then("I should see a profile creation success message") do
+  expect(page).to have_content("Profile created successfully!")
+end
+
+And("My profile should be created with the entered information") do
+  expect(page).to have_content("Jimmy")
+  expect(page).to have_content("Lee")
+  expect(page).to have_content("I'm a person")
 end

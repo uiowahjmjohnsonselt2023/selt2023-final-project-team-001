@@ -74,7 +74,7 @@ end
 #   expect(page).to have_current_path('/profile/new')
 # end
 
-And("I have a profile") do
+And("I have a user profile") do
   user = User.find_by(email: "valid@email.com")
   # make profile
   user.create_profile

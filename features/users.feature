@@ -29,7 +29,7 @@ Feature: Users
   @needs_log_in
   Scenario: Viewing your user profile
     Given I validly log in
-    And I have a profile
+    And I have a user profile
     When I go to my profile page
     Then I should see my profile
 
