@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2> Sales history for <%= @user.first_name %></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th scope="col"> Item </th>
+      <th scope="col"> Price </th>
+      <th scope="col"> Sold to </th>
+      <th scope="col"> Sold on </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @others.each do |m| %>
+      <tr>
+        <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
+        <td><%= number_to_currency m[:price] %></td>
+        <td><%= m[:buyer_id] %></td>
+        <td><%= m[:created_at] %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

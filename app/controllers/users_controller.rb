@@ -31,35 +31,23 @@ class UsersController < ApplicationController
     end
   end
 
-  def transaction_history
-    t_hist = params[:trans_hist]
-    unless session[:user_id].nil?
+  def purchase_history
+    if session[:user_id].nil?
+      flash[:alert] = "You must log in to view your purchase history"
+    else
       @user = Current.user
       @others = []
-      case t_hist
-      when "seller"
-        @transactions = Transaction.where(seller_id: @user.id)
-        @transactions.each do |t|
-          @buyer = User.where(id: t.buyer_id)
-          @others.append({buyer: @buyer.first_name + " " + @buyer.last_name, product: t.product_id, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
+      @transactions = Transaction.where(buyer_id: @user.id)
+      @transactions.each do |t|
+        sid = t.seller_id
+        @seller = User.where(id: sid).first
+        seller_dir = if @seller.storefront.nil?
+          sid
+        else
+          @seller.storefront
         end
-      when "buyer"
-        @transactions = Transaction.where(buyer_id: @user.id)
-        @transactions.each do |t|
-          sid = t.seller_id
-          @seller = User.where(id: sid).first
-          seller_dir = if @seller.storefront.nil?
-            sid
-          else
-            @seller.storefront
-          end
-          @product = Product.where(id: t.product_id).first
-          @others.append({seller: @seller.first_name + " " + @seller.last_name, dir: seller_dir, product: @product.name, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
-        end
-        puts @others
-      else
-        flash[:warning] = "You must log in to view your transaction history"
-        redirect_to login_path
+        @product = Product.where(id: t.product_id).first
+        @others.append({seller: @seller.first_name + " " + @seller.last_name, dir: seller_dir, product: @product.name, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
       end
     end
   end
