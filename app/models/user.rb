@@ -39,6 +39,8 @@ class User < ApplicationRecord
 
   has_many :products, foreign_key: :seller_id, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_one :cart, dependent: :destroy
+  has_many :cart_items, through: :cart
   has_many :reviews_user_has_given, class_name: "Review", foreign_key: :reviewer_id, dependent: :destroy
   has_many :reviews_for_sellers, class_name: "Review", foreign_key: :seller_id, dependent: :destroy
   has_many :cart_products, through: :carts, source: :product
