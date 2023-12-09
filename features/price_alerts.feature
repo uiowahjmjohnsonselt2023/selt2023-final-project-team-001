@@ -12,16 +12,17 @@ Feature: Price Alerts Management
     Then I should see a success message "Price alert successfully created!"
     And I should be redirected to the price alerts page
 
-  #@needs_log_in
-#  Scenario: Trying to add a price alert for own product
-#    Given I am logged in as a user
-#    And the following products exist:
-#      | name       | quantity | price |
-#      | Laptop     | 5        | 1000  |
-#    When I visit the new price alert page for "Laptop"
-#    Then I should see an alert "Cannot add a price alert for your own product!"
-#    And I should be redirected to the homepage
-#
+  @needs_log_in
+  Scenario: Trying to add a price alert for own product
+    Given I am logged in as a user
+    And The following products exist:
+      | name       | quantity | price |
+      | Laptop     | 5        | 1000  |
+    When I visit the new price alert page for "Laptop"
+    Then I should see an alert "You cannot add your own product to your price alerts!"
+    And I should be redirected to the homepage
+
+#  @needs_log_in
 #  Scenario: Editing a price alert successfully
 #    Given I am logged in as "user@example.com"
 #    And I have a price alert for "Smartphone" with a threshold of "$400"

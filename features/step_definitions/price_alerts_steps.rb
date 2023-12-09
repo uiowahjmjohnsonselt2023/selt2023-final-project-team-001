@@ -54,10 +54,10 @@ end
 
 When("I visit the new price alert page for {string}") do |string|
   visit "/price_alerts/new?product_id=#{Product.find_by(name: string).id}"
-  expect(page).to have_content("New Price Alert")
 end
 
 And("I set a price threshold of {string}") do |thresh|
+  expect(page).to have_content("New Price Alert")
   fill_in "New threshold", with: thresh
 end
 
@@ -71,4 +71,12 @@ end
 
 And("I should be redirected to the price alerts page") do
   expect(page).to have_current_path(price_alerts_path)
+end
+
+Then('I should see an alert "You cannot add your own product to your price alerts!"') do
+  expect(page).to have_content("You cannot add your own product to your price alerts!")
+end
+
+And("I should be redirected to the homepage") do
+  expect(page).to have_current_path(root_path)
 end
