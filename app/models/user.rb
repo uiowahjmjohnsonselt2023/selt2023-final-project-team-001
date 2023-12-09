@@ -23,12 +23,12 @@ class User < ApplicationRecord
   validate :password_is_secure
 
   enum storefront_requested: {
-    no: 0,
+    not_requested: 0,
     pending: 100,
     rejected: 200,
     appealed: 300,
     approved: 400
-  }
+  }, _prefix: :storefront, _default: 0
 
   def password_is_secure
     unless /[A-Z]/.match?(password)
