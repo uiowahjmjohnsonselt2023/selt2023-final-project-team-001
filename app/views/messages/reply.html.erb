@@ -5,13 +5,12 @@
       <p class="text-center mb-3"><em>
           <%=  "You are replying to: #{@receiver_name}"  %>
       </em></p>
-      <p style="word-wrap: break-word; max-width: 100%;"><strong>Subject:</strong> <%= @subject_replying_to %></p>
-      <p style="word-wrap: break-word; max-width: 100%;"><strong>Message:</strong> <%= @message_replying_to %></p>
       <br>
       <%= bootstrap_form_with model: @message, url: send_reply_path do |f| %>
         <%= hidden_field_tag :receiver_id, @receiver_id %>
         <%= f.text_field :subject, label: "Subject", placeholder: "Subject", maxlength: 100 %>
-        <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500 %>
+        <% original_message_lines = @message_replying_to.split("\n").map { |line| "> #{line}" } %>
+        <%= f.text_area :message, label: "Body", placeholder: "Body", style: "height: 20em;", maxlength: 500, value: original_message_lines.join("\n").strip %>
         <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
         <%= f.submit "Send", class: 'btn btn-primary' %>
       <% end %>
