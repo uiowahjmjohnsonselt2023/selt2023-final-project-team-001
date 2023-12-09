@@ -2,8 +2,8 @@
 
 <div class="container mt-4">
   <h2>Messages</h2>
-  <%=  link_to "Inbox", view_messages_path%>
-  <%= link_to "Sent", view_sent_messages_path %>
+  <%=  link_to "Inbox", view_messages_path, class: "btn btn-primary"%>
+  <%=  link_to "Sent", view_sent_messages_path, class: "btn btn-primary"%>
   <table class="table">
     <thead>
     <tr>
