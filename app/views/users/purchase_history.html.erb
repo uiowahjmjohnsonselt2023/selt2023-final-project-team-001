@@ -15,7 +15,7 @@
       <tr>
         <td>
           <%= if m[:storefront].nil?
-                m[:seller]
+                link_to m[:seller], profile_path(m[:profile])
         else
           link_to m[:seller], storefront_path(m[:storefront])
         end%></td>

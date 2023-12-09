@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-12-09T15:19:42-06:00">2023-12-09T15:19:42-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-12-09T15:32:05-06:00">2023-12-09T15:32:05-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,7 +23,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  94.99%
+  95.04%
 </span>
 
      </span>
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>2195</b> relevant lines,
-    <span class="green"><b>2085</b> lines covered</span> and
-    <span class="red"><b>110</b> lines missed. </span>
+    <b>2196</b> relevant lines,
+    <span class="green"><b>2087</b> lines covered</span> and
+    <span class="red"><b>109</b> lines missed. </span>
     (<span class="green">
-  94.99%
+  95.04%
 </span>
 )
   </div>
@@ -182,12 +182,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#c65484efdcdbdb9cb032542bef50458e09689893" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">74.51 %</td>
-            <td class="cell--number">79</td>
-            <td class="cell--number">51</td>
+            <td class="red strong cell--number t-file__coverage">76.00 %</td>
+            <td class="cell--number">78</td>
+            <td class="cell--number">50</td>
             <td class="cell--number">38</td>
-            <td class="cell--number">13</td>
-            <td class="cell--number">0.86</td>
+            <td class="cell--number">12</td>
+            <td class="cell--number">0.88</td>
             
           </tr>
         
@@ -590,9 +590,9 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3af6f56f3c5fa429e464073c16d7704c4ef1fdc4" class="src_link" title="config/environments/test.rb">config/environments/test.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">55</td>
-            <td class="cell--number">16</td>
-            <td class="cell--number">16</td>
+            <td class="cell--number">59</td>
+            <td class="cell--number">18</td>
+            <td class="cell--number">18</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -3962,7 +3962,7 @@
 
             
 
-            <code class="ruby">      flash.now[:notice] = t(&quot;price_alerts.create.success&quot;)</code>
+            <code class="ruby">      flash[:notice] = t(&quot;price_alerts.create.success&quot;)</code>
           </li>
         </div>
       
@@ -9994,7 +9994,7 @@
     <h3>app/controllers/users_controller.rb</h3>
     <h4>
       <span class="red">
-  74.51%
+  76.0%
 </span>
 
       lines covered
@@ -10003,9 +10003,9 @@
     
 
     <div class="t-line-summary">
-      <b>51</b> relevant lines.
+      <b>50</b> relevant lines.
       <span class="green"><b>38</b> lines covered</span> and
-      <span class="red"><b>13</b> lines missed.</span>
+      <span class="red"><b>12</b> lines missed.</span>
     </div>
 
     
@@ -10506,7 +10506,7 @@
 
             
 
-            <code class="ruby">        puts &quot;====== IN SELLER : #{@seller} ========&quot;</code>
+            <code class="ruby">        @product = Product.where(id: t.product_id).first</code>
           </li>
         </div>
       
@@ -10517,18 +10517,18 @@
 
             
 
-            <code class="ruby">        @product = Product.where(id: t.product_id).first</code>
+            <code class="ruby">        @others.append({seller: @seller.first_name + &quot; &quot; + @seller.last_name, storefront: @seller.storefront, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="47">
             
             
 
             
 
-            <code class="ruby">        @others.append({seller: @seller.first_name + &quot; &quot; + @seller.last_name, storefront: @seller.storefront,  product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
@@ -10539,7 +10539,7 @@
 
             
 
-            <code class="ruby">      end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -10550,7 +10550,7 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -10561,23 +10561,12 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="51">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="52">
+          <li class="covered" data-hits="1" data-linenumber="51">
             <span class="hits">1</span>
             
 
@@ -10588,7 +10577,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="53">
+          <li class="covered" data-hits="2" data-linenumber="52">
             <span class="hits">2</span>
             
 
@@ -10599,7 +10588,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="54">
+          <li class="missed" data-hits="0" data-linenumber="53">
             
             
 
@@ -10610,7 +10599,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="55">
+          <li class="covered" data-hits="2" data-linenumber="54">
             <span class="hits">2</span>
             
 
@@ -10621,7 +10610,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="56">
+          <li class="covered" data-hits="1" data-linenumber="55">
             <span class="hits">1</span>
             
 
@@ -10632,7 +10621,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="57">
+          <li class="covered" data-hits="1" data-linenumber="56">
             <span class="hits">1</span>
             
 
@@ -10643,7 +10632,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="58">
+          <li class="covered" data-hits="1" data-linenumber="57">
             <span class="hits">1</span>
             
 
@@ -10654,7 +10643,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="59">
+          <li class="covered" data-hits="1" data-linenumber="58">
             <span class="hits">1</span>
             
 
@@ -10665,7 +10654,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="60">
+          <li class="missed" data-hits="0" data-linenumber="59">
             
             
 
@@ -10676,7 +10665,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="61">
+          <li class="missed" data-hits="0" data-linenumber="60">
             
             
 
@@ -10687,7 +10676,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="62">
+          <li class="missed" data-hits="0" data-linenumber="61">
             
             
 
@@ -10698,18 +10687,18 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="63">
+          <li class="missed" data-hits="0" data-linenumber="62">
             
             
 
             
 
-            <code class="ruby">        @others.append({buyer: @buyer, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})</code>
+            <code class="ruby">        @others.append({buyer: @buyer.first_name + &quot; &quot; + @buyer.last_name, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="64">
+          <li class="never" data-hits="" data-linenumber="63">
             
             
 
@@ -10720,7 +10709,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
+          <li class="never" data-hits="" data-linenumber="64">
             
             
 
@@ -10731,7 +10720,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="66">
+          <li class="covered" data-hits="1" data-linenumber="65">
             <span class="hits">1</span>
             
 
@@ -10742,7 +10731,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
+          <li class="covered" data-hits="1" data-linenumber="66">
             <span class="hits">1</span>
             
 
@@ -10753,7 +10742,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="68">
+          <li class="never" data-hits="" data-linenumber="67">
             
             
 
@@ -10764,7 +10753,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="69">
+          <li class="never" data-hits="" data-linenumber="68">
             
             
 
@@ -10775,7 +10764,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="70">
+          <li class="never" data-hits="" data-linenumber="69">
             
             
 
@@ -10786,7 +10775,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="71">
+          <li class="covered" data-hits="1" data-linenumber="70">
             <span class="hits">1</span>
             
 
@@ -10797,7 +10786,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="72">
+          <li class="never" data-hits="" data-linenumber="71">
             
             
 
@@ -10808,7 +10797,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="72">
             
             
 
@@ -10819,7 +10808,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="74">
+          <li class="covered" data-hits="1" data-linenumber="73">
             <span class="hits">1</span>
             
 
@@ -10830,7 +10819,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="75">
+          <li class="covered" data-hits="1" data-linenumber="74">
             <span class="hits">1</span>
             
 
@@ -10841,7 +10830,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="76">
+          <li class="covered" data-hits="1" data-linenumber="75">
             <span class="hits">1</span>
             
 
@@ -10852,7 +10841,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="77">
+          <li class="covered" data-hits="1" data-linenumber="76">
             <span class="hits">1</span>
             
 
@@ -10863,7 +10852,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="78">
+          <li class="never" data-hits="" data-linenumber="77">
             
             
 
@@ -10874,7 +10863,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="79">
+          <li class="never" data-hits="" data-linenumber="78">
             
             
 
@@ -19268,8 +19257,8 @@
     
 
     <div class="t-line-summary">
-      <b>16</b> relevant lines.
-      <span class="green"><b>16</b> lines covered</span> and
+      <b>18</b> relevant lines.
+      <span class="green"><b>18</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -19375,40 +19364,40 @@
 
             
 
-            <code class="ruby">  # Settings specified here will take precedence over those in config/application.rb.</code>
+            <code class="ruby">  # Configure &#39;rails notes&#39; to inspect Cucumber files</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="10">
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  config.annotations.register_directories(&quot;features&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="11">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  config.annotations.register_extensions(&quot;feature&quot;) { |tag| /#\s*(#{tag}):?\s*(.*)$/ }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="11">
-            
-            
-
-            
-
-            <code class="ruby">  # While tests run files are not watched, reloading is not necessary.</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="12">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  config.enable_reloading = false</code>
           </li>
         </div>
       
@@ -19419,7 +19408,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # Settings specified here will take precedence over those in config/application.rb.</code>
           </li>
         </div>
       
@@ -19430,7 +19419,7 @@
 
             
 
-            <code class="ruby">  # Eager loading loads your entire application. When running a single test locally,</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19441,18 +19430,18 @@
 
             
 
-            <code class="ruby">  # this is usually not necessary, and can slow down your test suite. However, it&#39;s</code>
+            <code class="ruby">  # While tests run files are not watched, reloading is not necessary.</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="16">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="16">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  # recommended that you enable it in continuous integration systems to ensure eager</code>
+            
+
+            <code class="ruby">  config.enable_reloading = false</code>
           </li>
         </div>
       
@@ -19463,18 +19452,18 @@
 
             
 
-            <code class="ruby">  # loading is working properly before deploying your code.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="18">
+            
             
 
             
 
-            <code class="ruby">  config.eager_load = ENV[&quot;CI&quot;].present?</code>
+            <code class="ruby">  # Eager loading loads your entire application. When running a single test locally,</code>
           </li>
         </div>
       
@@ -19485,7 +19474,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # this is usually not necessary, and can slow down your test suite. However, it&#39;s</code>
           </li>
         </div>
       
@@ -19496,18 +19485,18 @@
 
             
 
-            <code class="ruby">  # Configure public file server for tests with Cache-Control for performance.</code>
+            <code class="ruby">  # recommended that you enable it in continuous integration systems to ensure eager</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="21">
+            
             
 
             
 
-            <code class="ruby">  config.public_file_server.enabled = true</code>
+            <code class="ruby">  # loading is working properly before deploying your code.</code>
           </li>
         </div>
       
@@ -19518,7 +19507,7 @@
 
             
 
-            <code class="ruby">  config.public_file_server.headers = {</code>
+            <code class="ruby">  config.eager_load = ENV[&quot;CI&quot;].present?</code>
           </li>
         </div>
       
@@ -19529,7 +19518,7 @@
 
             
 
-            <code class="ruby">    &quot;Cache-Control&quot; =&gt; &quot;public, max-age=#{1.hour.to_i}&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19540,62 +19529,62 @@
 
             
 
+            <code class="ruby">  # Configure public file server for tests with Cache-Control for performance.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  config.public_file_server.enabled = true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="26">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  config.public_file_server.headers = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="27">
+            
+            
+
+            
+
+            <code class="ruby">    &quot;Cache-Control&quot; =&gt; &quot;public, max-age=#{1.hour.to_i}&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="28">
+            
+            
+
+            
+
             <code class="ruby">  }</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="29">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="26">
-            
-            
-
-            
-
-            <code class="ruby">  # Show full error reports and disable caching.</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="27">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  config.consider_all_requests_local = true</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="28">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  config.action_controller.perform_caching = false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  config.cache_store = :null_store</code>
           </li>
         </div>
       
@@ -19606,18 +19595,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # Show full error reports and disable caching.</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  # Raise exceptions instead of rendering exception templates.</code>
+            
+
+            <code class="ruby">  config.consider_all_requests_local = true</code>
           </li>
         </div>
       
@@ -19628,18 +19617,18 @@
 
             
 
-            <code class="ruby">  config.action_dispatch.show_exceptions = :rescuable</code>
+            <code class="ruby">  config.action_controller.perform_caching = false</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="33">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">  config.cache_store = :null_store</code>
           </li>
         </div>
       
@@ -19650,29 +19639,29 @@
 
             
 
-            <code class="ruby">  # Disable request forgery protection in test environment.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="35">
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
+            <code class="ruby">  # Raise exceptions instead of rendering exception templates.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="36">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  config.action_controller.allow_forgery_protection = false</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="36">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">  config.action_dispatch.show_exceptions = :rescuable</code>
           </li>
         </div>
       
@@ -19683,29 +19672,29 @@
 
             
 
-            <code class="ruby">  # Print deprecation notices to the stderr.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="38">
+          <li class="never" data-hits="" data-linenumber="38">
+            
+            
+
+            
+
+            <code class="ruby">  # Disable request forgery protection in test environment.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="39">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  config.active_support.deprecation = :stderr</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="39">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">  config.action_controller.allow_forgery_protection = false</code>
           </li>
         </div>
       
@@ -19716,29 +19705,29 @@
 
             
 
-            <code class="ruby">  # Raise exceptions for disallowed deprecations.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="41">
+            
+            
+
+            
+
+            <code class="ruby">  # Print deprecation notices to the stderr.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="42">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  config.active_support.disallowed_deprecation = :raise</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="42">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">  config.active_support.deprecation = :stderr</code>
           </li>
         </div>
       
@@ -19749,29 +19738,29 @@
 
             
 
-            <code class="ruby">  # Tell Active Support which deprecation messages to disallow.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="44">
+          <li class="never" data-hits="" data-linenumber="44">
+            
+            
+
+            
+
+            <code class="ruby">  # Raise exceptions for disallowed deprecations.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="45">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  config.active_support.disallowed_deprecation_warnings = []</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="45">
-            
-            
-
-            
-
-            <code class="ruby"></code>
+            <code class="ruby">  config.active_support.disallowed_deprecation = :raise</code>
           </li>
         </div>
       
@@ -19782,7 +19771,7 @@
 
             
 
-            <code class="ruby">  # Raises error for missing translations.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19793,18 +19782,18 @@
 
             
 
-            <code class="ruby">  # config.i18n.raise_on_missing_translations = true</code>
+            <code class="ruby">  # Tell Active Support which deprecation messages to disallow.</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="48">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="48">
+            <span class="hits">1</span>
             
 
-            <code class="ruby"></code>
+            
+
+            <code class="ruby">  config.active_support.disallowed_deprecation_warnings = []</code>
           </li>
         </div>
       
@@ -19815,7 +19804,7 @@
 
             
 
-            <code class="ruby">  # Annotate rendered view with file names.</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -19826,7 +19815,7 @@
 
             
 
-            <code class="ruby">  # config.action_view.annotate_rendered_view_with_filenames = true</code>
+            <code class="ruby">  # Raises error for missing translations.</code>
           </li>
         </div>
       
@@ -19837,7 +19826,7 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # config.i18n.raise_on_missing_translations = true</code>
           </li>
         </div>
       
@@ -19848,12 +19837,56 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="53">
+            
+            
+
+            
+
+            <code class="ruby">  # Annotate rendered view with file names.</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="54">
+            
+            
+
+            
+
+            <code class="ruby">  # config.action_view.annotate_rendered_view_with_filenames = true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="55">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="56">
+            
+            
+
+            
+
             <code class="ruby">  # Raise error when a before_action&#39;s only/except options reference missing actions</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="53">
+          <li class="covered" data-hits="1" data-linenumber="57">
             <span class="hits">1</span>
             
 
@@ -19864,7 +19897,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="54">
+          <li class="covered" data-hits="1" data-linenumber="58">
             <span class="hits">1</span>
             
 
@@ -19875,7 +19908,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="never" data-hits="" data-linenumber="59">
             
             
 

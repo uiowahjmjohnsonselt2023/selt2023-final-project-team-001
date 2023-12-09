@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         sid = t.seller_id
         @seller = User.where(id: sid).first
         @product = Product.where(id: t.product_id).first
-        @others.append({seller: @seller.first_name + " " + @seller.last_name, storefront: @seller.storefront, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
+        @others.append({seller: @seller.first_name + " " + @seller.last_name, storefront: @seller.storefront, profile: @seller.profile, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
       end
     end
   end
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
         bid = t.buyer_id
         @buyer = User.where(id: bid).first
         @product = Product.where(id: t.product_id).first
-        @others.append({buyer: @buyer.first_name + " " + @buyer.last_name, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
+        @others.append({buyer: @buyer.first_name + " " + @buyer.last_name, product: @product.name, profile: @buyer.profile, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
       end
     else
       flash[:alert] = "You must register as a seller to view sales history"
