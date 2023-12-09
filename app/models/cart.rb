@@ -6,4 +6,12 @@ class Cart < ApplicationRecord
   def subtotal
     cart_items.sum(&:subtotal)
   end
+
+  def discounted_subtotal
+    cart_items.sum(&:discounted_subtotal)
+  end
+
+  def apply_promotions
+    promotions.each { |promo| promo.apply(self) }
+  end
 end
