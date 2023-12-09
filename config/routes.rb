@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get "price_alerts/send_price_alert"
   get "home/index"
   get "pages/index"
 
@@ -9,6 +10,13 @@ Rails.application.routes.draw do
     get :choose_template, on: :member
     get :customize, on: :member
   end
+
+  resources :price_alerts, only: [:new, :create, :index, :edit, :update], param: :id do
+    get :delete, on: :member
+    delete :destroy, on: :member
+  end
+
+  get "/send_price_alert", to: "price_alerts#send_price_alert", as: "send_price_alert"
 
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
