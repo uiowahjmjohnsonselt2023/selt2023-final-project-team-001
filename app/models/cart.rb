@@ -11,13 +11,21 @@ class Cart < ApplicationRecord
   end
 
   def discounted_subtotal
-    cart_items.sum(&:discounted_subtotal)
+    # Can't just use a sum here because cart_items gets reloaded
+    @discounted_subtotal || subtotal
   end
 
   def apply_promotions
-    unless empty?
-      promotions.each { |promo| promo.apply(self) }
+    if !empty?
+      # We have to do it like this so that the attributes that are set in the
+      # promotions are maintained. If we just returned cart_items, they'd be
+      # reloaded from the database and the attributes would be lost.
+      items = cart_items.includes(:seller, seller: :promotions).to_a
+      promotions.each { |promo| promo.apply(items) }
+      @discounted_subtotal = items.sum(&:discounted_subtotal)
+      items
+    else
+      cart_items
     end
-    cart_items # return cart_items for chaining
   end
 end

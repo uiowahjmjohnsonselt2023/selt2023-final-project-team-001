@@ -51,9 +51,9 @@ module Promotions
       active? && cart_item.applied_promotion.nil? && product_eligible?(cart_item)
     end
 
-    # @param [Cart] cart
-    def apply(cart)
-      cart_items = cart.cart_items.includes(:seller).filter { |ci| eligible?(ci) }
+    # @param [Array<CartItem>] cart_items
+    def apply(cart_items)
+      cart_items = cart_items.filter { |ci| eligible?(ci) }
       discount(cart_items) if cart_items.sum(&:quantity) >= min_quantity
     end
   end
