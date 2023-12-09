@@ -19,7 +19,8 @@ class CheckoutsController < ApplicationController
         total_price: cart_item.discounted_subtotal,
         original_quantity: cart_item.product.quantity,
         quantity: cart_item.quantity,
-        id: cart_item.product_id
+        id: cart_item.product_id,
+        cart_item_id: cart_item.id
       }
     end
 
@@ -33,9 +34,9 @@ class CheckoutsController < ApplicationController
   end
 
   def update_quantity
-    cart = CartItem.where(user_id: session[:user_id], product_id: params[:product_id])
-    if params[:quantity] != cart.pluck(:quantity).first.to_s
-      cart.update(quantity: params[:quantity])
+    cart_item = CartItem.find params[:cart_item_id]
+    if params[:quantity] != cart_item.quantity
+      cart_item.update(quantity: params[:quantity])
       flash[:success] = "Item quantity updated successfully!"
       redirect_to checkout_path
     end

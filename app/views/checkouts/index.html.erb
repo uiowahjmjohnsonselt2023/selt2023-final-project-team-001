@@ -25,7 +25,7 @@
               <td><%= product[:name] %></td>
               <td>
                 <%= form_tag update_quantity_path, method: :post do %>
-                  <%= hidden_field_tag :product_id, product[:id] %>
+                  <%= hidden_field_tag :cart_item_id, product[:cart_item_id] %>
                   <%= select_tag(
                         :quantity,
                         options_for_select(
