@@ -1,1 +1,60 @@
-<h1>Home</h1>
+<style>
+  /*move it to the top*/
+  .carousel-caption {
+      top: 0;
+      bottom: auto;
+      transform: translateY(0);
+      color: white; /* Set text color to white */
+      text-shadow: -1px -1px 0 #888,
+      1px -1px 0 #888,
+      -1px 1px 0 #888,
+      1px 1px 0 #888; /* Create a gray outline */
+  }
+</style>
+
+<div class="container-xl my-4">
+  <div class="row">
+    <h1>Welcome to Shoppr!</h1>
+    <p>Find amazing deals on various categories:</p>
+    <div class="col-lg-4">
+      <!-- Carousel -->
+      <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <!--from https://www.forbes.com/sites/jimgorzelany/2019/07/23/here-are-the-coolest-new-cars-for-2020/?sh=25baad2d11be-->
+            <img src="<%= asset_path('home/motors.jpg') %>" class="d-block w-100" alt="Motors">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Motors</h5>
+            </div>
+          </div>
+          <div class="carousel-item active">
+            <!--from https://www.reddit.com/r/adventuretime/comments/1vjc3n/bmo_looking_cool/-->
+            <img src="<%= asset_path('home/electronics.jpg') %>" class="d-block w-100" alt="Motors">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Electronics</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <% unless @user %>
+      <div class="col-lg-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sign in for the best experience</h5>
+            <p class="card-text">Explore a world of great deals by signing in.</p>
+            <a href="/login" class="btn btn-primary">Sign in securely</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
