@@ -52,6 +52,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def sales_history
+    if session[:user_id].nil?
+      flash[:alert] = "You must log in to view your sales history"
+    elsif Current.user.is_seller
+      @user = Current.user
+      @others = []
+      @transactions = Transaction.where(seller_id: @user.id)
+      @transactions.each do |t|
+        bid = t.buyer_id
+        @buyer = User.where(id: bid).first
+        @product = Product.where(id: t.product_id).first
+        @others.append({buyer: @buyer.first_name + " " + @buyer.last_name, product: @product.name, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
+      end
+    else
+      flash[:alert] = "You must register as a seller to view sales history"
+      redirect_to root_path
+    end
+  end
+
   def register
   end
 
