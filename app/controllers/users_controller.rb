@@ -33,19 +33,28 @@ class UsersController < ApplicationController
 
   def transaction_history
     t_hist = params[:trans_hist]
-    puts "====== IN T HIST WITH #{t_hist} ========="
     unless session[:user_id].nil?
       @user = Current.user
-      puts "====== USER ID NOT NIL ========="
-      @transactions = case t_hist
+      @others = []
+      case t_hist
       when "seller"
-        Transaction.where(seller_id: @user.id)
+        @transactions = Transaction.where(seller_id: @user.id)
+        @transactions.each do |t|
+          @buyer = User.where(id: t.buyer_id)
+          @others.append({buyer: @buyer.first_name + " " + @buyer.last_name, product: t.product_id, price: t.price_cents})
+        end
       when "buyer"
-        Transaction.where(buyer_id: @user.id)
+        @transactions = Transaction.where(seller_id: @user.id)
+        @transactions.each do |t|
+          @seller = User.where(id: t.seller_id)
+          @product = Product.where(id: t.product_id)
+          @others.append({seller: @seller.first_name + " " + @seller.last_name, product: @product.name, price: t.price_cents})
+        end
       else
         flash[:warning] = "You must log in to view your transaction history"
-        # redirect_to login_path
+        redirect_to login_path
       end
+      @others = User.where(id: @other_ids)
     end
   end
 
