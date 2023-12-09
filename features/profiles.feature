@@ -37,21 +37,23 @@ Feature: User Profiles
     And I have a profile
     When I go to create a new profile
     Then I should see an alert that I already have a profile
-#
+
   Scenario: Show a public profile
     Given There is a public profile
     When I view the profile
     Then I should see the profile details
-#
+
   Scenario: Attempt to view a private profile
     Given There is a private profile
     When I view the profile
     Then I should see an alert that the profile is private
-#
-#  Scenario: Delete my profile
-#    Given I have a profile
-#    When I go to delete my profile
-#    Then I should see a confirmation page to delete my profile
-#    When I confirm the deletion
-#    Then I should see a success message that my profile was deleted
-#    And my profile should no longer exist
+
+  @needs_log_in
+  Scenario: Delete my profile
+    Given I am logged in as a user
+    And I have a profile
+    When I go to delete my profile
+    Then I should see a confirmation page to delete my profile
+    When I confirm the deletion
+    Then I should see a success message that my profile was deleted
+    And My profile should no longer exist

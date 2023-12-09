@@ -157,3 +157,25 @@ Then("I should see an alert that I can only edit my own profile") do
   expect(page).to have_content("You can only edit your own profile!")
   expect(page).to have_current_path("/")
 end
+
+When("I go to delete my profile") do
+  visit "/profiles/#{@new_user.profile.id}/delete"
+end
+
+Then("I should see a confirmation page to delete my profile") do
+  expect(page).to have_content("Delete Profile")
+  expect(page).to have_content("Are you sure you want to delete your profile?")
+end
+
+When("I confirm the deletion") do
+  click_button "Delete Profile"
+end
+
+Then("I should see a success message that my profile was deleted") do
+  expect(page).to have_content("Profile deleted successfully!")
+  expect(page).to have_current_path("/")
+end
+
+And("My profile should no longer exist") do
+  expect(Profile.find_by(user_id: @new_user.id)).to be_nil
+end
