@@ -6,7 +6,7 @@ Before("@needs_user") do
 
   user&.destroy
 
-  new_user = User.create(
+  @new_user = User.create(
     first_name: "John",
     last_name: "Doe",
     email: email,
@@ -15,8 +15,11 @@ Before("@needs_user") do
     is_seller: false,
     is_admin: false
   )
-  new_user.update_attribute(:is_seller, false)
-  new_user.update_attribute(:is_admin, false)
+  @new_user.update_attribute(:is_seller, false)
+  @new_user.update_attribute(:is_admin, false)
+  @new_profile = FactoryBot.create(:profile, user: @new_user)
+  @new_user.save
+  puts(@new_profile.id)
 end
 
 And("There is a seller with a public profile") do
@@ -24,31 +27,25 @@ And("There is a seller with a public profile") do
   @profile = FactoryBot.create(:profile, user: @seller)
   @profile.update_attribute(:public_profile, true)
   @seller.save
-  puts(@seller.profile.id)
 end
 
 When("I go to the new review page for that seller") do
-  visit "/profiles/#{@seller.profile.id}"
+  visit "/review?profile_id=#{@seller.profile.id}"
 end
 
 Then("I should see a form to leave a review") do
-  expect(page).to have_current_path("/profiles/#{@profile.id}")
-  expect(page).to have_content("Name")
-  expect(page).to have_content("Bio")
-  expect(page).to have_content("Location")
-  expect(page).to have_content("Twitter")
-  expect(page).to have_content("Facebook")
-  expect(page).to have_content("Instagram")
-  expect(page).to have_content("Website")
-  expect(page).to have_content("Occupation")
-  expect(page).to have_content("Seller Rating (out of 5)")
-  expect(page).to have_content("Leave A Review")
+  expect(page).to have_current_path("/review?profile_id=#{@seller.profile.id}")
+  expect(page).to have_content("Create a Review")
+  expect(page).to have_content("Have you purchased from this seller before?")
 end
 
 When("I fill in the review form with valid information") do
-  expect(page).to have_content("Leave A Review")
+  expect(page).to have_content("Create a Review")
+  expect(page).to have_content("Have you purchased from this seller before?")
+  expect(page).to have_content("Rate your interaction:")
+  expect(page).to have_content("(Optional) Describe your interaction experience:")
   choose "Yes"
-  click_on "5 - Excellent"
+  choose "5 - Excellent"
 end
 
 And("I submit the review") do
@@ -61,4 +58,14 @@ end
 
 And("The seller's profile should show the updated seller rating") do
   expect(page).to have_content("5")
+end
+
+When("I am on the new review page for my own profile") do
+  puts(@new_profile.id)
+  visit "/review?profile_id=#{@new_profile.id}"
+end
+
+Then("I should get redirected and see an alert that I cannot leave a review for myself") do
+  expect(page).to have_content("You cannot leave a review for yourself.")
+  expect(page).to have_current_path("/profiles/#{@new_profile.id}")
 end

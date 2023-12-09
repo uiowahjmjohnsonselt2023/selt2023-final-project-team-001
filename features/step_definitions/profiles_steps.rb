@@ -1,6 +1,6 @@
 Before("@needs_log_in") do
   visit "/logout"
-  email = "valid@email.com"
+  email = "test@email.com"
   password = "P4ssw0rd!"
   user = User.find_by(email: email)
 
@@ -20,7 +20,7 @@ Before("@needs_log_in") do
 end
 
 Given("I am logged in as a user") do
-  email = "valid@email.com"
+  email = "test@email.com"
   password = "P4ssw0rd!"
   # handled by @needs_log_in
   visit "/login"
@@ -30,7 +30,7 @@ Given("I am logged in as a user") do
 end
 
 When("I go to edit my profile page") do
-  email = "valid@email.com"
+  email = "test@email.com"
   user = User.find_by(email: email)
   visit "/profiles/#{user.profile.id}/edit"
 end
@@ -64,4 +64,29 @@ Then("My profile should be updated with the new information") do
   expect(page).to have_content("Lee")
   expect(page).to have_content("I'm a person")
   expect(page).to have_content("USA")
+end
+
+Given("I do not have a profile") do
+  email = "test@email.com"
+  user = User.find_by(email: email)
+  user.profile.destroy
+end
+
+When("I go to create a profile") do
+  visit "/profiles/new"
+end
+
+Then("I should see the profile creation form") do
+  expect(page).to have_content("Create Profile")
+  expect(page).to have_content("First Name")
+  expect(page).to have_content("Last Name")
+  expect(page).to have_content("Bio")
+  expect(page).to have_content("Profile Picture")
+  expect(page).to have_content("Location")
+  expect(page).to have_content("Twitter")
+  expect(page).to have_content("Facebook")
+  expect(page).to have_content("Instagram")
+  expect(page).to have_content("Website")
+  expect(page).to have_content("Occupation")
+  expect(page).to have_content("Profile Visibility")
 end

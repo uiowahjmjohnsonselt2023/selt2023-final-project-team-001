@@ -14,10 +14,12 @@ Feature: Seller Reviews
     Then I should see a success message
     And The seller's profile should show the updated seller rating
 
-#  # Sad paths
-#  Scenario: Attempt to leave a review for oneself
-#    Given I am on the new review page for my own profile
-#    Then I should see an alert that I cannot leave a review for myself
+  # Sad paths
+  @needs_user
+  Scenario: Attempt to leave a review for oneself
+    Given I am logged in
+    And I am on the new review page for my own profile
+    Then I should get redirected and see an alert that I cannot leave a review for myself
 #
 #  Scenario: Attempt to leave a review for a non-seller
 #    Given there is a user who is not a seller

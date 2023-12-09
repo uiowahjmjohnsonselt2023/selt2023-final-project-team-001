@@ -3,6 +3,15 @@ Feature: User Profiles
   I want to manage my profile
   So that I can update or delete my information for others to see
 
+  Scenario: Create a new profile
+    Given I do not have a profile
+    When I go to create a new profile
+    Then I should see a profile creation form
+    When I fill in the profile creation form with valid information
+    And I submit the form
+    Then I should see a success message
+    And my profile should be created with the entered information
+
   @needs_log_in
   Scenario: Edit my profile
     Given I am logged in as a user
@@ -16,15 +25,6 @@ Feature: User Profiles
     Given there is another user with a profile
     When I try to edit their profile
     Then I should see an alert that I can only edit my own profile
-
-  Scenario: Create a new profile
-    Given I do not have a profile
-    When I go to create a new profile
-    Then I should see a profile creation form
-    When I fill in the profile creation form with valid information
-    And I submit the form
-    Then I should see a success message
-    And my profile should be created with the entered information
 
   Scenario: Attempt to create a new profile when I already have one
     Given I already have a profile
