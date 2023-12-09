@@ -1,5 +1,5 @@
 class Promotions::PercentOff < ApplicationRecord
-  include Promotionable
+  include Promotions::Promotionable
 
   validates :percentage, numericality: {greater_than: 0, less_than_or_equal_to: 1}
 
