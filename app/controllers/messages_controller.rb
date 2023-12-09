@@ -51,11 +51,11 @@ class MessagesController < ApplicationController
 
   def inbox
     # only grab non deleted messages
-    @messages = Message.where(receiver_id: Current.user.id, hasReceiverDeleted: false)
+    @messages = Message.where(receiver_id: Current.user.id, hasReceiverDeleted: false).order(created_at: :desc)
   end
 
   def sent
-    @messages = Message.where(sender_id: Current.user.id, hasSenderDeleted: false)
+    @messages = Message.where(sender_id: Current.user.id, hasSenderDeleted: false).order(created_at: :desc)
   end
 
   def show
@@ -71,14 +71,15 @@ class MessagesController < ApplicationController
 
   def delete
     if params[:confirmation] == "yes"
+      flash[:success] = "Message deleted."
       message = Message.find_by(id: params[:message_id])
       if Current.user.id == message.sender_id
         message.update(hasSenderDeleted: true)
+        redirect_to view_sent_messages_path
       else
         message.update(hasReceiverDeleted: true)
+        redirect_to view_messages_path
       end
-      flash[:success] = "Message deleted."
     end
-    redirect_to view_messages_path
   end
 end
