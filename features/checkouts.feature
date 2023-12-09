@@ -8,15 +8,17 @@ Feature: Shopping Cart Checkout
     When I visit the checkout page
     Then I should see a message indicating that my cart is empty
 
-#  Scenario: Adding items to the cart
-#    Given the following products exist:
-#      | Name           | Quantity | Price |
-#      | Laptop         | 5        | 1000  |
-#      | Smartphone     | 8        | 800   |
-#      | Headphones     | 10       | 200   |
-#    When I add "Laptop" and "Smartphone" to my cart
-#    Then I should see them in my cart with their total prices and quantities
-#    And the cart total should reflect the correct sum of prices
+  @needs_log_in
+  Scenario: Adding items to the cart
+    And I register as a seller
+    And The following products exist:
+      | name           | quantity | price |
+      | Laptop         | 5        | 1000  |
+      | Smartphone     | 8        | 800   |
+      | Headphones     | 10       | 200   |
+    When I add "Laptop" and "Smartphone" to my cart
+    Then I should see them in my cart
+    And The cart total should reflect the correct sum of prices
 #
 #  Scenario: Updating cart item quantity
 #    Given "Laptop" is in my cart with a quantity of 1

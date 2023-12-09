@@ -12,7 +12,7 @@ Before("@needs_log_in") do
     email: email,
     password: password,
     password_confirmation: password,
-    is_seller: false,
+    is_seller: true,
     is_admin: false
   )
   @new_user.update_attribute(:is_seller, false)
@@ -25,4 +25,37 @@ end
 
 Then("I should see a message indicating that my cart is empty") do
   expect(page).to have_content "Your cart is empty!"
+end
+
+#  Scenario: Adding items to the cart
+#     And the following products exist:
+#       | name           | Quantity | Price |
+#       | Laptop         | 5        | 1000  |
+#       | Smartphone     | 8        | 800   |
+#       | Headphones     | 10       | 200   |
+And("The following products exist:") do |table|
+  table.hashes.each do |product|
+    new_prod = FactoryBot.create(:product, name: product[:name], quantity: product[:quantity], price: product[:price])
+    @new_user.products << new_prod
+    @new_user.save
+  end
+end
+
+When("I add {string} and {string} to my cart") do |product_name, product_name2|
+  prod1 = Product.find_by(name: product_name)
+  prod2 = Product.find_by(name: product_name2)
+  visit product_path(prod1)
+  click_button "Add to Cart"
+  visit product_path(prod2)
+  click_button "Add to Cart"
+end
+
+Then("I should see them in my cart") do
+  visit checkout_path
+  expect(page).to have_content "Laptop"
+  expect(page).to have_content "Smartphone"
+end
+
+And("The cart total should reflect the correct sum of prices") do
+  expect(page).to have_content "$1,800.00"
 end
