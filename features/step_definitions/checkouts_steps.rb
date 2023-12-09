@@ -59,3 +59,29 @@ end
 And("The cart total should reflect the correct sum of prices") do
   expect(page).to have_content "$1,800.00"
 end
+
+And("{string} is in my cart with a quantity of {string}") do |product_name, quantity|
+  prod = Product.find_by(name: product_name)
+  visit product_path(prod)
+  click_button "Add to Cart"
+  visit checkout_path
+  select quantity, from: "quantity"
+  # click_on "quantity"
+  click_button "Update"
+end
+
+When("I update the quantity of {string} to {string}") do |product_name, quantity|
+  visit checkout_path
+  select quantity, from: "quantity"
+  # click_on "quantity"
+  click_button "Update"
+end
+
+Then("I should see a success message indicating the quantity update") do
+  expect(page).to have_content "Item quantity updated successfully!"
+end
+
+And("The updated quantity and total price should reflect in my cart") do
+  expect(page).to have_content "$2,000.00"
+  expect(page).to have_content "2"
+end

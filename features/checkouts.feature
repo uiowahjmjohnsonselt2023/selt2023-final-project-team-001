@@ -19,12 +19,16 @@ Feature: Shopping Cart Checkout
     When I add "Laptop" and "Smartphone" to my cart
     Then I should see them in my cart
     And The cart total should reflect the correct sum of prices
-#
-#  Scenario: Updating cart item quantity
-#    Given "Laptop" is in my cart with a quantity of 1
-#    When I update the quantity of "Laptop" to 2
-#    Then I should see a success message indicating the quantity update
-#    And the updated quantity and total price should reflect in my cart
+
+  @needs_log_in
+  Scenario: Updating cart item quantity
+    Given The following products exist:
+      | name           | quantity | price |
+      | Laptop         | 5        | 1000  |
+    And "Laptop" is in my cart with a quantity of "1"
+    When I update the quantity of "Laptop" to "2"
+    Then I should see a success message indicating the quantity update
+    And The updated quantity and total price should reflect in my cart
 #
 #  Scenario: Removing item from the cart
 #    Given "Smartphone" is in my cart
