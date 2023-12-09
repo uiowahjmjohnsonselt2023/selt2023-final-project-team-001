@@ -30,7 +30,14 @@
                   <%= submit_tag "Update", class: "btn btn-secondary" %>
                 <% end %>
               </td>
-              <td><%= number_to_currency product[:total_price] %></td>
+              <td>
+                <% if product[:original_total_price] != product[:total_price] %>
+                  <span class="text-decoration-line-through">
+                    <%= number_to_currency product[:original_total_price] %>
+                  </span>
+                <% end %>
+                  <%= number_to_currency product[:total_price] %>
+              </td>
               <td>
                 <button class="btn btn-danger delete-item"
                         type="button"
