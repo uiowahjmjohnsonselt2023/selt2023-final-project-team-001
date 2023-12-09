@@ -16,5 +16,6 @@ class Cart < ApplicationRecord
 
   def apply_promotions
     promotions.each { |promo| promo.apply(self) }
+    cart_items # return cart_items for chaining
   end
 end
