@@ -26,7 +26,14 @@
               <td>
                 <%= form_tag update_quantity_path, method: :post do %>
                   <%= hidden_field_tag :product_id, product[:id] %>
-                  <%= select_tag :quantity, options_for_select((1..product[:original_quantity]).to_a, selected: product[:quantity]) %>
+                  <%= select_tag(
+                        :quantity,
+                        options_for_select(
+                          (1..product[:original_quantity]).to_a,
+                          selected: product[:quantity],
+                        ),
+                        autocomplete: "off"
+                      ) %>
                   <%= submit_tag "Update", class: "btn btn-secondary" %>
                 <% end %>
               </td>
