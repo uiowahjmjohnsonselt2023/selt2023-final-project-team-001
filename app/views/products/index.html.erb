@@ -22,7 +22,7 @@
         </td>
         <td><%= link_to product.name, product_path(product.id) %></td>
         <td><%= number_to_currency product.price %></td>
-        <td><%= product.created_at %></td>
+        <td><%= product.created_at.strftime("%B %e, %Y %l:%M %p") %></td>
         <td><%= product.views %>
       </tr>
     <% end %>
