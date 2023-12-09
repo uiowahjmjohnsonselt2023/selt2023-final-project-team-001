@@ -88,3 +88,19 @@ Then("I should get redirected and see an alert that I cannot leave a review for 
   expect(page).to have_content("You cannot leave a review for yourself.")
   expect(page).to have_current_path("/profiles/#{@new_user.profile.id}")
 end
+
+Given("There is a public profile for a non seller") do
+  @seller = FactoryBot.create(:seller)
+  @profile = FactoryBot.create(:profile, user: @seller)
+  @profile.update_attribute(:public_profile, true)
+  @seller.update_attribute(:is_seller, false)
+  @seller.save
+end
+
+When("I go to the new review page for that user") do
+  visit "/review?profile_id=#{@seller.profile.id}"
+end
+
+Then("I should see an alert that I cannot leave a review for a non-seller") do
+  expect(page).to have_content("You cannot leave a review for someone who is not a seller.")
+end

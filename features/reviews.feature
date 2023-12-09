@@ -21,8 +21,10 @@ Feature: Seller Reviews
     And I have a profile
     And I am on the new review page for my own profile
     Then I should get redirected and see an alert that I cannot leave a review for myself
-#
-#  Scenario: Attempt to leave a review for a non-seller
-#    Given there is a user who is not a seller
-#    When I go to the new review page for that user
-#    Then I should see an alert that I cannot leave a review for a non-seller
+
+  @needs_log_in
+  Scenario: Attempt to leave a review for a non-seller
+    Given I am logged in as a user
+    Given There is a public profile for a non seller
+    When I go to the new review page for that user
+    Then I should see an alert that I cannot leave a review for a non-seller
