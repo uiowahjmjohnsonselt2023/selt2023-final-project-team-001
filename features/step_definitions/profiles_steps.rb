@@ -118,3 +118,21 @@ Then("I should see an alert that I already have a profile") do
   expect(page).to have_content("You already have a profile!")
   expect(page).to have_current_path("/profiles/#{@new_user.profile.id}")
 end
+
+Given("There is a public profile") do
+  @seller = FactoryBot.create(:seller)
+  @profile = FactoryBot.create(:profile, user: @seller)
+  @profile.update_attribute(:public_profile, true)
+  @seller.save
+end
+
+When("I view the public profile") do
+  visit "/profiles/#{@seller.profile.id}"
+end
+
+Then("I should see the profile details") do
+  expect(page).to have_content(@seller.profile.first_name)
+  expect(page).to have_content(@seller.profile.last_name)
+  expect(page).to have_content(@seller.profile.bio)
+  expect(page).to have_current_path "/profiles/#{@seller.profile.id}"
+end

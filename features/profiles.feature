@@ -35,15 +35,15 @@ Feature: User Profiles
     When I go to create a new profile
     Then I should see an alert that I already have a profile
 #
-#  Scenario: Show a public profile
-#    Given there is a public profile
-#    When I view the public profile
-#    Then I should see the profile details
+  Scenario: Show a public profile
+    Given There is a public profile
+    When I view the public profile
+    Then I should see the profile details
 #
-#  Scenario: Attempt to view a private profile
-#    Given there is a private profile
-#    When I try to view the private profile
-#    Then I should see an alert that the profile is private
+  Scenario: Attempt to view a private profile
+    Given there is a private profile
+    When I try to view the private profile
+    Then I should see an alert that the profile is private
 #
 #  Scenario: Delete my profile
 #    Given I have a profile
