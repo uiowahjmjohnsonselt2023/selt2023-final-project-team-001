@@ -11,3 +11,14 @@ Then("I should see a list of products") do
     expect(page).to have_content product.name
   end
 end
+
+When("I visit the product details page") do
+  visit product_path(@products.first)
+end
+
+Then("I should see the product details") do
+  expect(page).to have_content @products.first.name
+  expect(page).to have_content @products.first.description
+  expect(page).to have_content @products.first.price
+  expect(page).to have_content @products.first.quantity
+end

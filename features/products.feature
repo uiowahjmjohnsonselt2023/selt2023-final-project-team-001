@@ -5,10 +5,10 @@ Feature: Products
     When I visit the products page
     Then I should see a list of products
 
-#  Scenario: View a product details
-#    Given There are existing products
-#    When I visit the product details page
-#    Then I should see the product details
+  Scenario: View a product details
+    Given There are existing products
+    When I visit the product details page
+    Then I should see the product details
 #
 #  Scenario: Create a new product
 #    Given I am logged in as a seller
