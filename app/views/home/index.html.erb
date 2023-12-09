@@ -1,3 +1,8 @@
+<%# content_for :head do %>
+<!--  <script type="module" data-turbo-track="reload" src="../../javascript/home_controller.js"></script>-->
+<!-- Couldn't get seperating it to another file to work and low on time... Sorry -->
+<%# end %>
+
 <style>
   /*move it to the top*/
   .carousel-caption {
@@ -133,7 +138,6 @@
               <p class="card-text">Use a premade template, or code it yourself!</p>
               <a href="<%"/storefronts/#{@user.storefront.id}/choose_template"%>" class="btn btn-primary mt-auto">Use template</a>
               <a href="<%"/storefronts/#{@user.storefront.id}/customize"%>" class="btn btn-primary mt-auto">Code it yourself</a>
-
             </div>
           </div>
         </div>
@@ -160,3 +164,20 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        carouselItems.forEach(function(item) {
+            item.addEventListener('click', function(event) {
+                // Check if the click is not on a carousel control (prev/next button)
+                if (event.target.tagName === 'IMG') {
+                    // Get the index of the clicked carousel item
+                    let index = Array.from(carouselItems).indexOf(item);
+                    // Redirect to the category page using the index or category name
+                    window.location.href = `/products?category=${index + 1}&order=desc`;
+                }
+            });
+        });
+    });
+</script>
