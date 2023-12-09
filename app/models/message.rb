@@ -4,8 +4,8 @@ class Message < ApplicationRecord
 
   validates :sender_id, presence: true
   validates :sender_name, presence: true
+  validates :receiver_name, presence: true
   validates :receiver_id, presence: true
-  validates :hasRead, presence: true
   validates :message, presence: true, length: {maximum: 500}
   validates :subject, presence: true, length: {maximum: 100}
 end

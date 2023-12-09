@@ -147,7 +147,9 @@ CREATE TABLE public.messages (
     message text NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    sender_name character varying DEFAULT ''::character varying NOT NULL
+    sender_name character varying DEFAULT ''::character varying NOT NULL,
+    "hasRead" boolean DEFAULT false NOT NULL,
+    receiver_name character varying NOT NULL
 );
 
 
@@ -865,6 +867,8 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231209044224'),
+('20231209024152'),
 ('20231208023046'),
 ('20231207195703'),
 ('20231207195223'),
