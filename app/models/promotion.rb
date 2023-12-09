@@ -11,7 +11,10 @@ class Promotion < ApplicationRecord
   validates :name, length: {maximum: 50}, allow_blank: true
   validates :starts_on, :ends_on, presence: true
   validates :ends_on, comparison: {greater_than: :starts_on}
+  # Minimum number of items required to qualify for the promotion
   validates :min_quantity, numericality: {only_integer: true}
+  # Maximum number of items that can be discounted by the promotion. If non-positive,
+  # there is no limit.
   validates :max_quantity, numericality: {only_integer: true}
   validates :max_quantity,
     comparison: {greater_than: :min_quantity},
