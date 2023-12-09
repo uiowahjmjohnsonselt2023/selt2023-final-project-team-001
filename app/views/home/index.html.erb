@@ -20,20 +20,23 @@
       <!-- Carousel -->
       <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <!--from https://www.forbes.com/sites/jimgorzelany/2019/07/23/here-are-the-coolest-new-cars-for-2020/?sh=25baad2d11be-->
-            <img src="<%= asset_path('home/motors.jpg') %>" class="d-block w-100" alt="Motors">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Motors</h5>
-            </div>
-          </div>
-          <div class="carousel-item active">
-            <!--from https://www.reddit.com/r/adventuretime/comments/1vjc3n/bmo_looking_cool/-->
-            <img src="<%= asset_path('home/electronics.jpg') %>" class="d-block w-100" alt="Motors">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Electronics</h5>
-            </div>
-          </div>
+          <% categories = ['Motors', 'Electronics', 'Collectibles & Art', 'Home & Garden', 'Clothing', 'Shoes & Accessories', 'Toys & Hobbies', 'Sporting Goods', 'Books', 'Movies & Music', 'Health & Beauty', 'Business & Industrial', 'Jewelry & Watches', 'Baby Essentials', 'Pet Supplies', ''] %>
+          <!--image credits-->
+          <!--from https://www.forbes.com/sites/jimgorzelany/2019/07/23/here-are-the-coolest-new-cars-for-2020/?sh=25baad2d11be-->
+          <!--from https://www.reddit.com/r/adventuretime/comments/1vjc3n/bmo_looking_cool/-->
+          <!--from https://fatcatart.com/?lang=en-->
+
+          <% categories.each_with_index do |category, index| %>
+            <!--want this in case later categories are added, but the pictures aren't-->
+            <% if Rails.application.assets.find_asset("home/#{category}") %>
+              <div class="carousel-item <%= 'active' if index.zero? %>">
+                <img src="<%= asset_path("home/#{category}.jpg") %>" class="d-block w-100" alt="<%= category %>">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5><%= category %></h5>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
