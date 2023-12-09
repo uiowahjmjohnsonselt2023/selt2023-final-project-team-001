@@ -427,6 +427,8 @@ CREATE TABLE public.users (
     uid character varying,
     provider character varying,
     message_id bigint
+    storefront_requested integer,
+    request_time timestamp(6) without time zone
 );
 
 
@@ -1055,6 +1057,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231207195223'),
 ('20231208235127'),
 ('20231209011039'),
+('20231209220735'),
 ('20231209030520'),
 ('20231205154444'),
 ('20231204035349'),
