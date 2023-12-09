@@ -28,10 +28,12 @@ Feature: User Profiles
 #    When I try to edit their profile
 #    Then I should see an alert that I can only edit my own profile
 #
-#  Scenario: Attempt to create a new profile when I already have one
-#    Given I already have a profile
-#    When I try to create a new profile
-#    Then I should see an alert that I already have a profile
+  @needs_log_in
+  Scenario: Attempt to create a new profile when I already have one
+    Given I am logged in as a user
+    And I have a profile
+    When I go to create a new profile
+    Then I should see an alert that I already have a profile
 #
 #  Scenario: Show a public profile
 #    Given there is a public profile

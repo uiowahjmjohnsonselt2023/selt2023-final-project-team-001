@@ -113,3 +113,8 @@ And("My profile should be created with the entered information") do
   expect(page).to have_content("Lee")
   expect(page).to have_content("I'm a person")
 end
+
+Then("I should see an alert that I already have a profile") do
+  expect(page).to have_content("You already have a profile!")
+  expect(page).to have_current_path("/profiles/#{@new_user.profile.id}")
+end
