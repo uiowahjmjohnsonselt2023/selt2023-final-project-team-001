@@ -13,6 +13,9 @@ class CartItem < ApplicationRecord
 
   validates :quantity, numericality: {greater_than: 0, only_integer: true}
 
+  attr_accessor :applied_promotion
+  attr_accessor :discounted_subtotal
+
   def subtotal
     quantity * price
   end
