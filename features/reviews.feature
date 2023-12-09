@@ -15,9 +15,10 @@ Feature: Seller Reviews
     And The seller's profile should show the updated seller rating
 
   # Sad paths
-  @needs_user
+  @needs_log_in
   Scenario: Attempt to leave a review for oneself
-    Given I am logged in
+    Given I am logged in as a user
+    And I have a profile
     And I am on the new review page for my own profile
     Then I should get redirected and see an alert that I cannot leave a review for myself
 #

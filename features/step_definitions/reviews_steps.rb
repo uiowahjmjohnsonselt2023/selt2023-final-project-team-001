@@ -1,3 +1,24 @@
+Before("@needs_log_in") do
+  visit "/logout"
+  email = "test@email.com"
+  password = "P4ssw0rd!"
+  user = User.find_by(email: email)
+
+  user&.destroy
+
+  @new_user = User.create(
+    first_name: "John",
+    last_name: "Doe",
+    email: email,
+    password: password,
+    password_confirmation: password,
+    is_seller: false,
+    is_admin: false
+  )
+  @new_user.update_attribute(:is_seller, false)
+  @new_user.update_attribute(:is_admin, false)
+end
+
 Before("@needs_user") do
   visit "/logout"
   email = "test@email.com"
@@ -19,7 +40,6 @@ Before("@needs_user") do
   @new_user.update_attribute(:is_admin, false)
   @new_profile = FactoryBot.create(:profile, user: @new_user)
   @new_user.save
-  puts(@new_profile.id)
 end
 
 And("There is a seller with a public profile") do
@@ -61,11 +81,10 @@ And("The seller's profile should show the updated seller rating") do
 end
 
 When("I am on the new review page for my own profile") do
-  puts(@new_profile.id)
-  visit "/review?profile_id=#{@new_profile.id}"
+  visit "/review?profile_id=#{@new_user.profile.id}"
 end
 
 Then("I should get redirected and see an alert that I cannot leave a review for myself") do
   expect(page).to have_content("You cannot leave a review for yourself.")
-  expect(page).to have_current_path("/profiles/#{@new_profile.id}")
+  expect(page).to have_current_path("/profiles/#{@new_user.profile.id}")
 end
