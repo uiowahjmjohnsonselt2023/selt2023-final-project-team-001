@@ -6,6 +6,12 @@ class CheckoutsController < ApplicationController
     cart = Cart.find_or_create_by(user: Current.user)
     cart_items = cart.apply_promotions
 
+    @applied_promotions = cart_items.lazy
+      .reject { |ci| ci.applied_promotion.nil? }
+      .map { |ci| [ci.applied_promotion, ci.discount] }
+      .group_by(&:first)
+      .transform_values { |v| v.sum(&:second) }
+
     @products_in_cart = cart_items.map do |cart_item|
       {
         name: cart_item.product.name,
