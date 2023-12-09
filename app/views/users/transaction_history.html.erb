@@ -6,15 +6,17 @@
       <%# link_to defaults to the current URL when none is specified %>
       <th scope="col"> Seller </th>
       <th scope="col"> Name </th>
-      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
+      <th scope="col"> Price</th>
+      <th scope="col"> Purchased on </th>
     </tr>
     </thead>
     <tbody>
     <% @others.each do |m| %>
       <tr>
         <td> <%= link_to m[:seller] %></td>
-        <td> <%= m[:product] %></td>
+        <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
         <td><%= number_to_currency m[:price] %></td>
+        <td><%= m[:created_at] %></td>
       </tr>
     <% end %>
     </tbody>
