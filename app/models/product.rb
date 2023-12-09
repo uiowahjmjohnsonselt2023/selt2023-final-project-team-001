@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
-  has_many :carts
+  has_many :cart_items
   has_many :users, through: :carts
   has_and_belongs_to_many :promotions
   mount_uploaders :photos, ProductPhotoUploader

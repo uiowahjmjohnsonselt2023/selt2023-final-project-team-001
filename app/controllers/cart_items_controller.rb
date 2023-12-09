@@ -1,13 +1,13 @@
-class CartsController < ApplicationController
+class CartItemsController < ApplicationController
   before_action :require_login
 
   def add_to_cart
     product = Product.find params[:product_id]
-    cart = Cart.find_by(product: product, user: Current.user)
+    cart = CartItem.find_by(product: product, user: Current.user)
     if cart
       cart.quantity += params[:quantity].to_i
     else
-      cart = Cart.new(
+      cart = CartItem.new(
         product: product, user: Current.user, quantity: params[:quantity].to_i
       )
     end

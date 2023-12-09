@@ -1,5 +1,4 @@
-class Cart < ApplicationRecord
-  belongs_to :user
+class CartItem < ApplicationRecord
   belongs_to :product
   has_one :seller, through: :product
   has_many :promotions, through: :product

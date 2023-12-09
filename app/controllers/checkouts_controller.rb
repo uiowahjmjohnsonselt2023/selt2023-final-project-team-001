@@ -3,7 +3,7 @@ class CheckoutsController < ApplicationController
   before_action :index, except: [:index]
 
   def index
-    cart = Cart.where(user_id: session[:user_id])
+    cart = CartItem.where(user_id: session[:user_id])
 
     @products_in_cart = []
     @product_ids_and_quantity = []
@@ -28,7 +28,7 @@ class CheckoutsController < ApplicationController
   end
 
   def update_quantity
-    cart = Cart.where(user_id: session[:user_id], product_id: params[:product_id])
+    cart = CartItem.where(user_id: session[:user_id], product_id: params[:product_id])
     if params[:quantity] != cart.pluck(:quantity).first.to_s
       cart.update(quantity: params[:quantity])
       flash[:success] = "Item quantity updated successfully!"
@@ -38,7 +38,7 @@ class CheckoutsController < ApplicationController
 
   def remove_from_cart
     if params[:confirmation] == "yes"
-      Cart.find_by(user_id: session[:user_id], product_id: params[:product_id]).destroy
+      CartItem.find_by(user_id: session[:user_id], product_id: params[:product_id]).destroy
       flash[:success] = "Item removed from cart."
     end
     redirect_to checkout_path
@@ -50,7 +50,7 @@ class CheckoutsController < ApplicationController
       render :index
     else
       @product_ids_and_quantity.each do |p|
-        Cart.find_by(user_id: session[:user_id], product_id: p[:id]).destroy
+        CartItem.find_by(user_id: session[:user_id], product_id: p[:id]).destroy
         product = Product.find_by(id: p[:id])
         product.update!(quantity: (product.quantity - Integer(p[:quantity])))
       end
