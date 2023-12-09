@@ -1,5 +1,9 @@
 <div class="container mt-4">
-  <h2>Purchase history for <%= @user.first_name %></h2>
+  <h2><%= if @user.is_seller
+            "Sales"
+          else
+            "Purchase"
+  end%> history for <%= @user.first_name %></h2>
   <table class="table">
     <thead>
     <tr>

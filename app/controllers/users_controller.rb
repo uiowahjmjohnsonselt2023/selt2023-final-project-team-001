@@ -48,8 +48,13 @@ class UsersController < ApplicationController
         @transactions.each do |t|
           sid = t.seller_id
           @seller = User.where(id: sid).first
+          seller_dir = if @seller.storefront.nil?
+            sid
+          else
+            @seller.storefront
+          end
           @product = Product.where(id: t.product_id).first
-          @others.append({seller: @seller.first_name + " " + @seller.last_name, product: @product.name, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
+          @others.append({seller: @seller.first_name + " " + @seller.last_name, dir: seller_dir, product: @product.name, price: t.price_cents, created_at: t.created_at, product_id: @product.id})
         end
         puts @others
       else
