@@ -36,16 +36,20 @@ class StorefrontsController < ApplicationController
     case Current.user.storefront_requested
     when 0
       # add request here
+      puts "NO REQUEST YET =============="
     when 100
-      flash[:notice] = "Your storefront request is currently pending approval. \n You will receive a notification when the status of your request has changed."
+      flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
     when 200
-      flash[:notice] = "It looks like you have had a previous storefront request rejected. In order to request a new storefront, you will need to appeal this rejection."
+      flash[:notice] = "It looks like you have had a previous storefront request rejected. \nIn order to request a new storefront, you will need to appeal this rejection."
     when 300
-      flash[:notice] = "It looks like you are currently appealing to open a new storefront. You will be notified when there are changes to the status of your appeal."
+      flash[:notice] = "It looks like you are currently appealing to open a new storefront. \nYou will be notified when there are changes to the status of your appeal."
     else
       if Current.user.storefront
         flash[:alert] = t("storefronts.create.already_exists")
         redirect_to storefront_path(Current.user.storefront)
+      else
+        # no storefront but
+        redirect_to new_storefront_path
       end
     end
   end
