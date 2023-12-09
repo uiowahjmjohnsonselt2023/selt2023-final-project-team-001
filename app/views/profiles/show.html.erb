@@ -42,8 +42,9 @@
       <%= link_to "Delete Profile", delete_profile_path(@profile), method: :get, class: "btn btn-danger" %>
     <% end %>
   <% end %>
-  <% if @show_review_link %>
+  <% if @show_links %>
     <%= link_to "Leave A Review", review_path(profile_id: @profile), method: :get, class: "btn btn-secondary" %>
+    <%= link_to "Send A Message", send_message_path(profile_id: @profile), method: :get, class: "btn btn-secondary" %>
   <% end %>
 <% else %>
   <p>User profile not found.</p>

@@ -1,0 +1,54 @@
+<div data-controller="messages">
+
+  <div class="container mt-4">
+    <h2>Messages</h2>
+    <%=  link_to "Inbox", view_messages_path, class: "btn btn-primary"%>
+    <%=  link_to "Sent", view_sent_messages_path, class: "btn btn-primary"%>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>To</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <% @messages.each do |message| %>
+      <tr>
+          <td><%= message[:receiver_name] %></td>
+          <td>
+            <%= truncate(message[:subject], length: 20) %>
+          </td>
+          <td>
+            <%= truncate(message[:message], length: 20) %>
+          </td>
+          <td>
+            <%= message[:created_at].strftime("%B %e, %Y %l:%M %p") %>
+          </td>
+          <td>
+            <%= link_to "View Details", message_details_path(message_id: message[:id]), method: :get, class: "btn btn-primary" %>
+          </td>
+        <td>
+          <button class="btn btn-danger delete-message"
+                  data-action="messages#updateDeleteModal"
+                  type="button"
+                  data-messages-message-id-param="<%= message[:id] %>"
+                  data-bs-toggle="modal"
+                  data-bs-target="#confirmationModal">
+            <%= icon("trash-can", aria_label: "Trash Can") %>
+          </button>
+        </td>
+        </tr>
+      <% end %>
+      </tbody>
+
+    </table>
+  </div>
+  <%= render 'delete' %>
+
+</div>

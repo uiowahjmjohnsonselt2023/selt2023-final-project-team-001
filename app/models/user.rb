@@ -54,6 +54,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
   has_one :storefront, dependent: :destroy
   accepts_nested_attributes_for :storefront
+  has_many :messages_sent, class_name: "Message", foreign_key: :sender_id, dependent: :destroy
+  has_many :messages_received, class_name: "Message", foreign_key: :receiver_id, dependent: :destroy
   has_many :price_alerts, dependent: :destroy
 
   # Override the is_admin setter so that all admins are sellers and buyers.

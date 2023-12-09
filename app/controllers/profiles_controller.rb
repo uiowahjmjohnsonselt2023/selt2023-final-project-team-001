@@ -59,7 +59,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find params[:id] # renders 404 if nonexistent
     @is_current_user = Current.user&.profile == @profile
     @is_seller = (User.find @profile.user_id).is_seller
-    @show_review_link = User.find_by(id: @profile.user_id)&.is_seller && !@is_current_user # user can't leave review for themselves
+    @show_links = @is_seller && !@is_current_user # user can't leave review for themselves
     if !@profile.public_profile && !@is_current_user
       flash[:alert] = "This profile is private!"
       redirect_to root_path

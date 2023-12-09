@@ -36,6 +36,14 @@ Rails.application.routes.draw do
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
   get "/auth/:provider/callback", to: "sessions#omniauth"
+  get "/send_message", to: "messages#new", as: "send_message"
+  post "/send_message_submit", to: "messages#create", as: "send_message_submit"
+  get "/view_messages", to: "messages#inbox", as: "view_messages"
+  get "/view_sent_messages", to: "messages#sent", as: "view_sent_messages"
+  get "/show_message", to: "messages#show", as: "message_details"
+  get "/reply", to: "messages#reply", as: "reply"
+  post "/send_reply", to: "messages#create_reply", as: "send_reply"
+  delete "/delete_message", to: "messages#delete", as: "delete_message"
 
   get "/history", to: "products#history", as: "products_history"
 

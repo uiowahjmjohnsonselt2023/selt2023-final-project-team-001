@@ -144,6 +144,11 @@ Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})
 Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 3})
 
+Message.create!({receiver_id: User.find_by(email: "judy@rudy.com").id, sender_id: User.find_by(email: "seller@1.com").id, receiver_name: "Judy Rudy",
+                 sender_name: "Seller 1", subject: "hello!", message: "hey judy!", hasRead: false})
+Message.create!({receiver_id: User.find_by(email: "judy@rudy.com").id, sender_id: User.find_by(email: "seller@1.com").id, receiver_name: "Judy Rudy",
+                 sender_name: "Seller 1", subject: "hello!", message: "bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!bye judy!", hasRead: true})
+
 # make one user with a known username and password with products
 store_test = User.create!({first_name: "Not",
               last_name: "Real",

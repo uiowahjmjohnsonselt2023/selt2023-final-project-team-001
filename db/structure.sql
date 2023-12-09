@@ -136,6 +136,45 @@ ALTER SEQUENCE public.categorizations_id_seq OWNED BY public.categorizations.id;
 
 
 --
+-- Name: messages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.messages (
+    id bigint NOT NULL,
+    sender_id bigint NOT NULL,
+    receiver_id bigint NOT NULL,
+    subject text NOT NULL,
+    message text NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    sender_name character varying DEFAULT ''::character varying NOT NULL,
+    "hasRead" boolean DEFAULT false NOT NULL,
+    receiver_name character varying NOT NULL,
+    "hasSenderDeleted" boolean DEFAULT false NOT NULL,
+    "hasReceiverDeleted" boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.messages_id_seq OWNED BY public.messages.id;
+
+
+--
 -- Name: price_alerts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -351,7 +390,8 @@ CREATE TABLE public.users (
     updated_at timestamp(6) without time zone NOT NULL,
     cart_id bigint,
     uid character varying,
-    provider character varying
+    provider character varying,
+    message_id bigint
 );
 
 
@@ -425,6 +465,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.c
 --
 
 ALTER TABLE ONLY public.categorizations ALTER COLUMN id SET DEFAULT nextval('public.categorizations_id_seq'::regclass);
+
+
+--
+-- Name: messages id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages ALTER COLUMN id SET DEFAULT nextval('public.messages_id_seq'::regclass);
 
 
 --
@@ -506,6 +553,14 @@ ALTER TABLE ONLY public.categories
 
 ALTER TABLE ONLY public.categorizations
     ADD CONSTRAINT categorizations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: messages messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
 
 
 --
@@ -630,6 +685,20 @@ CREATE UNIQUE INDEX index_categorizations_on_product_id_and_category_id ON publi
 
 
 --
+-- Name: index_messages_on_receiver_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_messages_on_receiver_id ON public.messages USING btree (receiver_id);
+
+
+--
+-- Name: index_messages_on_sender_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_messages_on_sender_id ON public.messages USING btree (sender_id);
+
+
+--
 -- Name: index_price_alerts_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -707,6 +776,13 @@ CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
+-- Name: index_users_on_message_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_message_id ON public.users USING btree (message_id);
+
+
+--
 -- Name: index_viewed_products_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -769,6 +845,14 @@ ALTER TABLE ONLY public.categorizations
 
 
 --
+-- Name: messages fk_rails_67c67d2963; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT fk_rails_67c67d2963 FOREIGN KEY (receiver_id) REFERENCES public.users(id);
+
+
+--
 -- Name: viewed_products fk_rails_7d150f3af7; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -825,6 +909,22 @@ ALTER TABLE ONLY public.reviews
 
 
 --
+-- Name: messages fk_rails_b8f26a382d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT fk_rails_b8f26a382d FOREIGN KEY (sender_id) REFERENCES public.users(id);
+
+
+--
+-- Name: users fk_rails_e04d7fd992; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT fk_rails_e04d7fd992 FOREIGN KEY (message_id) REFERENCES public.messages(id);
+
+
+--
 -- Name: profiles fk_rails_e424190865; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -847,6 +947,12 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231209181651'),
+('20231209044224'),
+('20231209024152'),
+('20231208023046'),
+('20231207195703'),
+('20231207195223'),
 ('20231205154444'),
 ('20231204035349'),
 ('20231130163958'),
