@@ -17,4 +17,8 @@ class Promotions::PercentOff < ApplicationRecord
       ci.discounted_subtotal = ci.subtotal * percentage
     end
   end
+
+  def to_s
+    name || "#{percentage * 100}% off select items"
+  end
 end

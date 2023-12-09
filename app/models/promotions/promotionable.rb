@@ -56,5 +56,10 @@ module Promotions
       cart_items = cart_items.filter { |ci| eligible?(ci) }
       discount(cart_items) if cart_items.sum(&:quantity) >= min_quantity
     end
+
+    def to_s
+      # Provide a default to_s in case the subclass doesn't define one.
+      name || "Promotion"
+    end
   end
 end
