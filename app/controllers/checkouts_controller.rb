@@ -3,28 +3,27 @@ class CheckoutsController < ApplicationController
   before_action :index, except: [:index]
 
   def index
-    cart = CartItem.where(user_id: session[:user_id])
+    cart = Cart.find_or_create_by(user: Current.user)
+    cart_items = cart.apply_promotions
 
-    @products_in_cart = []
-    @product_ids_and_quantity = []
-    @cart_price = 0
-    @empty = "Your cart is empty!"
-
-    if cart.present?
-      cart.each do |product|
-        p = Product.find_by(id: product.product_id)
-        total_price = p.price * product.quantity
-        @cart_price += total_price
-        @products_in_cart.push({
-          name: p.name,
-          total_price: total_price,
-          original_quantity: p.quantity,
-          quantity: product.quantity,
-          id: product.product_id
-        })
-        @product_ids_and_quantity.push({id: product.product_id, quantity: product.quantity})
-      end
+    @products_in_cart = cart_items.map do |cart_item|
+      {
+        name: cart_item.product.name,
+        original_total_price: cart_item.subtotal,
+        total_price: cart_item.discounted_subtotal,
+        original_quantity: cart_item.product.quantity,
+        quantity: cart_item.quantity,
+        id: cart_item.product_id
+      }
     end
+
+    @product_ids_and_quantity = cart_items.map do |cart_item|
+      {id: cart_item.product_id, quantity: cart_item.product.quantity}
+    end
+
+    @cart_original_price = cart.subtotal
+    @cart_price = cart.discounted_subtotal
+    @empty = "Your cart is empty!"
   end
 
   def update_quantity
