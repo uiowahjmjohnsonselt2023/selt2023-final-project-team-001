@@ -7,7 +7,7 @@
   <%= hidden_field_tag :subject, @message.subject %>
   <%= hidden_field_tag :sender_name, @message.sender_name %>
   <%= hidden_field_tag :sender_id, @message.sender_id %>
-  <%= link_to "Back to Messages", view_messages_path, method: :get, class: "btn btn-secondary" %>
+  <%= link_to "Back", :back, class: "btn btn-secondary" %>
   <% if @reply_enabled %>
     <%= submit_tag "Reply", class: "btn btn-primary" %>
   <% end %>
