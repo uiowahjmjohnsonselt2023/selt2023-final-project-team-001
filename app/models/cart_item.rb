@@ -28,6 +28,10 @@ class CartItem < ApplicationRecord
     Money.new(@discounted_subtotal_cents || subtotal.cents)
   end
 
+  def discount
+    subtotal - discounted_subtotal
+  end
+
   def discounted_subtotal=(money)
     # Ue try(:cents) to get the cents value if money is a Money object,
     # or just use money if it's an integer.
