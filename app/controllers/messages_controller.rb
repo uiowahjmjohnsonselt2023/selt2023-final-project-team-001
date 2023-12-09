@@ -7,11 +7,16 @@ class MessagesController < ApplicationController
     @profile_id = params[:profile_id]
     @profile = Profile.find @profile_id
     @receiver_id = @profile.user_id
-    @name = (@profile.first_name || "") + " " + (@profile.last_name || "")
+    @name = @profile.user.full_name
 
     if Current.user.id == @receiver_id.to_i
       flash[:alert] = "You cannot send a message to yourself."
-      redirect_to profile_path(Profile.find_by(user_id: Current.user.id).id)
+      p_id = Profile.find_by(user_id: Current.user.id).id
+      if p_id.nil?
+        redirect_to root_path
+      else
+        redirect_to profile_path(p_id)
+      end
     end
   end
 
@@ -25,8 +30,9 @@ class MessagesController < ApplicationController
   end
 
   def create_reply
-    @sender_name = User.find_by(id: Current.user.id.to_s).full_name
-    message = Message.new(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:message][:subject], message: params[:message][:message], sender_name: @sender_name)
+    sender_name = Current.user.full_name
+    receiver_name = User.find_by(id: params[:receiver_id]).full_name
+    message = Message.new(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:message][:subject], message: params[:message][:message], sender_name: sender_name, receiver_name: receiver_name)
     if message.save
       flash[:success] = "Reply successfully sent!"
       redirect_to view_messages_path
@@ -36,8 +42,9 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @sender_name = User.find_by(id: Current.user.id.to_s).full_name
-    message = Message.new(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:message][:subject], message: params[:message][:message], sender_name: @sender_name)
+    sender_name = Current.user.full_name
+    receiver_name = User.find_by(id: params[:receiver_id]).full_name
+    message = Message.new(receiver_id: params[:receiver_id], sender_id: Current.user.id, subject: params[:message][:subject], message: params[:message][:message], sender_name: sender_name, receiver_name: receiver_name)
     if message.save
       flash[:success] = "Message successfully sent!"
       redirect_to profile_path(params[:profile_id])
@@ -46,13 +53,21 @@ class MessagesController < ApplicationController
     end
   end
 
-  def index
-    # display all messages
+  def inbox
     @messages = Message.where(receiver_id: Current.user.id)
+  end
+
+  def sent
+    @messages = Message.where(sender_id: Current.user.id)
   end
 
   def show
     @message = Message.find_by(id: params[:message_id])
+    @reply_enabled = true
+    if Current.user.id == @message.sender_id
+      @message.update(hasRead: true)
+      @reply_enabled = false
+    end
   end
 
   def delete
