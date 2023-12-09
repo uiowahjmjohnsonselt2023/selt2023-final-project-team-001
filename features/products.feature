@@ -36,8 +36,13 @@ Feature: Products
     And I update the product details
     And I submit the product edit form
     Then I should see the updated product details
-#
-#  Scenario: View product history
-#    Given I am logged in
-#    When I visit the product history page
-#    Then I should see my viewed products
+
+  @needs_log_in
+  Scenario: View product history
+    Given I am logged in
+    And I register as a seller
+    Given There are existing products
+    When I visit the product details page
+    Then I should see the product details
+    When I visit the product history page
+    Then I should see my viewed products

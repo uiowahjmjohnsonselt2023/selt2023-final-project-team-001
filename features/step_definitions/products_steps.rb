@@ -111,3 +111,16 @@ Then("I should see the updated product details") do
   expect(page).to have_content 10
   expect(page).to have_content 1
 end
+
+When("I visit the product history page") do
+  visit "/history"
+end
+
+Then("I should see my viewed products") do
+  expect(page).to have_content "Name"
+  expect(page).to have_content "Price"
+  expect(page).to have_content "Posted"
+  expect(page).to have_content "Views"
+  expect(page).to have_content @products.first.name
+  expect(page).to have_content @products.first.views
+end
