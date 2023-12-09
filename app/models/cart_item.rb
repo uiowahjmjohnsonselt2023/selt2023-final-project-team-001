@@ -14,14 +14,20 @@ class CartItem < ApplicationRecord
   validates :quantity, numericality: {greater_than: 0, only_integer: true}
 
   attr_accessor :applied_promotion
-  attr_writer :discounted_subtotal_cents
-  monetize :discounted_subtotal_cents
+  # Annoyingly, monetize requires a column to be present, so we can't use it here.
+  # monetize :discounted_subtotal_cents
 
   def subtotal
     quantity * price
   end
 
-  def discounted_subtotal_cents
-    @discounted_subtotal_cents || subtotal.cents
+  def discounted_subtotal
+    Money.new(@discounted_subtotal_cents || subtotal.cents)
+  end
+
+  def discounted_subtotal=(money)
+    # Ue try(:cents) to get the cents value if money is a Money object,
+    # or just use money if it's an integer.
+    @discounted_subtotal_cents = money.try(:cents) || money
   end
 end
