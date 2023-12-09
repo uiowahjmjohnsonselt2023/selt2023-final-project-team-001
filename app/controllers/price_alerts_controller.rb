@@ -24,7 +24,7 @@ class PriceAlertsController < ApplicationController
     @price_alert = PriceAlert.new(product: @product, user: Current.user, threshold: params[:price_alert][:new_threshold])
 
     if @price_alert.save
-      flash.now[:notice] = t("price_alerts.create.success")
+      flash[:notice] = t("price_alerts.create.success")
       redirect_to price_alerts_path
     else
       flash[:alert] = t("price_alerts.create.failure")
