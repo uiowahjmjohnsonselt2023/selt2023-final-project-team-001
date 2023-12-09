@@ -12,9 +12,9 @@
     <tbody>
     <% @others.each do |m| %>
       <tr>
-        <td> <%= m.seller %></td>
-        <td> <%= m.product %></td>
-        <td><%= number_to_currency m.price %></td>
+        <td> <%= link_to m[:seller] %></td>
+        <td> <%= m[:product] %></td>
+        <td><%= number_to_currency m[:price] %></td>
       </tr>
     <% end %>
     </tbody>
