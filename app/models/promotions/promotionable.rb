@@ -6,15 +6,19 @@ module Promotionable
     delegate_missing_to :promotion
   end
 
-  def product_eligible?(cart)
+  def product_eligible?(cart_item)
     if products.empty?
-      cart.product.seller == seller
+      cart_item.seller == seller
     else
-      products.include?(cart.product)
+      products.include?(cart_item.product)
     end
   end
 
-  def eligible?(cart)
-    active? && product_eligible?(cart)
+  # Returns whether the given cart item is eligible for this promotion. This
+  # doesn't include checking whether the item meet's the promotion's minimum
+  # quantity requirement, since that depends on the cart as a whole (since the
+  # min_quantity can be met by mixing and matching products).
+  def eligible?(cart_item)
+    active? && cart_item.applied_promotion.nil? && product_eligible?(cart_item)
   end
 end
