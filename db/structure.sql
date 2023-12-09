@@ -384,7 +384,8 @@ CREATE TABLE public.transactions (
     price_cents integer DEFAULT 1,
     shipping_status character varying DEFAULT 'pending'::character varying,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    quantity integer
 );
 
 
@@ -1057,6 +1058,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231207195223'),
 ('20231208235127'),
 ('20231209011039'),
+('20231209235009'),
 ('20231209220735'),
 ('20231209030520'),
 ('20231205154444'),

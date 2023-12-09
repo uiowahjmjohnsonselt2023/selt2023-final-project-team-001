@@ -53,7 +53,7 @@ class CheckoutsController < ApplicationController
         Cart.find_by(user_id: session[:user_id], product_id: p[:id]).destroy
         product = Product.find_by(id: p[:id])
         product.update!(quantity: (product.quantity - Integer(p[:quantity])))
-        @transaction = Transaction.new(buyer_id: session[:user_id], seller_id: product.seller_id, product_id: product.id, price_cents: product.price_cents)
+        @transaction = Transaction.new(buyer_id: session[:user_id], seller_id: product.seller_id, product_id: product.id, price_cents: product.price_cents, quantity: p[:quantity])
         @transaction.save
       end
       flash[:notice] = "Order placed successfully!"

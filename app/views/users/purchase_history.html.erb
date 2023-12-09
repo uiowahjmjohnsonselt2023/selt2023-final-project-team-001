@@ -7,6 +7,7 @@
       <th scope="col"> Seller </th>
       <th scope="col"> Item </th>
       <th scope="col"> Price</th>
+      <th scope="col"> Quantity </th>
       <th scope="col"> Purchased on </th>
     </tr>
     </thead>
@@ -21,6 +22,7 @@
         end%></td>
         <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
         <td><%= number_to_currency m[:price_cents] %></td>
+        <td><%= m[:quantity] %></td>
         <td><%= m[:created_at].strftime("%B %e, %Y %l:%M %p") %></td>
       </tr>
     <% end %>
