@@ -55,7 +55,7 @@ describe MessagesController, type: :controller do
     end
   end
 
-  describe "delete" do
+  describe "delete inbox message" do
     let(:message) { create(:message, sender_id: another_user.id, receiver_id: user.id, sender_name: another_user.full_name, receiver_name: user.full_name, subject: "test", message: "test") }
 
     context 'with confirmation "yes"' do
@@ -70,6 +70,25 @@ describe MessagesController, type: :controller do
         post :delete, params: {message_id: message.id, confirmation: "yes"}
 
         expect(response).to redirect_to(view_messages_path)
+      end
+    end
+
+    describe "delete inbox message" do
+      let(:message) { create(:message, sender_id: user.id, receiver_id: another_user.id, sender_name: user.full_name, receiver_name: another_user.full_name, subject: "test", message: "test") }
+
+      context 'with confirmation "yes"' do
+        it "soft-deletes the message" do
+          post :delete, params: {message_id: message.id, confirmation: "yes"}
+
+          expect(message.reload.hasSenderDeleted).to be_truthy
+          expect(flash[:success]).to eq("Message deleted.")
+        end
+
+        it "redirects to view_messages_path" do
+          post :delete, params: {message_id: message.id, confirmation: "yes"}
+
+          expect(response).to redirect_to(view_sent_messages_path)
+        end
       end
     end
   end
