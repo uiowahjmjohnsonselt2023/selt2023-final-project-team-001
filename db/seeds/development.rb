@@ -5,6 +5,7 @@ Faker::Config.random = random
 
 conditions = Product.conditions.values
 category_ids = Category.pluck(:id)
+reqs = User.storefront_requesteds.values
 
 password_kwargs = {
   min_length: 10,
@@ -29,7 +30,8 @@ users = 30.times.map do |i|
     password_confirmation: password,
     # Ensure that the database has at least 5 sellers and 5 buyers.
     is_seller: i < 5 || Faker::Boolean.boolean,
-    is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean
+    is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean,
+    storefront_requested: Faker::Base.sample(reqs)
   )
   user
 end
