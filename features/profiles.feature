@@ -37,12 +37,12 @@ Feature: User Profiles
 #
   Scenario: Show a public profile
     Given There is a public profile
-    When I view the public profile
+    When I view the profile
     Then I should see the profile details
 #
   Scenario: Attempt to view a private profile
-    Given there is a private profile
-    When I try to view the private profile
+    Given There is a private profile
+    When I view the profile
     Then I should see an alert that the profile is private
 #
 #  Scenario: Delete my profile
