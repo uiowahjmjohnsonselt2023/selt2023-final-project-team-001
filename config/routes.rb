@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create", as: "signup_submit"
   get "/register", to: "users#register", as: "register"
   post "/register", to: "users#new_seller", as: "seller"
+  get "/transaction_history", to: "users#transaction_history", as: "transaction_history"
 
   post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
 

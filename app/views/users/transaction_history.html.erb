@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2>Purchase history for <%= @user.first_name %></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th scope="col"><%= link_to 'Price', request.query_parameters.merge({ :sort => 'price', :order => params[:order] == "desc"? "asc" : "desc", :category => params[:category], search: params[:search] }) %> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |t| %>
+      <tr>
+        <td><%= number_to_currency t.price_cents %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
