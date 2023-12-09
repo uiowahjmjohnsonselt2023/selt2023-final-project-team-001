@@ -16,7 +16,7 @@
         <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
         <td><%= number_to_currency m[:price] %></td>
         <td><%= m[:buyer] %></td>
-        <td><%= m[:created_at] %></td>
+        <td><%= m[:created_at].strftime("%B %e, %Y %l:%M %p") %></td>
       </tr>
     <% end %>
     </tbody>
