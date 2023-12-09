@@ -1089,6 +1089,8 @@
           1,
           1,
           1,
+          1,
+          1,
           null,
           1,
           1,
@@ -4139,6 +4141,16 @@
           null
         ]
       },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/viewed_product.rb": {
         "lines": [
           null,
@@ -4166,6 +4178,6 @@
         ]
       }
     },
-    "timestamp": 1702091087
+    "timestamp": 1702091335
   }
 }
