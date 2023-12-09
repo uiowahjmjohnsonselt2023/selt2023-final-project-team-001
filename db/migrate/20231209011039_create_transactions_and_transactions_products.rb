@@ -2,7 +2,6 @@ class CreateTransactionsAndTransactionsProducts < ActiveRecord::Migration[7.1]
   def change
     create_table :transactions do |t|
       # Add columns for other attributes of your transaction
-      t.references :seller, {null: false, foreign_key: {to_table: :users}}
       t.references :buyer, {null: false, foreign_key: {to_table: :users}}
       t.timestamps
     end

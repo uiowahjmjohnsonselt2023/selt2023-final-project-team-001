@@ -373,6 +373,71 @@ ALTER SEQUENCE public.storefronts_id_seq OWNED BY public.storefronts.id;
 
 
 --
+-- Name: transactions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.transactions (
+    id bigint NOT NULL,
+    buyer_id bigint,
+    "{:null=>false, :foreign_key=>{:to_table=>:users}}_id" bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.transactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.transactions_id_seq OWNED BY public.transactions.id;
+
+
+--
+-- Name: transactions_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.transactions_products (
+    id bigint NOT NULL,
+    transaction_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    quantity_sold integer DEFAULT 1,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: transactions_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.transactions_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transactions_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.transactions_products_id_seq OWNED BY public.transactions_products.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -510,6 +575,20 @@ ALTER TABLE ONLY public.storefronts ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: transactions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions ALTER COLUMN id SET DEFAULT nextval('public.transactions_id_seq'::regclass);
+
+
+--
+-- Name: transactions_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions_products ALTER COLUMN id SET DEFAULT nextval('public.transactions_products_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -620,6 +699,22 @@ ALTER TABLE ONLY public.storefronts
 
 
 --
+-- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: transactions_products transactions_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions_products
+    ADD CONSTRAINT transactions_products_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -633,6 +728,13 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.viewed_products
     ADD CONSTRAINT viewed_products_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idx_on_{:null=>false, :foreign_key=>{:to_table=>:us_0d2f35bed4; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX "idx_on_{:null=>false, :foreign_key=>{:to_table=>:us_0d2f35bed4" ON public.transactions USING btree ("{:null=>false, :foreign_key=>{:to_table=>:users}}_id");
 
 
 --
@@ -762,6 +864,27 @@ CREATE INDEX index_storefronts_on_user_id ON public.storefronts USING btree (use
 
 
 --
+-- Name: index_transactions_on_buyer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_buyer_id ON public.transactions USING btree (buyer_id);
+
+
+--
+-- Name: index_transactions_products_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_products_on_product_id ON public.transactions_products USING btree (product_id);
+
+
+--
+-- Name: index_transactions_products_on_transaction_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_products_on_transaction_id ON public.transactions_products USING btree (transaction_id);
+
+
+--
 -- Name: index_users_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -858,6 +981,11 @@ ALTER TABLE ONLY public.categorizations
 
 ALTER TABLE ONLY public.messages
     ADD CONSTRAINT fk_rails_67c67d2963 FOREIGN KEY (receiver_id) REFERENCES public.users(id);
+-- Name: transactions_products fk_rails_750aa519bf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions_products
+    ADD CONSTRAINT fk_rails_750aa519bf FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -882,6 +1010,14 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.carts
     ADD CONSTRAINT fk_rails_916f2a1419 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- Name: transactions_products fk_rails_91958fc620; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions_products
+    ADD CONSTRAINT fk_rails_91958fc620 FOREIGN KEY (transaction_id) REFERENCES public.transactions(id);
 
 
 --
@@ -962,6 +1098,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231207195703'),
 ('20231207195223'),
 ('20231208235127'),
+('20231209011039'),
 ('20231205154444'),
 ('20231204035349'),
 ('20231130163958'),
