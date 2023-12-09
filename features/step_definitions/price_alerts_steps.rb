@@ -80,3 +80,15 @@ end
 And("I should be redirected to the homepage") do
   expect(page).to have_current_path(root_path)
 end
+
+When("I visit the edit price alert page for {string}") do |string|
+  visit "/price_alerts/#{PriceAlert.find_by(product: Product.find_by(name: string), user: @new_user2).id}/edit"
+end
+
+And("I update the price threshold to {string}") do |string|
+  fill_in "New threshold", with: string
+end
+
+And("I submit the price alert update form") do
+  click_button "Update Price Alert"
+end
