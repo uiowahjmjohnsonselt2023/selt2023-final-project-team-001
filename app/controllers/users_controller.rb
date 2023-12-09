@@ -34,6 +34,7 @@ class UsersController < ApplicationController
   def purchase_history
     if session[:user_id].nil?
       flash[:alert] = "You must log in to view your purchase history"
+      redirect_to login_path
     else
       @user = Current.user
       @others = []
