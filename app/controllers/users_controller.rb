@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     else
       @user = Current.user
       @others = []
-      @transactions = Transaction.where(buyer_id: @user.id)
+      @transactions = Transaction.where(buyer_id: @user.id).order(created_at: :desc)
       @transactions.each do |t|
         sid = t.seller_id
         @seller = User.where(id: sid).first
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     elsif Current.user.is_seller
       @user = Current.user
       @others = []
-      @transactions = Transaction.where(seller_id: @user.id)
+      @transactions = Transaction.where(seller_id: @user.id).order(created_at: :desc)
       @transactions.each do |t|
         bid = t.buyer_id
         @buyer = User.where(id: bid).first
