@@ -85,3 +85,20 @@ And("The updated quantity and total price should reflect in my cart") do
   expect(page).to have_content "$2,000.00"
   expect(page).to have_content "2"
 end
+
+When "I remove {string} from my cart" do |product_name|
+  visit checkout_path
+  find("button", text: "Delete").click
+end
+
+Then("I should see a confirmation popup") do
+  expect(page).to have_content "Confirm Deletion"
+  expect(page).to have_content "Are you sure you want to remove from your cart?"
+  # cannot proceed any further without a JS driver, which broke other things
+  # all('input[type="submit"][value="Delete"]')[0].click
+end
+
+And("The {string} should no longer be in my cart") do |product_name|
+  expect(page).to_not have_content product_name
+  expect(page).to have_content "Item removed from cart."
+end

@@ -29,16 +29,14 @@ Feature: Shopping Cart Checkout
     When I update the quantity of "Laptop" to "2"
     Then I should see a success message indicating the quantity update
     And The updated quantity and total price should reflect in my cart
-#
-#  Scenario: Removing item from the cart
-#    Given "Smartphone" is in my cart
-#    When I remove "Smartphone" from my cart
-#    Then I should see a success message indicating the item removal
-#    And "Smartphone" should no longer be visible in my cart
-#
-#  Scenario: Placing an order
-#    Given I have items in my cart
-#    When I proceed to checkout
-#    Then my cart should be empty
-#    And the inventory of purchased products should be updated accordingly
-#    And I should see a success message confirming my order placement
+
+  #this can't be completely tested as it uses js
+  @needs_log_in
+  Scenario: Removing item from the cart
+    Given The following products exist:
+      | name           | quantity | price |
+      | Smartphone     | 8        | 800   |
+    And "Smartphone" is in my cart with a quantity of "1"
+    When I remove "Smartphone" from my cart
+    Then I should see a confirmation popup
+#    And The "Smartphone" should no longer be in my cart
