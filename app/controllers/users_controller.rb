@@ -43,7 +43,12 @@ class UsersController < ApplicationController
         sid = t.seller_id
         @seller = User.where(id: sid).first
         @product = Product.where(id: t.product_id).first
-        @others.append({seller: @seller.first_name + " " + @seller.last_name, storefront: @seller.storefront, profile: @seller.profile, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
+        if @seller.storefront.nil?
+          @others.append({seller: @seller.first_name + " " + @seller.last_name, storefront: @seller.storefront, profile: @seller.profile, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
+        else
+          sf = Storefront.where(user_id: @seller.id).first
+          @others.append({seller: sf.name, storefront: @seller.storefront, profile: @seller.profile, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
+        end
       end
     end
   end
