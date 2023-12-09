@@ -92,3 +92,10 @@ end
 And("I submit the price alert update form") do
   click_button "Update Price Alert"
 end
+
+And("I delete the {string} price alert") do |string|
+  visit "/price_alerts/#{PriceAlert.find_by(product: Product.find_by(name: string), user: @new_user2).id}/delete"
+  expect(page).to have_content("Delete Price Alert")
+  expect(page).to have_content("Are you sure you want to delete your price alert?")
+  click_button "Delete Price Alert"
+end

@@ -37,15 +37,15 @@ Feature: Price Alerts Management
     Then I should see a success message "Price alert successfully updated!"
     And I should be redirected to the price alerts page
 
-
-#  Scenario: Deleting a price alert successfully
-#    Given I am logged in as a different user
-#    And The following products exist:
-#      | name       | quantity | price |
-#      | Smartphone | 10       | 500   |
-#    When I visit the new price alert page for "Smartphone"
-#    And I set a price threshold of "400"
-#    And I submit the price alert form
-#    And I click on the delete button for the "Smartphone" price alert
-#    Then I should see a success message "Price alert deleted successfully!"
-#    And I should be redirected to the price alerts page
+  @needs_log_in
+  Scenario: Deleting a price alert successfully
+    Given I am logged in as a different user
+    And The following products exist:
+      | name       | quantity | price |
+      | Smartphone | 10       | 500   |
+    When I visit the new price alert page for "Smartphone"
+    And I set a price threshold of "400"
+    And I submit the price alert form
+    And I delete the "Smartphone" price alert
+    Then I should see a success message "Price alert successfully deleted!"
+    And I should be redirected to the price alerts page
