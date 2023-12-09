@@ -42,7 +42,6 @@ class UsersController < ApplicationController
       @transactions.each do |t|
         sid = t.seller_id
         @seller = User.where(id: sid).first
-        puts "====== IN SELLER : #{@seller} ========"
         @product = Product.where(id: t.product_id).first
         @others.append({seller: @seller.first_name + " " + @seller.last_name, storefront: @seller.storefront, product: @product.name, price_cents: t.price_cents.to_f / 100.0, created_at: t.created_at, product_id: @product.id})
       end
