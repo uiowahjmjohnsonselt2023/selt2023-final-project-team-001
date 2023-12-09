@@ -23,11 +23,14 @@ Feature: User Profiles
     When I update my profile information
     Then My profile should be updated with the new information
 
-#  Scenario: Attempt to edit someone else's profile
-#    Given there is another user with a profile
-#    When I try to edit their profile
-#    Then I should see an alert that I can only edit my own profile
-#
+  @needs_log_in
+  Scenario: Attempt to edit someone else's profile
+    Given There is a public profile
+    And I am logged in as a user
+    And I have a profile
+    When I try to edit their profile
+    Then I should see an alert that I can only edit my own profile
+
   @needs_log_in
   Scenario: Attempt to create a new profile when I already have one
     Given I am logged in as a user

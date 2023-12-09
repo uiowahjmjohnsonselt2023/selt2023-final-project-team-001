@@ -148,3 +148,12 @@ Then("I should see an alert that the profile is private") do
   expect(page).to have_content("This profile is private!")
   expect(page).to have_current_path("/")
 end
+
+When("I try to edit their profile") do
+  visit "/profiles/#{@seller.profile.id}/edit"
+end
+
+Then("I should see an alert that I can only edit my own profile") do
+  expect(page).to have_content("You can only edit your own profile!")
+  expect(page).to have_current_path("/")
+end
