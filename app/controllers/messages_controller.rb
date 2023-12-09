@@ -12,11 +12,7 @@ class MessagesController < ApplicationController
     if Current.user.id == @receiver_id.to_i
       flash[:alert] = "You cannot send a message to yourself."
       p_id = Profile.find_by(user_id: Current.user.id).id
-      if p_id.nil?
-        redirect_to root_path
-      else
-        redirect_to profile_path(p_id)
-      end
+      redirect_to profile_path(p_id)
     end
   end
 
@@ -54,25 +50,33 @@ class MessagesController < ApplicationController
   end
 
   def inbox
-    @messages = Message.where(receiver_id: Current.user.id)
+    # only grab non deleted messages
+    @messages = Message.where(receiver_id: Current.user.id, hasReceiverDeleted: false)
   end
 
   def sent
-    @messages = Message.where(sender_id: Current.user.id)
+    @messages = Message.where(sender_id: Current.user.id, hasSenderDeleted: false)
   end
 
   def show
     @message = Message.find_by(id: params[:message_id])
-    @reply_enabled = true
-    if Current.user.id == @message.sender_id
-      @message.update(hasRead: true)
+    if Current.user.id == @message.sender_id # only time a message is read is when the reciever opens it
       @reply_enabled = false
+      @message.update(hasRead: false)
+    else
+      @reply_enabled = true
+      @message.update(hasRead: true)
     end
   end
 
   def delete
     if params[:confirmation] == "yes"
-      Message.find_by(id: params[:message_id]).destroy
+      message = Message.find_by(id: params[:message_id])
+      if Current.user.id == message.sender_id
+        message.update(hasSenderDeleted: true)
+      else
+        message.update(hasReceiverDeleted: true)
+      end
       flash[:success] = "Message deleted."
     end
     redirect_to view_messages_path
