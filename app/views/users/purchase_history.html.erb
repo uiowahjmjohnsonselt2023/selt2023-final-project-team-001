@@ -19,7 +19,7 @@
           link_to @seller.first_name + " " + @seller.last_name, storefront_path(@seller.storefront)
         end%></td>
         <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
-        <td><%= number_to_currency m[:price] %></td>
+        <td><%= number_to_currency m[:price_cents] %></td>
         <td><%= m[:created_at] %></td>
       </tr>
     <% end %>
