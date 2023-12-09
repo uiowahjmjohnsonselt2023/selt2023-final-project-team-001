@@ -4,6 +4,8 @@ class Promotion < ApplicationRecord
     Promotion::FixedAmountOff
   ]
 
+  delegate_missing_to :promotionable
+
   # If products is empty, then the promotion applies to all of the seller's products
   has_and_belongs_to_many :products
   belongs_to :seller, class_name: "User"
