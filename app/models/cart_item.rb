@@ -3,7 +3,10 @@ class CartItem < ApplicationRecord
   has_one :user, through: :cart
   belongs_to :product
   has_one :seller, through: :product
-  has_many :promotions, through: :product
+  # Get the promotions from seller because product.promotions will only get promotions
+  # specific to the product (i.e., it doesn't include promotions that apply to all
+  # products from the same seller).
+  has_many :promotions, through: :seller
 
   delegate :price, to: :product # for convenience
 
