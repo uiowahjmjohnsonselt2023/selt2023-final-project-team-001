@@ -1,8 +1,9 @@
 class Promotion < ApplicationRecord
-  delegated_type :promotionable, dependent: :destroy, types: %w[
+  TYPES = %w[
     Promotion::PercentOff
     Promotion::FixedAmountOff
   ]
+  delegated_type :promotionable, dependent: :destroy, types: TYPES
 
   delegate_missing_to :promotionable
 
