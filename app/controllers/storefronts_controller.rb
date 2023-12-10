@@ -62,13 +62,14 @@ class StorefrontsController < ApplicationController
       redirect_to login_path and return
     end
     @user = Current.user
+    @user.profile.seller_rating = 5
     unless @user.profile.seller_rating.nil?
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
         redirect_to root_path and return
-        # elsif Review.where(seller_id: @user.id).count < 5
-        # flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
-        # redirect_to root_path and return
+      elsif Review.where(seller_id: @user.id).count < 5
+        flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
+        redirect_to root_path and return
       else
         if @user.storefront_requested == 100
           flash[:notice] = "It looks like you already have a pending storefront request. We will contact you when the request has been reviewed."
