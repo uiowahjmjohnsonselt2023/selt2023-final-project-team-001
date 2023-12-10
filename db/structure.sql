@@ -301,7 +301,6 @@ CREATE TABLE public.reviews (
     id bigint NOT NULL,
     reviewer_id bigint NOT NULL,
     seller_id bigint NOT NULL,
-    has_purchased_from boolean DEFAULT false NOT NULL,
     interaction_rating integer NOT NULL,
     description text,
     created_at timestamp(6) without time zone NOT NULL,
