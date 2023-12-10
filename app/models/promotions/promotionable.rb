@@ -8,7 +8,15 @@ module Promotions
 
     included do
       has_one :promotion, as: :promotionable, touch: true
-      delegate_missing_to :promotion
+      # delegate_missing_to :promotion
+      delegate(
+        :name,
+        :starts_on, :ends_on,
+        :min_quantity, :max_quantity,
+        :products, :seller,
+        :started?, :ended?, :active?,
+        to: :promotion
+      )
     end
 
     def product_eligible?(cart_item)
