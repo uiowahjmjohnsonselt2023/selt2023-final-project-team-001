@@ -6,6 +6,7 @@ class Promotion < ApplicationRecord
   delegated_type :promotionable, dependent: :destroy, types: TYPES
   accepts_nested_attributes_for :promotionable
 
+  delegate :to_s, to: :promotionable
   delegate_missing_to :promotionable
 
   default_scope { includes(:products_promotions) }
