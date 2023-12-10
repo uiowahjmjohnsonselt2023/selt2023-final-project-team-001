@@ -65,15 +65,14 @@ class StorefrontsController < ApplicationController
     @user = Current.user
     # threshold 3 stars
     # threshold 5 reviews
-    puts "======= RATING ======="
     puts @user.profile.seller_rating
     unless @user.profile.seller_rating.nil?
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
       else
         @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
-        PasswordMailer.with(user: @admin).request_approval.deliver_now
-        redirect_to profile_path(@user)
+        StorefrontRequestMailer.with(user: @admin).request_approval.deliver_now
+        redirect_to profile_path(@user) and return
       end
     end
     flash[:notice] = "You do not have any reviews yet."
