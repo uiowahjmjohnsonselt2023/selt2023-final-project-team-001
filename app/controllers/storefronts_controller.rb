@@ -67,9 +67,9 @@ class StorefrontsController < ApplicationController
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
         redirect_to root_path and return
-        # elsif Review.where(seller_id: @user.id).count < 5
-        # flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
-        # redirect_to root_path and return
+      elsif Review.where(seller_id: @user.id).count < 5
+        flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
+        redirect_to root_path and return
       else
         if @user.storefront_requested == 100
           flash[:notice] = "It looks like you already have a pending storefront request. We will contact you when the request has been reviewed."
@@ -151,6 +151,23 @@ class StorefrontsController < ApplicationController
   end
 
   def process_admin_review
+    unless Current.user.nil?
+      # unless Current.user.is_admin?
+      #  flash[:alert] = "You don't have permission to view that page."
+      #  redirect_to root_path and return
+      # end
+      @user = User.where(id: params[:user]).first
+      if params[:approve]
+        @user.update_attribute!(:storefront_requested, 400)
+        flash[:notice] = "User request approved"
+      else
+        @user.update_attribute!(:storefront_requested, 200)
+        flash[:alert] = "User request rejected"
+      end
+      redirect_to profile_path(@user.profile) and return
+    end
+    flash[:alert] = "Please log in"
+    redirect_to login_path
   end
 
   private

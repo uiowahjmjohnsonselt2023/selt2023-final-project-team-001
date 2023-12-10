@@ -94,7 +94,7 @@ class UsersController < ApplicationController
     @reqs = []
     User.where(storefront_requested: 100).each do |user|
       puts user
-      @reqs.append(name: user.first_name + " " + user.last_name, profile: user.profile)
+      @reqs.append({user: user})
     end
   end
 end

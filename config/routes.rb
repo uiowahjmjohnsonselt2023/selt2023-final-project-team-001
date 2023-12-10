@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get "/request_storefront", to: "storefronts#make_request"
   get "/process_request", to: "storefronts#process_request"
   get "/show_requests", to: "users#show_requests"
-  get "/process_admin_review", to: "users#process_admin_review"
+  get "/process_admin_review", to: "storefronts#process_admin_review"
 
   post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
 
