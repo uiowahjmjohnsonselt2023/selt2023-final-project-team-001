@@ -3,10 +3,12 @@
   <%= f.datetime_field(
         :starts_on,
         min: promotion.starts_on || DateTime.now,
+        include_seconds: false
       ) %>
   <%= f.datetime_field(
         :ends_on,
         min: promotion.ends_on || DateTime.now,
+        include_seconds: false
       ) %>
   <%= f.text_field(
         :min_quantity,
