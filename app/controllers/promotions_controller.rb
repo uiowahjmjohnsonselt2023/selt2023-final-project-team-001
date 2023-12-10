@@ -10,7 +10,8 @@ class PromotionsController < ApplicationController
   def create
     @promotion = Current.user.promotions.build(promotion_params)
     if @promotion.save
-      redirect_to @promotion
+      flash[:notice] = "Promotion created successfully."
+      redirect_to root_path
     else
       flash[:alert] = "Please fix the errors below."
       render "new", status: :unprocessable_entity
