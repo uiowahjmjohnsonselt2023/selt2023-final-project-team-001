@@ -59,7 +59,9 @@
             <!--want this in case later categories are added, but the pictures aren't-->
             <% if Rails.application.assets.find_asset("home/#{category}") %>
               <div class="carousel-item <%= 'active' if index.zero? %>">
-                <img src="<%= asset_path("home/#{category}.jpg") %>" class="d-block carousel-image" alt="<%= category %>">
+                <%= link_to products_path(category: index + 1, order: "desc") do %>
+                  <img src="<%= asset_path("home/#{category}.jpg") %>" class="d-block carousel-image" alt="<%= category %>">
+                <% end %>
                 <div class="carousel-caption d-none d-md-block">
                   <h5><%= category %></h5>
                 </div>
