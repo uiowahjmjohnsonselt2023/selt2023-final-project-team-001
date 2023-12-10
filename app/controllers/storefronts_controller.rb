@@ -37,8 +37,6 @@ class StorefrontsController < ApplicationController
       redirect_to login_path and return
     end
     case Current.user.storefront_requested
-    when 0
-      # add request here
     when 100
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
     when 200
@@ -62,7 +60,6 @@ class StorefrontsController < ApplicationController
       redirect_to login_path and return
     end
     @user = Current.user
-    @user.profile.seller_rating = 5
     unless @user.profile.seller_rating.nil?
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
@@ -77,6 +74,7 @@ class StorefrontsController < ApplicationController
         end
         @user.update_attribute!(:storefront_requested, 100)
         StorefrontRequestMailer.request_approval.deliver_now
+        flash[:notice] = "Your request has been sent! You will be notified by email when it changes. "
         redirect_to profile_path(@user.profile) and return
       end
     end
@@ -165,7 +163,7 @@ class StorefrontsController < ApplicationController
         StorefrontRequestMailer.with(email: @user.email).request_denied.deliver_now
         flash[:alert] = "User request rejected"
       end
-      redirect_to profile_path(@user.profile) and return
+      redirect_to show_requests_path and return
     end
     flash[:alert] = "Please log in"
     redirect_to login_path
