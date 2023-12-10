@@ -1,77 +1,84 @@
-<%= bootstrap_form_with model: promotion, data: {controller: "promotion-form"} do |f| %>
-  <%= f.text_field :name %>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h1 class="card-title text-center"><%= title %></h1>
+      <%= bootstrap_form_with model: promotion, data: {controller: "promotion-form"} do |f| %>
+        <%= f.text_field :name %>
 
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.datetime_field(
-          :starts_on,
-          min: promotion.starts_on || @now,
-          include_seconds: false,
-          value: promotion.starts_on || @midnight
-        ) %>
-    </div>
-    <div class="col-md-6">
-      <%= f.datetime_field(
-          :ends_on,
-          min: promotion.ends_on || @now,
-          include_seconds: false,
-          value: promotion.ends_on || @week_from_midnight
-        ) %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.datetime_field(
+                :starts_on,
+                min: promotion.starts_on || @now,
+                include_seconds: false,
+                value: promotion.starts_on || @midnight
+              ) %>
+          </div>
+          <div class="col-md-6">
+            <%= f.datetime_field(
+                :ends_on,
+                min: promotion.ends_on || @now,
+                include_seconds: false,
+                value: promotion.ends_on || @week_from_midnight
+              ) %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.text_field(
+                :min_quantity,
+                inputmode: "numeric",
+                pattern: "[1-9][0-9]*",
+                required: true
+              ) %>
+          </div>
+          <div class="col-md-6">
+            <%= f.hidden_field :max_quantity, value: -1 %>
+            <%= f.text_field(
+                  :max_quantity,
+                  inputmode: "numeric",
+                  pattern: "-?[0-9]*",
+                  required: true
+                ) %>
+          </div>
+        </div>
+
+        <%= f.collection_select(
+              :product_ids,
+              Current.user.products,
+              :id, :name,
+              { label: "Products", include_blank: true },
+              { multiple: true, style: "height: 150px;" }
+            ) %>
+
+        <%= f.select(
+              :promotionable_type,
+              # e.g., Promotion::FixedAmountOff -> "Fixed Amount Off"
+              Promotion::TYPES.map { |type| [type.demodulize.underscore.titleize, type] },
+              {
+                label: "Promotion Type",
+                required: true
+              },
+              {
+                autocomplete: "off",
+                data: {
+                  action: "promotion-form#updateType",
+                  promotion_form_target: "promotionType",
+                }
+              }
+            ) %>
+
+        <% Promotion::TYPES.map do |type| %>
+          <%#  e.g., "Promotions::FixedAmountOff" -> "promotions/fixed_amount_off" %>
+          <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
+        <% end %>
+
+        <div>
+          <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+          <%= f.primary %>
+        </div>
+      <% end %>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <%= f.text_field(
-          :min_quantity,
-          inputmode: "numeric",
-          pattern: "[1-9][0-9]*",
-          required: true
-        ) %>
-    </div>
-    <div class="col-md-6">
-      <%= f.hidden_field :max_quantity, value: -1 %>
-      <%= f.text_field(
-            :max_quantity,
-            inputmode: "numeric",
-            pattern: "-?[0-9]*",
-            required: true
-          ) %>
-    </div>
-  </div>
-
-  <%= f.collection_select(
-        :product_ids,
-        Current.user.products,
-        :id, :name,
-        { label: "Products", include_blank: true },
-        { multiple: true, style: "height: 150px;" }
-      ) %>
-
-  <%= f.select(
-        :promotionable_type,
-        # e.g., Promotion::FixedAmountOff -> "Fixed Amount Off"
-        Promotion::TYPES.map { |type| [type.demodulize.underscore.titleize, type] },
-        {
-          label: "Promotion Type",
-          required: true
-        },
-        {
-          autocomplete: "off",
-          data: {
-            action: "promotion-form#updateType",
-            promotion_form_target: "promotionType",
-          }
-        }
-      ) %>
-
-  <% Promotion::TYPES.map do |type| %>
-    <%#  e.g., "Promotions::FixedAmountOff" -> "promotions/fixed_amount_off" %>
-    <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
-  <% end %>
-
-  <div>
-    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-    <%= f.primary %>
-  </div>
-<% end %>
+</div>
