@@ -17,7 +17,7 @@ class Promotions::FixedAmountOff < ApplicationRecord
   end
 
   def sample_discount(product)
-    [product.price - amount, 0].max
+    [product.price - amount, Money.new(0)].max
   end
 
   def to_s
