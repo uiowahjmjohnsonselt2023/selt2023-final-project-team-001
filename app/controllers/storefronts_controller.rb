@@ -69,6 +69,8 @@ class StorefrontsController < ApplicationController
     unless @user.profile.seller_rating.nil?
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
+      elsif Review.where(seller_id: @user.id).count < 5
+        flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews"
       else
         @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
         StorefrontRequestMailer.with(user: @admin).request_approval.deliver_now
