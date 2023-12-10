@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <h2> Purchase history for <%= @user.first_name %></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th scope="col"> Seller </th>
+      <th scope="col"> Item </th>
+      <th scope="col"> Price</th>
+      <th scope="col"> Quantity </th>
+      <th scope="col"> Total </th>
+      <th scope="col"> Purchased on </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @others.each do |m| %>
+      <tr>
+        <td>
+          <%= if m[:storefront].nil?
+                link_to m[:seller], profile_path(m[:profile])
+        else
+          link_to m[:seller], storefront_path(m[:storefront])
+        end%></td>
+        <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
+        <td><%= number_to_currency m[:price_cents] %></td>
+        <td><%= m[:quantity] %></td>
+        <td><%= number_to_currency(m[:price_cents] * m[:quantity]) %></td>
+        <td><%= m[:created_at].strftime("%B %e, %Y %l:%M %p") %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

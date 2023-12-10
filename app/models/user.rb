@@ -3,6 +3,12 @@ class User < ApplicationRecord
   has_secure_password
   before_save { |user| user.email = user.email.downcase }
   before_save :create_session_token
+  # If a user's is_seller attribute is changed to true, make sure they have a profile.
+  # This has to be after a commit because (for new users) we need to save the user
+  # before we can create a profile for them.
+  after_save_commit :update_profile_visibility,
+    if: [:saved_change_to_is_seller?, :is_seller?]
+
   validates :first_name, presence: true, length: {maximum: 50}
   validates :last_name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,24})\z/i
@@ -44,10 +50,15 @@ class User < ApplicationRecord
   has_many :reviews_user_has_given, class_name: "Review", foreign_key: :reviewer_id, dependent: :destroy
   has_many :reviews_for_sellers, class_name: "Review", foreign_key: :seller_id, dependent: :destroy
   has_many :cart_products, through: :carts, source: :product
+  has_many :viewed_products
+  has_many :viewed, through: :viewed_products, source: :product
   accepts_nested_attributes_for :profile  # If you want to handle profile attributes in user forms
   has_one :storefront, dependent: :destroy
   accepts_nested_attributes_for :storefront
   has_many :promotions, foreign_key: :seller_id, dependent: :destroy
+  has_many :messages_sent, class_name: "Message", foreign_key: :sender_id, dependent: :destroy
+  has_many :messages_received, class_name: "Message", foreign_key: :receiver_id, dependent: :destroy
+  has_many :price_alerts, dependent: :destroy
 
   # Override the is_admin setter so that all admins are sellers and buyers.
   def is_admin=(value)
@@ -64,5 +75,12 @@ class User < ApplicationRecord
 
   def create_session_token
     self.session_token = SecureRandom.urlsafe_base64
+  end
+
+  def update_profile_visibility
+    if is_seller? && (profile.nil? || !profile.public_profile)
+      build_profile(public_profile: true) unless profile
+      profile.update(public_profile: true)
+    end
   end
 end

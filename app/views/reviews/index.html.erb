@@ -1,0 +1,25 @@
+
+  <div class="container mt-4">
+    <h2>Reviews</h2>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Rating</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td>
+            <%= review[:interaction_rating] %>
+          </td>
+          <td><%= review[:description] %></td>
+        </tr>
+      <% end %>
+      </tbody>
+
+    </table>
+  </div>
+

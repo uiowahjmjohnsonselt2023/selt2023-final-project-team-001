@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get "price_alerts/send_price_alert"
   get "home/index"
   get "pages/index"
 
@@ -10,10 +11,19 @@ Rails.application.routes.draw do
     get :customize, on: :member
   end
 
+  resources :price_alerts, only: [:new, :create, :index, :edit, :update], param: :id do
+    get :delete, on: :member
+    delete :destroy, on: :member
+  end
+
+  get "/send_price_alert", to: "price_alerts#send_price_alert", as: "send_price_alert"
+
   get "/signup", to: "users#new", as: "signup"
   post "/signup", to: "users#create", as: "signup_submit"
   get "/register", to: "users#register", as: "register"
   post "/register", to: "users#new_seller", as: "seller"
+  get "/purchase_history", to: "users#purchase_history", as: "purchase_history"
+  get "/sales_history", to: "users#sales_history", as: "sales_history"
 
   post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
 
@@ -27,7 +37,18 @@ Rails.application.routes.draw do
   post "/forgot_password_reset_password_submit", to: "forgot_password#update", as: "forgot_password_reset_submit"
   get "/review", to: "reviews#new", as: "review"
   post "/create_review", to: "reviews#create", as: "create_review"
+  get "/reviews", to: "reviews#index", as: "reviews"
   get "/auth/:provider/callback", to: "sessions#omniauth"
+  get "/send_message", to: "messages#new", as: "send_message"
+  post "/send_message_submit", to: "messages#create", as: "send_message_submit"
+  get "/view_messages", to: "messages#inbox", as: "view_messages"
+  get "/view_sent_messages", to: "messages#sent", as: "view_sent_messages"
+  get "/show_message", to: "messages#show", as: "message_details"
+  get "/reply", to: "messages#reply", as: "reply"
+  post "/send_reply", to: "messages#create_reply", as: "send_reply"
+  delete "/delete_message", to: "messages#delete", as: "delete_message"
+
+  get "/history", to: "products#history", as: "products_history"
 
   resources :profiles, only: [:show, :new, :create, :edit, :update], param: :id do
     get :delete, on: :member

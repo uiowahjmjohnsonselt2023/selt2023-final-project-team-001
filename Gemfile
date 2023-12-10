@@ -65,6 +65,10 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "dotenv-rails" # Load environment variables from .env into ENV in development
   gem "shoulda-matchers", "~> 5.3.0"
+  gem "cucumber-rails", require: false
+  gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem "launchy"
 end
 
 group :development do

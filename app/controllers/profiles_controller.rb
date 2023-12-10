@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :require_login, except: [:show]
+  before_action :require_not_seller, only: [:destroy, :delete]
 
   def edit
     @profile = Current.user.profile
@@ -26,7 +27,7 @@ class ProfilesController < ApplicationController
       redirect_to @profile, notice: "Profile was successfully updated."
     else
       flash.now[:alert] = "Profile update failed. Please check the form."
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -35,6 +36,7 @@ class ProfilesController < ApplicationController
       flash[:alert] = "You already have a profile!"
       redirect_to profile_path(Current.user.profile)
     end
+    @profile = Profile.new
   end
 
   def create
@@ -45,8 +47,11 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Profile created successfully!"
       redirect_to profile_path(@profile)
     else
+      # Need to set user to nil because otherwise the navbar/_user_dropdown partial
+      # sees the profile and tries to render a link to it, but profile.id is nil.
+      @profile.user = nil
       flash.now[:alert] = "Profile creation failed. Please check the form."
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 
@@ -54,7 +59,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.find params[:id] # renders 404 if nonexistent
     @is_current_user = Current.user&.profile == @profile
     @is_seller = (User.find @profile.user_id).is_seller
-    @show_review_link = User.find_by(id: @profile.user_id)&.is_seller && !@is_current_user # user can't leave review for themselves
+    @show_links = @is_seller && !@is_current_user # user can't leave review for themselves
     if !@profile.public_profile && !@is_current_user
       flash[:alert] = "This profile is private!"
       redirect_to root_path

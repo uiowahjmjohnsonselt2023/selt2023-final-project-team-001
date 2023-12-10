@@ -51,11 +51,16 @@ en:
     promotions:
         default: "You need to login before you can %{action} a promotion!"
         new: "You need to login before you can create a promotion!"
+    price_alerts:
+      default: "You need to login before you can have price alerts!"
   require_not_seller:
     default: "You cannot be a seller to access that page."
     users:
       register: "You already are a seller, no need to register again!"
       new_seller: "You already are a seller, no need to register again!"
+    profiles:
+      destroy: "Sellers cannot delete their profiles!"
+      delete: "Sellers cannot delete their profiles!"
   require_seller:
     default: "You must be a seller to access that page."
     storefronts:
@@ -79,3 +84,24 @@ en:
       permission_denied: "You can only update your own storefront!"
     preview:
       success: "Storefront successfully previewed, scroll down to see!"
+  price_alerts:
+    new:
+      already_exists: "You already have a price alert for this product!"
+      cannot_add_own_product: "You cannot add your own product to your price alerts!"
+    create:
+      success: "Price alert successfully created!"
+      failure: "Failed to create price alert. Please try again."
+    edit:
+      not_yours: "You cannot edit someone else's price alert!"
+    update:
+      success: "Price alert successfully updated!"
+      failure: "Failed to update price alert. Please try again."
+      not_yours: "You cannot update someone else's price alert!"
+    show:
+      not_yours: "You cannot view someone else's price alert!"
+    destroy:
+      success: "Price alert successfully deleted!"
+      failure: "Failed to delete price alert. Please try again."
+      not_yours: "You cannot delete someone else's price alert!"
+    delete:
+      not_yours: "You cannot delete someone else's price alert!"

@@ -40,45 +40,14 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
--- Name: cart_items; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.cart_items (
-    id bigint NOT NULL,
-    product_id bigint,
-    quantity integer DEFAULT 1,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    cart_id bigint NOT NULL
-);
-
-
---
--- Name: cart_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.cart_items_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: cart_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.cart_items_id_seq OWNED BY public.cart_items.id;
-
-
---
 -- Name: carts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.carts (
     id bigint NOT NULL,
     user_id bigint,
+    product_id bigint,
+    quantity integer DEFAULT 1,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -167,6 +136,78 @@ ALTER SEQUENCE public.categorizations_id_seq OWNED BY public.categorizations.id;
 
 
 --
+-- Name: messages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.messages (
+    id bigint NOT NULL,
+    sender_id bigint NOT NULL,
+    receiver_id bigint NOT NULL,
+    subject text NOT NULL,
+    message text NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    sender_name character varying DEFAULT ''::character varying NOT NULL,
+    "hasRead" boolean DEFAULT false NOT NULL,
+    receiver_name character varying NOT NULL,
+    "hasSenderDeleted" boolean DEFAULT false NOT NULL,
+    "hasReceiverDeleted" boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.messages_id_seq OWNED BY public.messages.id;
+
+
+--
+-- Name: price_alerts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.price_alerts (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    threshold numeric(10,2),
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.price_alerts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: price_alerts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.price_alerts_id_seq OWNED BY public.price_alerts.id;
+
+
+--
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -184,7 +225,8 @@ CREATE TABLE public.products (
     seller_id bigint NOT NULL,
     cart_id bigint,
     photos json,
-    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED
+    searchable tsvector GENERATED ALWAYS AS ((setweight(to_tsvector('english'::regconfig, (name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, description), 'B'::"char"))) STORED,
+    views integer
 );
 
 
@@ -205,16 +247,6 @@ CREATE SEQUENCE public.products_id_seq
 --
 
 ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
-
-
---
--- Name: products_promotions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.products_promotions (
-    product_id bigint NOT NULL,
-    promotion_id bigint NOT NULL
-);
 
 
 --
@@ -262,107 +294,6 @@ ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
 
 
 --
--- Name: promotions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.promotions (
-    id bigint NOT NULL,
-    name character varying,
-    starts_on timestamp(6) without time zone NOT NULL,
-    ends_on timestamp(6) without time zone NOT NULL,
-    promotionable_type character varying,
-    promotionable_id integer,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    seller_id bigint NOT NULL,
-    min_quantity integer DEFAULT 1 NOT NULL,
-    max_quantity integer DEFAULT 1 NOT NULL
-);
-
-
---
--- Name: promotions_fixed_amount_offs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.promotions_fixed_amount_offs (
-    id bigint NOT NULL,
-    amount_cents integer DEFAULT 0 NOT NULL,
-    amount_currency character varying DEFAULT 'USD'::character varying NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: promotions_fixed_amount_offs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.promotions_fixed_amount_offs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: promotions_fixed_amount_offs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.promotions_fixed_amount_offs_id_seq OWNED BY public.promotions_fixed_amount_offs.id;
-
-
---
--- Name: promotions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.promotions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: promotions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.promotions_id_seq OWNED BY public.promotions.id;
-
-
---
--- Name: promotions_percent_offs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.promotions_percent_offs (
-    id bigint NOT NULL,
-    percentage numeric(7,6) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
--- Name: promotions_percent_offs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.promotions_percent_offs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: promotions_percent_offs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.promotions_percent_offs_id_seq OWNED BY public.promotions_percent_offs.id;
-
-
---
 -- Name: reviews; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -370,7 +301,6 @@ CREATE TABLE public.reviews (
     id bigint NOT NULL,
     reviewer_id bigint NOT NULL,
     seller_id bigint NOT NULL,
-    has_purchased_from boolean DEFAULT false NOT NULL,
     interaction_rating integer NOT NULL,
     description text,
     created_at timestamp(6) without time zone NOT NULL,
@@ -442,6 +372,42 @@ ALTER SEQUENCE public.storefronts_id_seq OWNED BY public.storefronts.id;
 
 
 --
+-- Name: transactions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.transactions (
+    id bigint NOT NULL,
+    buyer_id bigint NOT NULL,
+    seller_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    price_cents integer DEFAULT 1,
+    shipping_status character varying DEFAULT 'pending'::character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    quantity integer
+);
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.transactions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.transactions_id_seq OWNED BY public.transactions.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -459,7 +425,8 @@ CREATE TABLE public.users (
     updated_at timestamp(6) without time zone NOT NULL,
     cart_id bigint,
     uid character varying,
-    provider character varying
+    provider character varying,
+    message_id bigint
 );
 
 
@@ -483,10 +450,35 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: cart_items id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: viewed_products; Type: TABLE; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_items ALTER COLUMN id SET DEFAULT nextval('public.cart_items_id_seq'::regclass);
+CREATE TABLE public.viewed_products (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    product_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.viewed_products_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: viewed_products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.viewed_products_id_seq OWNED BY public.viewed_products.id;
 
 
 --
@@ -511,6 +503,20 @@ ALTER TABLE ONLY public.categorizations ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: messages id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages ALTER COLUMN id SET DEFAULT nextval('public.messages_id_seq'::regclass);
+
+
+--
+-- Name: price_alerts id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts ALTER COLUMN id SET DEFAULT nextval('public.price_alerts_id_seq'::regclass);
+
+
+--
 -- Name: products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -522,27 +528,6 @@ ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.pro
 --
 
 ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.profiles_id_seq'::regclass);
-
-
---
--- Name: promotions id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions ALTER COLUMN id SET DEFAULT nextval('public.promotions_id_seq'::regclass);
-
-
---
--- Name: promotions_fixed_amount_offs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions_fixed_amount_offs ALTER COLUMN id SET DEFAULT nextval('public.promotions_fixed_amount_offs_id_seq'::regclass);
-
-
---
--- Name: promotions_percent_offs id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions_percent_offs ALTER COLUMN id SET DEFAULT nextval('public.promotions_percent_offs_id_seq'::regclass);
 
 
 --
@@ -560,10 +545,24 @@ ALTER TABLE ONLY public.storefronts ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: transactions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions ALTER COLUMN id SET DEFAULT nextval('public.transactions_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: viewed_products id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products ALTER COLUMN id SET DEFAULT nextval('public.viewed_products_id_seq'::regclass);
 
 
 --
@@ -572,14 +571,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
-
-
---
--- Name: cart_items cart_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT cart_items_pkey PRIMARY KEY (id);
 
 
 --
@@ -607,6 +598,22 @@ ALTER TABLE ONLY public.categorizations
 
 
 --
+-- Name: messages messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: price_alerts price_alerts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT price_alerts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -620,30 +627,6 @@ ALTER TABLE ONLY public.products
 
 ALTER TABLE ONLY public.profiles
     ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
-
-
---
--- Name: promotions_fixed_amount_offs promotions_fixed_amount_offs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions_fixed_amount_offs
-    ADD CONSTRAINT promotions_fixed_amount_offs_pkey PRIMARY KEY (id);
-
-
---
--- Name: promotions_percent_offs promotions_percent_offs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions_percent_offs
-    ADD CONSTRAINT promotions_percent_offs_pkey PRIMARY KEY (id);
-
-
---
--- Name: promotions promotions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.promotions
-    ADD CONSTRAINT promotions_pkey PRIMARY KEY (id);
 
 
 --
@@ -679,6 +662,14 @@ ALTER TABLE ONLY public.storefronts
 
 
 --
+-- Name: transactions transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT transactions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -687,24 +678,18 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: index_cart_items_on_cart_id; Type: INDEX; Schema: public; Owner: -
+-- Name: viewed_products viewed_products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-CREATE INDEX index_cart_items_on_cart_id ON public.cart_items USING btree (cart_id);
-
-
---
--- Name: index_cart_items_on_cart_id_and_product_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_cart_items_on_cart_id_and_product_id ON public.cart_items USING btree (cart_id, product_id);
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT viewed_products_pkey PRIMARY KEY (id);
 
 
 --
--- Name: index_cart_items_on_product_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_carts_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_cart_items_on_product_id ON public.cart_items USING btree (product_id);
+CREATE INDEX index_carts_on_product_id ON public.carts USING btree (product_id);
 
 
 --
@@ -712,6 +697,13 @@ CREATE INDEX index_cart_items_on_product_id ON public.cart_items USING btree (pr
 --
 
 CREATE INDEX index_carts_on_user_id ON public.carts USING btree (user_id);
+
+
+--
+-- Name: index_carts_on_user_id_and_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_carts_on_user_id_and_product_id ON public.carts USING btree (user_id, product_id);
 
 
 --
@@ -743,6 +735,34 @@ CREATE UNIQUE INDEX index_categorizations_on_product_id_and_category_id ON publi
 
 
 --
+-- Name: index_messages_on_receiver_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_messages_on_receiver_id ON public.messages USING btree (receiver_id);
+
+
+--
+-- Name: index_messages_on_sender_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_messages_on_sender_id ON public.messages USING btree (sender_id);
+
+
+--
+-- Name: index_price_alerts_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_product_id ON public.price_alerts USING btree (product_id);
+
+
+--
+-- Name: index_price_alerts_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_price_alerts_on_user_id ON public.price_alerts USING btree (user_id);
+
+
+--
 -- Name: index_products_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -764,31 +784,10 @@ CREATE INDEX index_products_on_seller_id ON public.products USING btree (seller_
 
 
 --
--- Name: index_products_promotions_on_product_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_products_promotions_on_product_id ON public.products_promotions USING btree (product_id);
-
-
---
--- Name: index_products_promotions_on_promotion_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_products_promotions_on_promotion_id ON public.products_promotions USING btree (promotion_id);
-
-
---
 -- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_profiles_on_user_id ON public.profiles USING btree (user_id);
-
-
---
--- Name: index_promotions_on_seller_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_promotions_on_seller_id ON public.promotions USING btree (seller_id);
 
 
 --
@@ -813,6 +812,27 @@ CREATE INDEX index_storefronts_on_user_id ON public.storefronts USING btree (use
 
 
 --
+-- Name: index_transactions_on_buyer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_buyer_id ON public.transactions USING btree (buyer_id);
+
+
+--
+-- Name: index_transactions_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_product_id ON public.transactions USING btree (product_id);
+
+
+--
+-- Name: index_transactions_on_seller_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_transactions_on_seller_id ON public.transactions USING btree (seller_id);
+
+
+--
 -- Name: index_users_on_cart_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -824,6 +844,27 @@ CREATE INDEX index_users_on_cart_id ON public.users USING btree (cart_id);
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_message_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_message_id ON public.users USING btree (message_id);
+
+
+--
+-- Name: index_viewed_products_on_product_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_product_id ON public.viewed_products USING btree (product_id);
+
+
+--
+-- Name: index_viewed_products_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_viewed_products_on_user_id ON public.viewed_products USING btree (user_id);
 
 
 --
@@ -843,11 +884,27 @@ ALTER TABLE ONLY public.categorizations
 
 
 --
+-- Name: transactions fk_rails_0b24a7fcc3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_0b24a7fcc3 FOREIGN KEY (buyer_id) REFERENCES public.users(id);
+
+
+--
+-- Name: transactions fk_rails_0d676c9617; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_0d676c9617 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
 -- Name: users fk_rails_1d13818f0e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT fk_rails_1d13818f0e FOREIGN KEY (cart_id) REFERENCES public.cart_items(id);
+    ADD CONSTRAINT fk_rails_1d13818f0e FOREIGN KEY (cart_id) REFERENCES public.carts(id);
 
 
 --
@@ -859,6 +916,22 @@ ALTER TABLE ONLY public.storefronts
 
 
 --
+-- Name: transactions fk_rails_458bde2e92; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.transactions
+    ADD CONSTRAINT fk_rails_458bde2e92 FOREIGN KEY (seller_id) REFERENCES public.users(id);
+
+
+--
+-- Name: price_alerts fk_rails_49aac91261; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_49aac91261 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: categorizations fk_rails_5a40b79a1d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -867,11 +940,19 @@ ALTER TABLE ONLY public.categorizations
 
 
 --
--- Name: cart_items fk_rails_6cdb1f0139; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: messages fk_rails_67c67d2963; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_items
-    ADD CONSTRAINT fk_rails_6cdb1f0139 FOREIGN KEY (cart_id) REFERENCES public.carts(id);
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT fk_rails_67c67d2963 FOREIGN KEY (receiver_id) REFERENCES public.users(id);
+
+
+--
+-- Name: viewed_products fk_rails_7d150f3af7; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_7d150f3af7 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -883,11 +964,27 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: cart_items fk_rails_916f2a1419; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: carts fk_rails_916f2a1419; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.cart_items
+ALTER TABLE ONLY public.carts
     ADD CONSTRAINT fk_rails_916f2a1419 FOREIGN KEY (product_id) REFERENCES public.products(id);
+
+
+--
+-- Name: viewed_products fk_rails_95ac6b7bea; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.viewed_products
+    ADD CONSTRAINT fk_rails_95ac6b7bea FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: price_alerts fk_rails_95c3a9b293; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.price_alerts
+    ADD CONSTRAINT fk_rails_95c3a9b293 FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -895,7 +992,7 @@ ALTER TABLE ONLY public.cart_items
 --
 
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT fk_rails_99518e1c1e FOREIGN KEY (cart_id) REFERENCES public.cart_items(id);
+    ADD CONSTRAINT fk_rails_99518e1c1e FOREIGN KEY (cart_id) REFERENCES public.carts(id);
 
 
 --
@@ -907,11 +1004,19 @@ ALTER TABLE ONLY public.reviews
 
 
 --
--- Name: promotions fk_rails_d60b765d0e; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: messages fk_rails_b8f26a382d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.promotions
-    ADD CONSTRAINT fk_rails_d60b765d0e FOREIGN KEY (seller_id) REFERENCES public.users(id);
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT fk_rails_b8f26a382d FOREIGN KEY (sender_id) REFERENCES public.users(id);
+
+
+--
+-- Name: users fk_rails_e04d7fd992; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT fk_rails_e04d7fd992 FOREIGN KEY (message_id) REFERENCES public.messages(id);
 
 
 --
@@ -937,22 +1042,23 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20231209040207'),
-('20231209040104'),
-('20231209032617'),
-('20231209022607'),
-('20231208235133'),
-('20231208220151'),
-('20231208215630'),
-('20231208061249'),
-('20231208060725'),
-('20231205142620'),
-('20231204233551'),
+('20231210064247'),
+('20231209235009'),
+('20231209181651'),
+('20231209044224'),
+('20231209030520'),
+('20231209024152'),
+('20231208023046'),
+('20231207195703'),
+('20231207195223'),
+('20231205154444'),
+('20231204035349'),
 ('20231130163958'),
 ('20231130152546'),
 ('20231130152310'),
 ('20231130152251'),
 ('20231129233947'),
+('20231129232534'),
 ('20231124050558'),
 ('20231124045627'),
 ('20231124002516'),

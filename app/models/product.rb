@@ -7,8 +7,10 @@ class Product < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
   has_many :cart_items
-  has_many :users, through: :carts
   has_and_belongs_to_many :promotions
+  has_many :viewed_products
+  has_many :viewed_by_users, through: :viewed_products, source: :user
+  has_many :price_alerts, dependent: :destroy
   mount_uploaders :photos, ProductPhotoUploader
 
   # Left 100 between each value to allow for future additions.
@@ -26,6 +28,7 @@ class Product < ApplicationRecord
   validates :name, length: {maximum: 100}
   validates :description, length: {maximum: 1000}
   validates :quantity, numericality: {greater_than_or_equal_to: 0}
+  validates :views, numericality: {greater_than_or_equal_to: 0}
   validates :private, inclusion: {in: [true, false]}
 
   scope :only_public, -> { where(private: false) }

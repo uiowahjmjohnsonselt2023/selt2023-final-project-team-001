@@ -60,7 +60,6 @@ class StorefrontsController < ApplicationController
       flash[:alert] = t("storefronts.update.permission_denied")
       redirect_to root_path
     end
-    flash[:notice] = t("storefronts.update.success")
   end
 
   def customize
@@ -79,8 +78,17 @@ class StorefrontsController < ApplicationController
     @products = @user.products.where(private: false)
 
     if @storefront.custom_code == "1"
+      # hacky fix for flash notice not showing up because the page rerenders
+      # persists the message for one more load without also keeping it
+      # for the next page you go to as flash.keep would
+      if flash.notice == "Storefront successfully updated!"
+        flash[:notice] = "Storefront successfully updated! "
+      end
       render :template1 and return
     elsif @storefront.custom_code == "2"
+      if flash.notice == "Storefront successfully updated!"
+        flash[:notice] = "Storefront successfully updated! "
+      end
       render :template2 and return
     end
     @custom_code = @storefront&.custom_code || "" # Fetch custom code or default to empty string

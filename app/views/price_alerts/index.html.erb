@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Price Alerts</h1>
+  <div class="row">
+    <% if @price_alerts.present? %>
+      <% @price_alerts.each do |price_alert| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to price_alert.product.name, price_alert.product %></h5>
+              <p class="card-text">Current Price: $<%= price_alert.product.price %></p>
+              <p class="card-text">Threshold: $<%= format('%.2f', price_alert.threshold) %></p>
+              <%= link_to "Edit", edit_price_alert_path(price_alert), class: "btn btn-primary" %>
+              <%= link_to "Delete", delete_price_alert_path(price_alert), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-md-12">
+        <p>No price alerts found.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
