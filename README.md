@@ -6,24 +6,35 @@ This is a practical online platform designed for buying and selling goods. We ai
 
 ### Key Features
 
-- Users can create an account and login securely. 
+- Users can create an account, login securely with our credentials or their google account, and reset their password. 
 
 - Users can view products available for sale, with the option to sort and filter according to attributes like price, date posted, and tags.
 
-- Users can register to sell products, with the ability to sell as an independent seller (in the style of Facebook Marketplace or Craigslist) or set up a storefront to sell products regularly (more in the style of Etsy)
-- Sellers can choose to set up a storefront where they can establish a business selling their products
-- Sellers can customize their storefront's appearance with HTML
+- Users can register to sell products, with the ability to sell as an independent seller (in the style of Facebook Marketplace or Craigslist) or set up a storefront to sell products regularly (more in the style of Etsy).
+- Sellers can choose to set up a storefront where they can establish a business selling their products.
+- Sellers can customize their storefront's appearance with HTML or use a premade template.
 
-- Buyers and sellers can make use of third-party plugins for UPS and FedEx to calculate shipping, prepare and print shipping labels, and track their orders.
+- Buyers and sellers can interact in a number of different ways: through on-platform messaging and leaving seller reviews.
 
-- Buyers and sellers can interact in a number of different ways: through on-platform messaging, commenting, and leaving product, seller, and buyer reviews.
+- Users have profiles which for sellers will display and allow leaving reviews as well as personal info a user wishes to share.
+
+- Users can add items to their cart and "purchase" them.
+
+- Users can search products or storefronts.
+
+- Viewing individual product pages with a view similar to Amazon.
+
+- Ability to add items to a price alert list, where if the price drops below the threshold you set it will send you an email notification.
+
+- Ability for sellers to add deals (either a fixed amount off or a percent off).
 
 ### Navigation
 
-- From the home page, users can use the navigation bar to find what they are looking for.
-- All users will see links to view their storefronts (for users who are not logged in/registered, following this link will lead them to a page showing that they have no storefronts), as well as links to view all products sorted by recency.
+- From the home page, users can use the navigation bar to find what they are looking for as well as follow some of the features suggested depending on users status (like whether they are logged in or a seller).
+- All users will see links to view what storefronts are available, as well as links to view all products sorted by recency.
 - On the left in the nav bar, there is also a dropdown menu listing the product categories. Any user can click a category to view all the products in that category.
-- On the right in the nav bar, a user who is not logged in will have a link to the login/sign up page, and a user who is logged in will have a dropdown menu allowing them to view their profile and create or update their storefront
+- On the right in the nav bar, a user who is not logged in will have a link to the login/sign up page, and a user who is logged in will have a dropdown menu allowing them to view their profile and create or update their storefront among many other features only logged in users can access.
+- For explicit instructions see our wiki on the HOWTO page.
 
 
 ## Installation
