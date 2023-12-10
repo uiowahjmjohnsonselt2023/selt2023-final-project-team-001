@@ -1,28 +1,40 @@
 <%= bootstrap_form_with model: promotion, data: {controller: "promotion-form"} do |f| %>
   <%= f.text_field :name %>
-  <%= f.datetime_field(
-        :starts_on,
-        min: promotion.starts_on || DateTime.now,
-        include_seconds: false
-      ) %>
-  <%= f.datetime_field(
-        :ends_on,
-        min: promotion.ends_on || DateTime.now,
-        include_seconds: false
-      ) %>
-  <%= f.text_field(
-        :min_quantity,
-        inputmode: "numeric",
-        pattern: "[1-9][0-9]*",
-        required: true
-      ) %>
-  <%= f.hidden_field :max_quantity, value: -1 %>
-  <%= f.text_field(
-        :max_quantity,
-        inputmode: "numeric",
-        pattern: "-?[0-9]*",
-        required: true
-      ) %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.datetime_field(
+          :starts_on,
+          min: promotion.starts_on || DateTime.now,
+          include_seconds: false
+        ) %>
+    </div>
+    <div class="col-md-6">
+      <%= f.datetime_field(
+          :ends_on,
+          min: promotion.ends_on || DateTime.now,
+          include_seconds: false
+        ) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.text_field(
+          :min_quantity,
+          inputmode: "numeric",
+          pattern: "[1-9][0-9]*",
+          required: true
+        ) %>
+    </div>
+    <div class="col-md-6">
+      <%= f.hidden_field :max_quantity, value: -1 %>
+      <%= f.text_field(
+            :max_quantity,
+            inputmode: "numeric",
+            pattern: "-?[0-9]*",
+            required: true
+          ) %>
+    </div>
+  </div>
   <%= f.collection_select(
         :product_ids,
         Product.all,
