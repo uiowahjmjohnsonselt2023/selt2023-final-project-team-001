@@ -152,10 +152,10 @@ class StorefrontsController < ApplicationController
 
   def process_admin_review
     unless Current.user.nil?
-      # unless Current.user.is_admin?
-      #  flash[:alert] = "You don't have permission to view that page."
-      #  redirect_to root_path and return
-      # end
+      unless Current.user.is_admin?
+        flash[:alert] = "You don't have permission to view that page."
+        redirect_to root_path and return
+      end
       @user = User.where(id: params[:user]).first
       if params[:approve]
         @user.update_attribute!(:storefront_requested, 400)
