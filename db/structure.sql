@@ -1042,7 +1042,6 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20231210064247'),
 ('20231209235009'),
 ('20231209181651'),
 ('20231209044224'),
