@@ -74,13 +74,11 @@ describe CheckoutsController, type: :controller do
     end
 
     it "creates a new transaction" do
-      allow(controller).to receive(:require_login)
-      allow(controller).to receive(:session).and_return(user_id: user.id)
-      cart = create(:cart, user: user, product: product)
+      cart_item
       expect {
         patch :update_product_inventory
       }.to change(Transaction, :count).by(1)
-      expect(Cart.exists?(cart.id)).to be_falsey
+      expect(CartItem.exists?(cart_item.id)).to be_falsey
     end
   end
 end
