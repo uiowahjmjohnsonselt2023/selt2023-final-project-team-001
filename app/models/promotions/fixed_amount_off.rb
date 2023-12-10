@@ -17,6 +17,6 @@ class Promotions::FixedAmountOff < ApplicationRecord
   end
 
   def to_s
-    name || "$#{amount.format} off select items"
+    name || "#{amount.format} off select items"
   end
 end
