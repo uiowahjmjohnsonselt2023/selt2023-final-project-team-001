@@ -29,4 +29,8 @@ class ReviewsController < ApplicationController
     flash[:success] = "Review successfully created!"
     redirect_to profile_path(params[:profile_id])
   end
+
+  def index
+    @reviews = Review.where(seller_id: params[:seller_id])
+  end
 end
