@@ -81,4 +81,23 @@ class UsersController < ApplicationController
     flash[:notice] = "Registration successful"
     redirect_to root_path
   end
+
+  def process_admin_review
+  end
+
+  def show_requests
+    if Current.user.nil?
+      flash[:alert] = "Please log in."
+      redirect_to login_path and return
+    end
+    unless Current.user.is_admin?
+      flash[:alert] = "You do not have permission to view that page."
+      redirect_to root_path and return
+    end
+    @reqs = []
+    User.where(storefront_requested: 100).each do |user|
+      puts user
+      @reqs.append(name: user.first_name + " " + user.last_name, profile: user.profile)
+    end
+  end
 end

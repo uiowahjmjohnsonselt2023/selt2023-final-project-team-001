@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h2>Pending storefront requests</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th>Name</th>
+      <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @reqs.each do |r| %>
+      <tr>
+        <td><%= link_to r[:name], profile_path(r[:profile]) %></td>
+        <td>Approval box here</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

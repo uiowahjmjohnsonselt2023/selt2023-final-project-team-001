@@ -71,7 +71,6 @@ class StorefrontsController < ApplicationController
         # flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
         # redirect_to root_path and return
       else
-        puts @user.storefront_requested
         if @user.storefront_requested == 100
           flash[:notice] = "It looks like you already have a pending storefront request. We will contact you when the request has been reviewed."
           redirect_to redirect_to profile_path(@user) and return
@@ -84,9 +83,6 @@ class StorefrontsController < ApplicationController
     end
     flash[:alert] = "You do not have any reviews yet."
     redirect_to root_path
-  end
-
-  def process_admin_review
   end
 
   def edit
