@@ -82,9 +82,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def process_admin_review
-  end
-
   def show_requests
     if Current.user.nil?
       flash[:alert] = "Please log in."

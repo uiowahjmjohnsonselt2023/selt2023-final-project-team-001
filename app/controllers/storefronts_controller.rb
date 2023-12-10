@@ -150,6 +150,9 @@ class StorefrontsController < ApplicationController
     @custom_code = storefront_params[:custom_code] || ""
   end
 
+  def process_admin_review
+  end
+
   private
 
   def storefront_params
