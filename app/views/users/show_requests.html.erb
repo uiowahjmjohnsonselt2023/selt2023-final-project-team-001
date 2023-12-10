@@ -15,8 +15,8 @@
       <% user = r[:user] %>
       <tr>
         <td><%= link_to user.first_name + " " + user.last_name, profile_path(user.profile) %></td>
-        <td><%= link_to "Approve", process_admin_review_path(approve: true, user: user.id), class: "btn btn-primary"%></td>
-        <td><%= link_to "Reject", process_admin_review_path(approve: false, user: user.id), class: "btn btn-danger"%></td>
+        <td><%= link_to "Approve", process_admin_review_path(approve: "true", user: user.id), class: "btn btn-primary"%></td>
+        <td><%= link_to "Reject", process_admin_review_path(approve: "false", user: user.id), class: "btn btn-danger"%></td>
       </tr>
     <% end %>
     </tbody>

@@ -37,6 +37,8 @@ class StorefrontsController < ApplicationController
       redirect_to login_path and return
     end
     case Current.user.storefront_requested
+    when 0
+      redirect_to process_request
     when 100
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
     when 200
@@ -154,7 +156,7 @@ class StorefrontsController < ApplicationController
         redirect_to root_path and return
       end
       @user = User.where(id: params[:user]).first
-      if params[:approve]
+      if params[:approve] == "true"
         @user.update_attribute!(:storefront_requested, 400)
         StorefrontRequestMailer.with(email: @user.email).request_approved.deliver_now
         flash[:notice] = "User request approved"

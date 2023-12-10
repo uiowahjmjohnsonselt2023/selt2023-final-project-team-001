@@ -795,6 +795,7 @@
           1,
           1,
           1,
+          1,
           null,
           1,
           null,
@@ -2795,10 +2796,15 @@
           2,
           2,
           2,
+          2,
+          2,
+          2,
+          2,
+          2,
           null,
-          2,
-          2,
-          2,
+          0,
+          0,
+          0,
           null,
           0,
           0,
@@ -2814,6 +2820,10 @@
           1,
           1,
           1,
+          null,
+          null,
+          1,
+          0,
           null,
           null
         ]
@@ -3434,7 +3444,7 @@
           null,
           0,
           null,
-          null,
+          0,
           null,
           0,
           null,
@@ -3462,14 +3472,15 @@
           0,
           0,
           0,
-          null,
-          null,
-          null,
+          0,
+          0,
+          0,
           null,
           0,
           0,
           0,
           null,
+          0,
           0,
           0,
           0,
@@ -3816,7 +3827,7 @@
           null,
           0,
           0,
-          null,
+          0,
           null,
           0,
           0,
@@ -4498,17 +4509,11 @@
           1,
           null,
           null,
-          1,
-          1,
-          1,
-          null,
-          null,
           null
         ]
       },
       "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/review.rb": {
         "lines": [
-          1,
           1,
           1,
           1,
@@ -5003,6 +5008,6 @@
         ]
       }
     },
-    "timestamp": 1702193533
+    "timestamp": 1702196020
   }
 }
