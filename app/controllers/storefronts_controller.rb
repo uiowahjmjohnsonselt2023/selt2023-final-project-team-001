@@ -33,8 +33,6 @@ class StorefrontsController < ApplicationController
   end
 
   def make_request
-    puts "REQ???????????????"
-    puts Current.user.storefront_requested
     case Current.user.storefront_requested
     when "not_requested"
       # add request here
