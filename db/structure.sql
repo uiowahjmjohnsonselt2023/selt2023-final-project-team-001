@@ -426,6 +426,8 @@ CREATE TABLE public.users (
     cart_id bigint,
     uid character varying,
     provider character varying,
+    storefront_requested integer,
+    request_time timestamp(6) without time zone,
     message_id bigint
 );
 
@@ -1044,6 +1046,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20231210064247'),
 ('20231209235009'),
+('20231209220735'),
 ('20231209181651'),
 ('20231209044224'),
 ('20231209030520'),
@@ -1051,6 +1054,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231208023046'),
 ('20231207195703'),
 ('20231207195223'),
+('20231208235127'),
+('20231209011039'),
 ('20231205154444'),
 ('20231204035349'),
 ('20231130163958'),
