@@ -1,0 +1,44 @@
+<%= bootstrap_form_with model: promotion, data: {controller: "promotion-form"} do |f| %>
+  <%= f.text_field :name %>
+  <%= f.datetime_field(
+        :starts_on,
+        min: promotion.starts_on || DateTime.now,
+      ) %>
+  <%= f.datetime_field(
+        :ends_on,
+        min: promotion.ends_on || DateTime.now,
+      ) %>
+  <%= f.text_field(
+        :min_quantity,
+        inputmode: "numeric",
+        pattern: "[1-9][0-9]*",
+      ) %>
+  <%= f.hidden_field :max_quantity, value: -1 %>
+  <%= f.text_field(
+        :max_quantity,
+        inputmode: "numeric",
+        pattern: "-?[0-9]*",
+      ) %>
+  <%= f.collection_select(
+        :product_ids,
+        Product.all,
+        :id, :name,
+        { label: "Products", include_blank: true },
+        { multiple: true }
+      ) %>
+  <%= f.select(
+        :promotionable_type,
+        Promotion::TYPES.map { |type| [type.demodulize.underscore.titleize, type] },
+        { label: "Promotion Type", include_blank: promotion.promotionable_type.blank? },
+        {
+          autocomplete: "off",
+          data: {
+            action: "promotion-form#updateType",
+            promotion_form_target: "promotionType",
+          },
+        },
+      ) %>
+  <% Promotion::TYPES.map do |type| %>
+    <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
+  <% end %>
+<% end %>
