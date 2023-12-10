@@ -105,3 +105,9 @@ en:
       not_yours: "You cannot delete someone else's price alert!"
     delete:
       not_yours: "You cannot delete someone else's price alert!"
+  activerecord:
+    help:
+      promotion:
+        min_quantity: "Minimum number of products needed in cart to apply the promotion."
+        max_quantity: "Maximum number of products to discount. 0 or a negative number means no limit."
+        product_ids: "Products to apply the promotion to. Leave blank to apply to all of your products."
