@@ -48,6 +48,7 @@
 
   <%= f.select(
         :promotionable_type,
+        # e.g., Promotion::FixedAmountOff -> "Fixed Amount Off"
         Promotion::TYPES.map { |type| [type.demodulize.underscore.titleize, type] },
         {
           label: "Promotion Type",
@@ -64,6 +65,7 @@
       ) %>
 
   <% Promotion::TYPES.map do |type| %>
+    <%#  e.g., "Promotion::FixedAmountOff" -> "promotion/fixed_amount_off" %>
     <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
   <% end %>
 <% end %>
