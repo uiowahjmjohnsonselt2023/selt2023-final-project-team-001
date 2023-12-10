@@ -301,7 +301,6 @@ CREATE TABLE public.reviews (
     id bigint NOT NULL,
     reviewer_id bigint NOT NULL,
     seller_id bigint NOT NULL,
-    has_purchased_from boolean DEFAULT false NOT NULL,
     interaction_rating integer NOT NULL,
     description text,
     created_at timestamp(6) without time zone NOT NULL,
@@ -428,8 +427,6 @@ CREATE TABLE public.users (
     uid character varying,
     provider character varying,
     message_id bigint
-    storefront_requested integer,
-    request_time timestamp(6) without time zone
 );
 
 
@@ -948,11 +945,6 @@ ALTER TABLE ONLY public.categorizations
 
 ALTER TABLE ONLY public.messages
     ADD CONSTRAINT fk_rails_67c67d2963 FOREIGN KEY (receiver_id) REFERENCES public.users(id);
--- Name: transactions_products fk_rails_750aa519bf; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.transactions_products
-    ADD CONSTRAINT fk_rails_750aa519bf FOREIGN KEY (product_id) REFERENCES public.products(id);
 
 
 --
@@ -1050,6 +1042,7 @@ ALTER TABLE ONLY public.carts
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20231210064247'),
 ('20231209235009'),
 ('20231209181651'),
 ('20231209044224'),
@@ -1058,11 +1051,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231208023046'),
 ('20231207195703'),
 ('20231207195223'),
-('20231208235127'),
-('20231209011039'),
-('20231209235009'),
-('20231209220735'),
-('20231209030520'),
 ('20231205154444'),
 ('20231204035349'),
 ('20231130163958'),
