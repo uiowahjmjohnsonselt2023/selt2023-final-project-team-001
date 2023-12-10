@@ -65,6 +65,7 @@ class StorefrontsController < ApplicationController
     @user = Current.user
     # threshold 3 stars
     # threshold 5 reviews
+    # @user.profile.update(seller_rating: 2)
     puts @user.profile.seller_rating
     unless @user.profile.seller_rating.nil?
       if @user.profile.seller_rating < 3
@@ -77,7 +78,8 @@ class StorefrontsController < ApplicationController
         redirect_to profile_path(@user) and return
       end
     end
-    flash[:notice] = "You do not have any reviews yet."
+    flash[:alert] = "You do not have any reviews yet."
+    redirect_to root_path
   end
 
   def edit
