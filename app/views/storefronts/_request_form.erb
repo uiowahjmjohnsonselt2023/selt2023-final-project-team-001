@@ -1,0 +1,7 @@
+<%= bootstrap_form_with model: @storefront do |f|%>
+  <%= f.text_field :name %>
+  <%= f.text_area :short_description %>
+
+  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+  <%= link_to "Request", root_path , class: "btn btn-primary" %>
+<% end %>
