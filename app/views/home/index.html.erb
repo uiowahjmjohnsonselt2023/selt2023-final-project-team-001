@@ -51,17 +51,14 @@
 
 
           <% categories.each_with_index do |category, index| %>
-            <!--want this in case later categories are added, but the pictures aren't-->
-            <% if Rails.application.assets.find_asset("home/#{category}") %>
-              <div class="carousel-item <%= 'active' if index.zero? %>">
-                <%= link_to products_path(category: index + 1, order: "desc") do %>
-                  <img src="<%= asset_path("home/#{category}.jpg") %>" class="d-block carousel-image" alt="<%= category %>">
-                <% end %>
-                <div class="carousel-caption d-none d-md-block">
-                  <h5><%= category %></h5>
-                </div>
+            <div class="carousel-item <%= 'active' if index.zero? %>">
+              <%= link_to products_path(category: index + 1, order: "desc") do %>
+                <img src="<%= asset_path("home/#{category}.jpg") %>" class="d-block carousel-image" alt="<%= category %>">
+              <% end %>
+              <div class="carousel-caption d-none d-md-block">
+                <h5><%= category %></h5>
               </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
