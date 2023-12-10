@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     delete :destroy, on: :member
   end
 
-  resources :promotions
+  resources :promotions, except: [:index, :destroy]
 
   get "/login", to: "sessions#new", as: "login"
   post "/login", to: "sessions#create", as: "login_submit"
