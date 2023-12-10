@@ -97,4 +97,49 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "GET #purchase_history" do
+    context "when not logged in" do
+      it "redirects the user to login" do
+        get :purchase_history
+        expect(flash[:alert]).to eq("You must log in to view your purchase history")
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
+    context "when logged in" do
+      before do
+        login_as create(:user)
+      end
+
+      it "shows the user their purchase history" do
+        get :purchase_history
+        expect(response).to render_template :purchase_history
+      end
+    end
+  end
+
+  describe "GET #sales_history" do
+    context "when not logged in as seller" do
+      before do
+        login_as create(:user)
+      end
+
+      it "directs the user to register as a seller" do
+        get :sales_history
+        expect(flash[:alert]).to eq("You must register as a seller to view sales history")
+      end
+    end
+
+    context "when logged in as a seller" do
+      before do
+        login_as create(:seller)
+      end
+
+      it "shows a user their sales history" do
+        get :sales_history
+        expect(response).to render_template :sales_history
+      end
+    end
+  end
 end

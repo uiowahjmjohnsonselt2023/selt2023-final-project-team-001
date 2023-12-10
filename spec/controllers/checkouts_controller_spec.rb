@@ -73,5 +73,15 @@ describe CheckoutsController, type: :controller do
       expect(flash[:alert]).to eq("You must add products to your cart to purchase them!")
       expect(response).to render_template(:index)
     end
+
+    it "creates a new transaction" do
+      allow(controller).to receive(:require_login)
+      allow(controller).to receive(:session).and_return(user_id: user.id)
+      cart = create(:cart, user: user, product: product)
+      expect {
+        patch :update_product_inventory
+      }.to change(Transaction, :count).by(1)
+      expect(Cart.exists?(cart.id)).to be_falsey
+    end
   end
 end

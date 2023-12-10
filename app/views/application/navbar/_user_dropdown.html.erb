@@ -9,11 +9,13 @@
       <%= dropdown_link "Create Storefront", new_storefront_path %>
     <% end %>
     <%= dropdown_link "Post a product", new_product_path %>
+    <%= dropdown_link "Sold items", sales_history_path %>
   <% else %>
     <%= dropdown_link "Register as seller", register_path %>
   <% end %>
-  <%= dropdown_link "Shopping history", products_history_path %>
   <%= dropdown_link "Price Alerts", price_alerts_path  %>
+  <%= dropdown_link "Shopping history", products_history_path %>
+  <%= dropdown_link "Purchase history", purchase_history_path %>
   <%= dropdown_divider %>
   <%= dropdown_link("Logout", logout_path, method: :delete) %>
 <% end %>
