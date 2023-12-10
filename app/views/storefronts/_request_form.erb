@@ -1,7 +1,41 @@
-<%= bootstrap_form_with model: @storefront do |f|%>
-  <%= f.text_field :name %>
-  <%= f.text_area :short_description_of_your_storefront %>
-
-  <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
-  <%= link_to "Request", root_path , class: "btn btn-primary" %>
-<% end %>
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-10 col-lg-8">
+    <div class="card p-5">
+      <h2 class="text-center mb-3">Request a storefront</h2>
+      <p>
+        To request to create a storefront, please read the statements below:
+      </p>
+      <ul>
+        <li>
+          In order to be approved for a storefront, you need to have a history of positive sales.
+        </li>
+        <li>
+          You may not be allowed to make a request if you do not have enough sales or enough positive reviews.
+        </li>
+        <li>
+          Once you have made your request, it will be reviewed by a member of our team.
+        </li>
+        <li>
+          You'll receive a message from us when your request has been reviewed!
+        </li>
+      </ul>
+      <%= bootstrap_form_with model: @user, url: register_path do |f| %>
+        <%= f.check_box(
+              :understand_above,
+              required: true,
+              label: "I understand the above and wish to request a storefront"
+            ) %>
+        <%= f.check_box(
+              :agree_tos,
+              required: true,
+              label: "I have read and agree to the #{
+                future_link_to "terms and conditions"
+              }".html_safe
+            ) %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.submit "Register", extra_class: "w-25" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
