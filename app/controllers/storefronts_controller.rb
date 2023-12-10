@@ -33,6 +33,9 @@ class StorefrontsController < ApplicationController
   end
 
   def make_request
+    if Current.user.nil?
+      redirect_to login_path
+    end
     case Current.user.storefront_requested
     when "not_requested"
       # add request here
@@ -52,6 +55,12 @@ class StorefrontsController < ApplicationController
       end
     else
       redirect_to root_path
+    end
+  end
+
+  def process_request
+    if Current.user.nil?
+      redirect_to login_path
     end
   end
 
