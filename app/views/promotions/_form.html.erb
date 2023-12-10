@@ -54,7 +54,6 @@
         Promotion::TYPES.map { |type| [type.demodulize.underscore.titleize, type] },
         {
           label: "Promotion Type",
-          include_blank: promotion.promotionable_type.blank?,
           required: true
         },
         {
