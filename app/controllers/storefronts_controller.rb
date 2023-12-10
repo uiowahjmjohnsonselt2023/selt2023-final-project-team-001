@@ -38,7 +38,7 @@ class StorefrontsController < ApplicationController
     end
     case Current.user.storefront_requested
     when 0
-      redirect_to process_request and return
+      nil
     when 100
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
       nil
@@ -67,6 +67,7 @@ class StorefrontsController < ApplicationController
     @user = Current.user
     if @user.profile.seller_rating.nil?
       flash[:alert] = "You do not have any reviews yet."
+      redirect_to root_path
     elsif @user.profile.seller_rating < 3
       flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
       redirect_to root_path and return
