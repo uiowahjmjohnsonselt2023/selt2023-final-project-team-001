@@ -1,6 +1,8 @@
 class Promotions::PercentOff < ApplicationRecord
   include Promotions::Promotionable
 
+  before_validation :decimalize_percentage, if: -> { percentage > 1 }
+
   validates :percentage, numericality: {greater_than: 0, less_than_or_equal_to: 1}
 
   # @param [Array<CartItem>] cart_items
@@ -20,5 +22,11 @@ class Promotions::PercentOff < ApplicationRecord
 
   def to_s
     name || "#{percentage * 100}% off select items"
+  end
+
+  private
+
+  def decimalize_percentage
+    self.percentage = percentage / 100
   end
 end
