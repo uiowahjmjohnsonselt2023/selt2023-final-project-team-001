@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     @profile = Profile.find @profile_id
     @seller_id = @profile.user_id
     @name = @profile.user.full_name
-
+    reviews_given = Current.user.reviews_user_has_given.where(seller_id: @seller_id).count
     if Current.user.id == @seller_id.to_i
       flash[:alert] = "You cannot leave a review for yourself."
       redirect_to profile_path(Profile.find_by(user_id: Current.user.id).id)
@@ -13,6 +13,10 @@ class ReviewsController < ApplicationController
       unless User.find_by(id: @seller_id).is_seller
         flash[:alert] = "You cannot leave a review for someone who is not a seller."
         redirect_to profile_path(Profile.find_by(user_id: @seller_id))
+      end
+      if reviews_given > 1
+        flash[:alert] = "You must purchase from this seller again in order to leave another review!"
+        redirect_to profile_path(@profile.id)
       end
     end
   end
