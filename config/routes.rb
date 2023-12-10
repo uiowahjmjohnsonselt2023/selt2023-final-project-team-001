@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "/sales_history", to: "users#sales_history", as: "sales_history"
 
   get "/request_storefront", to: "storefronts#make_request"
+  get "/process_request", to: "storefronts#process_request"
 
   post "/add_to_cart", to: "carts#add_to_cart", as: "add_to_cart"
 
