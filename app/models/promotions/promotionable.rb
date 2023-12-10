@@ -43,6 +43,7 @@ module Promotions
       included_items = []
       total_quantity = 0
       cart_items.each do |item|
+        break if total_quantity >= max_quantity
         if total_quantity + item.quantity <= max_quantity
           included_items << item
           total_quantity += item.quantity
