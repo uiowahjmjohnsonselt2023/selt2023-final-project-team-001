@@ -23,7 +23,7 @@ class Promotion < ApplicationRecord
   # there is no limit.
   validates :max_quantity, numericality: {only_integer: true}
   validates :max_quantity,
-    comparison: {greater_than: :min_quantity},
+    comparison: {greater_than_or_equal_to: :min_quantity},
     unless: -> { max_quantity <= 0 }
 
   scope :active, -> { where("starts_on <= ? AND ends_on >= ?", Time.now, Time.now) }
