@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     end
     unless Current.user.is_admin?
       flash[:alert] = "You do not have permission to view that page."
-      redirect_to root_path and return
+      # redirect_to root_path and return
     end
     @reqs = []
     User.where(storefront_requested: 100).each do |user|

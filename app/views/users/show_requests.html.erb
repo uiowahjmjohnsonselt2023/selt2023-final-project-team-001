@@ -6,13 +6,16 @@
       <%# link_to defaults to the current URL when none is specified %>
       <th>Name</th>
       <th> </th>
+      <th> </th>
+      <th> </th>
     </tr>
     </thead>
     <tbody>
     <% @reqs.each do |r| %>
       <tr>
         <td><%= link_to r[:name], profile_path(r[:profile]) %></td>
-        <td>Approval box here</td>
+        <td><%= link_to "Approve", root_path, class: "btn btn-primary"%></td>
+        <td><%= link_to "Reject", root_path, class: "btn btn-danger"%></td>
       </tr>
     <% end %>
     </tbody>
