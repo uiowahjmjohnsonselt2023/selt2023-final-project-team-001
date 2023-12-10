@@ -17,7 +17,9 @@
   <% if @is_seller %>
     <p><strong>Seller Rating (out of 5):</strong>
       <% if @profile.seller_rating && @profile.seller_rating > 0 %>
-        <%= @profile.seller_rating %>
+        <%= @profile.seller_rating %> (<%= link_to reviews_path(seller_id: @profile.user.id) do %>
+          <%= pluralize @profile.user.reviews_for_sellers.count, "review" %>
+        <% end %>)
       <% else %>
         <%= "No rating yet" %>
       <% end %>

@@ -13,7 +13,11 @@
   <% end %>
   <span class="ms-1">(</span>
   <%#= link_to "#" do # add once we have an index for reviews %>
-  <small><%= pluralize seller.reviews_for_sellers.count, "review" %> </small>
+  <small>
+    <%= link_to reviews_path(seller_id: seller.id) do %>
+      <%= pluralize seller.reviews_for_sellers.count, "review" %>
+    <% end %>
+  </small>
   <%# end %>
   <span>)</span>
 </div>
