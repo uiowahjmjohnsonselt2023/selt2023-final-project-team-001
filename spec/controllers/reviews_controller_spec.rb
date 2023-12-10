@@ -55,8 +55,8 @@ describe ReviewsController, type: :controller do
     end
 
     it "creates a new review" do
-      post :create, params: {profile_id: seller_profile.id, seller_id: seller.id, answer: valid_attributes[:answer], rating: valid_attributes[:rating], description: valid_attributes[:description]}
-      expect(Review).to have_received(:create).with(reviewer_id: user.id, seller_id: seller.id.to_s, has_purchased_from: valid_attributes[:answer] == 1, interaction_rating: valid_attributes[:rating], description: valid_attributes[:description])
+      post :create, params: {profile_id: seller_profile.id, seller_id: seller.id, rating: valid_attributes[:rating], description: valid_attributes[:description]}
+      expect(Review).to have_received(:create).with(reviewer_id: user.id, seller_id: seller.id.to_s, interaction_rating: valid_attributes[:rating], description: valid_attributes[:description])
       expect(Profile).to have_received(:update).with(seller_profile.id.to_s, seller_rating: seller.reviews_for_sellers.average(:interaction_rating).to_i)
       expect(flash[:success]).to eq("Review successfully created!")
       expect(response).to redirect_to(profile_path(seller_profile.id))
