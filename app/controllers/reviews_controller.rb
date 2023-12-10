@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    Review.create({reviewer_id: Current.user.id, seller_id: params[:seller_id], has_purchased_from: params[:answer].to_i == 1, interaction_rating: params[:rating].to_i, description: params[:description]})
+    Review.create({reviewer_id: Current.user.id, seller_id: params[:seller_id], interaction_rating: params[:rating].to_i, description: params[:description]})
     # update that seller's seller rating
     average_rating = (User.find params[:seller_id]).reviews_for_sellers.average(:interaction_rating).to_i
     Profile.update(params[:profile_id], seller_rating: average_rating)
