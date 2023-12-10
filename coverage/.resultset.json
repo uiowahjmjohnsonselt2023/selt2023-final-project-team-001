@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/checkouts_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/checkouts_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -92,7 +92,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/rails_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/rails_helper.rb": {
         "lines": [
           1,
           1,
@@ -173,7 +173,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/support/helpers.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/support/helpers.rb": {
         "lines": [
           1,
           1,
@@ -183,7 +183,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/environment.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -192,7 +192,7 @@
           1
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/application.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/application.rb": {
         "lines": [
           1,
           null,
@@ -271,14 +271,14 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/boot.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/boot.rb": {
         "lines": [
           1,
           null,
           1
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/environments/test.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -341,7 +341,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/assets.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -363,7 +363,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/carrier_wave.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/carrier_wave.rb": {
         "lines": [
           1,
           1,
@@ -373,7 +373,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/content_security_policy.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -384,50 +384,6 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/dotenv.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/filter_parameter_logging.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/inflections.rb": {
-        "lines": [
           null,
           null,
           null,
@@ -446,7 +402,51 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/inline_svg.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/dotenv.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/filter_parameter_logging.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/inflections.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/inline_svg.rb": {
         "lines": [
           1,
           1,
@@ -464,7 +464,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/money.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/money.rb": {
         "lines": [
           null,
           null,
@@ -581,14 +581,14 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/omniauth.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/omniauth.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/initializers/permissions_policy.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
           null,
@@ -605,15 +605,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/carts.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/messages.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/carts.rb": {
         "lines": [
           1,
           1,
@@ -621,7 +613,15 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/price_alerts.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/messages.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/price_alerts.rb": {
         "lines": [
           1,
           1,
@@ -632,7 +632,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/products.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/products.rb": {
         "lines": [
           1,
           null,
@@ -653,7 +653,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/profiles.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/profiles.rb": {
         "lines": [
           1,
           1,
@@ -674,7 +674,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/reviews.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/reviews.rb": {
         "lines": [
           1,
           1,
@@ -682,7 +682,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/storefronts.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/storefronts.rb": {
         "lines": [
           1,
           1,
@@ -694,7 +694,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/factories/users.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/factories/users.rb": {
         "lines": [
           1,
           1,
@@ -740,7 +740,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/config/routes.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -764,6 +764,11 @@
           null,
           1,
           1,
+          1,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -822,7 +827,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/accordion_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/accordion_helper.rb": {
         "lines": [
           1,
           1,
@@ -836,13 +841,13 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/application_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/flash_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/flash_helper.rb": {
         "lines": [
           1,
           1,
@@ -868,7 +873,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/footer_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/footer_helper.rb": {
         "lines": [
           1,
           null,
@@ -881,13 +886,13 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/forgot_password_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/forgot_password_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/future_link_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/future_link_helper.rb": {
         "lines": [
           1,
           1,
@@ -898,7 +903,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/icon_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/icon_helper.rb": {
         "lines": [
           1,
           1,
@@ -912,13 +917,13 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/messages_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/messages_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/navbar_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/navbar_helper.rb": {
         "lines": [
           1,
           null,
@@ -1014,13 +1019,13 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/price_alerts_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/price_alerts_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/products_helper.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/products_helper.rb": {
         "lines": [
           1,
           1,
@@ -1031,72 +1036,6 @@
           0,
           0,
           null,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/profiles_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/ratings_helper.rb": {
-        "lines": [
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/reviews_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/sessions_helper.rb": {
-        "lines": [
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/helpers/storefront_helper.rb": {
-        "lines": [
-          1,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
           0,
           null,
           0,
@@ -1105,7 +1044,73 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/checkouts_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/profiles_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/ratings_helper.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/reviews_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/sessions_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/helpers/storefront_helper.rb": {
+        "lines": [
+          1,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/checkouts_controller.rb": {
         "lines": [
           1,
           1,
@@ -1172,14 +1177,14 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/application_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/application_controller.rb": {
         "lines": [
           1,
           1,
           1,
           null,
           1,
-          185,
+          186,
           null,
           null,
           1,
@@ -1209,8 +1214,8 @@
           null,
           null,
           1,
-          31,
-          31,
+          32,
+          32,
           null,
           null,
           null,
@@ -1227,9 +1232,9 @@
           null,
           null,
           1,
-          104,
-          16,
-          16,
+          105,
+          17,
+          17,
           null,
           null,
           null,
@@ -1257,7 +1262,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/forgot_passwords_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/forgot_passwords_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -1334,7 +1339,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/forgot_password_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/forgot_password_controller.rb": {
         "lines": [
           1,
           1,
@@ -1385,7 +1390,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/messages_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/messages_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -1484,7 +1489,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/messages_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/messages_controller.rb": {
         "lines": [
           1,
           1,
@@ -1573,7 +1578,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/price_alerts_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/price_alerts_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -1721,7 +1726,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/price_alerts_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/price_alerts_controller.rb": {
         "lines": [
           1,
           1,
@@ -1810,7 +1815,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/products_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/products_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -2134,7 +2139,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/products_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/products_controller.rb": {
         "lines": [
           1,
           1,
@@ -2297,7 +2302,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/profiles_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/profiles_controller_spec.rb": {
         "lines": [
           null,
           null,
@@ -2611,7 +2616,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/profiles_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/profiles_controller.rb": {
         "lines": [
           1,
           1,
@@ -2713,7 +2718,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/reviews_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/reviews_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -2782,7 +2787,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/reviews_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/reviews_controller.rb": {
         "lines": [
           1,
           1,
@@ -2823,7 +2828,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/sessions_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/sessions_controller_spec.rb": {
         "lines": [
           null,
           null,
@@ -2945,7 +2950,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/sessions_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/sessions_controller.rb": {
         "lines": [
           1,
           null,
@@ -3034,7 +3039,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/storefronts_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/storefronts_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -3386,10 +3391,18 @@
           null,
           null,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/storefronts_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/storefronts_controller.rb": {
         "lines": [
           1,
           1,
@@ -3423,6 +3436,58 @@
           2,
           null,
           null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
           null,
           null,
           1,
@@ -3488,6 +3553,28 @@
           null,
           1,
           1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
           null,
           null,
           1,
@@ -3498,7 +3585,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/controllers/users_controller_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/controllers/users_controller_spec.rb": {
         "lines": [
           1,
           null,
@@ -3647,7 +3734,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/users_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/users_controller.rb": {
         "lines": [
           1,
           1,
@@ -3730,11 +3817,28 @@
           1,
           1,
           1,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
           null,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/forgot_password_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/forgot_password_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3753,7 +3857,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/price_alerts_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/price_alerts_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3772,7 +3876,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/products_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/products_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3791,7 +3895,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/profiles_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/profiles_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3810,7 +3914,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/reviews_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/reviews_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3829,7 +3933,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/sessions_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/sessions_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3848,7 +3952,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/helpers/storefront_helper_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/helpers/storefront_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -3867,7 +3971,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/mailers/password_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/mailers/password_spec.rb": {
         "lines": [
           1,
           null,
@@ -3892,7 +3996,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/mailers/password_mailer.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/mailers/password_mailer.rb": {
         "lines": [
           1,
           null,
@@ -3909,7 +4013,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/mailers/application_mailer.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/mailers/application_mailer.rb": {
         "lines": [
           1,
           1,
@@ -3917,7 +4021,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/mailers/price_alert_mailer_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/mailers/price_alert_mailer_spec.rb": {
         "lines": [
           1,
           null,
@@ -3926,7 +4030,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/mailers/price_alert_mailer.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/mailers/price_alert_mailer.rb": {
         "lines": [
           1,
           1,
@@ -3938,7 +4042,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/cart_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/cart_spec.rb": {
         "lines": [
           1,
           null,
@@ -3947,53 +4051,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/cart.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/categorization_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/categorization.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/category_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/category.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/cart.rb": {
         "lines": [
           1,
           1,
@@ -4003,7 +4061,53 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/message_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/categorization_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/categorization.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/category_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/category.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/message_spec.rb": {
         "lines": [
           1,
           null,
@@ -4046,7 +4150,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/message.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/message.rb": {
         "lines": [
           1,
           1,
@@ -4061,7 +4165,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/product_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/product_spec.rb": {
         "lines": [
           1,
           null,
@@ -4140,7 +4244,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/product.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/product.rb": {
         "lines": [
           1,
           1,
@@ -4192,7 +4296,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/uploaders/product_photo_uploader.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/uploaders/product_photo_uploader.rb": {
         "lines": [
           1,
           1,
@@ -4242,7 +4346,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/profile_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/profile_spec.rb": {
         "lines": [
           1,
           null,
@@ -4292,7 +4396,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/profile.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/profile.rb": {
         "lines": [
           1,
           1,
@@ -4328,7 +4432,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/uploaders/avatar_uploader.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/uploaders/avatar_uploader.rb": {
         "lines": [
           1,
           null,
@@ -4389,37 +4493,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/review_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/review.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          1,
-          1,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/storefront_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/review_spec.rb": {
         "lines": [
           1,
           null,
@@ -4435,6 +4509,35 @@
           1,
           null,
           null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/review.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/storefront_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
           1,
           1,
           1,
@@ -4459,7 +4562,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/storefront.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/storefront.rb": {
         "lines": [
           1,
           1,
@@ -4486,7 +4589,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/models/user_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/models/user_spec.rb": {
         "lines": [
           1,
           null,
@@ -4604,12 +4707,12 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/user.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/user.rb": {
         "lines": [
           1,
           1,
           1,
-          229,
+          230,
           1,
           null,
           null,
@@ -4680,7 +4783,7 @@
           1,
           null,
           1,
-          228,
+          229,
           null,
           null,
           1,
@@ -4692,7 +4795,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/home_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/home_spec.rb": {
         "lines": [
           1,
           null,
@@ -4706,7 +4809,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/price_alerts_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/price_alerts_spec.rb": {
         "lines": [
           1,
           null,
@@ -4715,7 +4818,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/products_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/products_spec.rb": {
         "lines": [
           1,
           null,
@@ -4724,18 +4827,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/profiles_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/reviews_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/profiles_spec.rb": {
         "lines": [
           1,
           null,
@@ -4746,7 +4838,18 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/sessions_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/reviews_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/sessions_spec.rb": {
         "lines": [
           1,
           null,
@@ -4774,7 +4877,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/storefronts_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/storefronts_spec.rb": {
         "lines": [
           1,
           null,
@@ -4783,7 +4886,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/requests/users_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/requests/users_spec.rb": {
         "lines": [
           1,
           null,
@@ -4797,7 +4900,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/price_alerts/send_price_alert.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/price_alerts/send_price_alert.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4806,7 +4909,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/products/edit.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/edit.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4815,7 +4918,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/products/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/new.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4824,7 +4927,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/products/show.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/products/show.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4833,7 +4936,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/sessions/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/sessions/new.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4842,7 +4945,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/spec/views/storefronts/new.html.erb_spec.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/spec/views/storefronts/new.html.erb_spec.rb": {
         "lines": [
           1,
           null,
@@ -4851,14 +4954,14 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/current.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/current.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/transaction.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/transaction.rb": {
         "lines": [
           1,
           1,
@@ -4867,7 +4970,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/price_alert.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/price_alert.rb": {
         "lines": [
           1,
           1,
@@ -4878,7 +4981,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/models/viewed_product.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/models/viewed_product.rb": {
         "lines": [
           null,
           1,
@@ -4887,7 +4990,7 @@
           null
         ]
       },
-      "/Users/audreypowers/SELT/selt2023-final-project-team-001/app/controllers/home_controller.rb": {
+      "/Users/jkessler/Desktop/3_FA_23/selt/SELT_REPOS/selt2023-final-project-team-001/app/controllers/home_controller.rb": {
         "lines": [
           1,
           1,
@@ -4905,6 +5008,6 @@
         ]
       }
     },
-    "timestamp": 1702190972
+    "timestamp": 1702196020
   }
 }

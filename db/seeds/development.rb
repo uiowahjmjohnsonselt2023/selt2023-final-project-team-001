@@ -5,6 +5,7 @@ Faker::Config.random = random
 
 conditions = Product.conditions.values
 category_ids = Category.pluck(:id)
+reqs = [0, 100, 200, 300, 400]
 
 password_kwargs = {
   min_length: 10,
@@ -29,7 +30,8 @@ users = 30.times.map do |i|
     password_confirmation: password,
     # Ensure that the database has at least 5 sellers and 5 buyers.
     is_seller: i < 5 || Faker::Boolean.boolean,
-    is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean
+    is_buyer: (i >= 5 && i < 10) || Faker::Boolean.boolean,
+    storefront_requested: Faker::Base.sample(reqs)
   )
   user
 end
@@ -93,7 +95,6 @@ sellers_to_review.each do |seller|
   Review.create!({
     reviewer_id: Faker::Base.sample(User.buyers).id,
     seller_id: seller.id,
-    has_purchased_from: Faker::Boolean.boolean,
     interaction_rating: Faker::Number.within(range: 1..5),
     description: Faker::Lorem.paragraph(sentence_count: 2)
   })
@@ -135,7 +136,6 @@ User.create!({first_name: "Judy",
 Review.create!({
   reviewer_id: User.find_by(email: "judy@rudy.com").id,
   seller_id: User.find_by(email: "seller@1.com").id,
-  has_purchased_from: true,
   interaction_rating: 5,
   description: "meh"
 })

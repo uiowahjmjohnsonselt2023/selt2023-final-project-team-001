@@ -48,6 +48,7 @@ en:
       default: "You need to login before you can %{action} a storefront!"
       new: "You need to login before you can create a storefront!"
       choose_template: "You need to login before you can choose a storefront template!"
+      process_request: "You need to login before you can request a storefront!"
     price_alerts:
       default: "You need to login before you can have price alerts!"
   require_not_seller:

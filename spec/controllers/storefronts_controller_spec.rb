@@ -347,5 +347,13 @@ RSpec.describe StorefrontsController, type: :controller do
         )
       end
     end
+
+    describe "GET #process_request" do
+      it "redirects to login" do
+        get :process_request
+        expect(response).to redirect_to login_path
+        expect(flash[:alert]).to eq "You need to login before you can request a storefront!"
+      end
+    end
   end
 end
