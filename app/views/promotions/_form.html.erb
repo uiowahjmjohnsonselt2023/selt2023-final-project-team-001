@@ -5,15 +5,17 @@
     <div class="col-md-6">
       <%= f.datetime_field(
           :starts_on,
-          min: promotion.starts_on || DateTime.now,
-          include_seconds: false
+          min: promotion.starts_on || @now,
+          include_seconds: false,
+          value: promotion.starts_on || @midnight
         ) %>
     </div>
     <div class="col-md-6">
       <%= f.datetime_field(
           :ends_on,
-          min: promotion.ends_on || DateTime.now,
-          include_seconds: false
+          min: promotion.ends_on || @now,
+          include_seconds: false,
+          value: promotion.ends_on || @week_from_midnight
         ) %>
     </div>
   </div>
