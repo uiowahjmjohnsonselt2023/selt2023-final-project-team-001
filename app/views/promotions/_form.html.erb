@@ -70,4 +70,9 @@
     <%#  e.g., "Promotions::FixedAmountOff" -> "promotions/fixed_amount_off" %>
     <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
   <% end %>
+
+  <div>
+    <%= link_to "Cancel", :back, class: "btn btn-secondary" %>
+    <%= f.primary %>
+  </div>
 <% end %>
