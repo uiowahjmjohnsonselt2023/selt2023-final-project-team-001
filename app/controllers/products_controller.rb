@@ -32,17 +32,17 @@ class ProductsController < ApplicationController
         flash[:alert] = "#{cat} isn't a valid category."
         redirect_to products_path(sort: params[:sort]) and return
       end
-      case sort
+      @product = case sort
       when "price"
-        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:price_cents)
+        Product.includes(:categories).only_public.in_stock.where(categories: cat).order(:price_cents)
       when "name"
-        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(:name)
+        Product.includes(:categories).only_public.in_stock.where(categories: cat).order(:name)
       when "date"
-        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
+        Product.includes(:categories).only_public.in_stock.where(categories: cat).order(created_at: :desc)
       when "views"
-        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(views: :asc)
+        Product.includes(:categories).only_public.in_stock.where(categories: cat).order(views: :asc)
       else
-        Product.joins(:categories).where(categories: cat).where.not(quantity: 0).where(private: false).order(created_at: :desc)
+        Product.includes(:categories).only_public.in_stock.where(categories: cat).order(created_at: :desc)
       end
       @products = @products.joins(:categories).where(categories: {id: cat})
     end
