@@ -50,7 +50,6 @@ class StorefrontsController < ApplicationController
         flash[:alert] = t("storefronts.create.already_exists")
         redirect_to storefront_path(Current.user.storefront)
       else
-        # no storefront but
         redirect_to new_storefront_path
       end
     else
@@ -77,7 +76,7 @@ class StorefrontsController < ApplicationController
         end
         @user.update_attribute!(:storefront_requested, 100)
         StorefrontRequestMailer.request_approval.deliver_now
-        redirect_to profile_path(@user) and return
+        redirect_to profile_path(@user.profile) and return
       end
     end
     flash[:alert] = "You do not have any reviews yet."
