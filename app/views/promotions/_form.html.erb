@@ -40,7 +40,7 @@
 
   <%= f.collection_select(
         :product_ids,
-        Product.all,
+        Current.user.products,
         :id, :name,
         { label: "Products", include_blank: true },
         { multiple: true }
