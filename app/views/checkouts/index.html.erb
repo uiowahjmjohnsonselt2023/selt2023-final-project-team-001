@@ -49,7 +49,8 @@
                 <button class="btn btn-danger delete-item"
                         type="button"
                         data-action="checkouts#updateDeleteModal"
-                        data-checkouts-product-id-param="<%= product[:id] %>"
+                        data-checkouts-product-name-param="<%= product[:name] %>"
+                        data-checkouts-cart-item-id-param="<%= product[:cart_item_id] %>"
                         data-bs-toggle="modal"
                         data-bs-target="#confirmationModal">
                   Delete
@@ -152,14 +153,16 @@
           <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
         </div>
         <div class="modal-body">
-          Are you sure you want to remove <span id="productNamePlaceholder"></span> from your cart?
+          Are you sure you want to remove
+          <span data-checkouts-target="deleteProductName"></span>
+          from your cart?
         </div>
         <div class="modal-footer">
           <%= bootstrap_form_with url: remove_item_path, method: :delete, id: "confirmDeleteForm" do |f| %>
             <%= f.hidden_field(
-                  :product_id,
-                  id: "productIdPlaceholder",
-                  data: { checkouts_target: "hiddenProductField" }
+                  :cart_item_id,
+                  id: "cartItemIdPlaceholder",
+                  data: { checkouts_target: "hiddenCartItemField" }
                 ) %>
             <%= f.hidden_field :confirmation, value: "yes" %>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>

@@ -1,11 +1,18 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["hiddenProductField", "totalPrice", "shipping", "shippingSelect"];
+    static targets = [
+        "hiddenCartItemField",
+        "totalPrice",
+        "shipping",
+        "shippingSelect",
+        "deleteProductName"
+    ];
     static values = { cartPrice: Number };
 
-    updateDeleteModal({ params: { productId } }) {
-        this.hiddenProductFieldTarget.value = productId;
+    updateDeleteModal({ params: { cartItemId, productName } }) {
+        this.hiddenCartItemFieldTarget.value = cartItemId;
+        this.deleteProductNameTarget.textContent = productName;
     }
 
     shippingSelectTargetConnected(target) {
