@@ -6,7 +6,11 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <h2 class="mb-1"><%= @product.name %></h2>
-    <%= render "products/listing/seller_dropdown", product: @product %>
+    <%= render "application/seller_dropdown", seller: @product.seller do %>
+      <li>
+        <%= link_to "Edit Product", edit_product_path(@product), class: "dropdown-item" %>
+      </li>
+    <% end %>
   </div>
   <%= render "products/listing/categories", product: @product %>
   <%= render "application/seller_info", seller: @seller, show_storefront: true %>

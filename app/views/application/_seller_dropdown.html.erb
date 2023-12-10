@@ -1,0 +1,12 @@
+<%# locals: (seller:, width: "32px", height: "32px") %>
+
+<% if Current.user == seller %>
+  <div class="dropdown">
+    <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= icon "more-horizontal", class: "text-secondary-subtle", width:, height: %>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <%= yield %>
+    </ul>
+  </div>
+<% end %>

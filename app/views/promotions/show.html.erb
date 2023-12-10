@@ -3,6 +3,14 @@
     <div class="card">
       <div class="card-body">
 
+        <div class="d-flex justify-content-end">
+        <div class="position-absolute">
+          <%= render "application/seller_dropdown", seller: @promotion.seller do %>
+            <%= dropdown_link "Edit Promotion", edit_promotion_path(@promotion) %>
+          <% end %>
+        </div>
+        </div>
+
         <h2 class="card-title text-center">
           Promotion: <%= @promotion.to_s %>
           <% if @promotion.active? %>
