@@ -150,7 +150,6 @@ judy.save!
 Review.create!({
   reviewer_id: judy.id,
   seller_id: default_seller.id,
-  has_purchased_from: true,
   interaction_rating: 5,
   description: "meh"
 })
