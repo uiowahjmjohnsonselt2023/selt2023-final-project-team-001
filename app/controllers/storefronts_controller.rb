@@ -34,7 +34,7 @@ class StorefrontsController < ApplicationController
 
   def make_request
     if Current.user.nil?
-      redirect_to login_path
+      redirect_to login_path and return
     end
     case Current.user.storefront_requested
     when "not_requested"
@@ -54,14 +54,18 @@ class StorefrontsController < ApplicationController
         redirect_to new_storefront_path
       end
     else
+      Current.user.update!(storefront_requested: 0)
       redirect_to root_path
     end
   end
 
   def process_request
     if Current.user.nil?
-      redirect_to login_path
+      redirect_to login_path and return
     end
+    @user = Current.user
+    @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
+    PasswordMailer.with(user: @admin).request_approval.deliver_now
   end
 
   def edit
