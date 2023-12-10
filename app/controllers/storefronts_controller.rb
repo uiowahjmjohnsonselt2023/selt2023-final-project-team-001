@@ -75,9 +75,8 @@ class StorefrontsController < ApplicationController
           flash[:notice] = "It looks like you already have a pending storefront request. We will contact you when the request has been reviewed."
           redirect_to redirect_to profile_path(@user) and return
         end
-        @admin = "jkkessler95@gmail.com"
         @user.update_attribute!(:storefront_requested, 100)
-        StorefrontRequestMailer.with(admin: @admin).request_approval.deliver_now
+        StorefrontRequestMailer.request_approval.deliver_now
         redirect_to profile_path(@user) and return
       end
     end
@@ -159,9 +158,11 @@ class StorefrontsController < ApplicationController
       @user = User.where(id: params[:user]).first
       if params[:approve]
         @user.update_attribute!(:storefront_requested, 400)
+        StorefrontRequestMailer.approve.with(email: @user.email).deliver_now
         flash[:notice] = "User request approved"
       else
         @user.update_attribute!(:storefront_requested, 200)
+        StorefrontRequestMailer.reject.with(email: @user.email).deliver_now
         flash[:alert] = "User request rejected"
       end
       redirect_to profile_path(@user.profile) and return
