@@ -1,7 +1,7 @@
 class Promotion < ApplicationRecord
   TYPES = %w[
-    Promotion::PercentOff
-    Promotion::FixedAmountOff
+    Promotions::PercentOff
+    Promotions::FixedAmountOff
   ]
   delegated_type :promotionable, dependent: :destroy, types: TYPES
   accepts_nested_attributes_for :promotionable

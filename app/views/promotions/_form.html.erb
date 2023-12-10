@@ -67,7 +67,7 @@
       ) %>
 
   <% Promotion::TYPES.map do |type| %>
-    <%#  e.g., "Promotion::FixedAmountOff" -> "promotion/fixed_amount_off" %>
+    <%#  e.g., "Promotions::FixedAmountOff" -> "promotions/fixed_amount_off" %>
     <%= render "promotions/#{type.underscore}", promotion: promotion, f: f %>
   <% end %>
 <% end %>

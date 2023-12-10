@@ -1,8 +1,0 @@
-<%= render "promotions/promotion/promotionable", f: f, type: "FixedAmountOff" do |pf| %>
-  <%= pf.text_field(
-        :amount,
-        prepend: "$",
-        inputmode: "decimal",
-        pattern: "[0-9]+\\.[0-9]*"
-      ) %>
-<% end %>
