@@ -20,6 +20,10 @@ class Promotions::PercentOff < ApplicationRecord
     end
   end
 
+  def sample_discount(product)
+    product.price * percentage
+  end
+
   def to_s
     name || "#{percentage * 100}% off select items"
   end

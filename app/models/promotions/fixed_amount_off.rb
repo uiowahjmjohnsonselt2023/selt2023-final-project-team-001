@@ -16,6 +16,10 @@ class Promotions::FixedAmountOff < ApplicationRecord
     end
   end
 
+  def sample_discount(product)
+    [product.price - amount, 0].max
+  end
+
   def to_s
     name || "#{amount.format} off select items"
   end

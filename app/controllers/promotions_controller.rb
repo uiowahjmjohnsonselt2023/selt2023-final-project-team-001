@@ -1,6 +1,20 @@
 class PromotionsController < ApplicationController
-  before_action :require_login
-  before_action :require_seller
+  before_action :require_login, except: [:show]
+  before_action :require_seller, except: [:show]
+
+  def show
+    @promotion = Promotion.find params[:id]
+    if @promotion.ended?
+      flash[:alert] = "That promotion has ended."
+      redirect_to root_path
+    else
+      @products = if @promotion.products.empty?
+        @promotion.seller.products
+      else
+        @promotion.products
+      end
+    end
+  end
 
   def new
     @promotion = Promotion.new
@@ -43,6 +57,7 @@ class PromotionsController < ApplicationController
       # Only allow the seller's products to be selected.
       Product.where(id: product_ids, seller: Current.user).pluck(:id)
     end
+    params[:promotion][:name] = params[:promotion][:name].presence
     params.require(:promotion).permit(
       :name,
       :starts_on,
