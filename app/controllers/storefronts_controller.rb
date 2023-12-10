@@ -86,6 +86,9 @@ class StorefrontsController < ApplicationController
     redirect_to root_path
   end
 
+  def process_admin_review
+  end
+
   def edit
     @storefront = Storefront.find(params[:id])
     if Current.user != @storefront.user && !Current.user.is_admin
