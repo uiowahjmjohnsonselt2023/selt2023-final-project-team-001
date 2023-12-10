@@ -35,6 +35,13 @@ class PromotionsController < ApplicationController
   end
 
   def promotion_params
+    product_ids = (params[:promotion][:product_ids] || []).compact_blank
+    params[:promotion][:product_ids] = if product_ids.empty?
+      []
+    else
+      # Only allow the seller's products to be selected.
+      Product.where(id: product_ids, seller: Current.user).pluck(:id)
+    end
     params.require(:promotion).permit(
       :name,
       :starts_on,
