@@ -56,15 +56,13 @@ end
 Then("I should see a form to leave a review") do
   expect(page).to have_current_path("/review?profile_id=#{@seller.profile.id}")
   expect(page).to have_content("Create a Review")
-  expect(page).to have_content("Have you purchased from this seller before?")
+  expect(page).to have_content("Describe your experience")
 end
 
 When("I fill in the review form with valid information") do
   expect(page).to have_content("Create a Review")
-  expect(page).to have_content("Have you purchased from this seller before?")
-  expect(page).to have_content("Rate your interaction:")
-  expect(page).to have_content("(Optional) Describe your interaction experience:")
-  choose "Yes"
+  expect(page).to have_content("Rate your interaction and/or purchase:")
+  expect(page).to have_content("(Optional) Describe your experience:")
   choose "5 - Excellent"
 end
 
