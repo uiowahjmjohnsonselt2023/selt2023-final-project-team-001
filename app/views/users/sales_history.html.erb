@@ -16,7 +16,7 @@
         <td> <%= link_to m[:product], product_path(m[:product_id]) %></td>
         <td><%= number_to_currency m[:price_cents] %></td>
        <td>
-          <% if @buyer.profile.id.present? %>
+          <% if !@buyer.profile.nil? %>
             <%= link_to m[:buyer], profile_path(@buyer.profile.id) %>
           <% else %>
             <%= @buyer.full_name %>
