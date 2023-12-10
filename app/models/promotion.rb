@@ -4,8 +4,11 @@ class Promotion < ApplicationRecord
     Promotion::FixedAmountOff
   ]
   delegated_type :promotionable, dependent: :destroy, types: TYPES
+  accepts_nested_attributes_for :promotionable
 
   delegate_missing_to :promotionable
+
+  default_scope { includes(:products_promotions) }
 
   # If products is empty, then the promotion applies to all of the seller's products
   has_and_belongs_to_many :products
