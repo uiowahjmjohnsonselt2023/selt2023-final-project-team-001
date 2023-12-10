@@ -37,9 +37,8 @@ class PromotionsController < ApplicationController
   def promotion_params
     params.require(:promotion).permit(
       :name,
-      :description,
-      :starts_at,
-      :ends_at,
+      :starts_on,
+      :ends_on,
       :min_quantity,
       :max_quantity,
       :promotionable_type,
