@@ -1,0 +1,7 @@
+<%= f.fields_for :promotionable_attributes do |pf| %>
+  <div class="d-none"
+       data-type="Promotions::<%= type %>"
+       data-promotion-form-target="typeForm">
+   <%= yield pf %>
+  </div>
+<% end %>

@@ -114,35 +114,48 @@ Categorization.insert_all(
   end
 )
 
-# Default seller
-User.create!({first_name: "Seller",
-              last_name: "1",
-              email: "seller@1.com",
-              password: "seller1000!P",
-              password_confirmation: "seller1000!P",
-              is_seller: true,
-              is_buyer: true,
-              is_admin: false})
+default_seller = User.new({
+  first_name: "Seller",
+  last_name: "1",
+  email: "seller@1.com",
+  password: "seller1000!P",
+  password_confirmation: "seller1000!P",
+  is_seller: true,
+  is_buyer: true,
+  is_admin: false,
+  profile_attributes: {
+    first_name: "Seller",
+    last_name: "1"
+  }
+})
+default_seller.save!
+
 # Create carts
-User.create!({first_name: "Judy",
-           last_name: "Rudy",
-           email: "judy@rudy.com",
-           password: "judyrudy100!P",
-           password_confirmation: "judyrudy100!P",
-           is_seller: false,
-           is_buyer: true,
-           is_admin: false})
+judy = User.new({
+  first_name: "Judy",
+  last_name: "Rudy",
+  email: "judy@rudy.com",
+  password: "judyrudy100!P",
+  password_confirmation: "judyrudy100!P",
+  is_seller: false,
+  is_buyer: true,
+  is_admin: false,
+  profile_attributes: {
+    first_name: "Judy",
+    last_name: "Rudy"
+  }
+})
+judy.save!
 
 Review.create!({
-  reviewer_id: User.find_by(email: "judy@rudy.com").id,
-  seller_id: User.find_by(email: "seller@1.com").id,
+  reviewer_id: judy.id,
+  seller_id: default_seller.id,
   interaction_rating: 5,
   description: "meh"
 })
 
-Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 1})
-Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 2})
-Cart.create!({user_id: User.find_by(email: "judy@rudy.com").id, product_id: 3})
+cart = judy.create_cart!
+cart.cart_items.create!([{product_id: 1}, {product_id: 2}, {product_id: 3}])
 
 Message.create!({receiver_id: User.find_by(email: "judy@rudy.com").id, sender_id: User.find_by(email: "seller@1.com").id, receiver_name: "Judy Rudy",
                  sender_name: "Seller 1", subject: "hello!", message: "hey judy!", hasRead: false})

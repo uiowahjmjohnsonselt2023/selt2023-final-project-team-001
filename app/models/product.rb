@@ -6,8 +6,8 @@ class Product < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
-  has_many :carts
-  has_many :users, through: :carts
+  has_many :cart_items
+  has_and_belongs_to_many :promotions
   has_many :viewed_products
   has_many :viewed_by_users, through: :viewed_products, source: :user
   has_many :price_alerts, dependent: :destroy

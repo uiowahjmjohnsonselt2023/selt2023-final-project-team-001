@@ -1,0 +1,8 @@
+<%= render "promotions/promotions/promotionable", f: f, type: "PercentOff" do |pf| %>
+  <%= pf.text_field(
+        :percentage,
+        append: "%",
+        inputmode: "decimal",
+        pattern: "[0-9]{0,2}(\\.[0-9]+)?"
+      ) %>
+<% end %>
