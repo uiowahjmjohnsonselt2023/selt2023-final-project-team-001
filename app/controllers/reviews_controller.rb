@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
         flash[:alert] = "You cannot leave a review for someone who is not a seller."
         redirect_to profile_path(Profile.find_by(user_id: @seller_id))
       end
-      if reviews_given > review_cap
+      if reviews_given >= review_cap
         flash[:alert] = "You must purchase from this seller again in order to leave another review!"
         redirect_to profile_path(@profile.id)
       end
