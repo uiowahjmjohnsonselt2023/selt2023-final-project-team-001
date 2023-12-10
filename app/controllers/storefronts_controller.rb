@@ -37,15 +37,15 @@ class StorefrontsController < ApplicationController
       redirect_to login_path and return
     end
     case Current.user.storefront_requested
-    when "not_requested"
+    when 0
       # add request here
-    when "pending"
+    when 100
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
-    when "rejected"
+    when 200
       flash[:notice] = "It looks like you have had a previous storefront request rejected. \nIn order to request a new storefront, you will need to appeal this rejection."
-    when "appealed"
+    when 300
       flash[:notice] = "It looks like you are currently appealing to open a new storefront. \nYou will be notified when there are changes to the status of your appeal."
-    when "approved"
+    when 400
       if Current.user.storefront
         flash[:alert] = t("storefronts.create.already_exists")
         redirect_to storefront_path(Current.user.storefront)
@@ -67,12 +67,18 @@ class StorefrontsController < ApplicationController
       if @user.profile.seller_rating < 3
         flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
         redirect_to root_path and return
-      elsif Review.where(seller_id: @user.id).count < 5
-        flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
-        redirect_to root_path and return
+        # elsif Review.where(seller_id: @user.id).count < 5
+        # flash[:warning] = "You do not have enough reviews to set up a storefront. You must have at least 5 reviews."
+        # redirect_to root_path and return
       else
-        @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
-        StorefrontRequestMailer.with(user: @admin).request_approval.deliver_now
+        puts @user.storefront_requested
+        if @user.storefront_requested == 100
+          flash[:notice] = "It looks like you already have a pending storefront request. We will contact you when the request has been reviewed."
+          redirect_to redirect_to profile_path(@user) and return
+        end
+        @admin = "jkkessler95@gmail.com"
+        @user.update_attribute!(:storefront_requested, 100)
+        StorefrontRequestMailer.with(admin: @admin).request_approval.deliver_now
         redirect_to profile_path(@user) and return
       end
     end

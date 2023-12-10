@@ -22,14 +22,6 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, length: {minimum: 8}, on: :create
   validate :password_is_secure
 
-  enum storefront_requested: {
-    not_requested: 0,
-    pending: 100,
-    rejected: 200,
-    appealed: 300,
-    approved: 400
-  }, _prefix: :storefront, _default: 0
-
   def password_is_secure
     unless /[A-Z]/.match?(password)
       errors.add(:password, "must contain at least one capital letter")
