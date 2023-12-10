@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2>Pending storefront requests</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <%# link_to defaults to the current URL when none is specified %>
+      <th>Name</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @reqs.each do |r| %>
+      <% user = r[:user] %>
+      <tr>
+        <td><%= link_to user.first_name + " " + user.last_name, profile_path(user.profile) %></td>
+        <td><%= link_to "Approve", process_admin_review_path(approve: "true", user: user.id), class: "btn btn-primary"%></td>
+        <td><%= link_to "Reject", process_admin_review_path(approve: "false", user: user.id), class: "btn btn-danger"%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

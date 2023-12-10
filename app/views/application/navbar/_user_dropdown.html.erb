@@ -6,13 +6,20 @@
       <%= dropdown_link "Your Storefront", storefront_path(user.storefront.id) %>
       <%= dropdown_link "Edit Storefront", edit_storefront_path(user.storefront.id) %>
     <% else %>
-      <%= dropdown_link "Create Storefront", new_storefront_path %>
+      <% if user.storefront_requested == 400 %>
+        <%= dropdown_link "Create Storefront", new_storefront_path %>
+      <% else %>
+        <%= dropdown_link "Request Storefront", request_storefront_path %>
+      <% end %>
     <% end %>
     <%= dropdown_link "Post a product", new_product_path %>
     <%= dropdown_link "Sold items", sales_history_path %>
     <%= dropdown_link "Create a promotion", new_promotion_path %>
   <% else %>
     <%= dropdown_link "Register as seller", register_path %>
+  <% end %>
+  <% if user.is_admin %>
+    <%= dropdown_link "Storefront Requests", show_requests_path %>
   <% end %>
   <%= dropdown_link "Price Alerts", price_alerts_path  %>
   <%= dropdown_link "Shopping history", products_history_path %>

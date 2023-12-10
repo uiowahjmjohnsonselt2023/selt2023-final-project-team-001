@@ -48,6 +48,7 @@ en:
       default: "You need to login before you can %{action} a storefront!"
       new: "You need to login before you can create a storefront!"
       choose_template: "You need to login before you can choose a storefront template!"
+      process_request: "You need to login before you can request a storefront!"
     promotions:
         default: "You need to login before you can %{action} a promotion!"
         new: "You need to login before you can create a promotion!"

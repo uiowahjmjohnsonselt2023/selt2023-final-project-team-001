@@ -77,7 +77,24 @@ class UsersController < ApplicationController
 
   def new_seller
     Current.user.update_attribute(:is_seller, true)
+    Current.user.update_attribute(:storefront_requested, 0)
     flash[:notice] = "Registration successful"
     redirect_to root_path
+  end
+
+  def show_requests
+    if Current.user.nil?
+      flash[:alert] = "Please log in."
+      redirect_to login_path and return
+    end
+    unless Current.user.is_admin?
+      flash[:alert] = "You do not have permission to view that page."
+      redirect_to root_path and return
+    end
+    @reqs = []
+    User.where(storefront_requested: 100).each do |user|
+      puts user
+      @reqs.append({user: user})
+    end
   end
 end
