@@ -38,7 +38,24 @@ class StorefrontsController < ApplicationController
     end
     case Current.user.storefront_requested
     when "not_requested"
-      # add request here
+      if Current.user.nil?
+        redirect_to login_path and return
+      end
+      @user = Current.user
+      # threshold 3 stars
+      # threshold 5 reviews
+      puts "======= RATING ======="
+      puts @user.profile.seller_rating
+      unless @user.profile.seller_rating.nil?
+        if @user.profile.seller_rating < 3
+          flash[:warning] = "Your seller rating is too low to set up a storefront at this time. Sellers must have a rating of at least 3 stars to set up a store front."
+        else
+          @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
+          PasswordMailer.with(user: @admin).request_approval.deliver_now
+          redirect_to profile_path(@user)
+        end
+      end
+      flash[:notice] = "You do not have any reviews yet."
     when "pending"
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
     when "rejected"
@@ -54,18 +71,8 @@ class StorefrontsController < ApplicationController
         redirect_to new_storefront_path
       end
     else
-      Current.user.update!(storefront_requested: 0)
       redirect_to root_path
     end
-  end
-
-  def process_request
-    if Current.user.nil?
-      redirect_to login_path and return
-    end
-    @user = Current.user
-    @admin = User.create(first_name: "test", last_name: "admin", email: "jkkessler95@gmail.com", is_admin: true)
-    PasswordMailer.with(user: @admin).request_approval.deliver_now
   end
 
   def edit
