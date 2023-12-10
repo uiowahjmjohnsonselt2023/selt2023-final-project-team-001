@@ -17,6 +17,9 @@
   <% else %>
     <%= dropdown_link "Register as seller", register_path %>
   <% end %>
+  <% if user.is_admin %>
+    <%= dropdown_link "Storefront Requests", show_requests_path %>
+  <% end %>
   <%= dropdown_link "Price Alerts", price_alerts_path  %>
   <%= dropdown_link "Shopping history", products_history_path %>
   <%= dropdown_link "Purchase history", purchase_history_path %>
