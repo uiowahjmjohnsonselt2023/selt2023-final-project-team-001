@@ -77,6 +77,7 @@ class UsersController < ApplicationController
 
   def new_seller
     Current.user.update_attribute(:is_seller, true)
+    Current.user.update_attribute(:storefront_requested, 0)
     flash[:notice] = "Registration successful"
     redirect_to root_path
   end

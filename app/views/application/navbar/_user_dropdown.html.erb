@@ -9,7 +9,7 @@
       <% if user.storefront_requested == 400 %>
         <%= dropdown_link "Create Storefront", new_storefront_path %>
       <% else %>
-        <%= dropdown_link "Request Storefront", new_storefront_path %>
+        <%= dropdown_link "Request Storefront", request_storefront_path %>
       <% end %>
     <% end %>
     <%= dropdown_link "Post a product", new_product_path %>

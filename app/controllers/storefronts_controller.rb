@@ -33,17 +33,19 @@ class StorefrontsController < ApplicationController
   end
 
   def make_request
+    puts "REQ???????????????"
+    puts Current.user.storefront_requested
     case Current.user.storefront_requested
-    when 0
+    when :not_requested
       # add request here
       puts "NO REQUEST YET =============="
-    when 100
+    when :pending
       flash[:notice] = "Your storefront request is currently pending approval. \nYou will receive a notification when the status of your request has changed."
-    when 200
+    when :rejected
       flash[:notice] = "It looks like you have had a previous storefront request rejected. \nIn order to request a new storefront, you will need to appeal this rejection."
-    when 300
+    when :appealed
       flash[:notice] = "It looks like you are currently appealing to open a new storefront. \nYou will be notified when there are changes to the status of your appeal."
-    else
+    when :approved
       if Current.user.storefront
         flash[:alert] = t("storefronts.create.already_exists")
         redirect_to storefront_path(Current.user.storefront)
@@ -51,6 +53,8 @@ class StorefrontsController < ApplicationController
         # no storefront but
         redirect_to new_storefront_path
       end
+    else
+      redirect_to root_path
     end
   end
 
